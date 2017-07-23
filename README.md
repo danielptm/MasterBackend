@@ -4,4 +4,4 @@
 1) Clone the project, using git clone.
 2) Switch into the folder master and run mvn test, to run the tests.
 
-
+#Please write unit tests for every function written in the service package.
