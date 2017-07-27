@@ -11,8 +11,9 @@
 
            <modules>
              <module>../dbmodel</module> <!-- module is in a subdirectory of this project -->
+               <module>../beans</module>
              <module>../service</module> <!-- module is a sibling to this project -->
-             <module>../api</module> <!-- somewhere else entirely -->
+             <module>../api</module>
            </modules>
 		
 
