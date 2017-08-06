@@ -2,11 +2,13 @@ package com.globati.resources;
 
 import com.braintreegateway.*;
 import com.globati.dbmodel.Deal;
+import com.globati.dbmodel.Employee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.utildb.SendMail;
 import com.globati.webmodel.BraintreeToken;
+import com.globati.webmodel.RequestDeal;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -56,39 +58,68 @@ public class BrainTreeResource {
         return Response.ok(tok).build();
     }
 
+
+
+
+
+    /**
+     *
+     *
+     *
+     *     private _title:string;
+     * @return
+     * @throws Exception
+     */
+
+
     @POST
     @Path("checkout")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_HTML)
     public Response checkout(
-                            @FormDataParam("file") InputStream is,
-                            @FormDataParam("title") String title,
-                            @FormDataParam("description") String description,
-                            @FormDataParam("businessName") String businessName,
-                            @FormDataParam("website")String website,
-                            @FormDataParam("category")String category,
-                            @FormDataParam("plan") String plan,
-                            @FormDataParam("lat") double targetLat,
-                            @FormDataParam("long") double targetLong,
-                            @FormDataParam("street") String street,
-                            @FormDataParam("city") String city,
-                            @FormDataParam("country") String country,
-                            @FormDataParam("nonce") String nonce,
-                            @FormDataParam("email") String email,
-                            @FormDataParam("employeeId") Long id,
-                            @FormDataParam("billingStreet") String billingStreet,
-                            @FormDataParam("billingCity") String billingCity,
-                            @FormDataParam("billingRegion") String billingRegion,
-                            @FormDataParam("billingCountry") String billingCountry
+            @FormDataParam("image1") String image1,
+            @FormDataParam("image2") String image2,
+            @FormDataParam("image3") String image3,
+            @FormDataParam("title") String title,
+            @FormDataParam("description") String description,
+            @FormDataParam("businessName") String businessName,
+            @FormDataParam("website")String website,
+            @FormDataParam("category")String category,
+            @FormDataParam("plan") String plan,
+            @FormDataParam("lat") Double targetLat,
+            @FormDataParam("long") Double targetLong,
+            @FormDataParam("street") String street,
+            @FormDataParam("city") String city,
+            @FormDataParam("country") String country,
+            @FormDataParam("nonce") String nonce,
+            @FormDataParam("email") String email,
+            @FormDataParam("employeeId") Long id,
+            @FormDataParam("billingStreet") String billingStreet,
+            @FormDataParam("billingCity") String billingCity,
+            @FormDataParam("billingRegion") String billingRegion,
+            @FormDataParam("billingCountry") String billingCountry
     ) throws Exception {
-        Deal deal = null;
+        System.out.println("image1 "+image1);
+        System.out.println("image2 "+image2);
+        System.out.println("image3 "+image3);
+        System.out.println("title "+title);
+        System.out.println("description "+description);
+        System.out.println("businessName "+businessName);
+        System.out.println("website "+website);
+        System.out.println("category "+category);
+        System.out.println("plan "+plan);
+        System.out.println("lat "+targetLat);
+
+        Employee employee = employeeService.getEmployeeById(id);
+        Deal createdDeal=null;
+
         try{
             double cost=0;
 
             switch(plan){
-                case "30days": cost =  employeeService.getEmployeeById(id).get_addAmount(); break;
-                case "60days": cost = employeeService.getEmployeeById(id).get_add2month();break;
-                case "90days": cost = employeeService.getEmployeeById(id).get_add3month(); break;
+                case "30days": cost =  employee.get_addAmount(); break;
+                case "60days": cost = employee.get_add2month();break;
+                case "90days": cost = employee.get_add3month(); break;
             }
 
             TransactionRequest request = new TransactionRequest()
@@ -100,9 +131,20 @@ public class BrainTreeResource {
 
             Result<Transaction> result = gateway.transaction().sale(request);
 
+            System.out.println("Braintree transactino success: "+result.isSuccess());
+
             if (result.isSuccess()) {
                 String transactionId = result.getTarget().getId();
-                deal = dealService.createDeal(is, title, description, businessName, targetLat, targetLong, id, country, street, city, category, website, email, plan, cost, transactionId, billingStreet, billingCity, billingRegion, billingCountry);
+                createdDeal = dealService.createDeal(
+                        image1, image2,
+                        image3, title, description, businessName,
+                        targetLat, targetLong, id, country, street, city,
+                        category, website, email, plan, cost,
+                        transactionId, billingStreet, billingCity,
+                        billingRegion, billingCountry
+                );
+                log.debug("createdDeal: ");
+                log.debug(createdDeal.toString());
                 return Response.ok("<!DOCTYPE html>"+
                         "<html lang=\"\">"+
                         ""+
@@ -145,9 +187,9 @@ public class BrainTreeResource {
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.25em 0.25em 0em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">Cost</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_dealtype()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_plan()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_cost()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+category+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+plan+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+cost+"</td>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\"></td>"+
                         "        </tr>"+
                         "        <tr>"+
@@ -158,20 +200,20 @@ public class BrainTreeResource {
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 21px; font-weight: 700; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">Billing Address</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+businessName+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+businessName+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_street()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingStreet()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+street+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+street+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingRegion()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+billingRegion+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em;\" colspan=\"6\">"+deal.get_country()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em; border-bottom: 1px dashed;\" colspan=\"6\">"+deal.get_country()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em;\" colspan=\"6\">"+country+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em; border-bottom: 1px dashed;\" colspan=\"6\">"+country+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
@@ -179,7 +221,7 @@ public class BrainTreeResource {
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+deal.get_employee().get_firstName()+" at "+deal.get_employee().get_email()+" if you have any questions</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+employee.get_firstName()+" at "+employee.get_email()+" if you have any questions</td>"+
                         "        </tr>"+
                         "        <tr style=\"border-bottom: 3px solid;\">"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
@@ -203,7 +245,7 @@ public class BrainTreeResource {
         }catch(Exception e){
             throw new WebException("Could not create deal", Response.Status.BAD_REQUEST);
         }finally{
-            SendMail.sendReceipt(deal);
+            SendMail.sendReceipt(createdDeal);
         }
 
     }

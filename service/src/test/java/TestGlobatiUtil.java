@@ -53,6 +53,11 @@ public class TestGlobatiUtil {
 
         String uid = UUID.randomUUID().toString();
 
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
+
+
         File file = new File(getClass().getClassLoader().getResource("test_resources/cbp.jpg").getFile());
         InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
@@ -63,7 +68,7 @@ public class TestGlobatiUtil {
 
         Email email = new Email(employee, li);
 
-        Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
 
         Assert.assertTrue(SendMail.sendGuestMail(email));
         Assert.assertTrue(SendMail.sendReceipt(d));

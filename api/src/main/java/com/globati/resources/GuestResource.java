@@ -36,10 +36,12 @@ public class GuestResource {
     DealService dealService;
 
     /**
-     * Called when going to globati.com/username
+     * Called when logging into myglobatiadmin.com
+     *
      * @param id
      * @return
      */
+
     @GET
     @Path("{username}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -48,6 +50,27 @@ public class GuestResource {
         List<Object> employeeAndNearbyDeals;
         try{
             employeeAndNearbyDeals = employeeService.getItemsForEmployee(id);
+            return Response.ok(employeeAndNearbyDeals).build();
+        }catch(Exception e){
+            throw new WebException("Could not find splash page for employee",Response.Status.CONFLICT);
+        }
+    }
+
+
+    /**
+     * Called when going to globati.com/username
+     *
+     * @param id
+     * @return
+     */
+    @GET
+    @Path("visitprofile/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response visitProfile(@PathParam("username") String id){
+        List<Object> employeeAndNearbyDeals;
+        try{
+            employeeAndNearbyDeals = employeeService.getItemsForEmployeeAndIncrement(id);
             return Response.ok(employeeAndNearbyDeals).build();
         }catch(Exception e){
             throw new WebException("Could not find splash page for employee",Response.Status.CONFLICT);

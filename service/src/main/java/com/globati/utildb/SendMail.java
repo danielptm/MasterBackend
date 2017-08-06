@@ -800,6 +800,8 @@ public class SendMail {
     }
 
     public static boolean sendReceipt(Deal deal) throws Exception {
+        log.debug("SendReceipt(deal): ");
+        log.debug(deal.toString());
         String[] emails = new String[]{deal.get_email()};
 
 

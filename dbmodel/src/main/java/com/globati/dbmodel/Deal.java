@@ -45,8 +45,15 @@ public class Deal extends BusinessEntity {
     public Deal() {
     }
 
-    public Deal(String image, String title, String description, String location, double targetLat, double targetLong, Employee employee, String country, String street, String city, String dealtype, String website, String email, String plan, double cost, String transactionId, String _billingStreet, String _billingCity, String _billingRegion, String _billingCountry) {
+    public Deal(
+            String image, String image2, String image3, String title, String description, String location,
+            double targetLat, double targetLong, Employee employee, String country, String street, String city,
+            String dealtype, String website, String email, String plan, double cost, String transactionId,
+            String _billingStreet, String _billingCity, String _billingRegion, String _billingCountry) {
+
         this._image = image;
+        this._image2 = image2;
+        this._image3 = image3;
         this._title = title;
         this._description = description;
         this._location = location;

@@ -39,14 +39,24 @@ public class DealService {
 
     DealService(){}
 
-    public Deal createDeal(InputStream is, String title, String description, String location, double targetLat, double targetLong, Long id, String country, String street, String city, String dealtype, String website, String email, String plan, double cost, String transactionId, String billingStreet, String billingCity, String billingRegion, String billingCountry)  throws ServiceException, GlobatiUtilException {
+    public Deal createDeal(
+            String image1, String image2, String image3,
+            String title, String description, String location,
+            double targetLat, double targetLong, Long id, String country,
+            String street, String city, String dealtype, String website,
+            String email, String plan, double cost, String transactionId,
+            String billingStreet, String billingCity, String billingRegion,
+            String billingCountry)  throws ServiceException, GlobatiUtilException {
         Deal deal=null;
         try {
             Employee employee = employeeService.getEmployeeById(id);
-            String imagepath = ImageHandler.createNewImage(is);
-            deal = new Deal(imagepath, title, description, location, targetLat, targetLong, employee, country, street, city, dealtype, website, email, plan, cost, transactionId, billingStreet, billingCity, billingRegion, billingCountry);
-            Deal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);
-            return dealRepository.save(withDistanceDeal);
+            deal = new Deal(
+                    image1, image2, image3, title, description, location, targetLat, targetLong, employee,
+                    country, street, city, dealtype, website, email, plan, cost, transactionId, billingStreet,
+                    billingCity, billingRegion, billingCountry
+            );
+//            Deal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);
+            return dealRepository.save(deal);
         }catch(Exception e){
             log.error(e.toString());
             throw new ServiceException("Could not create a deal: "+deal.toString(), e);

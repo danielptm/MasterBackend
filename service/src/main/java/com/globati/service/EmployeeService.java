@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -208,6 +209,18 @@ public class EmployeeService {
         }
     }
 
+    public Employee incrementCounter(Employee employee){
+        if(employee.get_visitCounter()==null){
+            employee.set_visitCounter(1);
+        }
+        else{
+            Integer newValue = employee.get_visitCounter();
+            newValue++;
+             employee.set_visitCounter(newValue);
+        }
+        return employee;
+    }
+
     /**
      * Creates a new employee
      * @param name
@@ -359,6 +372,13 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * This does not use the email supplied in the form, but uses the email
+     * to find the employee which suppli
+     * @param email
+     * @return
+     * @throws ServiceException
+     */
     public boolean sendEmailToChangePassword(String email) throws ServiceException {
         try {
             ApiKey api = new ApiKey();
@@ -410,6 +430,24 @@ public class EmployeeService {
             }
         }catch(Exception e){
             throw new ServiceException("Password or username did not match", e);
+        }
+    }
+
+    /**
+     * Called when a guest visits a globati profile page.
+     * @param id
+     * @return
+     * @throws Exception
+     */
+
+    public List<Object> getItemsForEmployeeAndIncrement(String id) throws Exception {
+        try {
+            Employee employee = getEmployeeByUserName(id);
+            incrementCounter(employee);
+            updateEmployee(employee);
+            return getItemsForEmployee(id);
+        } catch (ServiceException e) {
+            throw new Exception("Could not get items for employee by user name, and or could not increment visit counter with username: "+id);
         }
     }
 }

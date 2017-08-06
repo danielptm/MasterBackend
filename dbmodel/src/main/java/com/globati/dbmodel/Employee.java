@@ -64,6 +64,8 @@ public class Employee extends BaseEntity {
     private boolean _active;
     @Column(name="facebookprofile")
     private boolean _facebookProfile=false;
+    @Column(name="visitcounter")
+    private Integer _visitCounter;
 
 
     @OneToMany(mappedBy = "_employee", fetch = FetchType.LAZY)
@@ -97,6 +99,7 @@ public class Employee extends BaseEntity {
         this._about=""; //set these to empty strings, to avoid strangeness related to null on client side.
         this._display="";
         this._facebookProfile = false;
+        this._visitCounter=0;
     }
 
     //Used for a facebook login/create account
@@ -109,6 +112,7 @@ public class Employee extends BaseEntity {
         this._add2month = 10;
         this._add3month = 10;
         this._facebookProfile = true;
+        this._visitCounter=0;
     }
 
 
@@ -328,12 +332,21 @@ public class Employee extends BaseEntity {
         this._image3 = _image3;
     }
 
+    public Integer get_visitCounter() {
+        return _visitCounter;
+    }
+
+    public void set_visitCounter(Integer _visitCounter) {
+        this._visitCounter = _visitCounter;
+    }
 
     @Override
     public String toString() {
         return "Employee{" +
-                ", _firstName='" + _firstName + '\'' +
+                "_firstName='" + _firstName + '\'' +
                 ", _image='" + _image + '\'' +
+                ", _image2='" + _image2 + '\'' +
+                ", _image3='" + _image3 + '\'' +
                 ", _email='" + _email + '\'' +
                 ", _paypalEmail='" + _paypalEmail + '\'' +
                 ", _about='" + _about + '\'' +
@@ -353,8 +366,16 @@ public class Employee extends BaseEntity {
                 ", _add3month=" + _add3month +
                 ", _globatiUsername='" + _globatiUsername + '\'' +
                 ", _active=" + _active +
+                ", _facebookProfile=" + _facebookProfile +
+                ", _visitCounter=" + _visitCounter +
+                ", _deals=" + _deals +
+                ", _recommendations=" + _recommendations +
+                ", _events=" + _events +
                 '}';
     }
+
+
+
 
 }
 

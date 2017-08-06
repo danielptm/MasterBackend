@@ -63,8 +63,6 @@ public class EmployeeResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException {
-        System.out.println("In create globati profile rest call");
-        System.out.println(createEmployee.toString());
         try {
             this.employeeService.createEmployee(
                     createEmployee.get_firstName(),
@@ -90,7 +88,7 @@ public class EmployeeResource{
      * Dude, I am not sure where this is being called in the app, I thought this was at as the name says
      * login(). But a login to myglobatiadmi occurs in AuthenticationResource.
      *
-     *
+     * Next time i figure out what this does, please document it properly.
      *
      * @param username
      * @return
@@ -236,6 +234,7 @@ public class EmployeeResource{
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public Response sendUsernameAndPassword(String email){
+        System.out.println(email.toString());
         try{
             employeeService.sendEmailToChangePassword(email);
             return Response.ok("changepassword email sent").build();

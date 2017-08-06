@@ -32,7 +32,6 @@ import java.util.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-@Ignore
 public class DealServiceTest {
 
     private static final Logger log = LogManager.getLogger(DealServiceTest.class);
@@ -51,11 +50,15 @@ public class DealServiceTest {
      * @throws GlobatiUtilException
      */
 
-    @Ignore
+    @Test
     public void createDeal() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/faduma.jpg").getFile() );
         InputStream fis = new FileInputStream(file);
+
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
 
         File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
         InputStream fis1 = new FileInputStream(file1);
@@ -64,12 +67,12 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image3, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
 
         Assert.assertNotNull(d);
     }
 
-    @Ignore
+    @Test
     public void updateDeal() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
         String uid = UUID.randomUUID().toString();
         String imageToReplace = "35/d0/cc-5b6e-4941-ab82-3b1881fc94d0image.png"; //Make sure this file exists, otherwise the test will fail!!!!
@@ -80,15 +83,24 @@ public class DealServiceTest {
         File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
         InputStream fis1 = new FileInputStream(file1);
 
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
+
         Employee employee = this.employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        Deal d = dealService.createDeal(fis1, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30day", 30, "234", "billing","billing","billing","billing");
         Deal d2 = dealService.updateDeal(d);
         Assert.assertEquals(true, d2.is_active());
 
     }
 
-    @Ignore
+    @Test
     public void getNearByDeals() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
+
         String uid = UUID.randomUUID().toString();
 
         String uid2 = UUID.randomUUID().toString();
@@ -113,11 +125,11 @@ public class DealServiceTest {
         Employee employee2 = employeeService.createEmployee("Daniel",  uid2+"@me.com", uid2, "secret password", 59.336626, 18.055053, "image", "2308 n 44 st", "seattle", "usa");
 
 
-        Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
 
-        Deal d2 = dealService.createDeal(fis2, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d2 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
 
-        Deal d3 = dealService.createDeal(fis3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30,"234", "billing","billing","billing","billing");
+        Deal d3 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30,"234", "billing","billing","billing","billing");
 
         List<Deal> testarray = dealService.getNearbyActiveDeals("q", employee.get_id());
 
@@ -126,8 +138,9 @@ public class DealServiceTest {
         }
     }
 
-    @Ignore
+    @Test
     public void getActiveDealsBCountry() throws ServiceException {
+
         List<Deal> deals = this.dealService.getActiveDealsByCountry("sweden");
 
         log.debug("size: "+deals.size());
@@ -140,8 +153,13 @@ public class DealServiceTest {
     }
 
 
-    @Ignore
+    @Test
     public void getActiveDealsByCountryAndEmployee() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
+
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/faduma.jpg").getFile() );
         InputStream fis = new FileInputStream(file);
@@ -153,7 +171,7 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
 
 
         List<Deal> deals = dealService.getActiveDealsByEmployee(employee.get_id());
@@ -173,6 +191,12 @@ public class DealServiceTest {
     @Ignore
     public void getActiveDealsByMonthCreated() throws ServiceException, FileNotFoundException, UserDoesNotExistException, GlobatiUtilException {
 
+
+        String image1 = "image1 file";
+        String image2 = "iamge2 file";
+        String image3 = "image3 file";
+
+
         String uid = UUID.randomUUID().toString();
 
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
@@ -184,7 +208,7 @@ public class DealServiceTest {
         File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
         InputStream fis1 = new FileInputStream(file1);
 
-        Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
 
         List<Deal> deals = dealService.getDealsCreatedByMonth(1, 2017, 1L);
         log.debug(deals.size());

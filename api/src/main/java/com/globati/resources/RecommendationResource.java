@@ -81,10 +81,10 @@ public class RecommendationResource {
      * @param
      * @return
      */
-    @PUT
+    @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") Long id) throws ServiceException {
+    public Response delete(@PathParam("id") Long id) throws ServiceException {
         try{
             recommendationService.inactivateRecommendation(id);
             return Response.ok().build();
@@ -122,6 +122,28 @@ public class RecommendationResource {
             return Response.ok(returnRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not create new recommendation", Response.Status.CONFLICT);
+        }
+    }
+
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response update(@PathParam("id") Long id,  com.globati.webmodel.Recommendation recommendation){
+//        System.out.println("updateRecommendation()");
+//        System.out.println(recommendation);
+        try{
+            Recommendation returnRecommendation = recommendationService.getRecommendationById(id);
+            returnRecommendation.set_description(recommendation.get_description());
+            returnRecommendation.set_image(recommendation.get_image1());
+            returnRecommendation.set_image2(recommendation.get_image2());
+            returnRecommendation.set_image3(recommendation.get_image3());
+            returnRecommendation.set_title(recommendation.get_title());
+            recommendationService.updateRecommendation(returnRecommendation);
+            return Response.ok(returnRecommendation).build();
+        }catch(Exception e){
+            throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);
         }
     }
 }

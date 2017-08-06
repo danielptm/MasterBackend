@@ -81,6 +81,10 @@ public class TestEmployeeService {
 	public void getEmployeebyUserName() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 
+		String image1 = "image1 file";
+		String image2 = "iamge2 file";
+		String image3 = "image3 file";
+
 
 		InputStream fis = new FileInputStream(file);
 		InputStream fis2 = new FileInputStream(file);
@@ -93,7 +97,7 @@ public class TestEmployeeService {
 
 
 		String uid2 = UUID.randomUUID().toString();
-		Deal d = dealService.createDeal(fis2, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30 day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30 day", 30, "234", "billing","billing","billing","billing");
 
 		Date date = new Date();
 
@@ -102,13 +106,30 @@ public class TestEmployeeService {
 
 		String uid4 = UUID.randomUUID().toString();
 		Recommendation rec = recommendationService.createRecommendation(e1.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-//
-//		List<Object> items = employeeService.getItemsForEmployee(e1.get_globatiUsername());
 
-//		for (int i = 0; i < items.size(); i++) {
-//			log.debug(items.get(i));
-//		}
 
+		//
+		List<Object> items = employeeService.getItemsForEmployee(e1.get_globatiUsername());
+
+
+		Assert.assertTrue(items.size()>0);
+
+
+	}
+
+	@Test
+	public void inrementCounter() throws ServiceException, UserDoesNotExistException {
+
+		String uid = UUID.randomUUID().toString();
+
+		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+
+		Employee e2 = employeeService.incrementCounter(e1);
+
+		Assert.assertEquals(1, e2.get_visitCounter().intValue());
+
+		Employee e3 = employeeService.incrementCounter(e2);
+		Assert.assertEquals(2, e3.get_visitCounter().intValue());
 
 	}
 
@@ -175,6 +196,10 @@ public class TestEmployeeService {
 	@Test
 	public void loginWithFacebook() throws ServiceException, FileNotFoundException, UserDoesNotExistException, GlobatiUtilException {
 
+		String image1 = "image1 file";
+		String image2 = "iamge2 file";
+		String image3 = "image3 file";
+
 		String uid = UUID.randomUUID().toString();
 
 		Employee employee = employeeService.createProfileFromFacebookInfo("FacebookEmployee2", "Daniel", "emailaddress3@me.com","image/path");
@@ -196,7 +221,7 @@ public class TestEmployeeService {
 
 		InputStream fis1 = new FileInputStream(file2);
 
-		Deal d = dealService.createDeal(fis1, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
 
 //		List<Object> employeeAfterEditions =   employeeService.getItemsForEmployee(employee.get_globatiUsername());
 

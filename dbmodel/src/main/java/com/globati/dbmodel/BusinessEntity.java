@@ -39,7 +39,6 @@ public abstract class BusinessEntity extends BaseEntity {
     @Column(name="image3")
     protected String _image3;
 
-
     public double get_targetLat() {
         return _targetLat;
     }
