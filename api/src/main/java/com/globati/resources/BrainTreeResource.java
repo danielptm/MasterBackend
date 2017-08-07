@@ -97,7 +97,8 @@ public class BrainTreeResource {
             @FormDataParam("billingStreet") String billingStreet,
             @FormDataParam("billingCity") String billingCity,
             @FormDataParam("billingRegion") String billingRegion,
-            @FormDataParam("billingCountry") String billingCountry
+            @FormDataParam("billingCountry") String billingCountry,
+            @FormDataParam("cost") Double cost
     ) throws Exception {
         System.out.println("image1 "+image1);
         System.out.println("image2 "+image2);
@@ -109,18 +110,32 @@ public class BrainTreeResource {
         System.out.println("category "+category);
         System.out.println("plan "+plan);
         System.out.println("lat "+targetLat);
+        System.out.println("long "+targetLong);
+        System.out.println("street "+street);
+        System.out.println("city "+city);
+        System.out.println("country "+country);
+        System.out.println("nonce "+nonce);
+        System.out.println("email "+email);
+        System.out.println("employeeId "+id);
+        System.out.println("billingStreet "+billingStreet);
+        System.out.println("billingCity "+billingCity);
+        System.out.println("billingRegion "+billingRegion);
+        System.out.println("billingCountry "+billingCountry);
+        System.out.println("cost "+cost);
+
 
         Employee employee = employeeService.getEmployeeById(id);
         Deal createdDeal=null;
 
         try{
-            double cost=0;
-
-            switch(plan){
-                case "30days": cost =  employee.get_addAmount(); break;
-                case "60days": cost = employee.get_add2month();break;
-                case "90days": cost = employee.get_add3month(); break;
-            }
+//            double cost=0;
+//
+//            switch(plan){
+//                case "THIRTY_DAYS": cost =  employee.get_addAmount(); break;
+//                case "SIXTY_DAYS": cost = employee.get_add2month();break;
+//                case "NINETY_DAYS": cost = employee.get_add3month(); break;
+//                default : cost=10;
+//            }
 
             TransactionRequest request = new TransactionRequest()
                     .amount(new BigDecimal(cost))
