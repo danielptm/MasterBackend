@@ -18,8 +18,7 @@ public class Event extends BusinessEntity{
     private String repeat;
     @Column(name="publicvisible")
     private boolean publicVisible;
-    @Column(name="dateinactive")
-    private Date dateInactive;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="employeeid")
@@ -69,16 +68,6 @@ public class Event extends BusinessEntity{
 
     public void setPublicVisible(boolean publicVisible) {
         this.publicVisible = publicVisible;
-    }
-
-    @Override
-    public Date getDateInactive() {
-        return dateInactive;
-    }
-
-    @Override
-    public void setDateInactive(Date dateInactive) {
-        this.dateInactive = dateInactive;
     }
 
     public Employee getEmployee() {

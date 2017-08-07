@@ -1,9 +1,8 @@
 package com.globati.mapper;
 
 import com.globati.user_beans.guest.GuestDeal;
-import com.globati.user_beans.Event;
 import com.globati.user_beans.guest.GuestEmployee;
-import com.globati.user_beans.Recommendation;
+import com.globati.user_beans.guest.GuestRecommendation;
 
 /**
  * Created by daniel on 8/7/17.
@@ -20,11 +19,11 @@ public class BeansMapper {
         return null;
     }
 
-    public static Event mapEvent(){
+    public static GuestDeal mapEvent(){
         return null;
     }
 
-    public static Recommendation mapRecommendation(){
+    public static GuestRecommendation mapRecommendation(){
         return null;
     }
 

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by daniel on 8/7/17.
  */
-public class SuperDeal {
+public abstract class SuperDeal {
 
     Long id;
     double targetLat;
