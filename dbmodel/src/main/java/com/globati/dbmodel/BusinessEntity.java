@@ -11,144 +11,145 @@ import java.util.Date;
 public abstract class BusinessEntity extends BaseEntity {
 
     @Column(name = "targetlat")
-    protected double _targetLat;
+    protected double targetLat;
     @Column(name = "targetlong")
-    protected double _targetLong;
+    protected double targetLong;
     @Column(name = "distance")
-    protected double _distance;
+    protected double distance;
     @Column(length = 100, name = "street")
-    protected String _street;
+    protected String street;
     @Column(length = 100, name = "city")
-    protected String _city;
+    protected String city;
     @Column(length = 100, name = "country")
-    protected String _country;
+    protected String country;
     @Column(name = "image")
-    protected String _image;
+    protected String image;
     @Column(length = 3000, name = "description")
-    protected String _description;
+    protected String description;
     @Column(length = 100, name = "location")
-    protected String _location;
+    protected String location;
     @Column(name = "active")
-    protected boolean _active;
+    protected boolean active;
     @Column(length = 100, name = "title")
-    protected String _title;
+    protected String title;
     @Column(name="dateinactive")
-    protected Date _dateInactive;
+    protected Date dateInactive;
     @Column(name="image2")
-    protected String _image2;
+    protected String image2;
     @Column(name="image3")
-    protected String _image3;
+    protected String image3;
 
-    public double get_targetLat() {
-        return _targetLat;
+
+    public double getTargetLat() {
+        return targetLat;
     }
 
-    public void set_targetLat(double _targetLat) {
-        this._targetLat = _targetLat;
+    public void setTargetLat(double targetLat) {
+        this.targetLat = targetLat;
     }
 
-    public double get_targetLong() {
-        return _targetLong;
+    public double getTargetLong() {
+        return targetLong;
     }
 
-    public void set_targetLong(double _targetLong) {
-        this._targetLong = _targetLong;
+    public void setTargetLong(double targetLong) {
+        this.targetLong = targetLong;
     }
 
-    public double get_distance() {
-        return _distance;
+    public double getDistance() {
+        return distance;
     }
 
-    public void set_distance(double _distance) {
-        this._distance = _distance;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
-    public String get_street() {
-        return _street;
+    public String getStreet() {
+        return street;
     }
 
-    public void set_street(String _street) {
-        this._street = _street;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String get_city() {
-        return _city;
+    public String getCity() {
+        return city;
     }
 
-    public void set_city(String _city) {
-        this._city = _city;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String get_country() {
-        return _country;
+    public String getCountry() {
+        return country;
     }
 
-    public void set_country(String _country) {
-        this._country = _country;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String get_image() {
-        return _image;
+    public String getImage() {
+        return image;
     }
 
-    public void set_image(String _image) {
-        this._image = _image;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String get_description() {
-        return _description;
+    public String getDescription() {
+        return description;
     }
 
-    public void set_description(String _description) {
-        this._description = _description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String get_location() {
-        return _location;
+    public String getLocation() {
+        return location;
     }
 
-    public void set_location(String _location) {
-        this._location = _location;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public boolean is_active() {
-        return _active;
+    public boolean isActive() {
+        return active;
     }
 
-    public void set_active(boolean _active) {
-        this._active = _active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public String get_title() {
-        return _title;
+    public String getTitle() {
+        return title;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Date get_dateInactive() {
-        return _dateInactive;
+    public Date getDateInactive() {
+        return dateInactive;
     }
 
-    public void set_dateInactive(Date _dateInactive) {
-        this._dateInactive = _dateInactive;
+    public void setDateInactive(Date dateInactive) {
+        this.dateInactive = dateInactive;
     }
 
-    public String get_image2() {
-        return _image2;
+    public String getImage2() {
+        return image2;
     }
 
-    public void set_image2(String _image2) {
-        this._image2 = _image2;
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
-    public String get_image3() {
-        return _image3;
+    public String getImage3() {
+        return image3;
     }
 
-    public void set_image3(String _image3) {
-        this._image3 = _image3;
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
 

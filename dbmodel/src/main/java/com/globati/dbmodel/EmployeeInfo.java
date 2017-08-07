@@ -13,100 +13,100 @@ public class EmployeeInfo extends BaseEntity{
 
 
     @Column(name="employeeid")
-    Long _employeeId;
+    Long employeeId;
     @Column(name="globatipassword")
-    private String _globatiPassword;
+    private String globatiPassword;
     @Column(length=300, name="salt")
-    private byte[] _salt;
+    private byte[] salt;
     @Column(name="lastlogin")
-    private Date _lastLogin;
+    private Date lastLogin;
     @Column(name="datecreated")
-    private Date _dateCreated;
+    private Date dateCreated;
     @Column(name="authtoken")
-    private String _authToken;
+    private String authToken;
     @Column(name="tokenexpiration")
-    private String _tokenExpiration;
+    private String tokenExpiration;
     @Column(name="facebookid", length=100)
-    String _facebookId;
+    String facebookId;
 
     public EmployeeInfo(Long _employeeId) {
-        this._employeeId = _employeeId;
-        this._dateCreated = new Date();
+        this.employeeId = _employeeId;
+        this.dateCreated = new Date();
     }
 
-    public EmployeeInfo(Long _employeeId, String facebookid) {
-        this._employeeId = _employeeId;
-        this._facebookId = facebookid;
-        this._dateCreated = new Date();
+    public EmployeeInfo(Long employeeId, String facebookid) {
+        this.employeeId = employeeId;
+        this.facebookId = facebookid;
+        this.dateCreated = new Date();
     }
 
     public EmployeeInfo(){}
 
 
-    public Long get_employeeId() {
-        return _employeeId;
+
+
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void set_employeeId(Long _employeeId) {
-        this._employeeId = _employeeId;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String get_globatiPassword() {
-        return _globatiPassword;
+    public String getGlobatiPassword() {
+        return globatiPassword;
     }
 
-    public void set_globatiPassword(String _globatiPassword) {
-        this._globatiPassword = _globatiPassword;
+    public void setGlobatiPassword(String globatiPassword) {
+        this.globatiPassword = globatiPassword;
     }
 
-    public byte[] get_salt() {
-        return _salt;
+    public byte[] getSalt() {
+        return salt;
     }
 
-    public void set_salt(byte[] _salt) {
-        this._salt = _salt;
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 
-    public Date get_lastLogin() {
-        return _lastLogin;
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
-    public void set_lastLogin(Date _lastLogin) {
-        this._lastLogin = _lastLogin;
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
-    public Date get_dateCreated() {
-        return _dateCreated;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void set_dateCreated(Date _dateCreated) {
-        this._dateCreated = _dateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String get_authToken() {
-        return _authToken;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void set_authToken(String _authToken) {
-        this._authToken = _authToken;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
-    public String get_tokenExpiration() {
-        return _tokenExpiration;
+    public String getTokenExpiration() {
+        return tokenExpiration;
     }
 
-    public void set_tokenExpiration(String _tokenExpiration) {
-        this._tokenExpiration = _tokenExpiration;
+    public void setTokenExpiration(String tokenExpiration) {
+        this.tokenExpiration = tokenExpiration;
     }
 
-    public String get_facebookId() {
-        return _facebookId;
+    public String getFacebookId() {
+        return facebookId;
     }
 
-    public void set_facebookId(String _facebookId) {
-        this._facebookId = _facebookId;
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
     }
-
-
 
 }

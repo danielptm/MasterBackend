@@ -70,7 +70,7 @@ public class TestEventService {
         Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
 
 
-        Assert.assertEquals(e.get_title(), "title");
+        Assert.assertEquals(e.getTitle(), "title");
     }
 
     @Test
@@ -85,9 +85,9 @@ public class TestEventService {
 
         Date date = new Date();
         Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
-        Event e2 = eventService.getEventById(e.get_id());
-        e2.set_active(false);
-        Assert.assertEquals(eventService.updateEvent(e2).is_active(), false);
+        Event e2 = eventService.getEventById(e.getId());
+        e2.setActive(false);
+        Assert.assertEquals(eventService.updateEvent(e2).isActive(), false);
 
     }
 
@@ -102,8 +102,8 @@ public class TestEventService {
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
         Date date = new Date();
         Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
-        Employee employee1 = employeeService.getEmployeeById(employee.get_id());
-        List<Event> events = eventService.getEventsByEmployeeId(employee1.get_id());
+        Employee employee1 = employeeService.getEmployeeById(employee.getId());
+        List<Event> events = eventService.getEventsByEmployeeId(employee1.getId());
         Assert.assertEquals(1, events.size() );
     }
 
@@ -116,7 +116,7 @@ public class TestEventService {
         Assert.assertTrue(events.size()>0);
 
         for(Event e: events){
-            Assert.assertTrue(e.is_active());
+            Assert.assertTrue(e.isActive());
         }
 
 

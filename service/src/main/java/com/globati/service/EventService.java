@@ -68,7 +68,7 @@ public class EventService {
         try{
             List<Event> events = eventRepository.getAllEventsBy_employee_id(id, true);
             for(Event event: events){
-                CheckProximity.getEventProximity(event, event.get_employee());
+                CheckProximity.getEventProximity(event, event.getEmployee());
             }
             return events;
         }catch(Exception e){
@@ -99,10 +99,10 @@ public class EventService {
         List<Event> nearbyevents= new ArrayList<>();
         try {
             Employee employee = employeeService.getEmployeeById(id);
-            List<Event> events = eventRepository.findBy_country(country);
+            List<Event> events = eventRepository.findByCountry(country);
             for(Event event: events){
                 Event checkedEvent = CheckProximity.getEventProximity(event, employee);
-                if(checkedEvent.get_distance()<25 && checkedEvent.get_distance()!=0.0){
+                if(checkedEvent.getDistance()<25 && checkedEvent.getDistance()!=0.0){
                     nearbyevents.add(checkedEvent);
                 }
             }
@@ -124,8 +124,8 @@ public class EventService {
         List<Event> events = getAllActiveEvents();
 
         for(Event e:events){
-            if( DateTools.dateIsBeforeCurrentDate(e) && e.is_active() ){
-                e.set_active(false);
+            if( DateTools.dateIsBeforeCurrentDate(e) && e.isActive() ){
+                e.setActive(false);
                 updateEvent(e);
             }
         }

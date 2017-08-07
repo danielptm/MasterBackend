@@ -50,10 +50,10 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long id) throws ServiceException {
         try {
-            Employee employee = this.employeeRepository.getEmployeeBy_id(id);
-            employee.set_deals(null);
+            Employee employee = this.employeeRepository.getEmployeeByid(id);
+            employee.setDeals(null);
             employee.set_events(null);
-            employee.set_recommendations(null);
+            employee.setRecommendations(null);
             return employee;
         }catch(Exception e){
             throw new ServiceException("Was not able to retrieve employee by id: "+id, e);
@@ -75,7 +75,7 @@ public class EmployeeService {
             String username=FacebookUserId.generateFacebookUserId(name);
             Employee employee = new Employee(name, email, username, image);//sdfgdfgsdfgasdfasdfasdfasdfasdfasdf
             Employee employeeToReturn = employeeRepository.save(employee);
-            createEmployeeInfoFromFacebook(employeeToReturn.get_id(), facebookId);
+            createEmployeeInfoFromFacebook(employeeToReturn.getId(), facebookId);
             return employeeToReturn;
 
         }catch(Exception e){
@@ -98,7 +98,7 @@ public class EmployeeService {
                 return null;
             }
             else {
-                return employeeRepository.findOne(employeeInfo.get_employeeId());
+                return employeeRepository.findOne(employeeInfo.getEmployeeId());
             }
         }catch(Exception e){
             throw new ServiceException("Could not get employee by facebookid with id: "+id, e);
@@ -127,20 +127,20 @@ public class EmployeeService {
                 Employee createdEmployee = createProfileFromFacebookInfo(facebookId, name, email, image);
                 employeeInfo = employeeInfoService.getEmployeeInfoByFacebookId(facebookId);
                 ApiKey apiKey = new ApiKey();
-                employeeInfo.set_authToken(apiKey.getApiKey());
-                employeeInfo.set_tokenExpiration(apiKey.getTime());
+                employeeInfo.setAuthToken(apiKey.getApiKey());
+                employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
-                List<Object> items = getItemsForEmployee(createdEmployee.get_globatiUsername());
+                List<Object> items = getItemsForEmployee(createdEmployee.getGlobatiUsername());
                 items.add(apiKey);
                 return items;
             }
             else{
                 employeeInfo = employeeInfoService.getEmployeeInfoByFacebookId(facebookId);
                 ApiKey apiKey = new ApiKey();
-                employeeInfo.set_authToken(apiKey.getApiKey());
-                employeeInfo.set_tokenExpiration(apiKey.getTime());
+                employeeInfo.setTokenExpiration(apiKey.getApiKey());
+                employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
-                List<Object> items = getItemsForEmployee(employee.get_globatiUsername());
+                List<Object> items = getItemsForEmployee(employee.getGlobatiUsername());
                 items.add(apiKey);
                 return items;
             }
@@ -153,7 +153,7 @@ public class EmployeeService {
 
     public Employee getEmployeeByUserName(String username) throws ServiceException {
         try{
-            return employeeRepository.getEmployeeBy_globatiUsername(username);
+            return employeeRepository.getEmployeeByGlobatiUsername(username);
         }catch(Exception e){
             throw new ServiceException("Could not retrieve employee by username", e);
         }
@@ -176,7 +176,7 @@ public class EmployeeService {
     public List<Object> getItemsForEmployee(String username) throws ServiceException {
         ArrayList<Object> items = new ArrayList<>();
         try{
-            Employee employee = employeeRepository.getEmployeeBy_globatiUsername(username);
+            Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
 //            employee.set_welcomeMail(null);
 //            employee.set_recruitmentMail(null);
 //            employee.set_paypalEmail(null);
@@ -185,21 +185,21 @@ public class EmployeeService {
                 throw new Exception("this username could not be found");
             }
 
-            List<Deal> deals = dealService.getActiveDealsByEmployee(employee.get_id());
+            List<Deal> deals = dealService.getActiveDealsByEmployee(employee.getId());
             for(Deal deal: deals){
-                deal.set_transactionId(null);
+                deal.setTransactionId(null);
             }
 
-            List<Deal> nearbydeals = this.dealService.getNearbyActiveDeals(employee.get_country(), employee.get_id());
+            List<Deal> nearbydeals = this.dealService.getNearbyActiveDeals(employee.getCountry(), employee.getId());
             for(Deal deal: nearbydeals){
-                deal.set_transactionId(null);
+                deal.setTransactionId(null);
             }
 
-            List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.get_id());
-            List<Event> events = eventService.getEventsByEmployeeId(employee.get_id());
-            employee.set_recommendations(recommendations);
+            List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
+            List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
+            employee.setRecommendations(recommendations);
             employee.set_events(events);
-            employee.set_deals(deals);
+            employee.setDeals(deals);
             items.add(employee);
             items.add(nearbydeals);
 
@@ -210,13 +210,13 @@ public class EmployeeService {
     }
 
     public Employee incrementCounter(Employee employee){
-        if(employee.get_visitCounter()==null){
-            employee.set_visitCounter(1);
+        if(employee.getVisitCounter()==null){
+            employee.setVisitCounter(1);
         }
         else{
-            Integer newValue = employee.get_visitCounter();
+            Integer newValue = employee.getVisitCounter();
             newValue++;
-             employee.set_visitCounter(newValue);
+             employee.setVisitCounter(newValue);
         }
         return employee;
     }
@@ -243,7 +243,7 @@ public class EmployeeService {
 //            String imagepath = ImageHandler.createNewImage(is);
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             Employee savedEmployee = employeeRepository.save(employee);
-            employeeInfoService.createEmployeeInfo(savedEmployee.get_id(), password);
+            employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
             return savedEmployee;
         }
         catch(Exception e){
@@ -275,16 +275,16 @@ public class EmployeeService {
         Employee employee = null;
         try {
             employee = getEmployeeById(id);
-            ImageHandler.deleteFileFromS3(employee.get_image());
+            ImageHandler.deleteFileFromS3(employee.getImage());
         }catch(Exception e){
             log.error(e.toString());
-            throw new ServiceException("Could not retrieve employee with id: "+employee.get_id(), e);
+            throw new ServiceException("Could not retrieve employee with id: "+employee.getId(), e);
         }finally {
             //Creates
             String path = Paths.getS3Root()+Paths.getActiveImageLink();
             try {
                 path += ImageHandler.createNewImage(is);
-                employee.set_image(path);
+                employee.setImage(path);
                 updateEmployee(employee);
             } catch (Exception e) {
                 log.error(e.toString());
@@ -305,10 +305,10 @@ public class EmployeeService {
 
     public List<Employee> getEmployeesByCountry(String country) throws ServiceException {
         try{
-            List<Employee> employees= this.employeeRepository.getEmployeeBy_country(country);
+            List<Employee> employees= this.employeeRepository.getEmployeeByCountry(country);
             for(Employee employee: employees){
-                employee.set_deals(null);
-                employee.set_recommendations(null);
+                employee.setDeals(null);
+                employee.setRecommendations(null);
                 employee.set_events(null);
             }
             return employees;
@@ -319,10 +319,10 @@ public class EmployeeService {
 
     public List<Employee> getEmployeesByCity(String city) throws ServiceException {
         try{
-            List<Employee> employees = this.employeeRepository.getEmployeeBy_city(city);
+            List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
             for(Employee employee: employees){
-                employee.set_deals(null);
-                employee.set_recommendations(null);
+                employee.setDeals(null);
+                employee.setRecommendations(null);
                 employee.set_events(null);
             }
             return employees;
@@ -358,7 +358,7 @@ public class EmployeeService {
     public boolean changePasswordWithToken(String token, String password) throws ServiceException {
         try{
             EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByToken(token);
-            if(Long.parseLong(employeeInfo.get_tokenExpiration())>System.currentTimeMillis()) {
+            if(Long.parseLong(employeeInfo.getTokenExpiration())>System.currentTimeMillis()) {
                 EmployeeInfo info = PBKDF2.hashEmployeePassword(employeeInfo, password);
                 employeeInfoService.updateEmployeeInfo(info);
                 return true;
@@ -382,12 +382,12 @@ public class EmployeeService {
     public boolean sendEmailToChangePassword(String email) throws ServiceException {
         try {
             ApiKey api = new ApiKey();
-            Employee employee = employeeRepository.getEmployeeBy_email(email);
-            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
-            employeeInfo.set_authToken(api.getApiKey());
-            employeeInfo.set_tokenExpiration(api.getTime());
+            Employee employee = employeeRepository.getEmployeeByEmail(email);
+            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
+            employeeInfo.setAuthToken(api.getApiKey());
+            employeeInfo.setTokenExpiration(api.getTime());
             employeeInfoService.updateEmployeeInfo(employeeInfo);
-            return SendMail.sendForgottenPasswordEmail(employee.get_email(), employee.get_globatiUsername(),employeeInfo.get_authToken());
+            return SendMail.sendForgottenPasswordEmail(employee.getEmail(), employee.getGlobatiUsername(),employeeInfo.getAuthToken());
         }catch(Exception e){
             throw new ServiceException("Could not send employee info", e);
         }
@@ -414,13 +414,13 @@ public class EmployeeService {
 
             Employee employee = getEmployeeByUserName(username);
 
-            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
             if(PBKDF2.checkPassword(employeeInfo, passwordAttempt)){
-                employeeInfo.set_lastLogin( new Date() );
+                employeeInfo.setLastLogin( new Date() );
                 ApiKey apiKey = new ApiKey();
-                employeeInfo.set_authToken(apiKey.getApiKey());
-                employeeInfo.set_tokenExpiration(apiKey.getTime());
+                employeeInfo.setAuthToken(apiKey.getApiKey());
+                employeeInfo.setTokenExpiration(apiKey.getTime());
                 item.add(apiKey);
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 return item;

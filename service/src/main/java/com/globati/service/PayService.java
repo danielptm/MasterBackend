@@ -52,7 +52,7 @@ public class PayService {
 
         while( itr.hasNext() ){
             Employee employee = (Employee) itr.next();
-            employee.set_deals(dealService.getDealsCreatedByMonth(month, year, employee.get_id()));
+            employee.setDeals(dealService.getDealsCreatedByMonth(month, year, employee.getId()));
             employees.add(employee);
         }
         return employees;
@@ -88,12 +88,12 @@ public class PayService {
             for (Employee employee : employees) {
                 Double amountToPay = 0.0;
                 Integer numberOfDeals = 0;
-                for (Deal deal : employee.get_deals()) {
-                    amountToPay += deal.get_cost();
+                for (Deal deal : employee.getDeals()) {
+                    amountToPay += deal.getCost();
                     numberOfDeals++;
                 }
-                if(employee.get_paypalEmail()!=null) {
-                    String line = employee.get_paypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.get_id() + ","+numberOfDeals;
+                if(employee.getPaypalEmail()!=null) {
+                    String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.getId() + ","+numberOfDeals;
                     bw.write(line);
                     bw.newLine();
                 }
@@ -128,11 +128,11 @@ public class PayService {
             for (Employee employee : employeesWithNoPaypal) {
                 Double amountToPay = 0.0;
                 Integer numberOfDeals = 0;
-                for (Deal deal : employee.get_deals()) {
-                    amountToPay += deal.get_cost();
+                for (Deal deal : employee.getDeals()) {
+                    amountToPay += deal.getCost();
                     numberOfDeals++;
                 }
-                String line = employee.get_paypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.get_id() + ","+ numberOfDeals;
+                String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.getId() + ","+ numberOfDeals;
                 bw.write(line);
                 bw.newLine();
             }

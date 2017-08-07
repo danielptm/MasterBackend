@@ -43,11 +43,11 @@ public class DefaultAuthentication implements ContainerRequestFilter {
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }
 
-        if(! token.equals(employeeInfo.get_authToken()) ){
+        if(! token.equals(employeeInfo.getAuthToken()) ){
             throw new WebException("The user needs to authenticate themselves", Response.Status.UNAUTHORIZED);
         }
 
-        if(Long.parseLong(employeeInfo.get_tokenExpiration())< System.currentTimeMillis() ){
+        if(Long.parseLong(employeeInfo.getTokenExpiration())< System.currentTimeMillis() ){
             throw new WebException("The token is expired, the user needs to log in to get a new token", Response.Status.UNAUTHORIZED);
         }
     }

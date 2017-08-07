@@ -21,9 +21,9 @@ public class PBKDF2 {
     private static final int KEY_LENGTH = 64*8;
 
     public static boolean checkPassword(EmployeeInfo employee, String passwordAttempt){
-        String password = employee.get_globatiPassword();
+        String password = employee.getGlobatiPassword();
         char[] passwordAttemptChar = passwordAttempt.toCharArray();
-        byte[] salt = employee.get_salt();
+        byte[] salt = employee.getSalt();
         String hashedPassword =hashPassword(passwordAttemptChar, salt, ITERATIONS, KEY_LENGTH);
         if(password.equals(hashedPassword)){
             return true;
@@ -37,8 +37,8 @@ public class PBKDF2 {
         char[] charpass = password.toCharArray();
         byte[] salt = getsalt();
         String hashedPassword = hashPassword(charpass, salt, ITERATIONS, KEY_LENGTH);
-        e.set_globatiPassword(hashedPassword);
-        e.set_salt(salt);
+        e.setGlobatiPassword(hashedPassword);
+        e.setSalt(salt);
         return e;
     }
 

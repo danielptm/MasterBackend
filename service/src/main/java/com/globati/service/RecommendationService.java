@@ -40,7 +40,7 @@ public class RecommendationService{
         String imagepath=null;
         try {
 //            imagepath = ImageHandler.createNewImage(is);
-            employee = employeeRepository.getEmployeeBy_id(employeeId);
+            employee = employeeRepository.getEmployeeByid(employeeId);
             rec = new Recommendation(employee, title, description, targetLat, targetLong, street, city, country, image1, image2, image3);
             Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
             return recommendationRepository.save(rec2);
@@ -59,7 +59,7 @@ public class RecommendationService{
     public Recommendation inactivateRecommendation(Long id) throws ServiceException {
         try{
             Recommendation rec = recommendationRepository.findOne(id);
-            rec.set_active(false);
+            rec.setActive(false);
             return updateRecommendation(rec);
         }catch(Exception e){
             log.error("Could not inactivate recommendation with id: "+id);
@@ -88,7 +88,7 @@ public class RecommendationService{
 
     public List<Recommendation> getRecommendationByEmployeeId(Long id) throws ServiceException {
         try{
-            return recommendationRepository.getAllRecommendationsBy_employee_idAndActive(id, true);
+            return recommendationRepository.getAllRecommendationsByEmployeeIdAndActive(id, true);
         }catch(Exception e){
             log.error(e.toString());
             throw new ServiceException( "Could not get recommendations by id: "+id, e );

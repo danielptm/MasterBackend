@@ -27,8 +27,8 @@ public class CheckProximity {
 
     public static Event getEventProximity(Event event, Employee employee){
         List<Event> lbo = new ArrayList<Event>();
-        double lat1 = employee.get_propLat(); double lng1 = employee.get_propLong();
-        double lat2 = event.get_targetLat(); double lng2 = event.get_targetLong();
+        double lat1 = employee.getPropLat(); double lng1 = employee.getPropLong();
+        double lat2 = event.getTargetLat(); double lng2 = event.getTargetLong();
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lng2-lng1);
         double R = 6371;
@@ -37,14 +37,14 @@ public class CheckProximity {
         double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.asin(Math.sqrt(a));
         double distance = R*c;
-        event.set_distance(distance);
+        event.setDistance(distance);
         return event;
     }
 
     public static Recommendation getRecommendationProximity(Recommendation recommendation, Employee employee){
         List<Recommendation> lbo = new ArrayList<Recommendation>();
-        double lat1 = employee.get_propLat(); double lng1 = employee.get_propLong();
-        double lat2 = recommendation.get_targetLat(); double lng2 = recommendation.get_targetLong();
+        double lat1 = employee.getPropLat(); double lng1 = employee.getPropLong();
+        double lat2 = recommendation.getTargetLat(); double lng2 = recommendation.getTargetLong();
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lng2-lng1);
         double R = 6371;
@@ -53,14 +53,14 @@ public class CheckProximity {
         double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.asin(Math.sqrt(a));
         double distance = R*c;
-        recommendation.set_distance(distance);
+        recommendation.setDistance(distance);
         return recommendation;
     }
 
     public static Deal getDealProximity(Deal deal, Employee employee){
         List<Deal> lbo = new ArrayList<Deal>();
-        double lat1 = employee.get_propLat(); double lng1 = employee.get_propLong();
-        double lat2 = deal.get_targetLat(); double lng2 = deal.get_targetLong();
+        double lat1 = employee.getPropLat(); double lng1 = employee.getPropLong();
+        double lat2 = deal.getTargetLat(); double lng2 = deal.getTargetLong();
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lng2-lng1);
         double R = 6371;
@@ -69,15 +69,15 @@ public class CheckProximity {
         double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.asin(Math.sqrt(a));
         double distance = R*c;
-        deal.set_distance(distance);
+        deal.setDistance(distance);
         return deal;
 
     }
 
     public static Deal getNonRecruiterProximity(Deal deal, Employee employee){
         List<Deal> lbo = new ArrayList<Deal>();
-        double lat1 = employee.get_propLat(); double lng1 = employee.get_propLong();
-        double lat2 = deal.get_targetLat(); double lng2 = deal.get_targetLong();
+        double lat1 = employee.getPropLat(); double lng1 = employee.getPropLong();
+        double lat2 = deal.getTargetLat(); double lng2 = deal.getTargetLong();
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lng2-lng1);
         double R = 6371;
@@ -86,7 +86,7 @@ public class CheckProximity {
         double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
         double c = 2 * Math.asin(Math.sqrt(a));
         double distance = R*c;
-        deal.set_nonRecruiterDistance(distance);
+        deal.setNonRecruiterDistance(distance);
         return deal;
 
     }

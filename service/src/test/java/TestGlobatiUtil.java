@@ -11,6 +11,7 @@ import com.globati.utildb.HelpObjects.HashedPassword;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class TestGlobatiUtil {
     @Autowired
     DealService dealService;
 
-    @Test
+    @Ignore
     public void testSendSesMail() throws Exception {
 
         File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
@@ -68,7 +69,7 @@ public class TestGlobatiUtil {
 
         Email email = new Email(employee, li);
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
 
         Assert.assertTrue(SendMail.sendGuestMail(email));
         Assert.assertTrue(SendMail.sendReceipt(d));
@@ -100,7 +101,7 @@ public class TestGlobatiUtil {
 
 
 
-    @Test
+    @Ignore
     public void sendMail() throws Exception {
 
         String uid = UUID.randomUUID().toString();
@@ -148,9 +149,9 @@ public class TestGlobatiUtil {
         InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
-        Employee employee1 =employeeService.getEmployeeById(employee.get_id());
+        Employee employee1 =employeeService.getEmployeeById(employee.getId());
 
-        EmployeeInfo ei = new EmployeeInfo(employee1.get_id());
+        EmployeeInfo ei = new EmployeeInfo(employee1.getId());
 
         EmployeeInfo ei2 = PBKDF2.hashEmployeePassword(ei, "secret password");
 
@@ -168,7 +169,7 @@ public class TestGlobatiUtil {
         InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
-        EmployeeInfo ei = new EmployeeInfo(employee.get_id());
+        EmployeeInfo ei = new EmployeeInfo(employee.getId());
 
         EmployeeInfo ei2 = PBKDF2.hashEmployeePassword(ei, "secret password");
 
@@ -178,7 +179,7 @@ public class TestGlobatiUtil {
     }
 
 
-    @Test
+    @Ignore
     public void testWriteImageToS3() throws IOException, GlobatiUtilException {
 
         File file = new File(getClass().getClassLoader().getResource("test_resources/faduma.jpg").getFile());
@@ -189,7 +190,7 @@ public class TestGlobatiUtil {
 
     }
 
-    @Test
+    @Ignore
     public void testDeleteImageFromS3(){
 
         String keyName = "daniel.jpg";
@@ -212,7 +213,7 @@ public class TestGlobatiUtil {
         Paths.getActiveCreateAddLink();
     }
 
-    @Test
+    @Ignore
     public void testReplaceImage() throws IOException, GlobatiUtilException, ServiceException {
         File file = new File(getClass().getClassLoader().getResource("test_resources/faduma.jpg").getFile());
         InputStream fis = new FileInputStream(file);
@@ -222,7 +223,7 @@ public class TestGlobatiUtil {
 
     }
 
-    @Test
+    @Ignore
     public void testFacebookUserId(){
         String hi = "daniel";
         String fakeusername = FacebookUserId.generateFacebookUserId(hi);

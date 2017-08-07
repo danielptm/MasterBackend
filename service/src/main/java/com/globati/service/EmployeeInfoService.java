@@ -45,7 +45,7 @@ public class EmployeeInfoService {
 
     public EmployeeInfo getEmployeeInfoByEmployeeId(Long id) throws ServiceException {
         try{
-            return employeeInfoRepsitory.getBy_employeeId(id);
+            return employeeInfoRepsitory.getByEmployeeId(id);
         }catch(Exception e){
             log.error(e.toString());
             throw new ServiceException("Could not get info by employee id", e);
@@ -54,7 +54,7 @@ public class EmployeeInfoService {
 
     public EmployeeInfo getEmployeeInfoByToken(String token) throws ServiceException {
         try{
-            return employeeInfoRepsitory.getBy_authToken(token);
+            return employeeInfoRepsitory.getByAuthToken(token);
         }catch(Exception e){
             log.error(e.toString());
             throw new ServiceException("Could not get employee info by token ", e);
@@ -72,7 +72,7 @@ public class EmployeeInfoService {
 
     public EmployeeInfo getEmployeeInfoByFacebookId(String facebookId) throws ServiceException {
         try{
-            return employeeInfoRepsitory.getBy_facebookId(facebookId);
+            return employeeInfoRepsitory.getByFacebookId(facebookId);
 
         }catch(Exception e){
             throw new ServiceException("Could not get employee info by facebookid: "+facebookId, e);

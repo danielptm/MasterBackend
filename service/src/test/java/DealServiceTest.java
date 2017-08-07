@@ -67,7 +67,7 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(image1, image3, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image3, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
 
         Assert.assertNotNull(d);
     }
@@ -88,9 +88,9 @@ public class DealServiceTest {
         String image3 = "image3 file";
 
         Employee employee = this.employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        Deal d = dealService.createDeal(image1, image2, image3, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30day", 30, "234", "billing","billing","billing","billing");
         Deal d2 = dealService.updateDeal(d);
-        Assert.assertEquals(true, d2.is_active());
+        Assert.assertEquals(true, d2.isActive());
 
     }
 
@@ -125,16 +125,16 @@ public class DealServiceTest {
         Employee employee2 = employeeService.createEmployee("Daniel",  uid2+"@me.com", uid2, "secret password", 59.336626, 18.055053, "image", "2308 n 44 st", "seattle", "usa");
 
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
 
-        Deal d2 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d2 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
 
-        Deal d3 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.get_id(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30,"234", "billing","billing","billing","billing");
+        Deal d3 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30,"234", "billing","billing","billing","billing");
 
-        List<Deal> testarray = dealService.getNearbyActiveDeals("q", employee.get_id());
+        List<Deal> testarray = dealService.getNearbyActiveDeals("q", employee.getId());
 
         for(Deal deal:testarray){
-            Assert.assertTrue( 7.75730390360477== deal.get_nonRecruiterDistance() | 12.364386246574913== deal.get_nonRecruiterDistance() );
+            Assert.assertTrue( 7.75730390360477== deal.getNonRecruiterDistance() | 12.364386246574913== deal.getNonRecruiterDistance() );
         }
     }
 
@@ -147,8 +147,8 @@ public class DealServiceTest {
 
         for(Deal deal: deals){
             log.debug(deal.toString());
-            Assert.assertTrue(deal.is_active());
-            Assert.assertTrue(deal.get_country().equals("sweden"));
+            Assert.assertTrue(deal.isActive());
+            Assert.assertTrue(deal.getCountry().equals("sweden"));
         }
     }
 
@@ -171,13 +171,13 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
 
 
-        List<Deal> deals = dealService.getActiveDealsByEmployee(employee.get_id());
+        List<Deal> deals = dealService.getActiveDealsByEmployee(employee.getId());
 
         for(Deal deal:deals){
-            Assert.assertTrue(deal.is_active());
+            Assert.assertTrue(deal.isActive());
             Assert.assertTrue(deals.size()==1);
         }
     }
@@ -208,13 +208,13 @@ public class DealServiceTest {
         File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
         InputStream fis1 = new FileInputStream(file1);
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
 
         List<Deal> deals = dealService.getDealsCreatedByMonth(1, 2017, 1L);
         log.debug(deals.size());
         for(Deal deal:deals){
-            Assert.assertTrue(deal.get_datemade().getYear()+1900==2017);
-            Assert.assertTrue(deal.get_datemade().getMonth()==0);
+            Assert.assertTrue(deal.getDatemade().getYear()+1900==2017);
+            Assert.assertTrue(deal.getDatemade().getMonth()==0);
         }
     }
 }

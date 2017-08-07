@@ -36,14 +36,14 @@ public class DateTools {
      */
     public static List<Event> createRepeatingEvents(Event event){
         List<Event> events = new ArrayList<>();
-        if( event.get_repeat().equals(Repeat.DAILY) ){
+        if( event.getRepeat().equals(Repeat.DAILY) ){
             for(int i=0; i<90; i++){
                 Event newEvent = addDaysToEvent(event, i);
                 events.add(newEvent);
             }
         }
 
-        else if(event.get_repeat().equals(Repeat.WEEKLY)){
+        else if(event.getRepeat().equals(Repeat.WEEKLY)){
             for(int i=0; i<13; i++){
                 Event newEvent = addDaysToEvent(event, i*7);
                 events.add(newEvent);
@@ -58,15 +58,15 @@ public class DateTools {
 
     public static Event addDaysToEvent(Event event, int i){
         Calendar c = Calendar.getInstance();
-        c.setTime(event.get_date());
+        c.setTime(event.getDate());
         c.add(Calendar.DATE, i);
-        Event newevent = new Event(event.get_employee(), c.getTime(), event.get_targetLat(), event.get_targetLong(),event.get_street(), event.get_city(), event.get_country(), event.get_title(), event.get_description(), event.get_image(), event.get_image2(), event.get_image3());
-        newevent.set_distance(event.get_distance());
+        Event newevent = new Event(event.getEmployee(), c.getTime(), event.getTargetLat(), event.getTargetLong(),event.getStreet(), event.getCity(), event.getCountry(), event.getTitle(), event.getDescription(), event.getImage(), event.getImage2(), event.getImage3());
+        newevent.setDistance(event.getDistance());
         return newevent;
     }
 
     public static boolean dateIsBeforeCurrentDate(Event eventData){
         java.util.Date date = new java.util.Date();
-        return eventData.get_date().before(date);
+        return eventData.getDate().before(date);
     }
 }

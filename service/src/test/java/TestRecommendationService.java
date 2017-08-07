@@ -47,10 +47,10 @@ public class TestRecommendationService {
 
         Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
-        Employee e = employeeService.getEmployeeById(employee.get_id());
-        Recommendation rec = recommendationService.createRecommendation(e.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        Employee e = employeeService.getEmployeeById(employee.getId());
+        Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
-        Assert.assertEquals(rec.get_title(), "title");
+        Assert.assertEquals(rec.getTitle(), "title");
     }
 
     @Test
@@ -65,12 +65,12 @@ public class TestRecommendationService {
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
 
-        Employee e = employeeService.getEmployeeById(employee.get_id());
-        Recommendation re = recommendationService.createRecommendation(e.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-        Recommendation rec = recommendationService.getRecommendationById(re.get_id());
-        rec.set_active(true);
+        Employee e = employeeService.getEmployeeById(employee.getId());
+        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        Recommendation rec = recommendationService.getRecommendationById(re.getId());
+        rec.setActive(true);
         recommendationService.updateRecommendation(rec);
-        Assert.assertEquals(recommendationService.getRecommendationById(re.get_id()).is_active(), true);
+        Assert.assertEquals(recommendationService.getRecommendationById(re.getId()).isActive(), true);
     }
 
     @Test
@@ -87,12 +87,12 @@ public class TestRecommendationService {
 
         String country = "Sweden";
 
-        Employee employee =  employeeService.getEmployeeById(e.get_id());
+        Employee employee =  employeeService.getEmployeeById(e.getId());
 
-        recommendationService.createRecommendation(e.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-        recommendationService.createRecommendation(e.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
-        List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(employee.get_id());
+        List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(employee.getId());
         Assert.assertEquals(2, recommendationList.size());
 
     }

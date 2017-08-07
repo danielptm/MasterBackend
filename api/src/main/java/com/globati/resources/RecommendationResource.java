@@ -135,11 +135,11 @@ public class RecommendationResource {
 //        System.out.println(recommendation);
         try{
             Recommendation returnRecommendation = recommendationService.getRecommendationById(id);
-            returnRecommendation.set_description(recommendation.get_description());
-            returnRecommendation.set_image(recommendation.get_image1());
-            returnRecommendation.set_image2(recommendation.get_image2());
-            returnRecommendation.set_image3(recommendation.get_image3());
-            returnRecommendation.set_title(recommendation.get_title());
+            returnRecommendation.setDescription(recommendation.get_description());
+            returnRecommendation.setImage(recommendation.get_image1());
+            returnRecommendation.setImage2(recommendation.get_image2());
+            returnRecommendation.setImage3(recommendation.get_image3());
+            returnRecommendation.setTitle(recommendation.get_title());
             recommendationService.updateRecommendation(returnRecommendation);
             return Response.ok(returnRecommendation).build();
         }catch(Exception e){

@@ -46,10 +46,10 @@ public class SendMail {
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
 
-        System.out.println(mail.getEmployee().get_image());
+        System.out.println(mail.getEmployee().getImage());
 
         // Create the subject and body of the message.
-        Content subject = new Content().withData("My globati ~"+mail.getEmployee().get_firstName());
+        Content subject = new Content().withData("My globati ~"+mail.getEmployee().getFirstName());
         Content textBody = new Content().withData(
 
                 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"+
@@ -613,7 +613,7 @@ public class SendMail {
                         "																<td align=\"left\" valign=\"top\" class=\"flexibleContainerBox\">"+
                         "																	<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"90\" style=\"max-width:100%;\">"+
                         "																		<tr>"+
-                        "																			<td align=\"left\" class=\"textContent\"> <img src=\""+mail.getEmployee().get_image()+"\" width=\"100\" class=\"flexibleImageSmall\" style=\"max-width:100%;\" alt=\"\" title=\"\" /> </td>"+
+                        "																			<td align=\"left\" class=\"textContent\"> <img src=\""+mail.getEmployee().getImage()+"\" width=\"100\" class=\"flexibleImageSmall\" style=\"max-width:100%;\" alt=\"\" title=\"\" /> </td>"+
                         "																		</tr>"+
                         "																	</table>"+
                         "																</td>"+
@@ -626,8 +626,8 @@ public class SendMail {
                         "																				<table class=\"flexibleContainerBoxNext\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"350\" style=\"max-width:100%;\">"+
                         "																					<tr>"+
                         "																						<td align=\"left\" class=\"textContent\" style=\"padding-left:30px; padding-right;\">"+
-                        "																							<h3 style=\"color:#323333;line-height:125%;font-family:Ubuntu,Helvetica,sans-serif;font-size:29px;font-weight:700;margin-top:0;margin-bottom:3px;text-align:left;\">Hey, I'm "+mail.getEmployee().get_firstName()+"! <a style=\"color:#FFFFFF;\" href=\"#\" target=\"_blank\"></a></h3>"+
-                        "																							<div style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">"+mail.getEmployee().get_welcomeMail()+"</div>"+
+                        "																							<h3 style=\"color:#323333;line-height:125%;font-family:Ubuntu,Helvetica,sans-serif;font-size:29px;font-weight:700;margin-top:0;margin-bottom:3px;text-align:left;\">Hey, I'm "+mail.getEmployee().getFirstName()+"! <a style=\"color:#FFFFFF;\" href=\"#\" target=\"_blank\"></a></h3>"+
+                        "																							<div style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">"+mail.getEmployee().getWelcomeMail()+"</div>"+
                         "																						</td>"+
                         "																					</tr>"+
                         "																				</table>"+
@@ -670,7 +670,7 @@ public class SendMail {
                         "																						http://kb.mailchimp.com/templates/code/create-editable-content-areas-with-mailchimps-template-language"+
                         "																					-->"+
                         "																							<h3 mc:edit=\"header\" style=\"color:#323333;line-height:125%;font-family:Ubuntu,Helvetica,sans-serif;font-size:29px;font-weight:700;margin-top:0;margin-bottom:3px;text-align:left;\">Welcome to Globati!</h3>"+
-                        "																							<div mc:edit=\"body\" style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">Check out "+mail.getEmployee().get_firstName()+"'s profile below, you can also go to globati.com/myglobati to see other locals in the area on the globati network. </div>"+
+                        "																							<div mc:edit=\"body\" style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">Check out "+mail.getEmployee().getFirstName()+"'s profile below, you can also go to globati.com/myglobati to see other locals in the area on the globati network. </div>"+
                         "																						</td>"+
                         "																					</tr>"+
                         "																				</table>"+
@@ -703,7 +703,7 @@ public class SendMail {
                         "																	<!-- CONTENT TABLE // -->"+
                         "																	<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"50%\" class=\"emailButton\" style=\"background-color: deeppink;\">"+
                         "																		<tr>"+
-                        "																			<td align=\"center\" valign=\"middle\" class=\"buttonContent\" style=\"padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;\"> <a style=\"color:#FFFFFF;text-decoration:none;font-family:Ubuntu,Helvetica,sans-serif;font-size:21px;line-height:135%;\" href=\"#\" target=\"_blank\"><a href=\""+Paths.getActiveStaticGlobati()+mail.getEmployee().get_globatiUsername()+"\" >"+mail.getEmployee().get_firstName()+"'s globati</a> </td>"+
+                        "																			<td align=\"center\" valign=\"middle\" class=\"buttonContent\" style=\"padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;\"> <a style=\"color:#FFFFFF;text-decoration:none;font-family:Ubuntu,Helvetica,sans-serif;font-size:21px;line-height:135%;\" href=\"#\" target=\"_blank\"><a href=\""+Paths.getActiveStaticGlobati()+mail.getEmployee().getGlobatiUsername()+"\" >"+mail.getEmployee().getFirstName()+"'s globati</a> </td>"+
                         "																		</tr>"+
                         "																	</table>"+
                         "																	<!-- // CONTENT TABLE -->"+
@@ -802,7 +802,7 @@ public class SendMail {
     public static boolean sendReceipt(Deal deal) throws Exception {
         log.debug("SendReceipt(deal): ");
         log.debug(deal.toString());
-        String[] emails = new String[]{deal.get_email()};
+        String[] emails = new String[]{deal.getEmail()};
 
 
         // Construct an object to contain the recipient address.
@@ -829,7 +829,7 @@ public class SendMail {
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; background-color: #DC143C;\"></td>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; background-color: #DC143C;\"></td>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 24px; font-weight: 700; padding: 0.25em 0.5em 0.25em 0.5em; background-color: #DC143C; color: ;\" colspan=\"3\">Order Number"+
-                        "                <br> "+deal.get_transactionId()+"</td>"+
+                        "                <br> "+deal.getTransactionId()+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 48px; padding: 2em 0.25em 0em 0.25em; background-color: #DC143C; color: #FFF;\" colspan=\"12\">Thanks for advertising with us!</td>"+
@@ -853,9 +853,9 @@ public class SendMail {
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.25em 0.25em 0em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">Cost</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_dealtype()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_plan()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_cost()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.getDealtype()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.getPlan()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.getCost()+"</td>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\"></td>"+
                         "        </tr>"+
                         "        <tr>"+
@@ -866,20 +866,20 @@ public class SendMail {
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 21px; font-weight: 700; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">Billing Address</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.getLocation()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.getLocation()+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_street()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingStreet()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.getStreet()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.getBillingStreet()+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingRegion()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.getBillingRegion()+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em;\" colspan=\"6\">"+deal.get_country()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em; border-bottom: 1px dashed;\" colspan=\"6\">"+deal.get_country()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em;\" colspan=\"6\">"+deal.getCountry()+"</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em; border-bottom: 1px dashed;\" colspan=\"6\">"+deal.getCountry()+"</td>"+
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
@@ -887,7 +887,7 @@ public class SendMail {
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+deal.get_employee().get_firstName()+" at "+deal.get_employee().get_email()+" if you have any questions</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+deal.getEmployee().getFirstName()+" at "+deal.getEmployee().getEmail()+" if you have any questions</td>"+
                         "        </tr>"+
                         "        <tr style=\"border-bottom: 3px solid;\">"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
@@ -1012,7 +1012,7 @@ public class SendMail {
         Destination destination = new Destination().withToAddresses(emails);
 
         // Create the subject and body of the message.
-        Content subject = new Content().withData(employee.get_firstName()+" is inviting "+businessName+" to develop a business partnership on globati");
+        Content subject = new Content().withData(employee.getFirstName()+" is inviting "+businessName+" to develop a business partnership on globati");
         Content textBody = new Content().withData(
 
                     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"+
@@ -1576,7 +1576,7 @@ public class SendMail {
                             "																<td align=\"left\" valign=\"top\" class=\"flexibleContainerBox\">"+
                             "																	<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"90\" style=\"max-width:100%;\">"+
                             "																		<tr>"+
-                            "																			<td align=\"left\" class=\"textContent\"> <img src=\""+employee.get_image()+"\" width=\"100\" class=\"flexibleImageSmall\" style=\"max-width:100%;\" alt=\"\" title=\"Text\" /> </td>"+
+                            "																			<td align=\"left\" class=\"textContent\"> <img src=\""+employee.getImage()+"\" width=\"100\" class=\"flexibleImageSmall\" style=\"max-width:100%;\" alt=\"\" title=\"Text\" /> </td>"+
                             "																		</tr>"+
                             "																	</table>"+
                             "																</td>"+
@@ -1589,8 +1589,8 @@ public class SendMail {
                             "																				<table class=\"flexibleContainerBoxNext\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"350\" style=\"max-width:100%;\">"+
                             "																					<tr>"+
                             "																						<td align=\"left\" class=\"textContent\" style=\"padding-left:30px; padding-right;\">"+
-                            "																							<h3 style=\"color:#323333;line-height:125%;font-family:Ubuntu,Helvetica,sans-serif;font-size:29px;font-weight:700;margin-top:0;margin-bottom:3px;text-align:left;\">Hey I'm <a style=\"color:dodgerblue;\" href=\"\" target=\"_blank\">"+employee.get_firstName()+"</a>!</h3>"+
-                            "																							<div style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">"+employee.get_recruitmentMail()+"</div>"+
+                            "																							<h3 style=\"color:#323333;line-height:125%;font-family:Ubuntu,Helvetica,sans-serif;font-size:29px;font-weight:700;margin-top:0;margin-bottom:3px;text-align:left;\">Hey I'm <a style=\"color:dodgerblue;\" href=\"\" target=\"_blank\">"+employee.getFirstName()+"</a>!</h3>"+
+                            "																							<div style=\"text-align:left;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;color:#323333;line-height:135%;\">"+employee.getRecruitmentMail()+"</div>"+
                             "																						</td>"+
                             "																					</tr>"+
                             "																				</table>"+
@@ -1709,7 +1709,7 @@ public class SendMail {
                             "																	<!-- CONTENT TABLE // -->"+
                             "																	<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"50%\" class=\"emailButton\" style=\"background-color:deeppink;\">"+
                             "																		<tr>"+
-                            "																			<td align=\"center\" valign=\"middle\" class=\"buttonContent\" style=\"padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;\"> <a style=\"color:#FFFFFF;text-decoration:none;font-family:Ubuntu,Helvetica,sans-serif;font-size:18px;line-height:135%;\" href=\""+Paths.getActiveCreateAddLink()+employee.get_id()+"\" target=\"_blank\"><b>LET'S START!</a> </td>"+
+                            "																			<td align=\"center\" valign=\"middle\" class=\"buttonContent\" style=\"padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;\"> <a style=\"color:#FFFFFF;text-decoration:none;font-family:Ubuntu,Helvetica,sans-serif;font-size:18px;line-height:135%;\" href=\""+Paths.getActiveCreateAddLink()+employee.getId()+"\" target=\"_blank\"><b>LET'S START!</a> </td>"+
                             "																		</tr>"+
                             "																	</table>"+
                             "																	<!-- // CONTENT TABLE -->"+
@@ -1747,7 +1747,7 @@ public class SendMail {
                             "																					</tr>"+
                             "																					<tr>"+
                             "																						<td valign=\"top\" class=\"textContent\">"+
-                            "																							<div style=\"text-align:center;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;margin-top:3px;color:#FFFFFF;line-height:135%;\"> Contact "+employee.get_firstName()+" at "+employee.get_email()+" if you have any questions about creating a partnership.<span style=\"color:#FFFFF;\">"+
+                            "																							<div style=\"text-align:center;font-family:Ubuntu,Helvetica,sans-serif;font-size:15px;margin-bottom:0;margin-top:3px;color:#FFFFFF;line-height:135%;\"> Contact "+employee.getFirstName()+" at "+employee.getEmail()+" if you have any questions about creating a partnership.<span style=\"color:#FFFFF;\">"+
                             "																						</td>"+
                             "																					</tr>"+
 

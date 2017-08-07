@@ -48,7 +48,7 @@ public class EventResource {
     public Response update(@PathParam("id") Long id){
         try{
             Event event = eventService.getEventById(id);
-            event.set_active(false);
+            event.setActive(false);
             this.eventService.updateEvent(event);
             return Response.ok().build();
         }catch(Exception e){

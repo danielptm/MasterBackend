@@ -16,365 +16,366 @@ import java.util.List;
 @Table(name = "employee")
 public class Employee extends BaseEntity {
 
+
     @Column(length=100, name="firstname")
-    private String _firstName;
+    private String firstName;
     @Column(name="image")
-    private String _image;
+    private String image;
     @Column(name="image2")
-    private String _image2;
+    private String image2;
     @Column(name="image3")
-    private String _image3;
+    private String image3;
     @Column(unique = true, length=300, name="email", nullable = true)
-    private String _email;
+    private String email;
     @Column(length=100, name="paypalemail")
-    private String _paypalEmail;
+    private String paypalEmail;
     @Column(length=3000, name="about")
-    private String _about;
+    private String about;
     @Column(length=3000, name = "welcomemail")
-    private String _welcomeMail;
+    private String welcomeMail;
     @Column(length = 3000, name="recruitmentmail")
-    private String _recruitmentMail;
+    private String recruitmentMail;
     @Column(length=1000, name="instagramuser")
-    private String _instagramUser;
+    private String instagramUser;
     @Column(length=100, name="instagramuserid")
-    private String _instagramUserId;
+    private String instagramUserId;
     @Column(length=100, name="instagramusertoken")
-    private String _instagramUserToken;
+    private String instagramUserToken;
     @Column(name="proplat")
-    private double _propLat;
+    private double propLat;
     @Column(name="proplong")
-    private double _propLong;
+    private double propLong;
     @Column(length=100, name="street")
-    private String _street;
+    private String street;
     @Column(length=100, name="city")
-    private String _city;
+    private String city;
     @Column(length=100, name="country")
-    private String _country;
+    private String country;
     @Column(length=1000, name="display")
-    private String _display;
+    private String display;
     @Column(name="addamount")
-    private double _addAmount;
+    private double addAmount;
     @Column(name="add2month")
-    private double _add2month;
+    private double add2month;
     @Column(name="add3month")
-    private double _add3month;
+    private double add3month;
     @Column(unique = true, name="globatiusername")
-    private String _globatiUsername;
+    private String globatiUsername;
     @Column(name="active")
-    private boolean _active;
+    private boolean active;
     @Column(name="facebookprofile")
-    private boolean _facebookProfile=false;
+    private boolean facebookProfile=false;
     @Column(name="visitcounter")
-    private Integer _visitCounter;
+    private Integer visitCounter;
 
 
-    @OneToMany(mappedBy = "_employee", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference
-    List<Deal> _deals;
+    List<Deal> deals;
 
-    @OneToMany(mappedBy = "_employee", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    List<Recommendation> _recommendations;
+    List<Recommendation> recommendations;
 
-    @OneToMany(mappedBy = "_employee", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    List<Event> _events;
+    List<Event> events;
 
     public Employee(){}
 
     public Employee(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country) {
-        this._firstName = firstName;
-        this._email = email;
-        this._globatiUsername = userName;
-        this._propLat = locLat;
-        this._propLong = locLong;
-        this._image = image;
-        this._street = street;
-        this._city = city;
-        this._country = country;
-        this._active = true;
-        this._addAmount = 10;
-        this._add2month = 10;
-        this._add3month = 10;
-        this._about=""; //set these to empty strings, to avoid strangeness related to null on client side.
-        this._display="";
-        this._facebookProfile = false;
-        this._visitCounter=0;
+        this.firstName = firstName;
+        this.email = email;
+        this.globatiUsername = userName;
+        this.propLat = locLat;
+        this.propLong = locLong;
+        this.image = image;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.active = true;
+        this.addAmount = 10;
+        this.add2month = 10;
+        this.add3month = 10;
+        this.about=""; //set these to empty strings, to avoid strangeness related to null on client side.
+        this.display="";
+        this.facebookProfile = false;
+        this.visitCounter=0;
     }
 
     //Used for a facebook login/create account
     public Employee(String name, String _email, String _username, String _image){
-        this._firstName = name;
-        this._email = _email;
-        this._globatiUsername = _username;
-        this._image = _image;
-        this._addAmount = 10;
-        this._add2month = 10;
-        this._add3month = 10;
-        this._facebookProfile = true;
-        this._visitCounter=0;
+        this.firstName = name;
+        this.email = _email;
+        this.globatiUsername = _username;
+        this.image = _image;
+        this.addAmount = 10;
+        this.add2month = 10;
+        this.add3month = 10;
+        this.facebookProfile = true;
+        this.visitCounter=0;
     }
 
 
-    public String get_firstName() {
-        return _firstName;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String get_image() {
-        return _image;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String get_email() {
-        return _email;
+    public String getImage() {
+        return image;
     }
 
-    public String get_paypalEmail() {
-        return _paypalEmail;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String get_about() {
-        return _about;
+    public String getImage2() {
+        return image2;
     }
 
-    public String get_welcomeMail() {
-        return _welcomeMail;
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
-    public String get_recruitmentMail() {
-        return _recruitmentMail;
+    public String getImage3() {
+        return image3;
     }
 
-    public String get_instagramUser() {
-        return _instagramUser;
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
-    public String get_instagramUserId() {
-        return _instagramUserId;
+    public String getEmail() {
+        return email;
     }
 
-    public String get_instagramUserToken() {
-        return _instagramUserToken;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public double get_propLat() {
-        return _propLat;
+    public String getPaypalEmail() {
+        return paypalEmail;
     }
 
-    public double get_propLong() {
-        return _propLong;
+    public void setPaypalEmail(String paypalEmail) {
+        this.paypalEmail = paypalEmail;
     }
 
-    public String get_street() {
-        return _street;
+    public String getAbout() {
+        return about;
     }
 
-    public String get_city() {
-        return _city;
+    public void setAbout(String about) {
+        this.about = about;
     }
 
-    public String get_country() {
-        return _country;
+    public String getWelcomeMail() {
+        return welcomeMail;
     }
 
-    public String get_display() {
-        return _display;
+    public void setWelcomeMail(String welcomeMail) {
+        this.welcomeMail = welcomeMail;
     }
 
-    public String get_globatiUsername() {
-        return _globatiUsername;
+    public String getRecruitmentMail() {
+        return recruitmentMail;
     }
 
-    public boolean is_active() {
-        return _active;
+    public void setRecruitmentMail(String recruitmentMail) {
+        this.recruitmentMail = recruitmentMail;
     }
 
-    public void set_firstName(String _firstName) {
-        this._firstName = _firstName;
+    public String getInstagramUser() {
+        return instagramUser;
     }
 
-    public void set_image(String _image) {
-        this._image = _image;
+    public void setInstagramUser(String instagramUser) {
+        this.instagramUser = instagramUser;
     }
 
-    public void set_email(String _email) {
-        this._email = _email;
+    public String getInstagramUserId() {
+        return instagramUserId;
     }
 
-    public void set_paypalEmail(String _paypalEmail) {
-        this._paypalEmail = _paypalEmail;
+    public void setInstagramUserId(String instagramUserId) {
+        this.instagramUserId = instagramUserId;
     }
 
-    public void set_about(String _about) {
-        this._about = _about;
+    public String getInstagramUserToken() {
+        return instagramUserToken;
     }
 
-    public void set_welcomeMail(String _welcomeMail) {
-        this._welcomeMail = _welcomeMail;
+    public void setInstagramUserToken(String instagramUserToken) {
+        this.instagramUserToken = instagramUserToken;
     }
 
-    public void set_recruitmentMail(String _recruitmentMail) {
-        this._recruitmentMail = _recruitmentMail;
+    public double getPropLat() {
+        return propLat;
     }
 
-    public void set_instagramUser(String _instagramUser) {
-        this._instagramUser = _instagramUser;
+    public void setPropLat(double propLat) {
+        this.propLat = propLat;
     }
 
-    public void set_instagramUserId(String _instagramUserId) {
-        this._instagramUserId = _instagramUserId;
+    public double getPropLong() {
+        return propLong;
     }
 
-    public void set_instagramUserToken(String _instagramUserToken) {
-        this._instagramUserToken = _instagramUserToken;
+    public void setPropLong(double propLong) {
+        this.propLong = propLong;
     }
 
-    public void set_propLat(double _propLat) {
-        this._propLat = _propLat;
+    public String getStreet() {
+        return street;
     }
 
-    public void set_propLong(double _propLong) {
-        this._propLong = _propLong;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public void set_street(String _street) {
-        this._street = _street;
+    public String getCity() {
+        return city;
     }
 
-    public void set_city(String _city) {
-        this._city = _city;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public void set_country(String _country) {
-        this._country = _country;
+    public String getCountry() {
+        return country;
     }
 
-    public void set_display(String _display) {
-        this._display = _display;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public void set_globatiUsername(String _globatiUsername) {
-        this._globatiUsername = _globatiUsername;
+    public String getDisplay() {
+        return display;
     }
 
-    public void set_active(boolean _active) {
-        this._active = _active;
+    public void setDisplay(String display) {
+        this.display = display;
     }
 
-    public double get_addAmount() {
-        return _addAmount;
+    public double getAddAmount() {
+        return addAmount;
     }
 
-    public void set_addAmount(double _addAmount) {
-        this._addAmount = _addAmount;
+    public void setAddAmount(double addAmount) {
+        this.addAmount = addAmount;
     }
 
-    public double get_add2month() {
-        return _add2month;
+    public double getAdd2month() {
+        return add2month;
     }
 
-    public void set_add2month(double _add2month) {
-        this._add2month = _add2month;
+    public void setAdd2month(double add2month) {
+        this.add2month = add2month;
     }
 
-    public double get_add3month() {
-        return _add3month;
+    public double getAdd3month() {
+        return add3month;
     }
 
-    public void set_add3month(double _add3month) {
-        this._add3month = _add3month;
+    public void setAdd3month(double add3month) {
+        this.add3month = add3month;
     }
 
-    public List<Deal> get_deals() {
-        return _deals;
+    public String getGlobatiUsername() {
+        return globatiUsername;
     }
 
-    public void set_deals(List<Deal> _deals) {
-        this._deals = _deals;
+    public void setGlobatiUsername(String globatiUsername) {
+        this.globatiUsername = globatiUsername;
     }
 
-    public List<Recommendation> get_recommendations() {
-        return _recommendations;
+    public boolean isActive() {
+        return active;
     }
 
-    public void set_recommendations(List<Recommendation> _recommendations) {
-        this._recommendations = _recommendations;
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isFacebookProfile() {
+        return facebookProfile;
+    }
+
+    public void setFacebookProfile(boolean facebookProfile) {
+        this.facebookProfile = facebookProfile;
+    }
+
+    public Integer getVisitCounter() {
+        return visitCounter;
+    }
+
+    public void setVisitCounter(Integer visitCounter) {
+        this.visitCounter = visitCounter;
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
     }
 
     public List<Event> get_events() {
-        return _events;
+        return events;
     }
 
-    public void set_events(List<Event> _events) {
-        this._events = _events;
+    public void set_events(List<Event> events) {
+        this.events = events;
     }
 
-    public boolean is_facebookProfile() {
-        return _facebookProfile;
-    }
-
-    public void set_facebookProfile(boolean _facebookProfile) {
-        this._facebookProfile = _facebookProfile;
-    }
-
-    public String get_image2() {
-        return _image2;
-    }
-
-    public void set_image2(String _image2) {
-        this._image2 = _image2;
-    }
-
-    public String get_image3() {
-        return _image3;
-    }
-
-    public void set_image3(String _image3) {
-        this._image3 = _image3;
-    }
-
-    public Integer get_visitCounter() {
-        return _visitCounter;
-    }
-
-    public void set_visitCounter(Integer _visitCounter) {
-        this._visitCounter = _visitCounter;
-    }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "_firstName='" + _firstName + '\'' +
-                ", _image='" + _image + '\'' +
-                ", _image2='" + _image2 + '\'' +
-                ", _image3='" + _image3 + '\'' +
-                ", _email='" + _email + '\'' +
-                ", _paypalEmail='" + _paypalEmail + '\'' +
-                ", _about='" + _about + '\'' +
-                ", _welcomeMail='" + _welcomeMail + '\'' +
-                ", _recruitmentMail='" + _recruitmentMail + '\'' +
-                ", _instagramUser='" + _instagramUser + '\'' +
-                ", _instagramUserId='" + _instagramUserId + '\'' +
-                ", _instagramUserToken='" + _instagramUserToken + '\'' +
-                ", _propLat=" + _propLat +
-                ", _propLong=" + _propLong +
-                ", _street='" + _street + '\'' +
-                ", _city='" + _city + '\'' +
-                ", _country='" + _country + '\'' +
-                ", _display='" + _display + '\'' +
-                ", _addAmount=" + _addAmount +
-                ", _add2month=" + _add2month +
-                ", _add3month=" + _add3month +
-                ", _globatiUsername='" + _globatiUsername + '\'' +
-                ", _active=" + _active +
-                ", _facebookProfile=" + _facebookProfile +
-                ", _visitCounter=" + _visitCounter +
-                ", _deals=" + _deals +
-                ", _recommendations=" + _recommendations +
-                ", _events=" + _events +
+                "firstName='" + firstName + '\'' +
+                ", image='" + image + '\'' +
+                ", image2='" + image2 + '\'' +
+                ", image3='" + image3 + '\'' +
+                ", email='" + email + '\'' +
+                ", paypalEmail='" + paypalEmail + '\'' +
+                ", about='" + about + '\'' +
+                ", welcomeMail='" + welcomeMail + '\'' +
+                ", recruitmentMail='" + recruitmentMail + '\'' +
+                ", instagramUser='" + instagramUser + '\'' +
+                ", instagramUserId='" + instagramUserId + '\'' +
+                ", instagramUserToken='" + instagramUserToken + '\'' +
+                ", propLat=" + propLat +
+                ", propLong=" + propLong +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", display='" + display + '\'' +
+                ", addAmount=" + addAmount +
+                ", add2month=" + add2month +
+                ", add3month=" + add3month +
+                ", globatiUsername='" + globatiUsername + '\'' +
+                ", active=" + active +
+                ", facebookProfile=" + facebookProfile +
+                ", visitCounter=" + visitCounter +
+                ", deals=" + deals +
+                ", recommendations=" + recommendations +
+                ", _events=" + events +
                 '}';
     }
-
-
 
 
 }

@@ -236,7 +236,7 @@ public class BrainTreeResource {
                         "        </tr>"+
                         "        <tr>"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+employee.get_firstName()+" at "+employee.get_email()+" if you have any questions</td>"+
+                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+employee.getFirstName()+" at "+employee.getEmail()+" if you have any questions</td>"+
                         "        </tr>"+
                         "        <tr style=\"border-bottom: 3px solid;\">"+
                         "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+

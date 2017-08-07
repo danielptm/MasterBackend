@@ -48,7 +48,7 @@ public class BusinessEmail {
         return "BusinessEmail{" +
                 "businessName='" + businessName + '\'' +
                 ", businessEmail='" + businessEmail + '\'' +
-                ", employee=" + employee.get_globatiUsername() +
+                ", employee=" + employee.getGlobatiUsername() +
                 '}';
     }
 }

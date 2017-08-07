@@ -13,77 +13,80 @@ import java.util.Date;
 public class Event extends BusinessEntity{
 
     @Column(name="date")
-    private Date _date;
+    private Date date;
     @Column(length=100, name="repeating") //this has to be repeating, i think repeat is a reserved word in mysql, and while works on derby does not for mysql
-    private String _repeat;
+    private String repeat;
     @Column(name="publicvisible")
-    private boolean _publicVisible;
+    private boolean publicVisible;
     @Column(name="dateinactive")
-    private Date _dateInactive;
+    private Date dateInactive;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="employeeid")
     @JsonBackReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    Employee _employee;
+    Employee employee;
 
     public Event(){}
 
     //Took away distance, because this value will vary depending on the receptionists location
-    public Event(Employee _employee, Date _date, double _targetLat, double _targetLong, String _street, String _city, String _country, String title, String _description, String imageName1, String imageName2, String imageName3) {
-        this._employee = _employee;
-        this._date = _date;
-        this._targetLat = _targetLat;
-        this._targetLong = _targetLong;
-        this._repeat = _repeat;
-        this._street = _street;
-        this._city = _city;
-        this._country = _country;
-        this._description = _description;
-        this._active = true;
-        this._title = title;
-        this._image = imageName1;
-        this._image2 = imageName2;
-        this._image3 = imageName3;
+    public Event(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description, String imageName1, String imageName2, String imageName3) {
+        this.employee = employee;
+        this.date = date;
+        this.targetLat = targetLat;
+        this.targetLong = targetLong;
+        this.repeat = repeat;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.description = description;
+        this.active = true;
+        this.title = title;
+        this.image = imageName1;
+        this.image2 = imageName2;
+        this.image3 = imageName3;
     }
 
-    public Date get_date() {
-        return _date;
+
+    public Date getDate() {
+        return date;
     }
 
-    public void set_date(Date _date) {
-        this._date = _date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String get_repeat() {
-        return _repeat;
+    public String getRepeat() {
+        return repeat;
     }
 
-    public void set_repeat(String _repeat) {
-        this._repeat = _repeat;
+    public void setRepeat(String repeat) {
+        this.repeat = repeat;
     }
 
-    public boolean is_publicVisible() {
-        return _publicVisible;
+    public boolean isPublicVisible() {
+        return publicVisible;
     }
 
-    public void set_publicVisible(boolean _publicVisible) {
-        this._publicVisible = _publicVisible;
+    public void setPublicVisible(boolean publicVisible) {
+        this.publicVisible = publicVisible;
     }
 
-    public Date get_dateInactive() {
-        return _dateInactive;
+    @Override
+    public Date getDateInactive() {
+        return dateInactive;
     }
 
-    public void set_dateInactive(Date _dateInactive) {
-        this._dateInactive = _dateInactive;
+    @Override
+    public void setDateInactive(Date dateInactive) {
+        this.dateInactive = dateInactive;
     }
 
-    public Employee get_employee() {
-        return _employee;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void set_employee(Employee _employee) {
-        this._employee = _employee;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 

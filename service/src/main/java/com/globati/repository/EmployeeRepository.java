@@ -14,18 +14,18 @@ import java.util.List;
  */
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-    @Query("SELECT e FROM Employee e WHERE e._id =:_id " )
-    public Employee getEmployeeBy_id( @Param("_id") Long _id );
+    @Query("SELECT e FROM Employee e WHERE e.id =:id " )
+    public Employee getEmployeeByid( @Param("id") Long id );
 
-    public Employee getEmployeeBy_globatiUsername(String username);
+    public Employee getEmployeeByGlobatiUsername(String username);
 
-//    public Employee getEmployeeBy_facebookId(String id);
+//    public Employee getEmployeeByFacebookId(String id);
 
-    public Employee getEmployeeBy_email(String email);
+    public Employee getEmployeeByEmail(String email);
 
-    public List<Employee> getEmployeeBy_country(String country);
+    public List<Employee> getEmployeeByCountry(String country);
 
-    public List<Employee> getEmployeeBy_city(String city);
+    public List<Employee> getEmployeeByCity(String city);
 
 
 }

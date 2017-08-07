@@ -12,12 +12,12 @@ import java.util.List;
  */
 public interface EventRepository extends CrudRepository<Event, Long>{
 
-    public List<Event> findBy_country(String country);
+    public List<Event> findByCountry(String country);
 
-    @Query("SELECT e FROM Event e WHERE e._employee.id=:id AND e._active=:active")
+    @Query("SELECT e FROM Event e WHERE e.employee.id=:id AND e.active=:active")
     public List<Event> getAllEventsBy_employee_id(@Param("id") Long id, @Param("active") boolean active);
 
-    @Query("SELECT e FROM Event e WHERE e._active=:active")
+    @Query("SELECT e FROM Event e WHERE e.active=:active")
     public List<Event> getAllActiveEvents(@Param("active") boolean active);
 
 

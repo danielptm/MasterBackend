@@ -57,10 +57,10 @@ public class TestEmployeeService {
 
 		Employee employee4 = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
-		Employee employee5 = this.employeeService.getEmployeeById(employee4.get_id());
+		Employee employee5 = this.employeeService.getEmployeeById(employee4.getId());
 
 
-		Assert.assertEquals(employee4.get_id(), employee5.get_id());
+		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
 
 	@Test
@@ -71,10 +71,10 @@ public class TestEmployeeService {
 		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
 
-		Employee e2 = employeeService.getEmployeeById(e.get_id());
-		e2.set_firstName("zebra");
+		Employee e2 = employeeService.getEmployeeById(e.getId());
+		e2.setFirstName("zebra");
 		Employee e3 = employeeService.updateEmployee(e2);
-		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.get_id()).get_firstName());
+		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class TestEmployeeService {
 
 
 		String uid2 = UUID.randomUUID().toString();
-		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30 day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30 day", 30, "234", "billing","billing","billing","billing");
 
 		Date date = new Date();
 
@@ -105,11 +105,11 @@ public class TestEmployeeService {
 		Event e = eventService.createEvent(e1, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
 
 		String uid4 = UUID.randomUUID().toString();
-		Recommendation rec = recommendationService.createRecommendation(e1.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+		Recommendation rec = recommendationService.createRecommendation(e1.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
 
 		//
-		List<Object> items = employeeService.getItemsForEmployee(e1.get_globatiUsername());
+		List<Object> items = employeeService.getItemsForEmployee(e1.getGlobatiUsername());
 
 
 		Assert.assertTrue(items.size()>0);
@@ -126,10 +126,10 @@ public class TestEmployeeService {
 
 		Employee e2 = employeeService.incrementCounter(e1);
 
-		Assert.assertEquals(1, e2.get_visitCounter().intValue());
+		Assert.assertEquals(1, e2.getVisitCounter().intValue());
 
 		Employee e3 = employeeService.incrementCounter(e2);
-		Assert.assertEquals(2, e3.get_visitCounter().intValue());
+		Assert.assertEquals(2, e3.getVisitCounter().intValue());
 
 	}
 
@@ -153,7 +153,7 @@ public class TestEmployeeService {
 		Employee employee = employeeService.createProfileFromFacebookInfo("FacebookEmployee", "Daniel", "emailaddress1@me.com","image/path");
 
 		Assert.assertNotNull(employee);
-		Assert.assertEquals(employee.get_firstName(), "Daniel");
+		Assert.assertEquals(employee.getFirstName(), "Daniel");
 
 	}
 
@@ -165,20 +165,20 @@ public class TestEmployeeService {
 
 		Assert.assertNotNull(employee);
 
-		EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+		EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
-		Assert.assertEquals(employeeInfo.get_employeeId(), employee.get_id());
+		Assert.assertEquals(employeeInfo.getEmployeeId(), employee.getId());
 
-		Employee employee2 = employeeService.getEmployeeByFacebookId(employeeInfo.get_facebookId());
+		Employee employee2 = employeeService.getEmployeeByFacebookId(employeeInfo.getFacebookId());
 
 
 		Assert.assertNotNull(employee2);
-		Assert.assertEquals(employee2.get_firstName(), "Daniel");
+		Assert.assertEquals(employee2.getFirstName(), "Daniel");
 
-		Employee byFacebook = employeeService.getEmployeeByFacebookId(employeeInfo.get_facebookId());
+		Employee byFacebook = employeeService.getEmployeeByFacebookId(employeeInfo.getFacebookId());
 
 		Assert.assertNotNull(byFacebook);
-		Assert.assertEquals(byFacebook.get_firstName(), "Daniel");
+		Assert.assertEquals(byFacebook.getFirstName(), "Daniel");
 
 	}
 
@@ -209,7 +209,7 @@ public class TestEmployeeService {
 
 		InputStream fis = new FileInputStream(file);
 
-		Recommendation rec = recommendationService.createRecommendation(employee.get_id(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+		Recommendation rec = recommendationService.createRecommendation(employee.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
 		File file2 = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 
@@ -221,7 +221,7 @@ public class TestEmployeeService {
 
 		InputStream fis1 = new FileInputStream(file2);
 
-		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.get_id(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
 
 //		List<Object> employeeAfterEditions =   employeeService.getItemsForEmployee(employee.get_globatiUsername());
 

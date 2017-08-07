@@ -9,11 +9,11 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface EmployeeInfoRepsitory extends CrudRepository<EmployeeInfo, Long> {
 
-    public EmployeeInfo getBy_employeeId(Long id);
+    public EmployeeInfo getByEmployeeId(Long id);
 
-    public EmployeeInfo getBy_authToken(String token);
+    public EmployeeInfo getByAuthToken(String token);
 
-    public EmployeeInfo getBy_facebookId(String id);
+    public EmployeeInfo getByFacebookId(String id);
 
 
 }

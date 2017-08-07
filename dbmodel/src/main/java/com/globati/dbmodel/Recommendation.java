@@ -15,34 +15,34 @@ public class Recommendation extends BusinessEntity {
     @JoinColumn(name = "employeeid")
     @JsonBackReference
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    private Employee _employee;
+    private Employee employee;
 
 
     public Recommendation() {
     }
 
-    public Recommendation(Employee employee, String _title, String _description, double _targetLat, double _targetLong, String _street, String _city, String _country, String _image, String _image2, String _image3) {
-        this._employee = employee;
-        this._title = _title;
-        this._description = _description;
-        this._targetLat = _targetLat;
-        this._targetLong = _targetLong;
-        this._street = _street;
-        this._city = _city;
-        this._country = _country;
-        this._image = _image;
-        this._active = true;
-        this._image2 = _image2;
-        this._image3 = _image3;
+    public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong, String street, String city, String country, String image, String image2, String image3) {
+        this.employee = employee;
+        this.title = title;
+        this.description = description;
+        this.targetLat = targetLat;
+        this.targetLong = targetLong;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.image = image;
+        this.active = true;
+        this.image2 = image2;
+        this.image3 = image3;
     }
 
 
-    public Employee get_employee() {
-        return _employee;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void set_employee(Employee _employee) {
-        this._employee = _employee;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 

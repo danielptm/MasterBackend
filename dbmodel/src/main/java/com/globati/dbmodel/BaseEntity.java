@@ -13,16 +13,20 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseEntity {
 
+
+
     @Id
     @GeneratedValue
     @Column(name="id")
-    private Long _id;
+    private Long id;
 
-    public Long get_id() {
-        return _id;
+
+    public Long getId() {
+        return id;
     }
 
-    public void set_id(Long _id) {
-        this._id = _id;
+    public void setId(Long id) {
+        this.id = id;
     }
+
 }

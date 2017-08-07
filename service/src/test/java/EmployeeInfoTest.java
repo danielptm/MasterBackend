@@ -52,15 +52,15 @@ public class EmployeeInfoTest {
         InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
-        EmployeeInfo employeeInfo = employeeInfoService.createEmployeeInfo(employee.get_id(), "hi");
+        EmployeeInfo employeeInfo = employeeInfoService.createEmployeeInfo(employee.getId(), "hi");
 
-        employeeInfo.set_authToken(uid2);
+        employeeInfo.setAuthToken(uid2);
 
         employeeInfoService.updateEmployeeInfo(employeeInfo);
 
         EmployeeInfo employeeInfo2 = employeeInfoService.getEmployeeInfoByToken(uid2);
 
-        Assert.assertEquals(employeeInfo.get_id(), employeeInfo2.get_id());
+        Assert.assertEquals(employeeInfo.getId(), employeeInfo2.getId());
 
     }
 }

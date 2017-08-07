@@ -21,7 +21,7 @@ import java.util.List;
  * Refactoring:
  * ok
  *
- * I have decided to leave the Deal object the way it is. Even though it is poor design.
+ * I have decided to leave the GuestDeal object the way it is. Even though it is poor design.
  * The reason being that its a lot of work to break it out, it creates extra code, and at the moment there is no reason
  * to make this so loosely coupled from the data layer. We can make this refactor if we need to later.
  *

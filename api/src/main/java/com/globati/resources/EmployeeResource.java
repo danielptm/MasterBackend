@@ -127,67 +127,67 @@ public class EmployeeResource{
             employee= employeeService.getEmployeeById(employeeId);
 
             if(updateEmployee.get_email()!=null){
-                employee.set_email(updateEmployee.get_email());
+                employee.setEmail(updateEmployee.get_email());
             }
             if(updateEmployee.get_username()!=null){
-                employee.set_globatiUsername(updateEmployee.get_username());
+                employee.setGlobatiUsername(updateEmployee.get_username());
             }
             if(updateEmployee.get_instagramUserName()!=null){
-                employee.set_instagramUser(updateEmployee.get_instagramUserName());
+                employee.setInstagramUser(updateEmployee.get_instagramUserName());
             }
             if(updateEmployee.get_instagramToken()!=null){
-                employee.set_instagramUserToken(updateEmployee.get_instagramToken());
+                employee.setInstagramUserToken(updateEmployee.get_instagramToken());
             }
             if(updateEmployee.get_instagramUserId()!=null){
-                employee.set_instagramUserId(updateEmployee.get_instagramUserId());
+                employee.setInstagramUserId(updateEmployee.get_instagramUserId());
             }
             if(updateEmployee.get_paypal()!=null){
-                employee.set_paypalEmail(updateEmployee.get_paypal());
+                employee.setPaypalEmail(updateEmployee.get_paypal());
             }
             if(updateEmployee.get_day30()!=null){
-                employee.set_addAmount(updateEmployee.get_day30());
+                employee.setAddAmount(updateEmployee.get_day30());
             }
             if(updateEmployee.get_day60()!=null){
-                employee.set_add2month(updateEmployee.get_day60());
+                employee.setAdd2month(updateEmployee.get_day60());
             }
             if(updateEmployee.get_day90()!=null){
-                employee.set_add3month(updateEmployee.get_day90());
+                employee.setAdd3month(updateEmployee.get_day90());
             }
             if(updateEmployee.get_propLong()!=null){
-                employee.set_propLong(updateEmployee.get_propLong());
+                employee.setPropLong(updateEmployee.get_propLong());
             }
             if(updateEmployee.get_propLat()!=null){
-                employee.set_propLat(updateEmployee.get_propLat());
+                employee.setPropLat(updateEmployee.get_propLat());
             }
             if(updateEmployee.get_street()!=null){
-                employee.set_street(updateEmployee.get_street());
+                employee.setStreet(updateEmployee.get_street());
             }
             if(updateEmployee.get_city()!=null){
-                employee.set_city(updateEmployee.get_city());
+                employee.setCity(updateEmployee.get_city());
             }
             if(updateEmployee.get_country()!=null){
-                employee.set_country(updateEmployee.get_country());
+                employee.setCountry(updateEmployee.get_country());
             }
             if(updateEmployee.get_about()!=null){
-                employee.set_about(updateEmployee.get_about());
+                employee.setAbout(updateEmployee.get_about());
             }
             if(updateEmployee.get_welcomeMail()!=null){
-                employee.set_welcomeMail(updateEmployee.get_welcomeMail());
+                employee.setWelcomeMail(updateEmployee.get_welcomeMail());
             }
             if(updateEmployee.get_recruitmentMail()!=null){
-                employee.set_recruitmentMail(updateEmployee.get_recruitmentMail());
+                employee.setRecruitmentMail(updateEmployee.get_recruitmentMail());
             }
             if(updateEmployee.get_display()!=null){
-                employee.set_display(updateEmployee.get_display());
+                employee.setDisplay(updateEmployee.get_display());
             }
             if(updateEmployee.get_image()!=null){
-                employee.set_image(updateEmployee.get_image());
+                employee.setImage(updateEmployee.get_image());
             }
             if(updateEmployee.get_image2()!=null){
-                employee.set_image2(updateEmployee.get_image2());
+                employee.setImage2(updateEmployee.get_image2());
             }
             if(updateEmployee.get_image3()!=null){
-                employee.set_image3(updateEmployee.get_image3());
+                employee.setImage3(updateEmployee.get_image3());
             }
             Employee updatedEmployee = employeeService.updateEmployee(employee);
             return Response.ok(updatedEmployee).build();
