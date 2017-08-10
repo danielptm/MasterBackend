@@ -82,6 +82,11 @@ public class InfrastructureConfig  {
 		String dbPath = props.get("dbPath").toString();
 		String driver = props.get("driver").toString();
 
+		//For braintree
+		String merchantId=props.get("merchantId").toString();
+		String publicKey=props.get("publicKey").toString();
+		String privateKey=props.get("privateKey").toString();
+
 
 		Paths.setActiveS3Bucket(imageBucket);
 		Paths.setActiveStaticGlobati(staticGlobatiAddress);
@@ -91,6 +96,9 @@ public class InfrastructureConfig  {
 		Paths.setActiveDbPassword(dbPassword);
 		Paths.setActiveDatabase(dbPath);
 		Paths.setActiveDriver(driver);
+		Paths.setMerchantId(merchantId);
+		Paths.setPublicKey(publicKey);
+		Paths.setPrivateKey(privateKey);
 
 		activeDriver = Paths.getActiveDriver();
 		activeDbPassword = Paths.getActiveDbPassword();

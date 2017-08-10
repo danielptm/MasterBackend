@@ -186,13 +186,13 @@ public class DealService {
     private boolean dealIsExpired(Deal deal) throws Exception {
         Calendar c = Calendar.getInstance();
         c.setTime(deal.get_datemade());
-        if(deal.get_plan().equals("30days") || deal.get_plan().equals("30 day") || deal.get_plan().equals("30day")){
+        if(deal.get_plan().equals("THIRTY_DAYS") ){
             c.add(Calendar.DAY_OF_MONTH, 30 );
         }
-        else if(deal.get_plan().equals("60days") || deal.get_plan().equals("60 day") || deal.get_plan().equals("60day")){
+        else if(deal.get_plan().equals("SIXTY_DAYS")){
             c.add(Calendar.DAY_OF_MONTH, 60);
         }
-        else if(deal.get_plan().equals("90days") || deal.get_plan().equals("90 day") || deal.get_plan().equals("90day")){
+        else if(deal.get_plan().equals("90_DAYS")){
             c.add(Calendar.DAY_OF_MONTH, 90);
         }
         else{

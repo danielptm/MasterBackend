@@ -116,7 +116,7 @@ public class Paths {
 
     //*********************Set these values to switch back and fourth between production/development*********************
 
-        private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
+    private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
 
 
     //productionStaticGlobati || localStaticGlobati && localStaticMembers || productionStaticMembers
@@ -124,7 +124,10 @@ public class Paths {
     private static String activeStaticMembers;
 
     //I should not need to change this..... but it should be activeStaticGlobati/connect/
-    private static String activeCreateAddLink = activeStaticGlobati+"connect/";
+//    private static String activeCreateAddLink = activeStaticGlobati+"connect/";
+
+    //The one above is how it was before, but have had problems so i just changed it to this.
+    private static String activeCreateAddLink = "https://globati.com/connect/";
 
     //Use development links for testing.
     //productionImages || developmentImages
@@ -155,6 +158,13 @@ public class Paths {
 
     //derbyDatabaseDriver || mysqlDatabaseDriver
     private static String activeDriver;
+
+    //For braintree
+    private static String merchantId;
+
+    private static String publicKey;
+
+    private static String privateKey;
 
 
     //*********************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*********************
@@ -334,8 +344,28 @@ public class Paths {
     }
 
 
+    public static void setMerchantId(String item){
+        merchantId = item;
+    }
 
+    public static String getMerchantId(){
+        return merchantId;
+    }
 
+    public static void setPublicKey(String item){
+        publicKey = item;
+    }
 
+    public static String getPublicKey(){
+        return publicKey;
+    }
+
+    public static void setPrivateKey(String item){
+         privateKey = item;
+    }
+
+    public static String getPrivateKey(){
+        return privateKey;
+    }
 
 }

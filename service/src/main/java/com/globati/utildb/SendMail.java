@@ -1007,6 +1007,9 @@ public class SendMail {
 
         String[] emails = new String[]{email};
 
+        System.out.println("************ sending recruimtnet");
+        System.out.println(Paths.getActiveCreateAddLink()+employee.get_id());
+
 
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
