@@ -160,7 +160,14 @@ public class BraintreeService {
 
                 SendMail.sendReceipt(createdDeal);
 
-                return new AdReceipt(transactionId, new Date(), businessName, street, city, country,cost.toString(), plan).getEmailText();
+
+
+                AdReceipt receipt = new AdReceipt(transactionId, new Date(), businessName, street, city, country,cost.toString(), plan);
+
+
+                System.out.println("****** receipt");
+                    System.out.println(receipt.toString());
+                return receipt.getEmailText();
 
 //                return "<!DOCTYPE html>" +
 //                        "<html lang=\"\">" +

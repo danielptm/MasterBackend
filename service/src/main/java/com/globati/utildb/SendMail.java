@@ -11,10 +11,14 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.config.Paths;
 import com.globati.dbmodel.Deal;
+import com.globati.mail.beans.AdReceipt;
+import com.globati.mail.beans.ForgotPassword;
 import com.globati.utildb.HelpObjects.Email;
 import com.globati.dbmodel.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Date;
 
 /**
  * Created by daniel on 12/22/16.
@@ -810,96 +814,9 @@ public class SendMail {
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Your receipt for advertising on globati");
+        AdReceipt adReceipt = new AdReceipt(deal.get_transactionId(), new Date(), deal.get_location(), deal.get_street(), deal.get_city(), deal.get_country(), Double.toString(deal.get_cost()), deal.get_plan() );
         Content textBody = new Content().withData(
-                "<!DOCTYPE html>"+
-                        "<html lang=\"\">"+
-                        ""+
-                        "<head>"+
-                        "    <meta charset=\"utf-8\">"+
-                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"+
-                        "    <link href=\"https://fonts.googleapis.com/css?family=Lora|Ubuntu\" rel=\"stylesheet\">"+
-                        "    <title>Globati Receipt</title>"+
-                        "</head>"+
-                        ""+
-                        "<body>"+
-                        "    <table style=\"box-sizing: border-box;  border-collapse: collapse; text-align: center; font-family: Ubuntu, sans-serif; border-top: 3px solid; border-right: 3px solid; border-left: 3px solid; border-bottom: 3px solid; table-layout: fixed; width: 1260px; height: 1782px;\">"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 24px; padding: 0 0 0 0; background-color: #DC143C;\" colspan=\"6\"><img src=\"https://s3.eu-central-1.amazonaws.com/globatiimages/splash/Logo_and_Name.png\" width=624px height=272px alt=\"Globati Logo\" /></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; background-color: #DC143C;\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; background-color: #DC143C;\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; background-color: #DC143C;\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 24px; font-weight: 700; padding: 0.25em 0.5em 0.25em 0.5em; background-color: #DC143C; color: ;\" colspan=\"3\">Order Number"+
-                        "                <br> "+deal.get_transactionId()+"</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 48px; padding: 2em 0.25em 0em 0.25em; background-color: #DC143C; color: #FFF;\" colspan=\"12\">Thanks for advertising with us!</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.5em 5em 0em 5em; text-align: justify; background-color: #DC143C; color: #FFF;\" colspan=\"12\"></td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 48px; font-weight: 700; padding: 1em 0.25em 1em 0.25em; background-color: #DC143C; color: #FFF;\" colspan=\"12\">I N V O I C E</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 36px; font-weight:700; padding: 1em 0.25em 1em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"12\">Order Summary</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 24px; padding: 0.25em 0.25em 0.25em 0.25em; border-bottom: 2px solid; background-color: #323333; color: #FFF;\" colspan=\"9\">Online advertisement</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 36px; padding: 0 0 0 0; background-color: #323333; color: #FFF;\" rowspan=\"2\" colspan=\"3\"></td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.25em 0.25em 0em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">Business Type</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.25em 0.25em 0em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">Validity Period</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.25em 0.25em 0em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">Cost</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_dealtype()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_plan()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; font-style: italic; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\">"+deal.get_cost()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0em 0.25em 2em 0.25em; background-color: #323333; color: #FFF;\" colspan=\"3\"></td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 36px; font-weight: 700; padding: 1em 0.25em 1em 0.25em;\" colspan=\"12\">Customer Information</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 21px; font-weight: 700; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">Location</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 21px; font-weight: 700; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">Billing Address</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_location()+"</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_street()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingStreet()+"</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 0.25em 0.25em;\" colspan=\"6\">"+deal.get_billingRegion()+"</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em;\" colspan=\"6\">"+deal.get_country()+"</td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 1em 0.25em; border-bottom: 1px dashed;\" colspan=\"6\">"+deal.get_country()+"</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">You will also get a receipt with the transaction details by our payment partner Braintree</td>"+
-                        "        </tr>"+
-                        "        <tr>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 18px; padding: 0.75em 0.25em 0.25em 0.25em;\" colspan=\"6\">Contact "+deal.get_employee().get_firstName()+" at "+deal.get_employee().get_email()+" if you have any questions</td>"+
-                        "        </tr>"+
-                        "        <tr style=\"border-bottom: 3px solid;\">"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px;\" colspan=\"6\"></td>"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 15px; padding: 0.25em 0.25em 2em 0.25em;\" colspan=\"6\"></td>"+
-                        "        </tr>"+
-                        "        <tr style=\"background-color: #323333; color: #FFF;\">"+
-                        "            <td style=\"font-family: 'Ubuntu', sans serif; font-size: 12px; font-weight: 700; padding: 1em 0.25em 1em 0.25em;\" colspan=\"12\">© 2017 Globati. All rights reserved.</td>"+
-                        "        </tr>"+
-                        "    </table>"+
-                        "</body>"+
-                        ""+
-                        "</html>"
+                adReceipt.getEmailText()
             );
 
         Body body = new Body().withHtml(textBody);
@@ -1823,18 +1740,11 @@ public class SendMail {
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Here is your Globati username, click on the link to reset your password.");
+        ForgotPassword fp = new ForgotPassword(globatiuser, Paths.getActiveStaticMembers() + "changeyourpassword/" + apitoken);
+
+        System.out.println(fp.toString());
         Content textBody = new Content().withData(
-                "<!DOCTYPE html>" +
-                        "<html lang=\"en\">" +
-                        "<head>" +
-                        "    <meta charset=\"UTF-8\">" +
-                        "" +
-                        "</head>" +
-                        "<body>" +
-                        "    <h2>Your globati username is: " + globatiuser + "</h2>" +
-                        "    <h3><a href=\"" + Paths.getActiveStaticMembers() + "changeyourpassword/" + apitoken + "\">Click here to change your password</a></h3>" +
-                        "</body>" +
-                        "</html>"
+                fp.getEmailText()
         );
 
         Body body = new Body().withHtml(textBody);
