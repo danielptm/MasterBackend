@@ -1,4 +1,4 @@
-package com.globati.user_beans.guest;
+package com.globati.service_beans.guest;
 
 import com.globati.super_beans.SuperDeal;
 

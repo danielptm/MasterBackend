@@ -73,7 +73,7 @@ public class EmployeeService {
     public Employee createProfileFromFacebookInfo(String facebookId, String name, String email, String image ) throws ServiceException {
         try{
             String username=FacebookUserId.generateFacebookUserId(name);
-            Employee employee = new Employee(name, email, username, image);//sdfgdfgsdfgasdfasdfasdfasdfasdfasdf
+            Employee employee = new Employee(name, email, username, image);
             Employee employeeToReturn = employeeRepository.save(employee);
             createEmployeeInfoFromFacebook(employeeToReturn.getId(), facebookId);
             return employeeToReturn;

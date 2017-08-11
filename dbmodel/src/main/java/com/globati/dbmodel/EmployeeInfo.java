@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "employeeInfo")
 public class EmployeeInfo extends BaseEntity{
 
-
     @Column(name="employeeid")
     Long employeeId;
     @Column(name="globatipassword")
@@ -41,9 +40,6 @@ public class EmployeeInfo extends BaseEntity{
     }
 
     public EmployeeInfo(){}
-
-
-
 
     public Long getEmployeeId() {
         return employeeId;

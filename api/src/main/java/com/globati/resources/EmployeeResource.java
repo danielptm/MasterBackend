@@ -121,7 +121,6 @@ public class EmployeeResource{
     @Produces(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
     public Response update(@QueryParam("employeeId") Long employeeId, UpdateEmployee updateEmployee){
-        System.out.println(updateEmployee);
         Employee employee = null;
         try{
             employee= employeeService.getEmployeeById(employeeId);

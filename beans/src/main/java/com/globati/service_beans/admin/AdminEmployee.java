@@ -1,4 +1,4 @@
-package com.globati.user_beans.admin;
+package com.globati.service_beans.admin;
 
 import com.globati.super_beans.SuperEmployee;
 
