@@ -36,83 +36,9 @@ import java.util.Properties;
 public class Paths {
 
 
-//    Paths() throws IOException {
-//        Map<String, String> env = System.getenv();
-//        loadEnvironmentProperties(env.get("GLOBATI_SERVER_ENV"));
-//        System.out.println(env.get("GLOBATI_SERVER_ENV"));
-//    }
-//
-//    private void  loadEnvironmentProperties(String env) throws IOException {
-//        Properties props = new Properties();
-//        String devevelopmentResource = "environment/development.properties";
-//        String productionResource = "environment/production.properties";
-//        if (env.equals("dev")) {
-//            try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(devevelopmentResource)) {
-//                props.load(resourceStream);
-//                Paths.setActiveVendor(Database.MYSQL);
-//            }
-//        } else if (env.equals("prod")) {
-//            try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
-//                props.load(resourceStream);
-//                Paths.setActiveVendor(Database.MYSQL);
-//            }
-//        }
-//
-//        String imageBucket = props.get("imageBucket").toString();
-//        String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-//        String staticMyglobatiAdmin = props.get("staticMyglobatiAdmin").toString();
-//        String imagesWithDash = props.get("imagesWithDash").toString();
-//        String dbLogin = props.get("dbLogin").toString();
-//        String dbPassword = props.get("dbPassword").toString();
-//        String dbPath = props.get("dbPath").toString();
-//        String driver = props.get("driver").toString();
-//
-//
-//        Paths.setActiveS3Bucket(imageBucket);
-//        Paths.setActiveStaticGlobati(staticGlobatiAddress);
-//        Paths.setActiveStaticMembers(staticMyglobatiAdmin);
-//        Paths.setActiveImageLink(imagesWithDash);
-//        Paths.setActiveDbLoginName(dbLogin);
-//        Paths.setActiveDbPassword(dbPassword);
-//        Paths.setActiveDatabaseUrl(dbPath);
-//        Paths.setActiveDriver(driver);
-//
-//    }
 
 
     private static final Logger log = LogManager.getLogger(Paths.class);
-
-//    private static final String productionBucket = "globatiimages/production";
-//    private static final String developmentBucket = "globatiimages/development";
-//
-//    private static final String localStaticGlobati = "http://localhost:4200/";
-//    private static final String localStaticMembers = "http://localhost:4201/";
-//
-//    private static final String productionStaticGlobati = "https://globati.com/";
-//    private static final String productionStaticMembers = "https://myglobatiadmin.com/";
-//
-//    //Has to be the name of the bucket, not the whole url.mcu
-//    private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
-//    private static final String productionImages="globatiimages/production/";
-//    private static final String developmentImages = "globatiimages/development/";
-//
-//    private static final String productionDbLogin = "mrglobati";
-//    private static final String productionDbPassword = "Elgatonegro!986";
-//    private static final String developmentDbLogin = "awesome";
-//    private static final String developmentDbPassword = "database";
-//    private static final String testDbLogin = "";
-//    private static final String testDbPassword="";
-//
-//    private static final String productionDatabase = "jdbc:mysql://globatidb.cpkg3e91o3s6.eu-central-1.rds.amazonaws.com:3306/globatiDB?createDatabaseIfNotExist=true";
-//    private static final String developmentDatabase = "jdbc:mysql://localhost:3306/DatabaseProject?createDatabaseIfNotExist=true";
-//    private static final String testDatabase = "jdbc:derby:memory:test;create=true";
-//
-//
-//    private static final String derbyDatabaseDriver = "org.apache.derby.jdbc.EmbeddedDriver";
-//    private static final String mysqlDatabaseDriver = "com.mysql.jdbc.Driver";
-//
-//    private static final Database derbyVendor = Database.DERBY;
-//    private static final Database mysqlVendor = Database.MYSQL;
 
     //*********************Set these values to switch back and fourth between production/development*********************
 

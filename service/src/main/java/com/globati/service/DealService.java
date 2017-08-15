@@ -163,7 +163,7 @@ public class DealService {
      * @throws Exception
      */
 
-    @Scheduled(cron = "35 4 * * * ?")
+    @Scheduled(cron = "0 30 4 * * ?")
     public void getAllDealsAndSetExpiredEventsToNotActive() throws Exception {
         List<Deal> deals = getAllActiveDeals();
 

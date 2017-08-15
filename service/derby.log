@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Aug 10 16:15:17 PDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015d-ce6e-3e59-00000ad79488 
+Sat Aug 12 17:42:20 PDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015d-d90a-a800-00000ad661b0 
 on database directory memory:/Users/danieltuttle/Documents/globati/code/super/service/test with class loader sun.misc.Launcher$AppClassLoader@4aa298b7 
 Loaded from file:/Users/danieltuttle/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation

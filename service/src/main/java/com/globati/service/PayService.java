@@ -2,10 +2,14 @@ package com.globati.service;
 
 import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.EmployeeInfo;
+import com.globati.enums.Verified;
 import com.globati.service.exceptions.ServiceException;
+import com.globati.utildb.ImageHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -28,6 +32,9 @@ public class PayService {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    EmployeeInfoService employeeInfoService;
 
     private static final Logger log = LogManager.getLogger(PayService.class);
 
@@ -139,4 +146,50 @@ public class PayService {
         }
         return file;
     }
+
+    /**
+     *
+     * If a user has been verified, then they are added to the list.
+     * A csv file is created in the same way that is is in the above functions
+     * with the same format. Except the amount to pay is blank. This must be filled
+     * in by a globati member manually. Because it is based on how much money was made
+     * on bookings for the month.
+     *
+     *
+     * This should be a scheduled task that runs at the end of the month.
+     *
+     *
+     * @return
+     */
+    public File createCSVFileOfVerifiedUsersForBookings() throws ServiceException {
+
+        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeesByVerified(Verified.STANDARD);
+
+        File file = new File("verifiedUsers.csv");
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            String header = "PayPal email,Payment (Fill this in manually in excel),currency,id,Verified";
+            bw.write(header);
+            bw.newLine();
+            for (EmployeeInfo info : employeeInfos) {
+                Employee employee1 = employeeService.getEmployeeById(info.get_employeeId());
+                String line = employee1.get_paypalEmail() + ",," + "EUR" + "," + employee1.get_id() + ","+info.get_verified();
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+
+    }
+
+    @Scheduled(cron = "0 40 4 * * ?")
+    public void uploadVerifiedUsersToS3() throws ServiceException {
+        try{
+            ImageHandler.uploadVerifiedUsersToS3(createCSVFileOfVerifiedUsersForBookings());
+        }catch(Exception e){
+            throw new ServiceException("Could not upload the verified users csv file to S3", e);
+        }
+    }
+
 }

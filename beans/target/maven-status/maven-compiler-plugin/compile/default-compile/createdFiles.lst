@@ -1,3 +1,4 @@
+com/globati/enums/Verified.class
+com/globati/mail/beans/ForgotPassword.class
 com/globati/service/beans/Test.class
 com/globati/mail/beans/AdReceipt.class
-com/globati/mail/beans/ForgotPassword.class

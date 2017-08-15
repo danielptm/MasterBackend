@@ -18,7 +18,14 @@ import com.globati.dbmodel.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.io.File;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Created by daniel on 12/22/16.
@@ -920,6 +927,8 @@ public class SendMail {
 //        return true;
 //    }
 
+
+
     public static boolean sendRecruitmentMail(Employee employee, String email, String businessName) throws Exception {
 
         String[] emails = new String[]{email};
@@ -1775,4 +1784,130 @@ public class SendMail {
         }
 
     }
+
+
+//    public boolean sendVerifiedUsers(File file) throws Exception {
+//
+//        String email = "daniel@globati.com";
+//        String[] emails = new String[]{email};
+//
+//
+//        // Construct an object to contain the recipient address.
+//        Destination destination = new Destination().withToAddresses(emails);
+//
+//        // Create the subject and body of the message.
+//        Content subject = new Content().withData("Verified users for receiing booking money");
+//
+//        Content textBody = new Content().withData(
+//               "Make sure to fill in the amount to pay from manual calculation."
+//        );
+//
+//
+//
+//        Body body = new Body().withHtml(textBody);
+//
+//        // Create a message with the specified subject and body.
+//        com.amazonaws.services.simpleemail.model.Message message = new com.amazonaws.services.simpleemail.model.Message().withSubject(subject).withBody(body);
+//
+//
+//        // Assemble the email.
+//        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
+//
+//
+//        try {
+//            AWSCredentials credentials = new BasicAWSCredentials(
+//                    key,
+//                    password);
+//
+//            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
+//
+//            Region REGION = Region.getRegion(Regions.EU_WEST_1);
+//            client.setRegion(REGION);
+//
+//            // Send the email.
+//            client.sendEmail(request);
+//            return true;
+//        } catch (Exception ex) {
+//            log.error("Email send through AWS not sent.");
+//            log.error("Error message: " + ex.getMessage());
+//            throw new Exception(ex.toString());
+//        }
+//    }
+
+
+//        public static boolean sendVerifiedUsers(File file) {
+//        String recipient = "danielptm@me.com";
+//        String sender = "noreply@globati.com";
+//        String host = "smtp.gmail.com";
+//        final String username = "noreply";//change accordingly
+//        final String password = "Globati!23";//change accordingly
+//        Properties props = new Properties();
+//        props.put("mail.smtp.auth", "true");
+//        props.put("mail.smtp.starttls.enable", "true");
+//        props.put("mail.smtp.host", host);
+//        props.put("mail.smtp.port", "587");
+//
+//        Session session = Session.getInstance(props,
+//                new javax.mail.Authenticator() {
+//                    protected PasswordAuthentication getPasswordAuthentication() {
+//                        return new PasswordAuthentication(username, password);
+//                    }
+//                });
+//
+//        try {
+//
+//            DataSource ds = new FileDataSource(file);
+//
+//            Message message = new MimeMessage(session);
+//
+//            // Set From: header field of the header.
+//            message.setFrom(new InternetAddress(sender));
+//
+//            // Set To: header field of the header.
+//            message.setRecipients(Message.RecipientType.TO,
+//                    InternetAddress.parse(recipient));
+//
+//            // Set Subject: header field
+//            message.setSubject("Receptionists paypal batchpayout");
+//
+//            // Create the message part
+//            BodyPart messageBodyPart = new MimeBodyPart();
+//            BodyPart messageBodyPart2 = new MimeBodyPart();
+//
+//            // Now set the actual message
+//            messageBodyPart.setText("These are the files for receptioist recruitment deals");
+//
+//            // Create a multipar message
+//            Multipart multipart = new MimeMultipart();
+//
+//            // Set text message part
+//            multipart.addBodyPart(messageBodyPart);
+//
+//            // Part two is attachment
+//            messageBodyPart = new MimeBodyPart();
+////            DataSource source = new FileDataSource(filename);
+//            messageBodyPart.setDataHandler(new DataHandler(ds));
+////            messageBodyPart2.setDataHandler(new DataHandler(ds2));
+//            messageBodyPart.setFileName("receptionistWith.csv");
+//            messageBodyPart2.setFileName("receptionistWithout.csv");
+//            multipart.addBodyPart(messageBodyPart);
+//            multipart.addBodyPart(messageBodyPart2);
+//
+//            // Send the complete message parts
+//            message.setContent(multipart);
+//
+//            // Send message
+//            Transport.send(message);
+//
+//            Transport.send(message);
+//
+//        } catch (AddressException e) {
+//            e.printStackTrace();
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+//            return true;
+//    }
+
+
 }

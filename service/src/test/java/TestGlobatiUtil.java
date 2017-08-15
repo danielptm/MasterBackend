@@ -33,7 +33,6 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-@Ignore
 public class TestGlobatiUtil {
 
     private static final Logger log = LogManager.getLogger(TestGlobatiUtil.class);
