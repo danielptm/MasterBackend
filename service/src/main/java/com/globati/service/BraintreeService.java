@@ -27,10 +27,13 @@ public class BraintreeService {
 
     private static String privateKey=null;
 
+    private static Environment environment;
+
     static {
         merchantId= Paths.getMerchantId();
         publicKey = Paths.getPublicKey();
         privateKey = Paths.getPrivateKey();
+        environment = Paths.getBraintreeEnvironment();
     }
 
 
@@ -42,7 +45,7 @@ public class BraintreeService {
     DealService dealService;
 
     private static BraintreeGateway gateway = new BraintreeGateway(
-            Environment.SANDBOX,
+            environment,
             merchantId,
             publicKey,
             privateKey

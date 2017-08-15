@@ -1,5 +1,6 @@
 package com.globati.config;
 
+import com.braintreegateway.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,8 @@ public class Paths {
     private static String publicKey;
 
     private static String privateKey;
+
+    private static Environment braintreeEnvironment;
 
 
     //*********************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*********************
@@ -293,5 +296,14 @@ public class Paths {
     public static String getPrivateKey(){
         return privateKey;
     }
+
+    public static void setBraintreeEnvironment(Environment environment){
+        braintreeEnvironment = environment;
+    }
+
+    public static Environment getBraintreeEnvironment(){
+        return braintreeEnvironment;
+    }
+
 
 }

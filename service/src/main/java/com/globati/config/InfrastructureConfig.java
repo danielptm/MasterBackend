@@ -3,6 +3,7 @@ package com.globati.config;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import com.braintreegateway.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -64,11 +65,13 @@ public class InfrastructureConfig  {
 		if (env.equals("dev")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(devevelopmentResource)) {
 				props.load(resourceStream);
+				Paths.setBraintreeEnvironment(Environment.SANDBOX);
 				activeVendor = Database.MYSQL;
 			}
 		} else if (env.equals("prod")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
 				props.load(resourceStream);
+				Paths.setBraintreeEnvironment(Environment.PRODUCTION);
 				activeVendor = Database.MYSQL;
 			}
 		}
