@@ -52,17 +52,21 @@ public class BrainTreeResource {
 
     private static String privateKey=null;
 
+    private static Environment environment=null;
+
     static {
         merchantId= Paths.getMerchantId();
         publicKey = Paths.getPublicKey();
         privateKey = Paths.getPrivateKey();
+        environment = Paths.getBraintreeEnvironment();
+
     }
 
 
 
 
     private static BraintreeGateway gateway = new BraintreeGateway(
-            Environment.SANDBOX,
+            environment,
             merchantId,
             publicKey,
             privateKey
