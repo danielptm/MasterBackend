@@ -199,7 +199,7 @@ public class SendMail {
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Here is your Globati username, click on the link to reset your password.");
-        ForgotPassword fp = new ForgotPassword(globatiuser, Paths.getActiveStaticMembers() + "changeyourpassword/" + apitoken);
+        ForgotPassword fp = new ForgotPassword(globatiuser, Paths.getActiveStaticGlobati() + "changeyourpassword/" + apitoken);
 
         System.out.println(fp.toString());
         Content textBody = new Content().withData(

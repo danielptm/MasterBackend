@@ -78,7 +78,6 @@ public class InfrastructureConfig  {
 
 		String imageBucket = props.get("imageBucket").toString();
 		String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-		String staticMyglobatiAdmin = props.get("staticMyglobatiAdmin").toString();
 		String imagesWithDash = props.get("imagesWithDash").toString();
 		String dbLogin = props.get("dbLogin").toString();
 		String dbPassword = props.get("dbPassword").toString();
@@ -93,7 +92,6 @@ public class InfrastructureConfig  {
 
 		Paths.setActiveS3Bucket(imageBucket);
 		Paths.setActiveStaticGlobati(staticGlobatiAddress);
-		Paths.setActiveStaticMembers(staticMyglobatiAdmin);
 		Paths.setActiveImageLink(imagesWithDash);
 		Paths.setActiveDbLoginName(dbLogin);
 		Paths.setActiveDbPassword(dbPassword);

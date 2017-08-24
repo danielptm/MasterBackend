@@ -119,9 +119,9 @@ public class Paths {
      * Returns the active link for the static member admin site.
      * @return
      */
-    public static String getActiveStaticMembers(){
-        return activeStaticMembers;
-    }
+//    public static String getActiveStaticMembers(){
+//        return activeStaticMembers;
+//    }
 
     /**
      * Returns the active path for creating an add link.
@@ -214,9 +214,9 @@ public class Paths {
      * Returns the active link for the static member admin site.
      * @return
      */
-    public static void setActiveStaticMembers(String data){
-         activeStaticMembers = data;
-    }
+//    public static void setActiveStaticMembers(String data){
+//         activeStaticMembers = data;
+//    }
 
 
     /**
@@ -271,7 +271,6 @@ public class Paths {
     public static void setActiveDriver(String data) {
          activeDriver = data;
     }
-
 
     public static void setMerchantId(String item){
         merchantId = item;

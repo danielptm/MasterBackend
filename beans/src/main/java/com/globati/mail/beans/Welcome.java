@@ -619,7 +619,7 @@ public class Welcome {
                 "                    <tbody>"+
                 "                        <tr>"+
                 "                            <td align=\"center\" valign=\"middle\" class=\"mcnButtonContent\" style=\"font-family: Helvetica; font-size: 18px; padding: 18px;\">"+
-                "                                <a class=\"mcnButton \" title=\"My Globati\" href=\"https://www.globati.com/"+username+"\" target=\"_self\" style=\"font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;\">My Globati</a>"+
+                "                                <a class=\"mcnButton \" title=\"My Globati\" href=\"https://www.globati.com/me/"+username+"\" target=\"_self\" style=\"font-weight: bold;letter-spacing: -0.5px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;\">My Globati</a>"+
                 "                            </td>"+
                 "                        </tr>"+
                 "                    </tbody>"+
