@@ -10,6 +10,8 @@ master/master.iml
 dbmodel/dbmodel.iml
 api/api.iml
 service/service.iml
+service/derby.log
+
 
 #Please do not remove or change this line Joakim. 
 service/src/main/resources/environment/production.properties
