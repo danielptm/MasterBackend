@@ -31,29 +31,8 @@ public class BeansMapper {
         return null;
     }
 
-
-
-    public static GuestEmployee mapEmployee(com.globati.dbmodel.Employee employee){
-        return new GuestEmployee(
-                employee.getId(),
-                employee.getFirstName(),
-                employee.getImage(),
-                employee.getEmail(),
-                employee.getAbout(),
-                employee.getWelcomeMail(),
-                employee.getRecruitmentMail(),
-                employee.getInstagramUser(),
-                employee.getInstagramUserId(),
-                employee.getInstagramUserToken(),
-                employee.getPropLat(),
-                employee.getPropLong(),
-                employee.getStreet(),
-                employee.getCity(),
-                employee.getCountry(),
-                employee.getDisplay(),
-                employee.getGlobatiUsername(),
-                employee.isFacebookProfile()
-                );
+    public static GuestEmployee mapEmployee(){
+        return null;
     }
 
 

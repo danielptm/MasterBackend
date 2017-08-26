@@ -1,7 +1,5 @@
 package com.globati.super_beans;
 
-import javax.persistence.Column;
-import java.util.Date;
 
 /**
  * Created by daniel on 8/7/17.

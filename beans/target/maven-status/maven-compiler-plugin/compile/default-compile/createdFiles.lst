@@ -1,22 +1,18 @@
-<<<<<<< HEAD
 com/globati/super_beans/SuperDeal.class
 com/globati/super_beans/SuperEmployee.class
 com/globati/service_beans/guest/GuestEmployee.class
 com/globati/service_beans/admin/AdminEvent.class
 com/globati/service_beans/admin/AdminRecommendation.class
+com/globati/enums/Verified.class
 com/globati/super_beans/SuperEvent.class
 com/globati/super_beans/SuperRecommendation.class
+com/globati/mail/beans/ForgotPassword.class
 com/globati/service_beans/guest/GuestEvent.class
 com/globati/service_beans/guest/GuestDeal.class
+com/globati/mail/beans/AdReceipt.class
+com/globati/mail/beans/Welcome.class
 com/globati/service_beans/guest/GuestRecommendation.class
 com/globati/service_beans/admin/AdminEmployee.class
 com/globati/mapper/BeansMapper.class
 com/globati/service_beans/admin/AdminDeal.class
-=======
-com/globati/enums/Verified.class
-com/globati/mail/beans/Welcome.class
-com/globati/mail/beans/ForgotPassword.class
-com/globati/service/beans/Test.class
-com/globati/mail/beans/AdReceipt.class
 com/globati/mail/beans/Recruitment.class
->>>>>>> c9adedcebe75f3be47c9d708af03cfbd2efa0017

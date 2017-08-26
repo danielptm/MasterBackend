@@ -50,7 +50,7 @@ public class EmployeeInfoTest {
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
         Employee employee2 = this.employeeService.createEmployee("Daniel", uid2+"@me.com", uid2, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
@@ -74,9 +74,9 @@ public class EmployeeInfoTest {
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
-        Assert.assertEquals(employee.get_id(), e2.get_employeeId());
+        Assert.assertEquals(employee.getId(), e2.getEmployeeId());
 
     }
 
@@ -87,7 +87,7 @@ public class EmployeeInfoTest {
         InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
-        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
         e2.set_verified(Verified.NOT);
 
@@ -134,10 +134,10 @@ public class EmployeeInfoTest {
         InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
-        employee.set_paypalEmail("UnitTestEmail");
+        employee.setPaypalEmail("UnitTestEmail");
 
         employeeService.updateEmployee(employee);
-        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.get_id());
+        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
         e2.set_verified(Verified.STANDARD);
 
