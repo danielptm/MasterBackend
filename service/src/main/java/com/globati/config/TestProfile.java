@@ -56,7 +56,6 @@ public class TestProfile {
 
         Paths.setActiveS3Bucket(imageBucket);
         Paths.setActiveStaticGlobati(staticGlobatiAddress);
-        Paths.setActiveStaticMembers(staticMyglobatiAdmin);
         Paths.setActiveImageLink(imagesWithDash);
         Paths.setActiveDatabase(dbPath);
         Paths.setActiveDriver(driver);

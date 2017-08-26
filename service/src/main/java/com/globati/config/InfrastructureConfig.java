@@ -3,6 +3,7 @@ package com.globati.config;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import com.braintreegateway.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -64,33 +65,41 @@ public class InfrastructureConfig  {
 		if (env.equals("dev")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(devevelopmentResource)) {
 				props.load(resourceStream);
+				Paths.setBraintreeEnvironment(Environment.SANDBOX);
 				activeVendor = Database.MYSQL;
 			}
 		} else if (env.equals("prod")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
 				props.load(resourceStream);
+				Paths.setBraintreeEnvironment(Environment.PRODUCTION);
 				activeVendor = Database.MYSQL;
 			}
 		}
 
 		String imageBucket = props.get("imageBucket").toString();
 		String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-		String staticMyglobatiAdmin = props.get("staticMyglobatiAdmin").toString();
 		String imagesWithDash = props.get("imagesWithDash").toString();
 		String dbLogin = props.get("dbLogin").toString();
 		String dbPassword = props.get("dbPassword").toString();
 		String dbPath = props.get("dbPath").toString();
 		String driver = props.get("driver").toString();
 
+		//For braintree
+		String merchantId=props.get("merchantId").toString();
+		String publicKey=props.get("publicKey").toString();
+		String privateKey=props.get("privateKey").toString();
+
 
 		Paths.setActiveS3Bucket(imageBucket);
 		Paths.setActiveStaticGlobati(staticGlobatiAddress);
-		Paths.setActiveStaticMembers(staticMyglobatiAdmin);
 		Paths.setActiveImageLink(imagesWithDash);
 		Paths.setActiveDbLoginName(dbLogin);
 		Paths.setActiveDbPassword(dbPassword);
 		Paths.setActiveDatabase(dbPath);
 		Paths.setActiveDriver(driver);
+		Paths.setMerchantId(merchantId);
+		Paths.setPublicKey(publicKey);
+		Paths.setPrivateKey(privateKey);
 
 		activeDriver = Paths.getActiveDriver();
 		activeDbPassword = Paths.getActiveDbPassword();

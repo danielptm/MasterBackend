@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/user_beans/admin/AdminEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/user_beans/admin/AdminDeal.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEvent.java
@@ -11,3 +12,11 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/user_beans/guest/GuestEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/user_beans/admin/AdminEmployee.java
+=======
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/AdReceipt.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Recruitment.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/enums/Verified.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/ForgotPassword.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service/beans/Test.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Welcome.java
+>>>>>>> c9adedcebe75f3be47c9d708af03cfbd2efa0017

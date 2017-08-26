@@ -113,13 +113,12 @@ public class EventService {
         }
     }
 
-
     public List<Event> getAllActiveEvents(){
         return this.eventRepository.getAllActiveEvents(true);
     }
 
 
-    @Scheduled(cron = "30 4 * * * ?")
+    @Scheduled(cron = "0 35 4 * * ?")
     public void getAllEventsAndSetExpiredEventsToNotActive() throws ServiceException {
         List<Event> events = getAllActiveEvents();
 

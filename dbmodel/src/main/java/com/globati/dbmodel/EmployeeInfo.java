@@ -1,6 +1,9 @@
 package com.globati.dbmodel;
 
+import com.globati.enums.Verified;
+
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -10,6 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "employeeInfo")
 public class EmployeeInfo extends BaseEntity{
+
+
 
     @Column(name="employeeid")
     Long employeeId;
@@ -28,9 +33,14 @@ public class EmployeeInfo extends BaseEntity{
     @Column(name="facebookid", length=100)
     String facebookId;
 
+    @Column(name="verified")
+    @Enumerated(EnumType.STRING)
+    Verified _verified;
+
     public EmployeeInfo(Long _employeeId) {
         this.employeeId = _employeeId;
         this.dateCreated = new Date();
+
     }
 
     public EmployeeInfo(Long employeeId, String facebookid) {
@@ -103,6 +113,29 @@ public class EmployeeInfo extends BaseEntity{
 
     public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
+    }
+
+    public Verified get_verified() {
+        return _verified;
+    }
+
+    public void set_verified(Verified _verified) {
+        this._verified = _verified;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeInfo{" +
+                "employeeId=" + employeeId +
+                ", globatiPassword='" + globatiPassword + '\'' +
+                ", salt=" + Arrays.toString(salt) +
+                ", lastLogin=" + lastLogin +
+                ", dateCreated=" + dateCreated +
+                ", authToken='" + authToken + '\'' +
+                ", tokenExpiration='" + tokenExpiration + '\'' +
+                ", facebookId='" + facebookId + '\'' +
+                ", _verified=" + _verified +
+                '}';
     }
 
 }

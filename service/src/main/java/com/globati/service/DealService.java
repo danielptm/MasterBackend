@@ -164,7 +164,7 @@ public class DealService {
      * @throws Exception
      */
 
-    @Scheduled(cron = "35 4 * * * ?")
+    @Scheduled(cron = "0 30 4 * * ?")
     public void getAllDealsAndSetExpiredEventsToNotActive() throws Exception {
         List<Deal> deals = getAllActiveDeals();
 
@@ -186,11 +186,13 @@ public class DealService {
     private boolean dealIsExpired(Deal deal) throws Exception {
         Calendar c = Calendar.getInstance();
         c.setTime(deal.getDatemade());
-        if (deal.getPlan().equals("30days") || deal.getPlan().equals("30 day") || deal.getPlan().equals("30day")) {
-            c.add(Calendar.DAY_OF_MONTH, 30);
-        } else if (deal.getPlan().equals("60days") || deal.getPlan().equals("60 day") || deal.getPlan().equals("60day")) {
+        if(deal.getPlan().equals("THIRTY_DAYS") ){
+            c.add(Calendar.DAY_OF_MONTH, 30 );
+        }
+        else if(deal.getPlan().equals("SIXTY_DAYS")){
             c.add(Calendar.DAY_OF_MONTH, 60);
-        } else if (deal.getPlan().equals("90days") || deal.getPlan().equals("90 day") || deal.getPlan().equals("90day")) {
+        }
+        else if(deal.getPlan().equals("90_DAYS")){
             c.add(Calendar.DAY_OF_MONTH, 90);
         } else {
             throw new Exception("Invalid deal plan: Value should be '30 day', '60 day', or '90 day': value was: " + deal.getPlan());

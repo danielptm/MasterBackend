@@ -9,12 +9,12 @@ public class BusinessEmail {
 
     String businessName;
     String businessEmail;
-    Employee employee;
+    Long employeeId;
 
-    public BusinessEmail(String businessName, String businessEmail, Employee employee){
+    public BusinessEmail(String businessName, String businessEmail, Long employeeId){
         this.businessName = businessName;
         this.businessEmail = businessEmail;
-        this.employee = employee;
+        this.employeeId = employeeId;
     }
 
     public BusinessEmail(){}
@@ -35,20 +35,22 @@ public class BusinessEmail {
         this.businessEmail = businessEmail;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
+
 
     @Override
     public String toString() {
         return "BusinessEmail{" +
                 "businessName='" + businessName + '\'' +
                 ", businessEmail='" + businessEmail + '\'' +
-                ", employee=" + employee.getGlobatiUsername() +
+                ", employeeId=" + employeeId +
                 '}';
     }
+
 }

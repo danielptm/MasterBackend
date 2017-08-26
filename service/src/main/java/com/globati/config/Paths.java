@@ -1,5 +1,6 @@
 package com.globati.config;
 
+import com.braintreegateway.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,87 +37,13 @@ import java.util.Properties;
 public class Paths {
 
 
-//    Paths() throws IOException {
-//        Map<String, String> env = System.getenv();
-//        loadEnvironmentProperties(env.get("GLOBATI_SERVER_ENV"));
-//        System.out.println(env.get("GLOBATI_SERVER_ENV"));
-//    }
-//
-//    private void  loadEnvironmentProperties(String env) throws IOException {
-//        Properties props = new Properties();
-//        String devevelopmentResource = "environment/development.properties";
-//        String productionResource = "environment/production.properties";
-//        if (env.equals("dev")) {
-//            try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(devevelopmentResource)) {
-//                props.load(resourceStream);
-//                Paths.setActiveVendor(Database.MYSQL);
-//            }
-//        } else if (env.equals("prod")) {
-//            try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
-//                props.load(resourceStream);
-//                Paths.setActiveVendor(Database.MYSQL);
-//            }
-//        }
-//
-//        String imageBucket = props.get("imageBucket").toString();
-//        String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-//        String staticMyglobatiAdmin = props.get("staticMyglobatiAdmin").toString();
-//        String imagesWithDash = props.get("imagesWithDash").toString();
-//        String dbLogin = props.get("dbLogin").toString();
-//        String dbPassword = props.get("dbPassword").toString();
-//        String dbPath = props.get("dbPath").toString();
-//        String driver = props.get("driver").toString();
-//
-//
-//        Paths.setActiveS3Bucket(imageBucket);
-//        Paths.setActiveStaticGlobati(staticGlobatiAddress);
-//        Paths.setActiveStaticMembers(staticMyglobatiAdmin);
-//        Paths.setActiveImageLink(imagesWithDash);
-//        Paths.setActiveDbLoginName(dbLogin);
-//        Paths.setActiveDbPassword(dbPassword);
-//        Paths.setActiveDatabaseUrl(dbPath);
-//        Paths.setActiveDriver(driver);
-//
-//    }
 
 
     private static final Logger log = LogManager.getLogger(Paths.class);
 
-//    private static final String productionBucket = "globatiimages/production";
-//    private static final String developmentBucket = "globatiimages/development";
-//
-//    private static final String localStaticGlobati = "http://localhost:4200/";
-//    private static final String localStaticMembers = "http://localhost:4201/";
-//
-//    private static final String productionStaticGlobati = "https://globati.com/";
-//    private static final String productionStaticMembers = "https://myglobatiadmin.com/";
-//
-//    //Has to be the name of the bucket, not the whole url.mcu
-//    private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
-//    private static final String productionImages="globatiimages/production/";
-//    private static final String developmentImages = "globatiimages/development/";
-//
-//    private static final String productionDbLogin = "mrglobati";
-//    private static final String productionDbPassword = "Elgatonegro!986";
-//    private static final String developmentDbLogin = "awesome";
-//    private static final String developmentDbPassword = "database";
-//    private static final String testDbLogin = "";
-//    private static final String testDbPassword="";
-//
-//    private static final String productionDatabase = "jdbc:mysql://globatidb.cpkg3e91o3s6.eu-central-1.rds.amazonaws.com:3306/globatiDB?createDatabaseIfNotExist=true";
-//    private static final String developmentDatabase = "jdbc:mysql://localhost:3306/DatabaseProject?createDatabaseIfNotExist=true";
-//    private static final String testDatabase = "jdbc:derby:memory:test;create=true";
-//
-//
-//    private static final String derbyDatabaseDriver = "org.apache.derby.jdbc.EmbeddedDriver";
-//    private static final String mysqlDatabaseDriver = "com.mysql.jdbc.Driver";
-//
-//    private static final Database derbyVendor = Database.DERBY;
-//    private static final Database mysqlVendor = Database.MYSQL;
-
     //*********************Set these values to switch back and fourth between production/development*********************
 
-        private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
+    private static final String s3Root = "https://s3.eu-central-1.amazonaws.com/";
 
 
     //productionStaticGlobati || localStaticGlobati && localStaticMembers || productionStaticMembers
@@ -124,7 +51,10 @@ public class Paths {
     private static String activeStaticMembers;
 
     //I should not need to change this..... but it should be activeStaticGlobati/connect/
-    private static String activeCreateAddLink = activeStaticGlobati+"connect/";
+//    private static String activeCreateAddLink = activeStaticGlobati+"connect/";
+
+    //The one above is how it was before, but have had problems so i just changed it to this.
+    private static String activeCreateAddLink = "https://globati.com/connect/";
 
     //Use development links for testing.
     //productionImages || developmentImages
@@ -156,6 +86,15 @@ public class Paths {
     //derbyDatabaseDriver || mysqlDatabaseDriver
     private static String activeDriver;
 
+    //For braintree
+    private static String merchantId;
+
+    private static String publicKey;
+
+    private static String privateKey;
+
+    private static Environment braintreeEnvironment;
+
 
     //*********************^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*********************
 
@@ -180,9 +119,9 @@ public class Paths {
      * Returns the active link for the static member admin site.
      * @return
      */
-    public static String getActiveStaticMembers(){
-        return activeStaticMembers;
-    }
+//    public static String getActiveStaticMembers(){
+//        return activeStaticMembers;
+//    }
 
     /**
      * Returns the active path for creating an add link.
@@ -275,9 +214,9 @@ public class Paths {
      * Returns the active link for the static member admin site.
      * @return
      */
-    public static void setActiveStaticMembers(String data){
-         activeStaticMembers = data;
-    }
+//    public static void setActiveStaticMembers(String data){
+//         activeStaticMembers = data;
+//    }
 
 
     /**
@@ -333,9 +272,37 @@ public class Paths {
          activeDriver = data;
     }
 
+    public static void setMerchantId(String item){
+        merchantId = item;
+    }
 
+    public static String getMerchantId(){
+        return merchantId;
+    }
 
+    public static void setPublicKey(String item){
+        publicKey = item;
+    }
 
+    public static String getPublicKey(){
+        return publicKey;
+    }
+
+    public static void setPrivateKey(String item){
+         privateKey = item;
+    }
+
+    public static String getPrivateKey(){
+        return privateKey;
+    }
+
+    public static void setBraintreeEnvironment(Environment environment){
+        braintreeEnvironment = environment;
+    }
+
+    public static Environment getBraintreeEnvironment(){
+        return braintreeEnvironment;
+    }
 
 
 }

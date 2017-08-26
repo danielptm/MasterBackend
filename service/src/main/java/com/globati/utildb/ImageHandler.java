@@ -17,10 +17,17 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by daniel on 12/22/16.
+ *
+ * This class was used for uploading images to S3 when the image streams came through our server.
+ * This functioanlity is not utilized anymore, except files are uploaded to S3. Think about
+ * renaming this class to S3Handler, or somthing like that and get rid of the old functionality.
+ *
+ *
  */
 public class ImageHandler {
 
@@ -122,42 +129,27 @@ public class ImageHandler {
 
     }
 
+    public static boolean uploadVerifiedUsersToS3(File file){
 
-    /**
-     * Converts an inputstream to a buffered image, and reduces the resolution, then writes it.
-     * @param is
-     * @param dbimage
-     * @throws IOException
-     */
+        Date date = new Date();
 
-    public static void resizeImage(InputStream is, String dbimage) throws IOException {
+        String fileName = date.toString()+"verifiedUsers.csv";
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(activePath);
-        sb.append(dbimage);
-        String path = sb.toString();
-        log.debug("resize image:: "+path);
+        String bucketName = "globatiimages/batchpay";
 
-        BufferedImage bufferedImage = ImageIO.read(is);
 
-        ImageWriter writer = (ImageWriter)ImageIO.getImageWritersByFormatName("jpg").next();
-        ImageWriteParam iwp = writer.getDefaultWriteParam();
-        iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        iwp.setCompressionQuality(0.2f);
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
 
-        File file = new File(path);
-        FileImageOutputStream output = new FileImageOutputStream(file);
+        // create a client connection based on credentials
+        AmazonS3 s3client = new AmazonS3Client(credentials);
 
-        writer.setOutput(output);
-        IIOImage image = new IIOImage(bufferedImage, null, null);
+        s3client.putObject(new PutObjectRequest(bucketName, fileName, file)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
 
-        writer.write(null, image, iwp);
-
-        writer.dispose();
+        return true;
 
     }
 
-    public static InputStream readLocalImage(String image) throws FileNotFoundException {
-        return new FileInputStream(activePath+image);
-    }
 }
