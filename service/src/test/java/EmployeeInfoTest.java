@@ -6,6 +6,7 @@ import com.globati.service.EmployeeService;
 import com.globati.service.PayService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.utildb.HelpObjects.ApiKey;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.SendMail;
 import org.junit.Assert;
@@ -147,10 +148,56 @@ public class EmployeeInfoTest {
 
     }
 
+    /**
+     * This is not the greatest written test, because it should check that the apiktoken value is not null
+     * not that the ApikToken object is not null.
+     * @throws ServiceException
+     * @throws UserDoesNotExistException
+     */
 
-//    @Test
-//    public void testDataString(){
-//        Date date = new Date();
-//        System.out.println(date.toString());
-//    }
+    @Test
+    public void createAccountOrLoginWithFacebook() throws ServiceException, UserDoesNotExistException {
+        String facebookid="123";
+        String name = "daniel";
+        String email="hello@me.com";
+        String image="234234234";
+
+        String globatiusername ="zebra";
+
+        EmployeeInfo employeeInfo = this.employeeInfoService.getEmployeeInfoByFacebookId(facebookid);
+
+        //EmplyoeeInfo has not been created
+        Assert.assertNull(employeeInfo);
+
+        employeeService.createAccountOrLoginWithFacebook(facebookid, name, email, image);
+
+        EmployeeInfo employeeInfo1 = this.employeeInfoService.getEmployeeInfoByFacebookId(facebookid);
+
+        Assert.assertNotNull(employeeInfo1);
+
+        Employee employee = this.employeeService.getEmployeeByFacebookId(facebookid);
+
+        employee.setGlobatiUsername(globatiusername);
+
+        employeeService.updateEmployee(employee);
+
+        List<Object> items = employeeService.createAccountOrLoginWithFacebook(facebookid, name, email, image);
+
+        Assert.assertTrue(items.size()>0);
+
+
+        Assert.assertNotNull( items.get(2) );
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 }

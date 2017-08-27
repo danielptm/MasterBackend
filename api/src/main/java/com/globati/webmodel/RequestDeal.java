@@ -1,237 +1,262 @@
 package com.globati.webmodel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by daniel on 8/6/17.
  */
 public class RequestDeal {
 
-    Long _id;
-    String _title;
-    String _description;
-    String _businessName;
-    String _website;
-    String _category;
-    String _plan;
-    Double _targetLat;
-    Double _targetLong;
-    String _street;
-    String _city;
-    String _country;
-    String _nonce;
-    String _email;
-    String _billingStreet;
-    String _billingCity;
-    String _billingRegion;
-    String _billingCountry;
-    Double _cost;
-    String _image1;
-    String _image2;
-    String _image3;
+    @JsonProperty("_id")
+    Long id;
+    @JsonProperty("_title")
+    String title;
+    @JsonProperty("_description")
+    String description;
+    @JsonProperty("_businessName")
+    String businessName;
+    @JsonProperty("_website")
+    String website;
+    @JsonProperty("_category")
+    String category;
+    @JsonProperty("_plan")
+    String plan;
+    @JsonProperty("_targetLat")
+    Double targetLat;
+    @JsonProperty("_targetLong")
+    Double targetLong;
+    @JsonProperty("_street")
+    String street;
+    @JsonProperty("_city")
+    String city;
+    @JsonProperty("_country")
+    String country;
+    @JsonProperty("_nonce")
+    String nonce;
+    @JsonProperty("_email")
+    String email;
+    @JsonProperty("_billingStreet")
+    String billingStreet;
+    @JsonProperty("_billingCity")
+    String billingCity;
+    @JsonProperty("_billingRegion")
+    String billingRegion;
+    @JsonProperty("_billingCountry")
+    String billingCountry;
+    @JsonProperty("_cost")
+    Double cost;
+    @JsonProperty("_image1")
+    String image1;
+    @JsonProperty("_image2")
+    String image2;
+    @JsonProperty("_image3")
+    String image3;
 
     RequestDeal(){}
 
-    public Long get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
-    public void set_id(Long _id) {
-        this._id = _id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String get_title() {
-        return _title;
+    public String getTitle() {
+        return title;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String get_description() {
-        return _description;
+    public String getDescription() {
+        return description;
     }
 
-    public void set_description(String _description) {
-        this._description = _description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String get_businessName() {
-        return _businessName;
+    public String getBusinessName() {
+        return businessName;
     }
 
-    public void set_businessName(String _businessName) {
-        this._businessName = _businessName;
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
-    public String get_website() {
-        return _website;
+    public String getWebsite() {
+        return website;
     }
 
-    public void set_website(String _website) {
-        this._website = _website;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public String get_category() {
-        return _category;
+    public String getCategory() {
+        return category;
     }
 
-    public void set_category(String _category) {
-        this._category = _category;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String get_plan() {
-        return _plan;
+    public String getPlan() {
+        return plan;
     }
 
-    public void set_plan(String _plan) {
-        this._plan = _plan;
+    public void setPlan(String plan) {
+        this.plan = plan;
     }
 
-    public Double get_targetLat() {
-        return _targetLat;
+    public Double getTargetLat() {
+        return targetLat;
     }
 
-    public void set_targetLat(Double _targetLat) {
-        this._targetLat = _targetLat;
+    public void setTargetLat(Double targetLat) {
+        this.targetLat = targetLat;
     }
 
-    public Double get_targetLong() {
-        return _targetLong;
+    public Double getTargetLong() {
+        return targetLong;
     }
 
-    public void set_targetLong(Double _targetLong) {
-        this._targetLong = _targetLong;
+    public void setTargetLong(Double targetLong) {
+        this.targetLong = targetLong;
     }
 
-    public String get_street() {
-        return _street;
+    public String getStreet() {
+        return street;
     }
 
-    public void set_street(String _street) {
-        this._street = _street;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String get_city() {
-        return _city;
+    public String getCity() {
+        return city;
     }
 
-    public void set_city(String _city) {
-        this._city = _city;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String get_country() {
-        return _country;
+    public String getCountry() {
+        return country;
     }
 
-    public void set_country(String _country) {
-        this._country = _country;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String get_nonce() {
-        return _nonce;
+    public String getNonce() {
+        return nonce;
     }
 
-    public void set_nonce(String _nonce) {
-        this._nonce = _nonce;
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
     }
 
-    public String get_email() {
-        return _email;
+    public String getEmail() {
+        return email;
     }
 
-    public void set_email(String _email) {
-        this._email = _email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String get_billingStreet() {
-        return _billingStreet;
+    public String getBillingStreet() {
+        return billingStreet;
     }
 
-    public void set_billingStreet(String _billingStreet) {
-        this._billingStreet = _billingStreet;
+    public void setBillingStreet(String billingStreet) {
+        this.billingStreet = billingStreet;
     }
 
-    public String get_billingCity() {
-        return _billingCity;
+    public String getBillingCity() {
+        return billingCity;
     }
 
-    public void set_billingCity(String _billingCity) {
-        this._billingCity = _billingCity;
+    public void setBillingCity(String billingCity) {
+        this.billingCity = billingCity;
     }
 
-    public String get_billingRegion() {
-        return _billingRegion;
+    public String getBillingRegion() {
+        return billingRegion;
     }
 
-    public void set_billingRegion(String _billingRegion) {
-        this._billingRegion = _billingRegion;
+    public void setBillingRegion(String billingRegion) {
+        this.billingRegion = billingRegion;
     }
 
-    public String get_billingCountry() {
-        return _billingCountry;
+    public String getBillingCountry() {
+        return billingCountry;
     }
 
-    public void set_billingCountry(String _billingCountry) {
-        this._billingCountry = _billingCountry;
+    public void setBillingCountry(String billingCountry) {
+        this.billingCountry = billingCountry;
     }
 
-    public Double get_cost() {
-        return _cost;
+    public Double getCost() {
+        return cost;
     }
 
-    public void set_cost(Double _cost) {
-        this._cost = _cost;
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
-    public String get_image1() {
-        return _image1;
+    public String getImage1() {
+        return image1;
     }
 
-    public void set_image1(String _image1) {
-        this._image1 = _image1;
+    public void setImage1(String image1) {
+        this.image1 = image1;
     }
 
-    public String get_image2() {
-        return _image2;
+    public String getImage2() {
+        return image2;
     }
 
-    public void set_image2(String _image2) {
-        this._image2 = _image2;
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
-    public String get_image3() {
-        return _image3;
+    public String getImage3() {
+        return image3;
     }
 
-    public void set_image3(String _image3) {
-        this._image3 = _image3;
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
     @Override
     public String toString() {
         return "RequestDeal{" +
-                "_id=" + _id +
-                ", _title='" + _title + '\'' +
-                ", _description='" + _description + '\'' +
-                ", _businessName='" + _businessName + '\'' +
-                ", _website='" + _website + '\'' +
-                ", _category='" + _category + '\'' +
-                ", _plan='" + _plan + '\'' +
-                ", _targetLat=" + _targetLat +
-                ", _targetLong=" + _targetLong +
-                ", _street='" + _street + '\'' +
-                ", _city='" + _city + '\'' +
-                ", _country='" + _country + '\'' +
-                ", _nonce='" + _nonce + '\'' +
-                ", _email='" + _email + '\'' +
-                ", _billingStreet='" + _billingStreet + '\'' +
-                ", _billingCity='" + _billingCity + '\'' +
-                ", _billingRegion='" + _billingRegion + '\'' +
-                ", _billingCountry='" + _billingCountry + '\'' +
-                ", _cost=" + _cost +
-                ", _image1='" + _image1 + '\'' +
-                ", _image2='" + _image2 + '\'' +
-                ", _image3='" + _image3 + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", businessName='" + businessName + '\'' +
+                ", website='" + website + '\'' +
+                ", category='" + category + '\'' +
+                ", plan='" + plan + '\'' +
+                ", targetLat=" + targetLat +
+                ", targetLong=" + targetLong +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", nonce='" + nonce + '\'' +
+                ", email='" + email + '\'' +
+                ", billingStreet='" + billingStreet + '\'' +
+                ", billingCity='" + billingCity + '\'' +
+                ", billingRegion='" + billingRegion + '\'' +
+                ", billingCountry='" + billingCountry + '\'' +
+                ", cost=" + cost +
+                ", image1='" + image1 + '\'' +
+                ", image2='" + image2 + '\'' +
+                ", image3='" + image3 + '\'' +
                 '}';
     }
+
 
 }

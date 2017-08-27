@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class Email {
 
-    Employee employee;
+    Long id;
     private List<String> emails;
 
-    public Email(Employee employee, List<String> emails) {
-        this.employee = employee;
+    public Email(Long id, List<String> emails) {
+        this.id = id;
         this.emails = emails;
     }
 
@@ -30,12 +30,20 @@ public class Email {
         this.emails = emails;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Long getId() {
+        return id;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Email{" +
+                "id=" + id +
+                ", emails=" + emails +
+                '}';
     }
 
 }

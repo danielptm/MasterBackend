@@ -27,6 +27,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -48,18 +49,18 @@ public class SendMail {
     private static final Logger log = LogManager.getLogger(SendMail.class);
 
 
-    public static boolean sendGuestMail(Email mail) throws Exception {
+    public static boolean sendGuestMail(Employee employee, List<String> mails) throws Exception {
 
         String[] emails = new String[10];
 
-        for(int i=0 ; i< mail.getEmails().size(); i++){
-            emails[i] = mail.getEmails().get(i);
+        for(int i=0 ; i< mails.size(); i++){
+            emails[i] = mails.get(i);
         }
 
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
 
-        System.out.println(mail.getEmployee().getImage());
+//        System.out.println(mail.getEmployee().getImage());
 
         // Create the subject and body of the message.
 

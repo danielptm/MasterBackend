@@ -1,6 +1,5 @@
 package com.globati.resources;
 
-
 import com.globati.dbmodel.Employee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -11,6 +10,9 @@ import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.utildb.HelpObjects.ChangePassword;
 import com.globati.utildb.SendMail;
+import com.globati.webmodel.ChangePasswordWithToken;
+import com.globati.webmodel.CreateEmployee;
+import com.globati.webmodel.UpdateEmployee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -27,7 +29,6 @@ import javax.ws.rs.core.UriInfo;
 import java.io.*;
 import java.util.List;
 import com.globati.utildb.HelpObjects.Email;
-import com.globati.webmodel.*;
 
 
 
@@ -65,16 +66,16 @@ public class EmployeeResource{
     public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException {
         try {
             this.employeeService.createEmployee(
-                    createEmployee.get_firstName(),
-                    createEmployee.get_email(),
-                    createEmployee.get_username(),
-                    createEmployee.get_password(),
-                    createEmployee.get_targetLat(),
-                    createEmployee.get_targetLong(),
-                    createEmployee.get_image(),
-                    createEmployee.get_street(),
-                    createEmployee.get_city(),
-                    createEmployee.get_country()
+                    createEmployee.getFirstName(),
+                    createEmployee.getEmail(),
+                    createEmployee.getUsername(),
+                    createEmployee.getPassword(),
+                    createEmployee.getTargetLat(),
+                    createEmployee.getTargetLong(),
+                    createEmployee.getImage(),
+                    createEmployee.getStreet(),
+                    createEmployee.getCity(),
+                    createEmployee.getCountry()
             );
             return Response.ok().build();
         } catch (UserDoesNotExistException e) {
@@ -125,68 +126,68 @@ public class EmployeeResource{
         try{
             employee= employeeService.getEmployeeById(employeeId);
 
-            if(updateEmployee.get_email()!=null){
-                employee.setEmail(updateEmployee.get_email());
+            if(updateEmployee.getEmail()!=null){
+                employee.setEmail(updateEmployee.getEmail());
             }
-            if(updateEmployee.get_username()!=null){
-                employee.setGlobatiUsername(updateEmployee.get_username());
+            if(updateEmployee.getUsername()!=null){
+                employee.setGlobatiUsername(updateEmployee.getUsername());
             }
-            if(updateEmployee.get_instagramUserName()!=null){
-                employee.setInstagramUser(updateEmployee.get_instagramUserName());
+            if(updateEmployee.getInstagramUserName()!=null){
+                employee.setInstagramUser(updateEmployee.getInstagramUserName());
             }
-            if(updateEmployee.get_instagramToken()!=null){
-                employee.setInstagramUserToken(updateEmployee.get_instagramToken());
+            if(updateEmployee.getInstagramToken()!=null){
+                employee.setInstagramUserToken(updateEmployee.getInstagramToken());
             }
-            if(updateEmployee.get_instagramUserId()!=null){
-                employee.setInstagramUserId(updateEmployee.get_instagramUserId());
+            if(updateEmployee.getInstagramUserId()!=null){
+                employee.setInstagramUserId(updateEmployee.getInstagramUserId());
             }
-            if(updateEmployee.get_paypal()!=null){
-                employee.setPaypalEmail(updateEmployee.get_paypal());
+            if(updateEmployee.getPaypal()!=null){
+                employee.setPaypalEmail(updateEmployee.getPaypal());
             }
-            if(updateEmployee.get_day30()!=null){
-                employee.setAddAmount(updateEmployee.get_day30());
+            if(updateEmployee.getDay30()!=null){
+                employee.setAddAmount(updateEmployee.getDay30());
             }
-            if(updateEmployee.get_day60()!=null){
-                employee.setAdd2month(updateEmployee.get_day60());
+            if(updateEmployee.getDay60()!=null){
+                employee.setAdd2month(updateEmployee.getDay60());
             }
-            if(updateEmployee.get_day90()!=null){
-                employee.setAdd3month(updateEmployee.get_day90());
+            if(updateEmployee.getDay90()!=null){
+                employee.setAdd3month(updateEmployee.getDay90());
             }
-            if(updateEmployee.get_propLong()!=null){
-                employee.setPropLong(updateEmployee.get_propLong());
+            if(updateEmployee.getPropLong()!=null){
+                employee.setPropLong(updateEmployee.getPropLong());
             }
-            if(updateEmployee.get_propLat()!=null){
-                employee.setPropLat(updateEmployee.get_propLat());
+            if(updateEmployee.getPropLat()!=null){
+                employee.setPropLat(updateEmployee.getPropLat());
             }
-            if(updateEmployee.get_street()!=null){
-                employee.setStreet(updateEmployee.get_street());
+            if(updateEmployee.getStreet()!=null){
+                employee.setStreet(updateEmployee.getStreet());
             }
-            if(updateEmployee.get_city()!=null){
-                employee.setCity(updateEmployee.get_city());
+            if(updateEmployee.getCity()!=null){
+                employee.setCity(updateEmployee.getCity());
             }
-            if(updateEmployee.get_country()!=null){
-                employee.setCountry(updateEmployee.get_country());
+            if(updateEmployee.getCountry()!=null){
+                employee.setCountry(updateEmployee.getCountry());
             }
-            if(updateEmployee.get_about()!=null){
-                employee.setAbout(updateEmployee.get_about());
+            if(updateEmployee.getAbout()!=null){
+                employee.setAbout(updateEmployee.getAbout());
             }
-            if(updateEmployee.get_welcomeMail()!=null){
-                employee.setWelcomeMail(updateEmployee.get_welcomeMail());
+            if(updateEmployee.getWelcomeMail()!=null){
+                employee.setWelcomeMail(updateEmployee.getWelcomeMail());
             }
-            if(updateEmployee.get_recruitmentMail()!=null){
-                employee.setRecruitmentMail(updateEmployee.get_recruitmentMail());
+            if(updateEmployee.getRecruitmentMail()!=null){
+                employee.setRecruitmentMail(updateEmployee.getRecruitmentMail());
             }
-            if(updateEmployee.get_display()!=null){
-                employee.setDisplay(updateEmployee.get_display());
+            if(updateEmployee.getDisplay()!=null){
+                employee.setDisplay(updateEmployee.getDisplay());
             }
-            if(updateEmployee.get_image()!=null){
-                employee.setImage(updateEmployee.get_image());
+            if(updateEmployee.getImage()!=null){
+                employee.setImage(updateEmployee.getImage());
             }
-            if(updateEmployee.get_image2()!=null){
-                employee.setImage2(updateEmployee.get_image2());
+            if(updateEmployee.getImage2()!=null){
+                employee.setImage2(updateEmployee.getImage2());
             }
-            if(updateEmployee.get_image3()!=null){
-                employee.setImage3(updateEmployee.get_image3());
+            if(updateEmployee.getImage3()!=null){
+                employee.setImage3(updateEmployee.getImage3());
             }
             Employee updatedEmployee = employeeService.updateEmployee(employee);
             return Response.ok(updatedEmployee).build();
@@ -261,8 +262,10 @@ public class EmployeeResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
     public Response sendMail(Email list){
+//        System.out.println(list.getEmails().get(0));
         try{
-            SendMail.sendGuestMail(list);
+            Employee employee = employeeService.getEmployeeById(list.getId());
+            SendMail.sendGuestMail(employee, list.getEmails());
             return Response.ok("mail sent").build();
         }catch(Exception e){
             throw new WebException("Could not send emails", Response.Status.BAD_REQUEST);

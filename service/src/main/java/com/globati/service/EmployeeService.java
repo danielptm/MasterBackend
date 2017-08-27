@@ -52,7 +52,7 @@ public class EmployeeService {
         try {
             Employee employee = this.employeeRepository.getEmployeeByid(id);
             employee.setDeals(null);
-            employee.set_events(null);
+            employee.setEvents(null);
             employee.setRecommendations(null);
             return employee;
         }catch(Exception e){
@@ -137,7 +137,7 @@ public class EmployeeService {
             else{
                 employeeInfo = employeeInfoService.getEmployeeInfoByFacebookId(facebookId);
                 ApiKey apiKey = new ApiKey();
-                employeeInfo.setTokenExpiration(apiKey.getApiKey());
+                employeeInfo.setAuthToken(apiKey.getApiKey());
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 List<Object> items = getItemsForEmployee(employee.getGlobatiUsername());
@@ -198,7 +198,7 @@ public class EmployeeService {
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             employee.setRecommendations(recommendations);
-            employee.set_events(events);
+            employee.setEvents(events);
             employee.setDeals(deals);
             items.add(employee);
             items.add(nearbydeals);
@@ -269,8 +269,6 @@ public class EmployeeService {
         }
     }
 
-
-
     public boolean replaceImage(Long id, InputStream is) throws ServiceException{
         Employee employee = null;
         try {
@@ -309,7 +307,7 @@ public class EmployeeService {
             for(Employee employee: employees){
                 employee.setDeals(null);
                 employee.setRecommendations(null);
-                employee.set_events(null);
+                employee.setEvents(null);
             }
             return employees;
         }catch(Exception e){
@@ -323,7 +321,7 @@ public class EmployeeService {
             for(Employee employee: employees){
                 employee.setDeals(null);
                 employee.setRecommendations(null);
-                employee.set_events(null);
+                employee.setEvents(null);
             }
             return employees;
         }catch(Exception e){

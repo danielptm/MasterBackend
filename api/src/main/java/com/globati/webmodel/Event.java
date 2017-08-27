@@ -1,5 +1,7 @@
 package com.globati.webmodel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 /**
@@ -10,133 +12,131 @@ import java.util.Date;
  */
 public class Event {
 
-    private String _date;
-    private String _title;
-    private String _description;
-    private Double _targetLat;
-    private Double _targetLong;
-    private String _street;
-    private String _city;
-    private String _country;
-    private Long _employeeId;
-    private String _imageName1;
-    private String _imageName2;
-    private String _imageName3;
+    @JsonProperty("_date")
+    private String date;
+    @JsonProperty("_title")
+    private String title;
+    @JsonProperty("_description")
+    private String description;
+    @JsonProperty("_targetLat")
+    private Double targetLat;
+    @JsonProperty("_targetLong")
+    private Double targetLong;
+    @JsonProperty("_street")
+    private String street;
+    @JsonProperty("_city")
+    private String city;
+    @JsonProperty("_country")
+    private String country;
+    @JsonProperty("_employeeId")
+    private Long employeeId;
+    @JsonProperty("_imageName1")
+    private String imageName1;
+    @JsonProperty("_imageName2")
+    private String imageName2;
+    @JsonProperty("_imageName3")
+    private String imageName3;
 
     public Event() {}
 
-    public String get_date() {
-        return _date;
+    public String getDate() {
+        return date;
     }
 
-    public void set_date(String _date) {
-        this._date = _date;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String get_title() {
-        return _title;
+    public String getTitle() {
+        return title;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String get_description() {
-        return _description;
+    public String getDescription() {
+        return description;
     }
 
-    public void set_description(String _description) {
-        this._description = _description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double get_targetLat() {
-        return _targetLat;
+    public Double getTargetLat() {
+        return targetLat;
     }
 
-    public void set_targetLat(Double _targetLat) {
-        this._targetLat = _targetLat;
+    public void setTargetLat(Double targetLat) {
+        this.targetLat = targetLat;
     }
 
-    public Double get_targetLong() {
-        return _targetLong;
+    public Double getTargetLong() {
+        return targetLong;
     }
 
-    public void set_targetLong(Double _targetLong) {
-        this._targetLong = _targetLong;
+    public void setTargetLong(Double targetLong) {
+        this.targetLong = targetLong;
     }
 
-    public String get_street() {
-        return _street;
+    public String getStreet() {
+        return street;
     }
 
-    public void set_street(String _street) {
-        this._street = _street;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String get_city() {
-        return _city;
+    public String getCity() {
+        return city;
     }
 
-    public void set_city(String _city) {
-        this._city = _city;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String get_country() {
-        return _country;
+    public String getCountry() {
+        return country;
     }
 
-    public void set_country(String _country) {
-        this._country = _country;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public Long get_employeeId() {
-        return _employeeId;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void set_employeeId(Long _employeeId) {
-        this._employeeId = _employeeId;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String get_imageName1() {
-        return _imageName1;
+    public String getImageName1() {
+        return imageName1;
     }
 
-    public void set_imageName1(String _imageName1) {
-        this._imageName1 = _imageName1;
+    public void setImageName1(String imageName1) {
+        this.imageName1 = imageName1;
     }
 
-    public String get_imageName2() {
-        return _imageName2;
+    public String getImageName2() {
+        return imageName2;
     }
 
-    public void set_imageName2(String _imageName2) {
-        this._imageName2 = _imageName2;
+    public void setImageName2(String imageName2) {
+        this.imageName2 = imageName2;
     }
 
-    public String get_imageName3() {
-        return _imageName3;
+    public String getImageName3() {
+        return imageName3;
     }
 
-    public void set_imageName3(String _imageName3) {
-        this._imageName3 = _imageName3;
+    public void setImageName3(String imageName3) {
+        this.imageName3 = imageName3;
     }
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "_date=" + _date +
-                ", _title='" + _title + '\'' +
-                ", _description='" + _description + '\'' +
-                ", _targetLat='" + _targetLat + '\'' +
-                ", _targetLong='" + _targetLong + '\'' +
-                ", _street='" + _street + '\'' +
-                ", _city='" + _city + '\'' +
-                ", _country='" + _country + '\'' +
-                ", _employeeId='" + _employeeId + '\'' +
-                ", _imageName1='" + _imageName1 + '\'' +
-                ", _imageName2='" + _imageName2 + '\'' +
-                ", _imageName3='" + _imageName3 + '\'' +
-                '}';
-    }
+
+
+
 
 }

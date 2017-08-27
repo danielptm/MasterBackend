@@ -11,6 +11,14 @@ import java.util.UUID;
 
 public final class ApiKey {
 
+    @Override
+    public String toString() {
+        return "ApiKey{" +
+                "apiKey='" + apiKey + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
+
     String apiKey;
     String time;
 

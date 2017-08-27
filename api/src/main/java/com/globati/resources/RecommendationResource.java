@@ -106,17 +106,17 @@ public class RecommendationResource {
     public Response create(com.globati.webmodel.Recommendation recommendation){
         try{
             System.out.println(recommendation);
-             Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.get_employeeId(),
-                    recommendation.get_title(),
-                    recommendation.get_description(),
-                    recommendation.get_targetLat(),
-                    recommendation.get_targetLong(),
-                    recommendation.get_street(),
-                    recommendation.get_city(),
-                    recommendation.get_country(),
-                    recommendation.get_image1(),
-                    recommendation.get_image2(),
-                    recommendation.get_image3()
+             Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.getEmployeeId(),
+                    recommendation.getTitle(),
+                    recommendation.getDescription(),
+                    recommendation.getTargetLat(),
+                    recommendation.getTargetLong(),
+                    recommendation.getStreet(),
+                    recommendation.getCity(),
+                    recommendation.getCountry(),
+                    recommendation.getImage1(),
+                    recommendation.getImage2(),
+                    recommendation.getImage3()
             );
 //            recommendationService.createRecommendation(id, title, description, targetLat, targetLong, street, city, country, is);
             return Response.ok(returnRecommendation).build();
@@ -135,11 +135,11 @@ public class RecommendationResource {
 //        System.out.println(recommendation);
         try{
             Recommendation returnRecommendation = recommendationService.getRecommendationById(id);
-            returnRecommendation.setDescription(recommendation.get_description());
-            returnRecommendation.setImage(recommendation.get_image1());
-            returnRecommendation.setImage2(recommendation.get_image2());
-            returnRecommendation.setImage3(recommendation.get_image3());
-            returnRecommendation.setTitle(recommendation.get_title());
+            returnRecommendation.setDescription(recommendation.getDescription());
+            returnRecommendation.setImage(recommendation.getImage1());
+            returnRecommendation.setImage2(recommendation.getImage2());
+            returnRecommendation.setImage3(recommendation.getImage3());
+            returnRecommendation.setTitle(recommendation.getTitle());
             recommendationService.updateRecommendation(returnRecommendation);
             return Response.ok(returnRecommendation).build();
         }catch(Exception e){

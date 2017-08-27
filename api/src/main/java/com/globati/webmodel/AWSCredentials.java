@@ -2,6 +2,9 @@ package com.globati.webmodel;
 
 /**
  * Created by daniel on 5/14/17.
+ *
+ *
+ *
  */
 public class AWSCredentials {
 

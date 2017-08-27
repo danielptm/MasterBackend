@@ -334,11 +334,11 @@ public class Employee extends BaseEntity {
         this.recommendations = recommendations;
     }
 
-    public List<Event> get_events() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void set_events(List<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 

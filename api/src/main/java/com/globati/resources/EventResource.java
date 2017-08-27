@@ -75,9 +75,9 @@ public class EventResource {
     public Response create(com.globati.webmodel.Event event) throws ServiceException, GlobatiUtilException, ParseException {
         try{
             log.debug(event);
-            Employee employee = employeeService.getEmployeeById(event.get_employeeId());
+            Employee employee = employeeService.getEmployeeById(event.getEmployeeId());
             log.debug(employee);
-            Event event1 = this.eventService.createEvent(employee, com.globati.utildb.DateTools.getDate(event.get_date()), event.get_targetLat(), event.get_targetLong(), event.get_street(), event.get_city(), event.get_country(), event.get_title(), event.get_description(), event.get_imageName1(), event.get_imageName2(), event.get_imageName3());
+            Event event1 = this.eventService.createEvent(employee, com.globati.utildb.DateTools.getDate(event.getDate()), event.getTargetLat(), event.getTargetLong(), event.getStreet(), event.getCity(), event.getCountry(), event.getTitle(), event.getDescription(), event.getImageName1(), event.getImageName2(), event.getImageName3());
             log.debug("created event: "+event1);
             return Response.ok(event1).build();
         }catch(Exception e){
