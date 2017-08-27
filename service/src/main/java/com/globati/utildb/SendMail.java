@@ -50,6 +50,7 @@ public class SendMail {
 
 
     public static boolean sendGuestMail(Employee employee, List<String> mails) throws Exception {
+        System.out.println("Sending guest email "+mails.get(0));
 
         String[] emails = new String[10];
 
@@ -64,9 +65,9 @@ public class SendMail {
 
         // Create the subject and body of the message.
 
-        Content subject = new Content().withData("My globati ~"+mail.getEmployee().getFirstName());
+        Content subject = new Content().withData("My globati ~"+employee.getFirstName());
 
-        Welcome welcome = new Welcome(mail.getEmployee().getFirstName(), mail.getEmployee().getCity(), mail.getEmployee().getEmail(), mail.getEmployee().getGlobatiUsername());
+        Welcome welcome = new Welcome(employee.getFirstName(), employee.getCity(), employee.getEmail(), employee.getGlobatiUsername());
         Content textBody = new Content().withData(
             welcome.getWelcomeMail()
         );

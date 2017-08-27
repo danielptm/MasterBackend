@@ -67,11 +67,11 @@ public class TestGlobatiUtil {
         li.add("danielptm@me.com");
         li.add("daniel@globati.com");
 
-        Email email = new Email(employee, li);
+        Email email = new Email(employee.getId(), li);
 
         Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
 
-        Assert.assertTrue(SendMail.sendGuestMail(email));
+        Assert.assertTrue(SendMail.sendGuestMail(employee, email.getEmails()));
         Assert.assertTrue(SendMail.sendReceipt(d));
         Assert.assertTrue(SendMail.sendRecruitmentMail(employee, "daniel@globati.com", "La neta"));
         Assert.assertTrue(SendMail.sendForgottenPasswordEmail("daniel@globati.com", "danie", "token" ));
@@ -114,8 +114,8 @@ public class TestGlobatiUtil {
         li.add("danielptm@me.com");
         li.add("tuttleptm@gmail.com");
 
-        Email email = new Email(employee, li);
-        Assert.assertTrue(SendMail.sendGuestMail(email));
+        Email email = new Email(employee.getId(), li);
+        Assert.assertTrue(SendMail.sendGuestMail(employee, email.getEmails()));
     }
 
 

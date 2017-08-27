@@ -264,6 +264,7 @@ public class EmployeeResource{
     public Response sendMail(Email list){
 //        System.out.println(list.getEmails().get(0));
         try{
+            System.out.println(list);
             Employee employee = employeeService.getEmployeeById(list.getId());
             SendMail.sendGuestMail(employee, list.getEmails());
             return Response.ok("mail sent").build();
