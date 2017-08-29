@@ -67,7 +67,7 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(image1, image3, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image3, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30, "234", "billing","billing","billing","billing");
 
         Assert.assertNotNull(d);
     }
@@ -88,7 +88,7 @@ public class DealServiceTest {
         String image3 = "image3 file";
 
         Employee employee = this.employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        Deal d = dealService.createDeal(image1, image2, image3, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30day", 30, "234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "A title goes here", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com", "DAYS_30", 30, "234", "billing","billing","billing","billing");
         Deal d2 = dealService.updateDeal(d);
         Assert.assertEquals(true, d2.isActive());
 
@@ -125,11 +125,11 @@ public class DealServiceTest {
         Employee employee2 = employeeService.createEmployee("Daniel",  uid2+"@me.com", uid2, "secret password", 59.336626, 18.055053, "image", "2308 n 44 st", "seattle", "usa");
 
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30,"234", "billing","billing","billing","billing");
 
-        Deal d2 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30,"234", "billing","billing","billing","billing");
+        Deal d2 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.232557,18.131736, employee.getId(), "q", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30,"234", "billing","billing","billing","billing");
 
-        Deal d3 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30,"234", "billing","billing","billing","billing");
+        Deal d3 = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 58.902919,17.948099, employee2.getId(), "q", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30,"234", "billing","billing","billing","billing");
 
         List<Deal> testarray = dealService.getNearbyActiveDeals("q", employee.getId());
 
@@ -171,7 +171,7 @@ public class DealServiceTest {
 
         log.debug(employee.toString());
 
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30 day", 30, "234", "billing","billing","billing","billing" );
+        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30, "234", "billing","billing","billing","billing" );
 
 
         List<Deal> deals = dealService.getActiveDealsByEmployee(employee.getId());

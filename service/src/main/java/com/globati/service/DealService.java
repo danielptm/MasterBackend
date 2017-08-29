@@ -4,6 +4,8 @@ package com.globati.service;
 import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Event;
+import com.globati.enums.DealPlan;
+import com.globati.enums.DealType;
 import com.globati.repository.DealRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.*;
@@ -52,7 +54,7 @@ public class DealService {
             Employee employee = employeeService.getEmployeeById(id);
             deal = new Deal(
                     image1, image2, image3, title, description, location, targetLat, targetLong, employee,
-                    country, street, city, dealtype, website, email, plan, cost, transactionId, billingStreet,
+                    country, street, city, DealType.valueOf(dealtype), website, email, DealPlan.valueOf(plan), cost, transactionId, billingStreet,
                     billingCity, billingRegion, billingCountry
             );
 //            GuestDeal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);

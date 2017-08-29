@@ -112,7 +112,7 @@ public class SendMail {
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Your receipt for advertising on globati");
-        AdReceipt adReceipt = new AdReceipt(deal.getTransactionId(), new Date(), deal.getLocation(), deal.getStreet(), deal.getCity(), deal.getCountry(), Double.toString(deal.getCost()), deal.getPlan());
+        AdReceipt adReceipt = new AdReceipt(deal.getTransactionId(), new Date(), deal.getLocation(), deal.getStreet(), deal.getCity(), deal.getCountry(), Double.toString(deal.getCost()), deal.getPlan().toString());
         Content textBody = new Content().withData(
                 adReceipt.getEmailText()
             );

@@ -1,6 +1,7 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminDeal.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/enums/Verified.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/enums/DealPlan.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/ForgotPassword.java
@@ -9,6 +10,7 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/AdReceipt.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Recruitment.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mapper/BeansMapper.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/enums/DealType.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperDeal.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminEmployee.java

@@ -97,7 +97,7 @@ public class TestEmployeeService {
 
 
 		String uid2 = UUID.randomUUID().toString();
-		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com", "30 day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23, 23.23, e1.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com", "DAYS_30", 30, "234", "billing","billing","billing","billing");
 
 		Date date = new Date();
 
@@ -221,7 +221,7 @@ public class TestEmployeeService {
 
 		InputStream fis1 = new FileInputStream(file2);
 
-		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "deal type", "globati.com", "daniel@me.com","30day", 30, "234", "billing","billing","billing","billing");
+		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30, "234", "billing","billing","billing","billing");
 
 //		List<Object> employeeAfterEditions =   employeeService.getItemsForEmployee(employee.get_globatiUsername());
 

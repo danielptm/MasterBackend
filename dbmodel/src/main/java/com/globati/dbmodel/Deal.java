@@ -1,6 +1,9 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.globati.enums.DealPlan;
+import com.globati.enums.DealType;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,11 +24,13 @@ public class Deal extends BusinessEntity {
     @Column(length = 100, name = "billingregion")
     String billingRegion;
     @Column(length = 100, name = "dealtype")
-    String dealtype;
+    @Enumerated(EnumType.STRING)
+    DealType dealtype;
     @Column(length = 400, name = "website")
     String website;
     @Column(length = 100, name = "plan")
-    String plan;
+    @Enumerated(EnumType.STRING)
+    DealPlan plan;
     @Column(length = 200, name = "email")
     String email;
     @Column(length = 100, name = "transactionid")
@@ -48,7 +53,7 @@ public class Deal extends BusinessEntity {
     public Deal(
             String image, String image2, String image3, String title, String description, String location,
             double targetLat, double targetLong, Employee employee, String country, String street, String city,
-            String dealtype, String website, String email, String plan, double cost, String transactionId,
+            DealType dealtype, String website, String email, DealPlan plan, double cost, String transactionId,
             String billingStreet, String billingCity, String billingRegion, String billingCountry) {
 
         this.image = image;
@@ -110,28 +115,12 @@ public class Deal extends BusinessEntity {
         this.billingRegion = billingRegion;
     }
 
-    public String getDealtype() {
-        return dealtype;
-    }
-
-    public void setDealtype(String dealtype) {
-        this.dealtype = dealtype;
-    }
-
     public String getWebsite() {
         return website;
     }
 
     public void setWebsite(String website) {
         this.website = website;
-    }
-
-    public String getPlan() {
-        return plan;
-    }
-
-    public void setPlan(String plan) {
-        this.plan = plan;
     }
 
     public String getEmail() {
@@ -180,6 +169,22 @@ public class Deal extends BusinessEntity {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public DealType getDealtype() {
+        return dealtype;
+    }
+
+    public void setDealtype(DealType dealtype) {
+        this.dealtype = dealtype;
+    }
+
+    public DealPlan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(DealPlan plan) {
+        this.plan = plan;
     }
 
 
