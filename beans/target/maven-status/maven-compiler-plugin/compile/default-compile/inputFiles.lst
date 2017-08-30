@@ -10,6 +10,7 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/AdReceipt.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Recruitment.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mapper/BeansMapper.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/third_party_api/AWSCredentials.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/enums/DealType.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperDeal.java
@@ -17,4 +18,5 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminEvent.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/third_party_api/BraintreeToken.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Welcome.java

@@ -43,6 +43,7 @@ import com.globati.utildb.HelpObjects.Email;
 public class EmployeeResource{
 
 
+    //This does work.
     private static final Logger log = LogManager.getLogger(EmployeeResource.class);
 
     @Context
@@ -232,6 +233,7 @@ public class EmployeeResource{
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public Response sendUsernameAndPassword(String email){
+        log.debug("api sendUserNameAndPassword()");
         try{
             employeeService.sendEmailToChangePassword(email);
             return Response.ok("changepassword email sent").build();
@@ -259,9 +261,8 @@ public class EmployeeResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
     public Response sendMail(Email list){
-//        System.out.println(list.getEmails().get(0));
         try{
-            System.out.println(list);
+            log.debug("sendMail()");
             Employee employee = employeeService.getEmployeeById(list.getId());
             SendMail.sendGuestMail(employee, list.getEmails());
             return Response.ok("mail sent").build();

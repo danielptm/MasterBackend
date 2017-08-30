@@ -177,9 +177,6 @@ public class EmployeeService {
         ArrayList<Object> items = new ArrayList<>();
         try{
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
-//            employee.set_welcomeMail(null);
-//            employee.set_recruitmentMail(null);
-//            employee.set_paypalEmail(null);
 
             if(employee==null){
                 throw new Exception("this username could not be found");
@@ -239,8 +236,6 @@ public class EmployeeService {
     public Employee createEmployee(String name, String email, String username, String password, double latvalue, double longvalue, String image, String street, String city, String country) throws ServiceException, UserDoesNotExistException {
         Employee employee=null;
         try {
-//            String rootImagePath = Paths.getS3Root()+Paths.getActiveImageLink();
-//            String imagepath = ImageHandler.createNewImage(is);
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             Employee savedEmployee = employeeRepository.save(employee);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
@@ -384,7 +379,7 @@ public class EmployeeService {
      */
     public boolean sendEmailToChangePassword(String email) throws ServiceException {
         try {
-            System.out.println("sendEmailToChangePassword() "+email);
+            log.debug("service sendEmailToChangePassword() "+email);
             ApiKey api = new ApiKey();
             Employee employee = employeeRepository.getEmployeeByEmail(email);
             EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());

@@ -103,41 +103,33 @@ public class BraintreeService {
             String billingCountry,
             Double cost
     ) throws Exception {
-        System.out.println("image1 " + image1);
-        System.out.println("image2 " + image2);
-        System.out.println("image3 " + image3);
-        System.out.println("title " + title);
-        System.out.println("description " + description);
-        System.out.println("businessName " + businessName);
-        System.out.println("website " + website);
-        System.out.println("category " + category);
-        System.out.println("plan " + plan);
-        System.out.println("lat " + targetLat);
-        System.out.println("long " + targetLong);
-        System.out.println("street " + street);
-        System.out.println("city " + city);
-        System.out.println("country " + country);
-        System.out.println("nonce " + nonce);
-        System.out.println("email " + email);
-        System.out.println("employeeId " + id);
-        System.out.println("billingStreet " + billingStreet);
-        System.out.println("billingCity " + billingCity);
-        System.out.println("billingRegion " + billingRegion);
-        System.out.println("billingCountry " + billingCountry);
-        System.out.println("cost " + cost);
+        log.debug("Making braintree transaction: ");
+        log.debug("image1 " + image1);
+        log.debug("image2 " + image2);
+        log.debug("image3 " + image3);
+        log.debug("title " + title);
+        log.debug("description " + description);
+        log.debug("businessName " + businessName);
+        log.debug("website " + website);
+        log.debug("category " + category);
+        log.debug("plan " + plan);
+        log.debug("lat " + targetLat);
+        log.debug("long " + targetLong);
+        log.debug("street " + street);
+        log.debug("city " + city);
+        log.debug("country " + country);
+        log.debug("nonce " + nonce);
+        log.debug("email " + email);
+        log.debug("employeeId " + id);
+        log.debug("billingStreet " + billingStreet);
+        log.debug("billingCity " + billingCity);
+        log.debug("billingRegion " + billingRegion);
+        log.debug("billingCountry " + billingCountry);
+        log.debug("cost " + cost);
 
 
         Employee employee = employeeService.getEmployeeById(id);
         Deal createdDeal = null;
-
-//            double cost=0;
-//
-//            switch(plan){
-//                case "THIRTY_DAYS": cost =  employee.get_addAmount(); break;
-//                case "SIXTY_DAYS": cost = employee.get_add2month();break;
-//                case "NINETY_DAYS": cost = employee.get_add3month(); break;
-//                default : cost=10;
-//            }
 
             TransactionRequest request = new TransactionRequest()
                     .amount(new BigDecimal(cost))
@@ -148,7 +140,7 @@ public class BraintreeService {
 
             Result<Transaction> result = gateway.transaction().sale(request);
 
-            System.out.println("Braintree transactino success: " + result.isSuccess());
+            log.debug("Braintree transactino success: " + result.isSuccess());
 
             if (result.isSuccess()) {
                 String transactionId = result.getTarget().getId();
@@ -168,8 +160,8 @@ public class BraintreeService {
                 AdReceipt receipt = new AdReceipt(transactionId, new Date(), businessName, street, city, country,cost.toString(), plan);
 
 
-                System.out.println("****** receipt");
-                    System.out.println(receipt.toString());
+                log.debug("transaction receipt:");
+                log.debug(receipt.toString());
                 return receipt.getEmailText();
 
             } else {
