@@ -10,17 +10,15 @@ import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.utildb.HelpObjects.ChangePassword;
 import com.globati.utildb.SendMail;
-import com.globati.webmodel.ChangePasswordWithToken;
-import com.globati.webmodel.CreateEmployee;
-import com.globati.webmodel.UpdateEmployee;
+import com.globati.deserialization_beans.ChangePasswordWithToken;
+import com.globati.deserialization_beans.CreateEmployee;
+import com.globati.deserialization_beans.UpdateEmployee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.server.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -234,7 +232,6 @@ public class EmployeeResource{
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public Response sendUsernameAndPassword(String email){
-        System.out.println(email.toString());
         try{
             employeeService.sendEmailToChangePassword(email);
             return Response.ok("changepassword email sent").build();

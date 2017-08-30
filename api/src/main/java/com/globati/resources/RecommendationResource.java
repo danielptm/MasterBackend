@@ -8,7 +8,6 @@ import com.globati.service.RecommendationService;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -103,7 +101,7 @@ public class RecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.webmodel.Recommendation recommendation){
+    public Response create(com.globati.deserialization_beans.Recommendation recommendation){
         try{
             System.out.println(recommendation);
              Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.getEmployeeId(),
@@ -130,7 +128,7 @@ public class RecommendationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") Long id,  com.globati.webmodel.Recommendation recommendation){
+    public Response update(@PathParam("id") Long id,  com.globati.deserialization_beans.Recommendation recommendation){
 //        System.out.println("updateRecommendation()");
 //        System.out.println(recommendation);
         try{

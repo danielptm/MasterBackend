@@ -1,4 +1,4 @@
-package com.globati.webmodel;
+package com.globati.third_party_api;
 
 /**
  * Created by daniel on 1/26/17.

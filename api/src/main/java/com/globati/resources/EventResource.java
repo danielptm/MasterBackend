@@ -10,13 +10,11 @@ import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.GlobatiUtilException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.util.List;
 
@@ -72,7 +70,7 @@ public class EventResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.webmodel.Event event) throws ServiceException, GlobatiUtilException, ParseException {
+    public Response create(com.globati.deserialization_beans.Event event) throws ServiceException, GlobatiUtilException, ParseException {
         try{
             log.debug(event);
             Employee employee = employeeService.getEmployeeById(event.getEmployeeId());

@@ -1,8 +1,6 @@
-package com.globati.webmodel;
+package com.globati.deserialization_beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.ws.rs.QueryParam;
 
 /**
  * Created by daniel on 4/15/17.

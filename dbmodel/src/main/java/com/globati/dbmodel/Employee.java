@@ -27,7 +27,7 @@ public class Employee extends BaseEntity {
     private String image3;
     @Column(unique = true, length=300, name="email", nullable = true)
     private String email;
-    @Column(length=100, name="paypalemail")
+    @Column(unique=true, length=100, name="paypalemail")
     private String paypalEmail;
     @Column(length=3000, name="about")
     private String about;

@@ -1,4 +1,4 @@
-package com.globati.webmodel;
+package com.globati.deserialization_beans;
 
 /**
  * Created by daniel on 12/29/16.

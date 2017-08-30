@@ -1,6 +1,4 @@
-package com.globati.webmodel;
-
-import com.globati.utildb.HelpObjects.ChangePassword;
+package com.globati.deserialization_beans;
 
 /**
  * Created by daniel on 1/25/17.

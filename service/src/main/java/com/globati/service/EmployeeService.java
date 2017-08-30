@@ -372,13 +372,19 @@ public class EmployeeService {
 
     /**
      * This does not use the email supplied in the form, but uses the email
-     * to find the employee which suppli
+     * to find the employee by email. This is problematic because email is not unique in the database,
+     * so if a sombody creates multiple accounts with the same email and tries to reset their password
+     * this function will fail, and the user will not receive an email.
+     *
+     * This seems like kind of an unlikely problem, but if it appears
+     *
      * @param email
      * @return
      * @throws ServiceException
      */
     public boolean sendEmailToChangePassword(String email) throws ServiceException {
         try {
+            System.out.println("sendEmailToChangePassword() "+email);
             ApiKey api = new ApiKey();
             Employee employee = employeeRepository.getEmployeeByEmail(email);
             EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
@@ -392,10 +398,10 @@ public class EmployeeService {
     }
 
     /**
-     * This function was moved from the Web api level to the service class.
+     * This function was moved from the Web third_party_api level to the service class.
      *
-     * There are no tests for this function, and was copied exactly from the Web api level, except for it returns now List<ApiKey>
-     * In the web api level it returned Response.ok(item).build();
+     * There are no tests for this function, and was copied exactly from the Web third_party_api level, except for it returns now List<ApiKey>
+     * In the web third_party_api level it returned Response.ok(item).build();
      *
      * This function needs a test!
      *

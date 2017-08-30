@@ -1,18 +1,13 @@
 package com.globati.resources;
 
-import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.EmployeeInfo;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.ServiceException;
-import com.globati.utildb.HelpObjects.ApiKey;
-import com.globati.utildb.PBKDF2;
-import com.globati.webmodel.AWSCredentials;
-import com.globati.webmodel.FacebookLogin;
-import com.globati.webmodel.PasswordAttempt;
-import javafx.concurrent.Service;
+import com.globati.third_party_api.AWSCredentials;
+import com.globati.deserialization_beans.FacebookLogin;
+import com.globati.deserialization_beans.PasswordAttempt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

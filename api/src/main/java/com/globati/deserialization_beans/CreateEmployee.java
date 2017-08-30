@@ -1,4 +1,4 @@
-package com.globati.webmodel;
+package com.globati.deserialization_beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

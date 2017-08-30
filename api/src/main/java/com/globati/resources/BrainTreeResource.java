@@ -2,24 +2,16 @@ package com.globati.resources;
 
 import com.braintreegateway.*;
 import com.globati.config.Paths;
-import com.globati.dbmodel.Deal;
-import com.globati.dbmodel.Employee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.BraintreeService;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
-import com.globati.utildb.SendMail;
-import com.globati.webmodel.BraintreeToken;
-import com.globati.webmodel.RequestDeal;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import com.globati.third_party_api.BraintreeToken;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.io.InputStream;
-import java.math.BigDecimal;
 
 /**
  * Created by daniel on 1/5/17.

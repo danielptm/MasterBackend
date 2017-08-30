@@ -1,8 +1,6 @@
-package com.globati.webmodel;
+package com.globati.deserialization_beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Date;
 
 /**
  * Created by daniel on 12/16/16.
