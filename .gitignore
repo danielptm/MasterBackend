@@ -2,14 +2,6 @@
 service/target
 dbmodel/target
 api/target
-service/.idea
-dbmodel/.idea
-api/.idea
-master/.idea
-master/master.iml
-dbmodel/dbmodel.iml
-api/api.iml
-service/service.iml
 service/derby.log
 
 
