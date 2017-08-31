@@ -4,6 +4,7 @@ import com.globati.dbmodel.Employee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class GuestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response guestLogin(@PathParam("username") String id){
-        List<Object> employeeAndNearbyDeals;
+        EmployeeAndItems employeeAndNearbyDeals;
         try{
             employeeAndNearbyDeals = employeeService.getItemsForEmployee(id);
             return Response.ok(employeeAndNearbyDeals).build();
@@ -68,7 +69,7 @@ public class GuestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response visitProfile(@PathParam("username") String id){
-        List<Object> employeeAndNearbyDeals;
+        EmployeeAndItems employeeAndNearbyDeals;
         try{
             employeeAndNearbyDeals = employeeService.getItemsForEmployeeAndIncrement(id);
             return Response.ok(employeeAndNearbyDeals).build();

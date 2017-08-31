@@ -5,6 +5,7 @@ import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.ServiceException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.third_party_api.AWSCredentials;
 import com.globati.deserialization_beans.FacebookLogin;
 import com.globati.deserialization_beans.PasswordAttempt;
@@ -43,7 +44,7 @@ public class AuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authentication(PasswordAttempt pa){
-        System.out.println("hi");
+        log.debug("authentication()");
         try {
              return Response.ok(employeeService.authenticateReceptionist(pa.getUsername(), pa.getPassword())).build();
         }catch(Exception e){
@@ -80,7 +81,7 @@ public class AuthenticationResource {
             String idFromServer = facebook.userOperations().getUserProfile().getId();
 
             if(idFromClient.equals(idFromServer)){
-                List<Object> profileItems = this.employeeService.createAccountOrLoginWithFacebook(facebookLogin.getUserid(), facebookLogin.getName(), facebookLogin.getEmail(), facebookLogin.getImage());
+                EmployeeAndItems profileItems = this.employeeService.createAccountOrLoginWithFacebook(facebookLogin.getUserid(), facebookLogin.getName(), facebookLogin.getEmail(), facebookLogin.getImage());
                 return Response.ok(profileItems).build();
             }
             else{

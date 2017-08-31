@@ -1,8 +1,5 @@
-package com.globati.utildb.HelpObjects;
+package com.globati.HelpObjects;
 
-import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 /**

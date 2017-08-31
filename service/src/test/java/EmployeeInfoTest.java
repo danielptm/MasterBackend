@@ -6,9 +6,8 @@ import com.globati.service.EmployeeService;
 import com.globati.service.PayService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
-import com.globati.utildb.HelpObjects.ApiKey;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.ImageHandler;
-import com.globati.utildb.SendMail;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +20,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -181,12 +179,11 @@ public class EmployeeInfoTest {
 
         employeeService.updateEmployee(employee);
 
-        List<Object> items = employeeService.createAccountOrLoginWithFacebook(facebookid, name, email, image);
+        EmployeeAndItems items = employeeService.createAccountOrLoginWithFacebook(facebookid, name, email, image);
 
-        Assert.assertTrue(items.size()>0);
+        Assert.assertNotNull(items.getNearByDeals());
 
-
-        Assert.assertNotNull( items.get(2) );
+        Assert.assertNotNull( items.getEmployee());
 
 
 

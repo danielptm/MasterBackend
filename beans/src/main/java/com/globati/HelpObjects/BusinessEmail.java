@@ -1,6 +1,4 @@
-package com.globati.utildb.HelpObjects;
-
-import com.globati.dbmodel.Employee;
+package com.globati.HelpObjects;
 
 /**
  * Created by daniel on 1/21/17.

@@ -2,6 +2,7 @@ import com.globati.dbmodel.*;
 import com.globati.service.*;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.GlobatiUtilException;
 import com.globati.utildb.ImageHandler;
 import org.apache.logging.log4j.LogManager;
@@ -109,10 +110,12 @@ public class TestEmployeeService {
 
 
 		//
-		List<Object> items = employeeService.getItemsForEmployee(e1.getGlobatiUsername());
+		EmployeeAndItems items = employeeService.getItemsForEmployee(e1.getGlobatiUsername());
 
 
-		Assert.assertTrue(items.size()>0);
+//		Assert.assertNotNull(items.getApiKey());
+		Assert.assertNotNull(items.getEmployee());
+		Assert.assertNotNull(items.getNearByDeals());
 
 
 	}

@@ -5,7 +5,7 @@ import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
-import com.globati.utildb.HelpObjects.BusinessEmail;
+import com.globati.HelpObjects.BusinessEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

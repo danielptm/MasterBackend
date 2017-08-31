@@ -1,4 +1,4 @@
-package com.globati.utildb.HelpObjects;
+package com.globati.HelpObjects;
 
 /**
  * Created by daniel on 1/19/17.

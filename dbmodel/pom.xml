@@ -28,11 +28,7 @@
       <version>${hibernate.version}</version>
     </dependency>
 
-    <dependency>
-      <version>1.0-SNAPSHOT</version>
-      <groupId>com.globati</groupId>
-      <artifactId>beans</artifactId>
-    </dependency>
+
 
   </dependencies>
   <build>
