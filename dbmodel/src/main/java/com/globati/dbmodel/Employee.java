@@ -25,9 +25,9 @@ public class Employee extends BaseEntity {
     private String image2;
     @Column(name="image3")
     private String image3;
-    @Column(length=300, name="email", nullable = true)
+    @Column(unique=true, length=300, name="email", nullable = true)
     private String email;
-    @Column(length=100, name="paypalemail")
+    @Column(unique=true, length=100, name="paypalemail")
     private String paypalEmail;
     @Column(length=3000, name="about")
     private String about;
@@ -101,6 +101,7 @@ public class Employee extends BaseEntity {
         this.display="";
         this.facebookProfile = false;
         this.visitCounter=0;
+        this.paypalEmail = email;
     }
 
     //Used for a facebook login/create account
@@ -114,6 +115,7 @@ public class Employee extends BaseEntity {
         this.add3month = 10;
         this.facebookProfile = true;
         this.visitCounter=0;
+        this.paypalEmail = _email;
     }
 
 
