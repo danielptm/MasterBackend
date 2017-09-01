@@ -6,18 +6,17 @@ import com.globati.dbmodel.*;
 import com.globati.repository.EmployeeRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.FacebookUserId;
-import com.globati.utildb.HelpObjects.ApiKey;
+import com.globati.HelpObjects.ApiKey;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.PBKDF2;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.InputStream;
-import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -119,7 +118,7 @@ public class EmployeeService {
      * @return
      * @throws ServiceException
      */
-    public List<Object> createAccountOrLoginWithFacebook(String facebookId, String name, String email, String image) throws ServiceException {
+    public EmployeeAndItems createAccountOrLoginWithFacebook(String facebookId, String name, String email, String image) throws ServiceException {
         try{
             EmployeeInfo employeeInfo=null;
             Employee employee = getEmployeeByFacebookId(facebookId);
@@ -130,9 +129,9 @@ public class EmployeeService {
                 employeeInfo.setAuthToken(apiKey.getApiKey());
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
-                List<Object> items = getItemsForEmployee(createdEmployee.getGlobatiUsername());
-                items.add(apiKey);
-                return items;
+                EmployeeAndItems employeeAndItems = getItemsForEmployee(createdEmployee.getGlobatiUsername());
+                employeeAndItems.setApiKey(apiKey);
+                return employeeAndItems;
             }
             else{
                 employeeInfo = employeeInfoService.getEmployeeInfoByFacebookId(facebookId);
@@ -140,8 +139,8 @@ public class EmployeeService {
                 employeeInfo.setAuthToken(apiKey.getApiKey());
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
-                List<Object> items = getItemsForEmployee(employee.getGlobatiUsername());
-                items.add(apiKey);
+                EmployeeAndItems items = getItemsForEmployee(employee.getGlobatiUsername());
+                items.setApiKey(apiKey);
                 return items;
             }
         }catch(Exception e){
@@ -173,7 +172,7 @@ public class EmployeeService {
      * @return
      * @throws ServiceException
      */
-    public List<Object> getItemsForEmployee(String username) throws ServiceException {
+    public EmployeeAndItems getItemsForEmployee(String username) throws ServiceException {
         ArrayList<Object> items = new ArrayList<>();
         try{
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
@@ -197,10 +196,13 @@ public class EmployeeService {
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(deals);
-            items.add(employee);
-            items.add(nearbydeals);
 
-            return items;
+            EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee, deals);
+
+//            items.add(employee);
+//            items.add(nearbydeals);
+
+            return employeeAndItems;
             } catch(Exception e){
                 throw new ServiceException("Could not retrieve employee by user name and pasword", e);
         }
@@ -439,7 +441,7 @@ public class EmployeeService {
      * @throws Exception
      */
 
-    public List<Object> getItemsForEmployeeAndIncrement(String id) throws Exception {
+    public EmployeeAndItems getItemsForEmployeeAndIncrement(String id) throws Exception {
         try {
             Employee employee = getEmployeeByUserName(id);
             incrementCounter(employee);

@@ -3,21 +3,17 @@ package com.globati.service;
 
 import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.Event;
 import com.globati.enums.DealPlan;
 import com.globati.enums.DealType;
 import com.globati.repository.DealRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.*;
-import com.globati.utildb.HelpObjects.BusinessEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

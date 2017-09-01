@@ -8,7 +8,8 @@ import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
-import com.globati.utildb.HelpObjects.ChangePassword;
+import com.globati.HelpObjects.ChangePassword;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.SendMail;
 import com.globati.deserialization_beans.ChangePasswordWithToken;
 import com.globati.deserialization_beans.CreateEmployee;
@@ -26,7 +27,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
 import java.util.List;
-import com.globati.utildb.HelpObjects.Email;
+import com.globati.HelpObjects.Email;
 
 
 
@@ -100,7 +101,7 @@ public class EmployeeResource{
     @GlobatiAuthentication
     public Response login(String username){
         try{
-            List<Object> employeeitems = employeeService.getItemsForEmployee(username);
+            EmployeeAndItems employeeitems = employeeService.getItemsForEmployee(username);
             return Response.ok(employeeitems).build();
         }catch(Exception e){
             throw new WebException("Could not retrieve user by username and password", Response.Status.BAD_REQUEST);

@@ -1,6 +1,4 @@
-package com.globati.utildb.HelpObjects;
-
-import com.globati.dbmodel.Employee;
+package com.globati.HelpObjects;
 
 import java.util.List;
 

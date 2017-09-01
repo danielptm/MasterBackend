@@ -1,6 +1,4 @@
-package com.globati.utildb.HelpObjects;
-
-import javafx.scene.control.TextFormatter;
+package com.globati.HelpObjects;
 
 /**
  * Created by daniel on 1/23/17.

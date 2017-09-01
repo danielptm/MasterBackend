@@ -15,20 +15,14 @@ import com.globati.mail.beans.AdReceipt;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Recruitment;
 import com.globati.mail.beans.Welcome;
-import com.globati.utildb.HelpObjects.Email;
 import com.globati.dbmodel.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by daniel on 12/22/16.
