@@ -9,6 +9,9 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Created by daniel on 1/19/17.
+ *
+ * I do not think this is working properly.
+ *
  */
 @Provider
 public class UserDoesNotExistMapper {

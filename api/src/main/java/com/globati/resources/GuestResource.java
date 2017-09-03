@@ -4,6 +4,8 @@ import com.globati.dbmodel.Employee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
+import com.globati.service.exceptions.ServiceException;
+import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,13 +70,13 @@ public class GuestResource {
     @Path("visitprofile/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response visitProfile(@PathParam("username") String id){
+    public Response visitProfile(@PathParam("username") String id) throws ServiceException, UserDoesNotExistException {
         EmployeeAndItems employeeAndNearbyDeals;
         try{
             employeeAndNearbyDeals = employeeService.getItemsForEmployeeAndIncrement(id);
             return Response.ok(employeeAndNearbyDeals).build();
-        }catch(Exception e){
-            throw new WebException("Could not find splash page for employee",Response.Status.CONFLICT);
+        }catch(ServiceException e){
+            throw new WebException("Could not find splash page for employee", Response.Status.CONFLICT);
         }
     }
 

@@ -19,7 +19,9 @@ com/globati/HelpObjects/BusinessEmail.class
 com/globati/service_beans/guest/GuestDeal.class
 com/globati/HelpObjects/Password.class
 com/globati/HelpObjects/ChangePassword.class
+com/globati/third_party_api/BraintreeToken.class
 com/globati/mail/beans/AdReceipt.class
+com/globati/third_party_api/AWSCredentials.class
 com/globati/mail/beans/Welcome.class
 com/globati/service_beans/admin/AdminEmployee.class
 com/globati/mail/beans/Recruitment.class

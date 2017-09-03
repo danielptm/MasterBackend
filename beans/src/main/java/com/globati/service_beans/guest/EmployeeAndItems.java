@@ -9,6 +9,16 @@ import java.util.List;
 public class EmployeeAndItems {
 
     Employee employee;
+
+    @Override
+    public String toString() {
+        return "EmployeeAndItems{" +
+                "employee=" + employee +
+                ", nearByDeals=" + nearByDeals +
+                ", apiKey=" + apiKey +
+                '}';
+    }
+
     List<Deal> nearByDeals;
     ApiKey apiKey;
 

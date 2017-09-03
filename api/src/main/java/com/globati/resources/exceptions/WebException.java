@@ -16,5 +16,9 @@ public class WebException extends WebApplicationException {
         super(message, status);
     }
 
+    public WebException(String message, Response.Status status, Exception e){
+        super(message, e);
+    }
+
 
 }

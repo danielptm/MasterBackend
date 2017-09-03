@@ -45,6 +45,7 @@ public class DealService {
             String email, String plan, double cost, String transactionId,
             String billingStreet, String billingCity, String billingRegion,
             String billingCountry) throws ServiceException, GlobatiUtilException {
+            log.info("createDeal(): employeeId: "+id+" transactionId: "+transactionId+" dealTitle: "+title);
         Deal deal = null;
         try {
             Employee employee = employeeService.getEmployeeById(id);
@@ -56,25 +57,27 @@ public class DealService {
 //            GuestDeal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);
             return dealRepository.save(deal);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not create a deal: " + deal.toString(), e);
         }
     }
 
     public Deal updateDeal(Deal d) throws ServiceException {
+        log.info("updateDeal(): id: "+d.getId());
         try {
             return dealRepository.save(d);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not update deal at this time: " + d.toString(), e);
         }
     }
 
     public List<Deal> getAllDealsForEmployeeId(Employee employee) throws ServiceException {
+        log.info("getAllDealsForEmployeeId(): employeeId: "+employee.getId());
         try {
             return dealRepository.findDealsBy_employee_id(employee.getId());
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not get deals for employee: " + employee.getId(), e);
         }
     }
@@ -89,6 +92,7 @@ public class DealService {
      * @throws ServiceException
      */
     public List<Deal> getNearbyActiveDeals(String country, Long id) throws ServiceException {
+        log.info("getNearbyActiveDeals(): id: "+id);
         List<Deal> nearbyDeals = new ArrayList<>();
         try {
             Employee employee = employeeService.getEmployeeById(id);
@@ -101,7 +105,7 @@ public class DealService {
             }
             return nearbyDeals;
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not get near by deals: " + country, e);
         }
     }
@@ -115,34 +119,38 @@ public class DealService {
      */
 
     public List<Deal> getActiveDealsByCountry(String country) throws ServiceException {
+        log.info("getActiveDealsByCountry(): country: "+country);
         try {
             return dealRepository.getActiveDealsByCountry(country, true);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not get active deals by country: " + country, e);
         }
     }
 
     public List<Deal> getActiveDealsByEmployee(Long l) throws ServiceException {
+        log.info("getActiveDealsByEmployee(): employeeId: "+l);
         try {
             return dealRepository.getActiveDealsByEmployee(l, true);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not get active deals by employee with id: " + l, e);
         }
     }
 
 
     public List<Deal> getDealsCreatedByMonth(Integer month, Integer year, Long employeeId) throws ServiceException {
+        log.info("getDealsCreatedByMonth(): month: "+month+" year: "+year);
         try {
             return dealRepository.getDealsCreatedForMonth(month, year, employeeId);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.warn(e.toString());
             throw new ServiceException("Could not get deals created for month " + month, e);
         }
     }
 
     public void sendRecruitmentMail(Employee employee, String businessEmail, String businessName) throws ServiceException {
+        log.info("sendRecruitmentMail(): employeeId: "+employee.getId()+" businessEmail: "+businessEmail);
         try {
             SendMail.sendRecruitmentMail(employee, businessEmail, businessName);
         } catch (Exception e) {
@@ -184,16 +192,17 @@ public class DealService {
     private boolean dealIsExpired(Deal deal) throws Exception {
         Calendar c = Calendar.getInstance();
         c.setTime(deal.getDatemade());
-        if(deal.getPlan().equals("THIRTY_DAYS") ){
+        if(deal.getPlan().equals(DealPlan.DAYS_30) ){
             c.add(Calendar.DAY_OF_MONTH, 30 );
         }
-        else if(deal.getPlan().equals("SIXTY_DAYS")){
+        else if(deal.getPlan().equals(DealPlan.DAYS_60)){
             c.add(Calendar.DAY_OF_MONTH, 60);
         }
-        else if(deal.getPlan().equals("90_DAYS")){
+        else if(deal.getPlan().equals(DealPlan.DAY_90)){
             c.add(Calendar.DAY_OF_MONTH, 90);
         } else {
-            throw new Exception("Invalid deal plan: Value should be '30 day', '60 day', or '90 day': value was: " + deal.getPlan());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: dealIsExpired(): dealId: "+deal.getId());
+            throw new Exception("Invalid deal plan: Value should be 'DAYS_30', 'DAYS_60', or 'DAY_90': value was: " + deal.getPlan());
         }
         return c.getTime().before(new Date());
     }

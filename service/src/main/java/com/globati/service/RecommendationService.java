@@ -35,6 +35,7 @@ public class RecommendationService{
 
 
     public Recommendation createRecommendation(Long employeeId, String title, String description, double targetLat, double targetLong, String street, String city, String country, String image1, String image2, String image3) throws ServiceException {
+        log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
         Employee employee=null;
         Recommendation rec=null;
         String imagepath=null;
@@ -45,7 +46,7 @@ public class RecommendationService{
             Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
             return recommendationRepository.save(rec2);
         }catch(Exception e){
-            log.error(e.toString());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
             throw new ServiceException("Could not create recommendation at this time: "+rec.toString(), e);
         }
     }
@@ -62,7 +63,7 @@ public class RecommendationService{
             rec.setActive(false);
             return updateRecommendation(rec);
         }catch(Exception e){
-            log.error("Could not inactivate recommendation with id: "+id);
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: inactivateRecommendation(): id: "+id);
             throw new ServiceException("Could not inactivate recommendation", e);
         }
     }
@@ -71,8 +72,8 @@ public class RecommendationService{
         try {
             return recommendationRepository.save(recommendation);
         }catch(Exception e){
-            log.error(e.toString());
-            throw new ServiceException("Could not update recommendation: "+recommendation.toString(), e);
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: "+recommendation.getId());
+            throw new ServiceException("Could not update recommendation with id: "+recommendation.getId(), e);
         }
     }
 
@@ -80,8 +81,8 @@ public class RecommendationService{
         try{
             recommendationRepository.delete(recommendation);
         }catch(Exception e){
-            log.error(e.toString());
-            throw new ServiceException("Could not delete reocommendation "+recommendation.toString(), e);
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: deleteRecommendation(): recommendationId: "+recommendation.getId());
+            throw new ServiceException("Could not delete reocommendation with id: "+recommendation.getId(), e);
         }
     }
 
@@ -90,8 +91,8 @@ public class RecommendationService{
         try{
             return recommendationRepository.getAllRecommendationsByEmployeeIdAndActive(id, true);
         }catch(Exception e){
-            log.error(e.toString());
-            throw new ServiceException( "Could not get recommendations by id: "+id, e );
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationByEmployeeId(): employeeId: "+id);
+            throw new ServiceException( "Could not get recommendations by employeeId: "+id, e );
         }
     }
 }

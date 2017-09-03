@@ -42,6 +42,7 @@ public class EventService {
     }
 
     public Event createEvent(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description, String imageName1, String imageName2, String imageName3 ) throws ServiceException, GlobatiUtilException {
+        log.info("createEvent(): employeeId: "+employee.getId());
         Event event=null;
         try {
             event = new Event(employee, date, targetLat, targetLong, street, city, country, title, description, imageName1, imageName2, imageName3 );
@@ -49,22 +50,24 @@ public class EventService {
             //I believe this is not necessary anymore because the distance is being on client side now
             return eventRepository.save(event);
         }catch(Exception e){
-            log.error(e.toString());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEvent(): employeeId: "+employee.getId());
             throw new ServiceException("Could not create event "+event.toString(), e);
         }
 
     }
 
     public Event getEventById(Long id) throws ServiceException {
+        log.info("getEventById(): id: "+id);
         try {
             return eventRepository.findOne(id);
         }catch(Exception e){
-            log.error(e.toString());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEventById(): "+id);
             throw new ServiceException("Could not get event by id: "+id, e);
         }
     }
 
     public List<Event> getEventsByEmployeeId(Long id) throws ServiceException {
+        log.info("getEventsByEmployeeId(): id: "+id);
         try{
             List<Event> events = eventRepository.getAllEventsBy_employee_id(id, true);
             for(Event event: events){
@@ -72,7 +75,7 @@ public class EventService {
             }
             return events;
         }catch(Exception e){
-            log.error(e.toString());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEventsByEmployeeId(): employeeId: "+id);
             throw new ServiceException("Could not get events by Employee id: "+id,e);
         }
     }
@@ -81,7 +84,7 @@ public class EventService {
         try{
             return eventRepository.save(event);
         }catch(Exception e){
-            log.error(e.toString());
+            log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEvent(): eventId: "+event.getId());
             throw new ServiceException("Could not update event "+event.toString(), e);
         }
     }
@@ -90,7 +93,7 @@ public class EventService {
         try{
             eventRepository.delete(event);
         }catch(Exception e){
-            log.error(e.toString());
+            log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: deleteEvent(): eventId:  "+event.getId() );
             throw new ServiceException("Could not delete event "+event.toString(), e);
         }
     }
@@ -108,7 +111,7 @@ public class EventService {
             }
             return nearbyevents;
         }catch(Exception e){
-            log.error(e.toString());
+            log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getNearByEvents(): employeeId: "+id);
             throw new ServiceException("Could not get near by events for country: "+country, e);
         }
     }

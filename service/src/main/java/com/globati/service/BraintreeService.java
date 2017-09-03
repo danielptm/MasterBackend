@@ -103,29 +103,34 @@ public class BraintreeService {
             String billingCountry,
             Double cost
     ) throws Exception {
-        log.debug("Making braintree transaction: ");
-        log.debug("image1 " + image1);
-        log.debug("image2 " + image2);
-        log.debug("image3 " + image3);
-        log.debug("title " + title);
-        log.debug("description " + description);
-        log.debug("businessName " + businessName);
-        log.debug("website " + website);
-        log.debug("category " + category);
-        log.debug("plan " + plan);
-        log.debug("lat " + targetLat);
-        log.debug("long " + targetLong);
-        log.debug("street " + street);
-        log.debug("city " + city);
-        log.debug("country " + country);
-        log.debug("nonce " + nonce);
-        log.debug("email " + email);
-        log.debug("employeeId " + id);
-        log.debug("billingStreet " + billingStreet);
-        log.debug("billingCity " + billingCity);
-        log.debug("billingRegion " + billingRegion);
-        log.debug("billingCountry " + billingCountry);
-        log.debug("cost " + cost);
+        log.info("***");
+        log.info("***");
+        log.info("Making braintree transaction: ");
+        log.info("***");
+        log.info("image1 " + image1);
+        log.info("image2 " + image2);
+        log.info("image3 " + image3);
+        log.info("title " + title);
+        log.info("description " + description);
+        log.info("businessName " + businessName);
+        log.info("website " + website);
+        log.info("category " + category);
+        log.info("plan " + plan);
+        log.info("lat " + targetLat);
+        log.info("long " + targetLong);
+        log.info("street " + street);
+        log.info("city " + city);
+        log.info("country " + country);
+        log.info("nonce " + nonce);
+        log.info("email " + email);
+        log.info("employeeId " + id);
+        log.info("billingStreet " + billingStreet);
+        log.info("billingCity " + billingCity);
+        log.info("billingRegion " + billingRegion);
+        log.info("billingCountry " + billingCountry);
+        log.info("cost " + cost);
+        log.info("***");
+        log.info("***");
 
 
         Employee employee = employeeService.getEmployeeById(id);
@@ -140,7 +145,7 @@ public class BraintreeService {
 
             Result<Transaction> result = gateway.transaction().sale(request);
 
-            log.debug("Braintree transactino success: " + result.isSuccess());
+            log.info("Braintree transaction success: " + result.isSuccess());
 
             if (result.isSuccess()) {
                 String transactionId = result.getTarget().getId();
@@ -159,9 +164,6 @@ public class BraintreeService {
 
                 AdReceipt receipt = new AdReceipt(transactionId, new Date(), businessName, street, city, country,cost.toString(), plan);
 
-
-                log.debug("transaction receipt:");
-                log.debug(receipt.toString());
                 return receipt.getEmailText();
 
             } else {
