@@ -4,8 +4,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import com.braintreegateway.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -29,7 +33,11 @@ import java.util.Properties;
 @EnableJpaRepositories("com.globati.repository")
 @EnableTransactionManagement
 @EnableScheduling
+//@PropertySource("classpath:/environment/${GLOBATI_SERVER_ENV}.properties")
 public class InfrastructureConfig  {
+
+//	@Autowired
+//	org.springframework.core.env.Environment environment;
 
 
 	private static  String activeDbLogin;
@@ -38,12 +46,15 @@ public class InfrastructureConfig  {
 	private static  String activeDriver;
 	private static String databasePath;
 
+//	@Value("${production.vendor}")
+//	String testproperty;
+
 
 	public InfrastructureConfig() throws IOException {
 		Map<String, String> env = System.getenv();
 		loadEnvironmentProperties(env.get("GLOBATI_SERVER_ENV"));
 
-		System.out.println("************************ PRODUCTION ");
+//		System.out.println("************************ DEVELOPMENT value: "+environment.getProperty("vendor"));
 
 	}
 
@@ -65,16 +76,16 @@ public class InfrastructureConfig  {
 		Properties props = new Properties();
 		String devevelopmentResource = "environment/development.properties";
 		String productionResource = "environment/production.properties";
-		if (env.equals("dev")) {
+		if (env.equals("development")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(devevelopmentResource)) {
 				props.load(resourceStream);
-				Paths.setBraintreeEnvironment(Environment.SANDBOX);
+//				Paths.setBraintreeEnvironment(Environment.SANDBOX);
 				activeVendor = Database.MYSQL;
 			}
 		} else if (env.equals("prod")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
 				props.load(resourceStream);
-				Paths.setBraintreeEnvironment(Environment.PRODUCTION);
+//				Paths.setBraintreeEnvironment(Environment.PRODUCTION);
 				activeVendor = Database.MYSQL;
 			}
 		}
@@ -161,5 +172,9 @@ public class InfrastructureConfig  {
 	}
 
 
-
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+//		PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+//		return propertySourcesPlaceholderConfigurer;
+//	}
 }
