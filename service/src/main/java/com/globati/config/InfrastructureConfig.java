@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-@Profile("running")
+@Profile("production")
 @EnableJpaRepositories("com.globati.repository")
 @EnableTransactionManagement
 @EnableScheduling
@@ -42,6 +42,9 @@ public class InfrastructureConfig  {
 	public InfrastructureConfig() throws IOException {
 		Map<String, String> env = System.getenv();
 		loadEnvironmentProperties(env.get("GLOBATI_SERVER_ENV"));
+
+		System.out.println("************************ PRODUCTION ");
+
 	}
 
 	/**
