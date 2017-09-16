@@ -47,28 +47,28 @@ public class BrainTreeResource {
     private static Environment environment=null;
 
     static {
-        merchantId= Paths.getMerchantId();
-        publicKey = Paths.getPublicKey();
-        privateKey = Paths.getPrivateKey();
-        environment = Paths.getBraintreeEnvironment();
+//        merchantId= Paths.getMerchantId();
+//        publicKey = Paths.getPublicKey();
+//        privateKey = Paths.getPrivateKey();
+//        environment = Paths.getBraintreeEnvironment();
 
     }
 
-    private static BraintreeGateway gateway = new BraintreeGateway(
-            environment,
-            merchantId,
-            publicKey,
-            privateKey
-    );
+//    private static BraintreeGateway gateway = new BraintreeGateway(
+//            environment,
+//            merchantId,
+//            publicKey,
+//            privateKey
+//    );
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response gettoken() {
-//        throw new WebApplicationException(Response.Status.BAD_GATEWAY);
-        String to = gateway.clientToken().generate();
-        BraintreeToken tok = new BraintreeToken(to);
-        return Response.ok(tok).build();
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response gettoken() {
+////        throw new WebApplicationException(Response.Status.BAD_GATEWAY);
+//        String to = gateway.clientToken().generate();
+//        BraintreeToken tok = new BraintreeToken(to);
+//        return Response.ok(tok).build();
+//    }
 
 
     /**
@@ -107,20 +107,21 @@ public class BrainTreeResource {
             @FormDataParam("billingCountry") String billingCountry,
             @FormDataParam("cost") Double cost
     ) throws Exception {
-        String response = braintreeService.makeTransaction(
-                image1, image2, image3,
-                title,description,businessName,
-                website, category, plan, targetLat,
-                targetLong, street, city, country,
-                nonce, email, id, billingStreet, billingCity,
-                billingRegion, billingCountry, cost
-        );
-
-        if(response !=null){
-            return Response.ok(response).build();
-        }
-        else{
-            throw new WebException("Could not create deal", Response.Status.CONFLICT);
-        }
+//        String response = braintreeService.makeTransaction(
+//                image1, image2, image3,
+//                title,description,businessName,
+//                website, category, plan, targetLat,
+//                targetLong, street, city, country,
+//                nonce, email, id, billingStreet, billingCity,
+//                billingRegion, billingCountry, cost
+//        );
+//
+//        if(response !=null){
+//            return Response.ok(response).build();
+//        }
+//        else{
+//            throw new WebException("Could not create deal", Response.Status.CONFLICT);
+//        }
+        return null;
     }
 }
