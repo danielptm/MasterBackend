@@ -1,10 +1,13 @@
 package com.globati.config;
 
+import com.globati.service.PropertiesService;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -18,6 +21,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -30,7 +34,11 @@ import java.util.Properties;
 @EnableJpaRepositories("com.globati.repository")
 @EnableTransactionManagement
 @EnableScheduling
+@PropertySource("classpath:environment/test.properties")
 public class TestProfile {
+
+    @Autowired
+    PropertiesService propertiesService;
 
     String activeDriver;
     String databasePath;
@@ -39,37 +47,31 @@ public class TestProfile {
     Database activeVendor = Database.DERBY;
 
     public TestProfile() throws IOException {
+
+        Map<String, String> SYSTEMENV = System.getenv();
+
+
         Properties props = new Properties();
         String testResource = "environment/test.properties";
         try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(testResource)) {
             props.load(resourceStream);
             activeVendor = Database.DERBY;
         }
-
-        String imageBucket = props.get("imageBucket").toString();
-        String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-        String staticMyglobatiAdmin = props.get("staticMyglobatiAdmin").toString();
-        String imagesWithDash = props.get("imagesWithDash").toString();
         String dbPath = props.get("dbPath").toString();
         String driver = props.get("driver").toString();
 
-
-        Paths.setActiveS3Bucket(imageBucket);
-        Paths.setActiveStaticGlobati(staticGlobatiAddress);
-        Paths.setActiveImageLink(imagesWithDash);
-        Paths.setActiveDatabase(dbPath);
-        Paths.setActiveDriver(driver);
-
-        activeDriver = Paths.getActiveDriver();
-        databasePath = Paths.getActiveDatabase();
+        activeDriver = driver;
+        databasePath = dbPath;
         activeDbPassword="";
         activeDbLogin="";
 
-
-
-        System.out.println("************************ Globati server environment: test");
+        System.out.println("=======================================================================");
+        System.out.println("**                   GLOBATI "+SYSTEMENV.get("GLOBATI_SERVER_ENV")+" ENVIRONMENT     **");
+        System.out.println("=========================================================================");
         System.out.println("Active Driver: "+activeDriver+" "+"ActiveDbPassword: "+activeDbPassword+" "+"ActiveDbLogin: "+activeDbLogin+"ActiveDbPath: "+databasePath);
-
+        System.out.println("=======================================================================");
+        System.out.println("**                      RUNNING UNIT TESTS                          **");
+        System.out.println("=======================================================================");
 
     }
 

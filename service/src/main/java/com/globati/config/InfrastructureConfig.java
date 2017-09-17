@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import com.braintreegateway.Environment;
+import com.globati.service.PropertiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,11 +34,14 @@ import java.util.Properties;
 @EnableJpaRepositories("com.globati.repository")
 @EnableTransactionManagement
 @EnableScheduling
-//@PropertySource("classpath:/environment/${GLOBATI_SERVER_ENV}.properties")
+@PropertySource("classpath:environment/${GLOBATI_SERVER_ENV}.properties")
 public class InfrastructureConfig  {
 
-//	@Autowired
-//	org.springframework.core.env.Environment environment;
+	@Autowired
+	org.springframework.core.env.Environment environment;
+
+	@Autowired
+	PropertiesService propertiesService;
 
 
 	private static  String activeDbLogin;
@@ -46,33 +50,24 @@ public class InfrastructureConfig  {
 	private static  String activeDriver;
 	private static String databasePath;
 
-//	@Value("${production.vendor}")
-//	String testproperty;
-
 
 	public InfrastructureConfig() throws IOException {
 		Map<String, String> env = System.getenv();
 		loadEnvironmentProperties(env.get("GLOBATI_SERVER_ENV"));
-
-//		System.out.println("************************ DEVELOPMENT value: "+environment.getProperty("vendor"));
-
 	}
 
 	/**
-	 * This function loads the environment properties. As of now these includes links used between
-	 * the envioronments, such as the angular light server paths, as well as the productions paths,
-	 * db url etc... This does not load the AWS keys for accessing S3. It should probably do this as
-	 * well, although it is maybe not super necessary.
-	 *
-	 *
-	 * activeVendor is assigned in both if statements, because we might add an environment later
-	 * with a different databseVendor.
+	 * This functions loads some properties from the properties files. PropertiesService cannot be injected
+	 * and used in this class because it is a config class and the values for PropertiesService have not
+	 * been initialized yet, so the required values are read in directly from the files.
 	 *
 	 * @param env
 	 * @throws IOException
 	 */
 
 	private void  loadEnvironmentProperties(String env) throws IOException {
+		Map<String, String> SYSTEMENV = System.getenv();
+
 		Properties props = new Properties();
 		String devevelopmentResource = "environment/development.properties";
 		String productionResource = "environment/production.properties";
@@ -82,45 +77,36 @@ public class InfrastructureConfig  {
 //				Paths.setBraintreeEnvironment(Environment.SANDBOX);
 				activeVendor = Database.MYSQL;
 			}
-		} else if (env.equals("prod")) {
+		} else if(env.equals("production")) {
 			try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(productionResource)) {
 				props.load(resourceStream);
 //				Paths.setBraintreeEnvironment(Environment.PRODUCTION);
 				activeVendor = Database.MYSQL;
 			}
 		}
+		else{
+			System.out.println("======================================================");
+			System.out.println("NO ENVIRONMENT VARIABLE SET..... SERVER CANNOT START");
+			System.out.println("======================================================");
+		}
 
-		String imageBucket = props.get("imageBucket").toString();
-		String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
-		String imagesWithDash = props.get("imagesWithDash").toString();
+//		String imageBucket = props.get("imageBucket").toString();
+//		String staticGlobatiAddress = props.get("staticGlobatiAddress").toString();
+//		String imagesWithDash = props.get("imagesWithDash").toString();
 		String dbLogin = props.get("dbLogin").toString();
 		String dbPassword = props.get("dbPassword").toString();
 		String dbPath = props.get("dbPath").toString();
 		String driver = props.get("driver").toString();
 
-		//For braintree
-		String merchantId=props.get("merchantId").toString();
-		String publicKey=props.get("publicKey").toString();
-		String privateKey=props.get("privateKey").toString();
+		activeDriver = driver;
+		activeDbPassword = dbPassword;
+		activeDbLogin = dbLogin;
+		databasePath = dbPath;
 
 
-		Paths.setActiveS3Bucket(imageBucket);
-		Paths.setActiveStaticGlobati(staticGlobatiAddress);
-		Paths.setActiveImageLink(imagesWithDash);
-		Paths.setActiveDbLoginName(dbLogin);
-		Paths.setActiveDbPassword(dbPassword);
-		Paths.setActiveDatabase(dbPath);
-		Paths.setActiveDriver(driver);
-		Paths.setMerchantId(merchantId);
-		Paths.setPublicKey(publicKey);
-		Paths.setPrivateKey(privateKey);
-
-		activeDriver = Paths.getActiveDriver();
-		activeDbPassword = Paths.getActiveDbPassword();
-		activeDbLogin = Paths.getActiveDbLoginName();
-		databasePath = Paths.getActiveDatabase();
-
-		System.out.println("************************ Globati server environment: "+env);
+		System.out.println("=======================================================================");
+		System.out.println("**    GLOBATI "+SYSTEMENV.get("GLOBATI_SERVER_ENV")+" ENVIRONMENT   **");
+		System.out.println("=========================================================================");
 
 	}
 
@@ -172,9 +158,9 @@ public class InfrastructureConfig  {
 	}
 
 
-//	@Bean
-//	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-//		PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
-//		return propertySourcesPlaceholderConfigurer;
-//	}
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+		return propertySourcesPlaceholderConfigurer;
+	}
 }

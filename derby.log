@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sat Sep 16 15:17:11 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015e-8ad5-f528-000011d7c040 
+Sat Sep 16 15:18:38 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-015e-8ad7-4a1d-0000078bf060 
 on database directory memory:/Users/danieltuttle/Documents/globati/code/super/testdb with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/Users/danieltuttle/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation

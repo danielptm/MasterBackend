@@ -6,16 +6,12 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.globati.config.Paths;
+import com.globati.service.PropertiesService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import java.awt.image.BufferedImage;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.*;
 import java.util.Date;
 import java.util.UUID;
@@ -31,10 +27,13 @@ import java.util.UUID;
  */
 public class ImageHandler {
 
+    @Autowired
+    static PropertiesService propertiesService;
+
     //Value assigned during method execution
     private static String lastCreatedPath=null;
 
-    private static final String activePath= Paths.getActiveImageLink();
+//    private static final String activePath= propertiesService.getImageBucket();
 
     private static final Logger log = LogManager.getLogger(ImageHandler.class);
 
@@ -48,7 +47,7 @@ public class ImageHandler {
 
     public static boolean checkIfImageExists(String path){
         StringBuilder sb = new StringBuilder();
-        String root = activePath;
+        String root = propertiesService.getImageBucket();
         sb.append(root);
         sb.append(path);
 
@@ -98,7 +97,7 @@ public class ImageHandler {
     }
 
     public static void uploadFileToS3(InputStream is, String fileName) throws IOException {
-        String bucketName = Paths.getActiveS3Bucket();
+        String bucketName = propertiesService.getImageBucket();
 
         File file = getFileFromImage(is);
 
@@ -116,7 +115,7 @@ public class ImageHandler {
 
 
     public static void deleteFileFromS3(String keyName){
-        String bucketName = Paths.getActiveS3Bucket();
+        String bucketName = propertiesService.getImageBucket();
 
         AWSCredentials credentials = new BasicAWSCredentials(
                 "AKIAJSYT5343PVMDHCRQ",

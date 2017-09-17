@@ -9,18 +9,17 @@ import com.amazonaws.services.simpleemail.model.Body;
 import com.amazonaws.services.simpleemail.model.Content;
 import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import com.globati.config.Paths;
 import com.globati.dbmodel.Deal;
 import com.globati.mail.beans.AdReceipt;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Recruitment;
 import com.globati.mail.beans.Welcome;
 import com.globati.dbmodel.Employee;
+import com.globati.service.PropertiesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +31,9 @@ import java.util.List;
  * us this website to convert large html bits of text to strings http://pojo.sodhanalibrary.com/string.html
  */
 public class SendMail {
+
+    @Autowired
+    public static PropertiesService properties;
 
     static final String FROM = "noreply@globati.com";  // Replace with your "From" address. This address must be verified.
     static final String TO = "daniel@globati.com"; // Replace with a "To" address. If your account is still in the
@@ -149,7 +151,7 @@ public class SendMail {
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
 
-        Recruitment recruitment = new Recruitment(businessName, employee.getFirstName(), Paths.getActiveCreateAddLink()+employee.getId());
+        Recruitment recruitment = new Recruitment(businessName, employee.getFirstName(), properties.getActiveCreateAddLink()+employee.getId());
 
         // Create the subject and body of the message.
         Content subject = new Content().withData(employee.getFirstName()+" is inviting "+businessName+" to develop a business partnership on globati");
@@ -196,7 +198,7 @@ public class SendMail {
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Here is your Globati username, click on the link to reset your password.");
-        ForgotPassword fp = new ForgotPassword(globatiuser, Paths.getActiveStaticGlobati() + "changeyourpassword/" + apitoken);
+        ForgotPassword fp = new ForgotPassword(globatiuser, properties.getStaticGlobatiAddress() + "changeyourpassword/" + apitoken);
 
         System.out.println(fp.toString());
         Content textBody = new Content().withData(
