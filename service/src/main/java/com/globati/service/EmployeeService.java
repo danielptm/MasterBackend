@@ -1,7 +1,6 @@
 package com.globati.service;
 
 
-import com.globati.config.Paths;
 import com.globati.dbmodel.*;
 import com.globati.repository.EmployeeRepository;
 import com.globati.service.exceptions.ServiceException;
@@ -29,6 +28,10 @@ import java.util.List;
 public class EmployeeService {
 
     private static final Logger log = LogManager.getLogger(EmployeeService.class);
+
+    @Autowired
+    PropertiesService propertiesService;
+
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -296,7 +299,7 @@ public class EmployeeService {
             throw new ServiceException("Could not retrieve employee with id: "+employee.getId(), e);
         }finally {
             //Creates
-            String path = Paths.getS3Root()+Paths.getActiveImageLink();
+            String path = propertiesService.getS3Root()+propertiesService.getImageBucket();
             try {
                 path += ImageHandler.createNewImage(is);
                 employee.setImage(path);

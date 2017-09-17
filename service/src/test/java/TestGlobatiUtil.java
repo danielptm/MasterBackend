@@ -1,9 +1,9 @@
 
-import com.globati.config.Paths;
 import com.globati.dbmodel.*;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.service.EventService;
+import com.globati.service.PropertiesService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.utildb.*;
@@ -37,6 +37,8 @@ public class TestGlobatiUtil {
 
     private static final Logger log = LogManager.getLogger(TestGlobatiUtil.class);
 
+
+
     @Autowired
     EmployeeService employeeService;
 
@@ -45,6 +47,9 @@ public class TestGlobatiUtil {
 
     @Autowired
     DealService dealService;
+
+    @Autowired
+    PropertiesService propertiesService;
 
     @Ignore
     public void testSendSesMail() throws Exception {
@@ -209,8 +214,8 @@ public class TestGlobatiUtil {
 
     @Test
     public void testStaticBlock(){
-        Paths.getActiveImageLink();
-        Paths.getActiveCreateAddLink();
+        propertiesService.getImageBucket();
+        propertiesService.getActiveCreateAddLink();
     }
 
     @Ignore

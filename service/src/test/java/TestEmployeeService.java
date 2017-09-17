@@ -136,15 +136,16 @@ public class TestEmployeeService {
 
 	}
 
+	/**
+	 * Make a meaningful test out of this.
+	 * @throws ServiceException
+	 */
 	@Test
 	public void getEmployeesByCity() throws ServiceException {
-		List<Employee> employees = employeeService.getEmployeesByCity("seattle");
+//		List<Employee> employees = employeeService.getEmployeesByCity("seattle");
+//
+//		List<Employee> employeelist = employeeService.getEmployeesByCountry("usa");
 
-		List<Employee> employeelist = employeeService.getEmployeesByCountry("usa");
-
-		log.debug(employees.size());
-
-		log.debug(employeelist.size());
 
 	}
 

@@ -19,6 +19,8 @@
 
     <bean id="PayService" class="com.globati.service.PayService"></bean>
 
+    <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
+
 
 
 
