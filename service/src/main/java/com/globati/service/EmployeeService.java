@@ -476,10 +476,10 @@ public class EmployeeService {
      * @return
      * @throws ServiceException
      */
-    public List<ApiKey> authenticateReceptionist(String userName, String password) throws ServiceException {
+    public List<String> authenticateReceptionist(String userName, String password) throws ServiceException {
         log.info("authenticateRecptionist(): username: "+userName);
         try {
-            List<ApiKey> item = new ArrayList<>();
+            List<String> item = new ArrayList<>();
             String username = userName;
             String passwordAttempt = password;
 
@@ -492,7 +492,8 @@ public class EmployeeService {
                 ApiKey apiKey = new ApiKey();
                 employeeInfo.setAuthToken(apiKey.getApiKey());
                 employeeInfo.setTokenExpiration(apiKey.getTime());
-                item.add(apiKey);
+                String jwt = jwtService.buildJwt(apiKey.getApiKey());
+                item.add(jwt);
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 return item;
             }
@@ -501,6 +502,7 @@ public class EmployeeService {
             }
         }catch(ServiceException e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: authenticateReceptionist()");
+            e.printStackTrace();
             throw e;
         }
     }

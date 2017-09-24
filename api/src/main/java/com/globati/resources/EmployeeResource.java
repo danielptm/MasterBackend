@@ -89,7 +89,8 @@ public class EmployeeResource{
      * Dude, I am not sure where this is being called in the app, I thought this was at as the name says
      * login(). But a login to myglobatiadmi occurs in AuthenticationResource.
      *
-     * Next time i figure out what this does, please document it properly.
+     * This is called after the authenticationResource is accessed, because that just returned credentials. This logs
+         * the user in and gets their data.
      *
      * @param username
      * @return
@@ -104,6 +105,7 @@ public class EmployeeResource{
             EmployeeAndItems employeeitems = employeeService.getItemsForEmployee(username);
             return Response.ok(employeeitems).build();
         }catch(Exception e){
+            e.printStackTrace();
             throw new WebException("Could not retrieve user by username and password", Response.Status.BAD_REQUEST);
         }
     }

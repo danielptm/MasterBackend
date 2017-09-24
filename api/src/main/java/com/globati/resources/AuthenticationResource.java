@@ -48,6 +48,7 @@ public class AuthenticationResource {
         try {
              return Response.ok(employeeService.authenticateReceptionist(pa.getUsername(), pa.getPassword())).build();
         }catch(Exception e){
+            e.printStackTrace();
             throw new WebException("Password or username did not match", Response.Status.UNAUTHORIZED);
         }
     }
