@@ -21,6 +21,8 @@
 
     <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
 
+    <bean id="JwtService" class="com.globati.service.JwtService"></bean>
+
 
 
 

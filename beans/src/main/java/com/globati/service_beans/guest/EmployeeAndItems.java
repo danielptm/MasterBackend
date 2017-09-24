@@ -20,7 +20,7 @@ public class EmployeeAndItems {
     }
 
     List<Deal> nearByDeals;
-    ApiKey apiKey;
+    String apiKey;
 
     public EmployeeAndItems(Employee employee, List<Deal> nearByDeals){
         this.employee = employee;
@@ -43,11 +43,11 @@ public class EmployeeAndItems {
         this.nearByDeals = nearByDeals;
     }
 
-    public ApiKey getApiKey() {
+    public String getApiKey() {
         return apiKey;
     }
 
-    public void setApiKey(ApiKey apiKey) {
+    public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
 

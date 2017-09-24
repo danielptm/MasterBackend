@@ -5,6 +5,7 @@ import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
+import com.globati.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -28,22 +29,25 @@ public class DefaultAuthentication implements ContainerRequestFilter {
     @Autowired
     EmployeeInfoService employeeInfoService;
 
+    @Autowired
+    JwtService jwtService;
+
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
         String clientapikey1 = requestContext.getHeaders().get("Authorization").get(0);
         EmployeeInfo employeeInfo = null;
-        String token = null;
+        String jwt = null;
 
         try {
-            token = clientapikey1.substring("Bearer".length()).trim();
-            employeeInfo = employeeInfoService.getEmployeeInfoByToken(token);
+            jwt = clientapikey1.substring("Bearer".length()).trim();
+            employeeInfo = employeeInfoService.getEmployeeInfoByToken(jwtService.getPayloadFromJwt(jwt));
         }catch(Exception e){
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }
 
-        if(! token.equals(employeeInfo.getAuthToken()) ){
+        if(! jwtService.getPayloadFromJwt(jwt).equals(employeeInfo.getAuthToken()) ){
             throw new WebException("The user needs to authenticate themselves", Response.Status.UNAUTHORIZED);
         }
 
@@ -51,6 +55,4 @@ public class DefaultAuthentication implements ContainerRequestFilter {
             throw new WebException("The token is expired, the user needs to log in to get a new token", Response.Status.UNAUTHORIZED);
         }
     }
-
-
 }

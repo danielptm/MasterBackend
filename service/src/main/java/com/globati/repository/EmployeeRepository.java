@@ -25,7 +25,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     public List<Employee> getEmployeeByCountry(String country);
 
-    public List<Employee> getEmployeeByCity(String city);
+    @Query("SELECT e FROM Employee e WHERE e.city =:city " )
+    public List<Employee> getEmployeeByCity(@Param("city") String city);
 
 
 }

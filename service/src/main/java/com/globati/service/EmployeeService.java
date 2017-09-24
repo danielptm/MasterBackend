@@ -2,6 +2,7 @@ package com.globati.service;
 
 
 import com.globati.dbmodel.*;
+import com.globati.enums.Verified;
 import com.globati.repository.EmployeeRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -47,6 +48,9 @@ public class EmployeeService {
 
     @Autowired
     EmployeeInfoService employeeInfoService;
+
+    @Autowired
+    JwtService jwtService;
 
     EmployeeService(){}
 
@@ -142,7 +146,8 @@ public class EmployeeService {
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 EmployeeAndItems employeeAndItems = getItemsForEmployee(createdEmployee.getGlobatiUsername());
-                employeeAndItems.setApiKey(apiKey);
+                String jwt = jwtService.buildJwt(apiKey.getApiKey());
+                employeeAndItems.setApiKey(jwt);
                 return employeeAndItems;
             }
             else{
@@ -152,7 +157,8 @@ public class EmployeeService {
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 EmployeeAndItems items = getItemsForEmployee(employee.getGlobatiUsername());
-                items.setApiKey(apiKey);
+                String jwt = jwtService.buildJwt(apiKey.getApiKey());
+                items.setApiKey(jwt);
                 return items;
             }
         }catch(Exception e){
@@ -331,7 +337,7 @@ public class EmployeeService {
                 employee.setRecommendations(null);
                 employee.setEvents(null);
             }
-            return employees;
+            return removeNonVerifiedEmployeesfromList(employees);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCountry()");
             throw new ServiceException("Could not get employees by place: "+country, e);
@@ -347,10 +353,40 @@ public class EmployeeService {
                 employee.setRecommendations(null);
                 employee.setEvents(null);
             }
-            return employees;
+            List<Employee> employees1 = removeNonVerifiedEmployeesfromList(employees);
+            return employees1;
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCity()");
+            e.printStackTrace();
             throw new ServiceException("Could not get employees by city: "+city, e);
+        }
+    }
+
+
+    /**
+     *
+     * This function takes a list of employees and removes the employees which are not verified. This function
+     * is called by the getEmployeesByCity() as well as getEmployeesByCountry()
+     *
+     * @param employees
+     * @return
+     * @throws ServiceException
+     */
+    private List<Employee> removeNonVerifiedEmployeesfromList(List<Employee> employees) throws ServiceException {
+        List<Employee> employeesFiltered = new ArrayList<>();
+        try {
+            for (int i=0; i<employees.size(); i++) {
+                Employee employee = employees.get(i);
+                EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
+                if(employeeInfo.get_verified().equals(Verified.STANDARD)){
+                    employeesFiltered.add(employee);
+                }
+            }
+            return employeesFiltered;
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: removeNonVerifiedEmployeesFromList()");
+            e.printStackTrace();
+            throw new ServiceException("Could not remove employee from list ",e);
         }
     }
 

@@ -30,6 +30,9 @@ public class PropertiesService {
     String publicKey;
     @Value("${privateKey}")
     String privateKey;
+    @Value("${jwtSecret}")
+    String jwtSecret;
+
     String activeCreateAddLink = "https://globati.com/connect/";
 
     public String getImageBucket(){
@@ -78,5 +81,9 @@ public class PropertiesService {
 
     public String getActiveCreateAddLink(){
         return activeCreateAddLink;
+    }
+
+    public String getJwtSecret() {
+        return jwtSecret;
     }
 }

@@ -1,4 +1,5 @@
 import com.globati.dbmodel.*;
+import com.globati.enums.Verified;
 import com.globati.service.*;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -137,15 +138,59 @@ public class TestEmployeeService {
 	}
 
 	/**
-	 * Make a meaningful test out of this.
+	 *There is not unit test for getEmployeesByCountry()... But if this passes, you can be pretty sure the other will pass.
 	 * @throws ServiceException
 	 */
 	@Test
-	public void getEmployeesByCity() throws ServiceException {
-//		List<Employee> employees = employeeService.getEmployeesByCity("seattle");
-//
-//		List<Employee> employeelist = employeeService.getEmployeesByCountry("usa");
+	public void getEmployeesByCity() throws ServiceException, UserDoesNotExistException {
+		String uid = UUID.randomUUID().toString();
 
+		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(e1.getId());
+		employeeInfo.set_verified(Verified.STANDARD);
+		employeeInfoService.updateEmployeeInfo(employeeInfo);
+
+		String uid2 = UUID.randomUUID().toString();
+
+		Employee e2 = this.employeeService.createEmployee("Daniel", uid2+"@me.com", uid2+"b", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		EmployeeInfo employeeInfo1 = employeeInfoService.getEmployeeInfoByEmployeeId(e2.getId());
+		employeeInfo1.set_verified(Verified.STANDARD);
+		employeeInfoService.updateEmployeeInfo(employeeInfo1);
+
+		String uid3 = UUID.randomUUID().toString();
+
+		Employee e3 = this.employeeService.createEmployee("Daniel", uid3+"@me.com", uid3+"c", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "yy3324", "usa");
+
+
+		String uid4 = UUID.randomUUID().toString();
+
+		Employee e4 = this.employeeService.createEmployee("Daniel", uid4+"@me.com", uid4+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		EmployeeInfo employeeInfo4 = employeeInfoService.getEmployeeInfoByEmployeeId(e1.getId());
+		employeeInfo.set_verified(null);
+		employeeInfoService.updateEmployeeInfo(employeeInfo4);
+
+
+		List<Employee> employees = employeeService.getEmployeesByCity("xxx432");
+
+		List<Employee> employees2 = employeeService.getEmployeesByCity("yy3324");
+
+
+		Assert.assertEquals(2, employees.size());
+
+		Assert.assertEquals(0, employees2.size());
+
+//		EmployeeInfo employeeInfo2 = employeeInfoService.getEmployeeInfoByEmployeeId(e3.getId());
+//		employeeInfo2.set_verified(Verified.STANDARD);
+//		employeeInfoService.updateEmployeeInfo(employeeInfo2);
+
+//		Assert.assertEquals(1, employeeService.getEmployeesByCity("seattle").size());
+
+
+	}
+
+
+	@Test
+	public void getEmployeeByCountry(){
 
 	}
 
