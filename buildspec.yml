@@ -18,4 +18,4 @@ phases:
       - echo  '*********************************** Finishing build'
 artifacts:
   files:
-    - super/api/target/serverside-0.0.1-SNAPSHOT.jar
+    - api/target/serverside-0.0.1-SNAPSHOT.jar
