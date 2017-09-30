@@ -13,7 +13,7 @@ phases:
       - ls
       - ls master
       - cd master
-      - mvn install
+      - mvn -f install master/pom.xml
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
