@@ -1,0 +1,17 @@
+version: 0.1
+environment_variables:
+    plaintext:
+        S3_BUCKET: "globati.com"
+        BUILD_ENV: "prod"
+phases:
+  install:
+    commands:
+      - echo '*********************************** installing maven'
+      - apt-get install maven
+      - mvn -version
+  build:
+    commands:
+      - mvn clean install
+  post_build:
+    commands:
+      - echo  '*********************************** Finishing build'
