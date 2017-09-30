@@ -68,6 +68,10 @@ public class InfrastructureConfig  {
 	private void  loadEnvironmentProperties(String env) throws IOException {
 		Map<String, String> SYSTEMENV = System.getenv();
 
+		System.out.println("======================================================");
+		System.out.println("WELCOME TO AWS CONTINUOUS DELIVERTY VIA PIPELINE");
+		System.out.println("======================================================");
+
 		Properties props = new Properties();
 		String devevelopmentResource = "environment/development.properties";
 		String productionResource = "environment/production.properties";
