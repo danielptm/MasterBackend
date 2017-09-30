@@ -16,3 +16,6 @@ phases:
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
+artifacts:
+  files:
+    - super/api/target/serverside-0.0.1-SNAPSHOT.jar
