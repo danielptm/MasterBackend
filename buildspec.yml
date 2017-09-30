@@ -11,8 +11,9 @@ phases:
     commands:
       - echo '******************** installing maven'
       - ls
+      - ls master
       - cd master
-      - mvn clean install
+      - mvn install
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
