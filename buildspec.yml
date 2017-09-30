@@ -12,7 +12,6 @@ phases:
       - echo '******************** installing maven'
       - ls
       - ls master
-      - cd master
       - mvn -f install master/pom.xml
   post_build:
     commands:
