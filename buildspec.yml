@@ -6,11 +6,10 @@ environment_variables:
 phases:
   install:
     commands:
-      - echo '*********************************** installing maven'
-      - apt-get install maven
-      - mvn -version
+    - echo '*********************** install phase'
   build:
     commands:
+      - echo '******************** installing maven'
       - mvn clean install
   post_build:
     commands:
