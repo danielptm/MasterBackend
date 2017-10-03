@@ -18,4 +18,5 @@ phases:
       - echo  '*********************************** Finishing build'
 artifacts:
   files:
-    - api/target/application.jar
+    - '**/*'
+  base-directory: api/target
