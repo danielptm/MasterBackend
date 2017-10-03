@@ -12,11 +12,11 @@ phases:
       - echo '******************** installing maven'
       - ls
       - ls master
-      - mvn package -f master/pom.xml
+      - mvn install -f master/pom.xml
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
 artifacts:
   files:
-    - '**/*'
+    - 'application.jar'
   base-directory: 'api/target'
