@@ -1,3 +1,4 @@
+
 version: 0.1
 environment_variables:
     plaintext:
@@ -12,10 +13,11 @@ phases:
       - echo '******************** installing maven'
       - ls
       - ls master
-      - mvn install -f master/pom.xml
+      - mvn package
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
 artifacts:
   files:
-    - api/target/application.jar
+      - '**/*'
+  base-directory: 'api/target'  
