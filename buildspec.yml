@@ -12,7 +12,7 @@ phases:
       - echo '******************** installing maven'
       - ls
       - ls master
-      - mvn install -f master/pom.xml
+      - mvn package -f master/pom.xml
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
