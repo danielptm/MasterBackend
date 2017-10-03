@@ -19,4 +19,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: api/target
+  base-directory: 'api/target'
