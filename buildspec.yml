@@ -13,11 +13,11 @@ phases:
       - echo '******************** installing maven'
       - ls
       - ls master
-      - mvn package
+      - mvn install
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
 artifacts:
   files:
       - '**/*'
-  base-directory: 'api/target'  
+  base-directory: 'api/targe'
