@@ -5,6 +5,3 @@ api/target
 service/derby.log
 
 
-#Please do not remove or change this line Joakim. 
-service/src/main/resources/environment/production.properties
-
