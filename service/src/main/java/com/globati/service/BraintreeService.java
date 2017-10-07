@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class BraintreeService {
 
+//    This should probably be deleted
+    //Yes it shoud
+
 //    private static final Logger log = LogManager.getLogger(BraintreeService.class);
 //
 //    private static String merchantId=null;
