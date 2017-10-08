@@ -126,7 +126,7 @@ public class EmployeeResource{
     public Response update(@QueryParam("employeeId") Long employeeId, UpdateEmployee updateEmployee){
         Employee employee = null;
         try{
-            employee= employeeService.getEmployeeById(employeeId);
+            employee = employeeService.getEmployeeById(employeeId);
 
             if(updateEmployee.getEmail()!=null){
                 employee.setEmail(updateEmployee.getEmail());

@@ -18,10 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -65,6 +62,20 @@ public class TestEmployeeService {
 		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
 
+	@Test(expected = ServiceException.class)
+	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException {
+
+		String uid = UUID.randomUUID().toString();
+
+		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
+		InputStream fis = new FileInputStream(file);
+
+		Employee employee4 = employeeService.createEmployee("check this2", uid+"@me.com", "London", "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+
+
+
+	}
+
 	@Test
 	public void updateEmployee() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
 		String uid = UUID.randomUUID().toString();
@@ -77,6 +88,21 @@ public class TestEmployeeService {
 		e2.setFirstName("zebra");
 		Employee e3 = employeeService.updateEmployee(e2);
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
+	}
+
+	@Test(expected = ServiceException.class)
+	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+
+		String uid = UUID.randomUUID().toString();
+		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
+		InputStream fis = new FileInputStream(file);
+		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+
+		e.setGlobatiUsername("London");
+
+		employeeService.updateEmployee(e);
+
+
 	}
 
 	@Test
@@ -179,12 +205,6 @@ public class TestEmployeeService {
 
 		Assert.assertEquals(0, employees2.size());
 
-//		EmployeeInfo employeeInfo2 = employeeInfoService.getEmployeeInfoByEmployeeId(e3.getId());
-//		employeeInfo2.set_verified(Verified.STANDARD);
-//		employeeInfoService.updateEmployeeInfo(employeeInfo2);
-
-//		Assert.assertEquals(1, employeeService.getEmployeesByCity("seattle").size());
-
 
 	}
 
@@ -272,17 +292,19 @@ public class TestEmployeeService {
 
 		Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 23.23,23.23, employee.getId(), "USA", "2308", "Seattle", "TOURISM", "globati.com", "daniel@me.com","DAYS_30", 30, "234", "billing","billing","billing","billing");
 
-//		List<Object> employeeAfterEditions =   employeeService.getItemsForEmployee(employee.get_globatiUsername());
-
-//		Employee employee1 = (Employee) employeeAfterEditions.get(0);
-
-//		Assert.assertEquals( employee1.get_deals().size() , 1);
-//
-//		Assert.assertEquals(employee1.get_recommendations().size(), 1);
-//E
-//		Assert.assertEquals(employee1.get_events().size(), 1);
+	}
 
 
+	@Test
+	public void userNameIsAReservedWord() throws ServiceException, IOException {
+		String desiredName="London";
+		String desieredName2="zebraface";
+		String desieredName3="Vienna";
+
+
+		Assert.assertTrue(employeeService.userNameIsAReservedWord(desiredName));
+		Assert.assertFalse(employeeService.userNameIsAReservedWord(desieredName2));
+		Assert.assertTrue(employeeService.userNameIsAReservedWord(desieredName3));
 	}
 
 
