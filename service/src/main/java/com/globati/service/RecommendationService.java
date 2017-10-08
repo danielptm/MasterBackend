@@ -47,6 +47,7 @@ public class RecommendationService{
             return recommendationRepository.save(rec2);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
+            e.printStackTrace();
             throw new ServiceException("Could not create recommendation at this time: "+rec.toString(), e);
         }
     }
@@ -64,6 +65,7 @@ public class RecommendationService{
             return updateRecommendation(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: inactivateRecommendation(): id: "+id);
+            e.printStackTrace();
             throw new ServiceException("Could not inactivate recommendation", e);
         }
     }
@@ -73,6 +75,7 @@ public class RecommendationService{
             return recommendationRepository.save(recommendation);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: "+recommendation.getId());
+            e.printStackTrace();
             throw new ServiceException("Could not update recommendation with id: "+recommendation.getId(), e);
         }
     }
@@ -82,6 +85,7 @@ public class RecommendationService{
             recommendationRepository.delete(recommendation);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: deleteRecommendation(): recommendationId: "+recommendation.getId());
+            e.printStackTrace();
             throw new ServiceException("Could not delete reocommendation with id: "+recommendation.getId(), e);
         }
     }
@@ -92,6 +96,7 @@ public class RecommendationService{
             return recommendationRepository.getAllRecommendationsByEmployeeIdAndActive(id, true);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationByEmployeeId(): employeeId: "+id);
+            e.printStackTrace();
             throw new ServiceException( "Could not get recommendations by employeeId: "+id, e );
         }
     }

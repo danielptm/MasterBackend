@@ -271,6 +271,7 @@ public class EmployeeService {
         }
         catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
+            e.printStackTrace();
             if(e.getClass().toString().equals("class org.springframework.dao.DataIntegrityViolationException")){
                 throw new UserDoesNotExistException("This username already exists");
             }
@@ -299,6 +300,7 @@ public class EmployeeService {
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
+            e.printStackTrace();
             if(e.getClass().toString().equals("class org.springframework.dao.DataIntegrityViolationException")){
                 throw new UserDoesNotExistException("This username already exists, or was a reserved word for username:"+employee.getGlobatiUsername());
             }
@@ -316,6 +318,7 @@ public class EmployeeService {
             ImageHandler.deleteFileFromS3(employee.getImage());
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: replaceImage()");
+            e.printStackTrace();
             throw new ServiceException("Could not retrieve employee with id: "+employee.getId(), e);
         }finally {
             //Creates
@@ -326,6 +329,7 @@ public class EmployeeService {
                 updateEmployee(employee);
             } catch (Exception e) {
                 log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: replaceImage()");
+                e.printStackTrace();
                 throw new ServiceException("Could not create new image for employee: " + employee.toString(), e);
             }
             return true;
@@ -338,6 +342,7 @@ public class EmployeeService {
             return employeeRepository.findAll();
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getAllEmployees()");
+            e.printStackTrace();
             throw new ServiceException("Could not get All employees", e);
         }
     }
@@ -354,6 +359,7 @@ public class EmployeeService {
             return removeNonVerifiedEmployeesfromList(employees);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCountry()");
+            e.printStackTrace();
             throw new ServiceException("Could not get employees by place: "+country, e);
         }
     }
@@ -426,6 +432,7 @@ public class EmployeeService {
             }
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: changePassword()");
+            e.printStackTrace();
             throw new ServiceException("Could not change password at this time "+employeeId,e);
         }
     }
@@ -444,6 +451,7 @@ public class EmployeeService {
             }
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: changePasswordWithToken()");
+            e.printStackTrace();
             throw new ServiceException("Could not change password at this time ",e);
         }
     }
@@ -473,6 +481,7 @@ public class EmployeeService {
             return SendMail.sendForgottenPasswordEmail(employee.getEmail(), employee.getGlobatiUsername(),employeeInfo.getAuthToken());
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: sendEmailToChangePassword()");
+            e.printStackTrace();
             throw new ServiceException("Could not send employee info", e);
         }
     }

@@ -188,6 +188,7 @@ public class PayService {
         try{
             ImageHandler.uploadVerifiedUsersToS3(createCSVFileOfVerifiedUsersForBookings());
         }catch(Exception e){
+            e.printStackTrace();
             throw new ServiceException("Could not upload the verified users csv file to S3", e);
         }
     }

@@ -51,6 +51,7 @@ public class EventService {
             return eventRepository.save(event);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEvent(): employeeId: "+employee.getId());
+            e.printStackTrace();
             throw new ServiceException("Could not create event "+event.toString(), e);
         }
 
@@ -62,6 +63,7 @@ public class EventService {
             return eventRepository.findOne(id);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEventById(): "+id);
+            e.printStackTrace();
             throw new ServiceException("Could not get event by id: "+id, e);
         }
     }
@@ -76,6 +78,7 @@ public class EventService {
             return events;
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEventsByEmployeeId(): employeeId: "+id);
+            e.printStackTrace();
             throw new ServiceException("Could not get events by Employee id: "+id,e);
         }
     }
@@ -85,6 +88,7 @@ public class EventService {
             return eventRepository.save(event);
         }catch(Exception e){
             log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEvent(): eventId: "+event.getId());
+            e.printStackTrace();
             throw new ServiceException("Could not update event "+event.toString(), e);
         }
     }
@@ -94,6 +98,7 @@ public class EventService {
             eventRepository.delete(event);
         }catch(Exception e){
             log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: deleteEvent(): eventId:  "+event.getId() );
+            e.printStackTrace();
             throw new ServiceException("Could not delete event "+event.toString(), e);
         }
     }
@@ -112,6 +117,7 @@ public class EventService {
             return nearbyevents;
         }catch(Exception e){
             log.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getNearByEvents(): employeeId: "+id);
+            e.printStackTrace();
             throw new ServiceException("Could not get near by events for country: "+country, e);
         }
     }

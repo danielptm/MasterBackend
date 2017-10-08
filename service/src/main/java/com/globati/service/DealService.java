@@ -57,7 +57,8 @@ public class DealService {
 //            GuestDeal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);
             return dealRepository.save(deal);
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not create a deal: " + deal.toString(), e);
         }
     }
@@ -68,6 +69,7 @@ public class DealService {
             return dealRepository.save(d);
         } catch (Exception e) {
             log.warn(e.toString());
+            e.printStackTrace();
             throw new ServiceException("Could not update deal at this time: " + d.toString(), e);
         }
     }
@@ -77,7 +79,8 @@ public class DealService {
         try {
             return dealRepository.findDealsBy_employee_id(employee.getId());
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not get deals for employee: " + employee.getId(), e);
         }
     }
@@ -105,7 +108,8 @@ public class DealService {
             }
             return nearbyDeals;
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not get near by deals: " + country, e);
         }
     }
@@ -123,7 +127,8 @@ public class DealService {
         try {
             return dealRepository.getActiveDealsByCountry(country, true);
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not get active deals by country: " + country, e);
         }
     }
@@ -133,7 +138,8 @@ public class DealService {
         try {
             return dealRepository.getActiveDealsByEmployee(l, true);
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not get active deals by employee with id: " + l, e);
         }
     }
@@ -144,7 +150,8 @@ public class DealService {
         try {
             return dealRepository.getDealsCreatedForMonth(month, year, employeeId);
         } catch (Exception e) {
-            log.warn(e.toString());
+            log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not get deals created for month " + month, e);
         }
     }
@@ -154,7 +161,8 @@ public class DealService {
         try {
             SendMail.sendRecruitmentMail(employee, businessEmail, businessName);
         } catch (Exception e) {
-            log.error(e.toString());
+            log.error("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");
+            e.printStackTrace();
             throw new ServiceException("Could not send recruitment mail", e);
         }
     }
