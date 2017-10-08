@@ -89,7 +89,7 @@ public class PayService {
         File file2;
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            String header = "Recipient ID,"+"Payment,"+"Currency,"+"Customer ID,"+"Number of recruitments for month "+ c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+            String header = "Recipient ID,"+"Payment,"+"Currency,"+"Year"+ c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
             bw.write(header);
             bw.newLine();
             for (Employee employee : employees) {
@@ -100,7 +100,7 @@ public class PayService {
                     numberOfDeals++;
                 }
                 if(employee.getPaypalEmail()!=null) {
-                    String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.getId() + ","+numberOfDeals;
+                    String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR";
                     bw.write(line);
                     bw.newLine();
                 }
