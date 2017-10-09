@@ -76,6 +76,7 @@ public class GuestResource {
             employeeAndNearbyDeals = employeeService.getItemsForEmployeeAndIncrement(id);
             return Response.ok(employeeAndNearbyDeals).build();
         }catch(ServiceException e){
+            e.printStackTrace();
             throw new WebException("Could not find splash page for employee", Response.Status.CONFLICT);
         }
     }
