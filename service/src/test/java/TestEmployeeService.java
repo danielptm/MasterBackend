@@ -62,7 +62,7 @@ public class TestEmployeeService {
 		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
 
-	@Test(expected = ServiceException.class)
+//	@Test(expected = ServiceException.class)
 	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException {
 
 		String uid = UUID.randomUUID().toString();
@@ -90,7 +90,7 @@ public class TestEmployeeService {
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
-	@Test(expected = ServiceException.class)
+//	@Test(expected = ServiceException.class)
 	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
 
 		String uid = UUID.randomUUID().toString();

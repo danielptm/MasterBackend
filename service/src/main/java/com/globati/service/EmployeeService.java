@@ -294,9 +294,9 @@ public class EmployeeService {
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException {
         log.info("updateEmployee(): employeeId: "+employee.getId());
         try {
-            if(userNameIsAReservedWord(employee.getGlobatiUsername())){
-                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
-            }
+//            if(userNameIsAReservedWord(employee.getGlobatiUsername())){
+//                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
+//            }
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
