@@ -298,10 +298,10 @@ public class EmployeeService {
         try {
 
             //It is ok for to update for one of us to update our profiles to a reserved word name.
-            if( userNameIsAReservedWord(employee.getGlobatiUsername())
-                    && (employee.getId() != 1 || employee.getId() != 17 || employee.getId() != 49) ){
-                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
-            }
+//            if( userNameIsAReservedWord(employee.getGlobatiUsername())
+//                    && (employee.getId() != 1 || employee.getId() != 17 || employee.getId() != 49) ){
+//                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
+//            }
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
