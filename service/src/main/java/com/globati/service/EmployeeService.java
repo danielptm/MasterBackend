@@ -285,6 +285,8 @@ public class EmployeeService {
      * Updates an employee, but does a check on globati username, if the username is a reserved word
      * or exists already in the database, an exception is thrown.
      *
+     * If uncomment this comment, this will
+     *
      * @param employee
      * @return
      * @throws ServiceException
@@ -294,9 +296,12 @@ public class EmployeeService {
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException {
         log.info("updateEmployee(): employeeId: "+employee.getId());
         try {
-//            if(userNameIsAReservedWord(employee.getGlobatiUsername())){
-//                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
-//            }
+
+            //It is ok for to update for one of us to update our profiles to a reserved word name.
+            if( userNameIsAReservedWord(employee.getGlobatiUsername())
+                    && (employee.getId() != 1 || employee.getId() != 17 || employee.getId() != 49) ){
+                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
+            }
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");

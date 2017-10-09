@@ -62,7 +62,7 @@ public class TestEmployeeService {
 		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
 
-//	@Test(expected = ServiceException.class)
+	@Test(expected = ServiceException.class)
 	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException {
 
 		String uid = UUID.randomUUID().toString();
@@ -90,18 +90,38 @@ public class TestEmployeeService {
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
-//	@Test(expected = ServiceException.class)
+	@Test(expected = ServiceException.class)
 	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
 
 		String uid = UUID.randomUUID().toString();
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 		InputStream fis = new FileInputStream(file);
+
+		//Do this just to create the employee
 		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
+		//Trick the method that this users
 		e.setGlobatiUsername("London");
-
 		employeeService.updateEmployee(e);
+	}
 
+
+	/**
+	 * This tests to make sure that we owners of globati can update our profiles to reserved word.
+	 * @throws FileNotFoundException
+	 * @throws ServiceException
+	 * @throws UserDoesNotExistException
+	 */
+	@Test
+	public void allowAuserWithReservedWordToUpdateTheirProfile() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+
+		String uid = UUID.randomUUID().toString();
+		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
+		InputStream fis = new FileInputStream(file);
+		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		e.setGlobatiUsername("London");
+		e.setId(1L);
+		Assert.assertEquals("London", e.getGlobatiUsername());
 
 	}
 
