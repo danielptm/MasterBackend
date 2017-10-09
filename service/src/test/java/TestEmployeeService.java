@@ -121,6 +121,7 @@ public class TestEmployeeService {
 		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		e.setGlobatiUsername("London");
 		e.setId(1L);
+		employeeService.updateEmployee(e);
 		Assert.assertEquals("London", e.getGlobatiUsername());
 
 	}
