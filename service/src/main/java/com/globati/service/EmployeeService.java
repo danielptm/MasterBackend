@@ -541,9 +541,9 @@ public class EmployeeService {
         log.info("getItemsForEmployeeAndIncrement(): id: "+id);
         try {
             Employee employee = getEmployeeByUserName(id);
-            if(employee==null){
-                throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: "+id);
-            }
+//            if(employee==null){
+//                throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: "+id);
+//            }
             incrementCounter(employee);
             updateEmployee(employee);
             return getItemsForEmployee(id);
