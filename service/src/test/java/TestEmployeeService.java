@@ -90,7 +90,7 @@ public class TestEmployeeService {
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
-	@Ignore
+	@Test(expected = ServiceException.class)
 	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
 
 		String uid = UUID.randomUUID().toString();
