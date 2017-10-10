@@ -299,13 +299,13 @@ public class EmployeeService {
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
         try {
-            if( userNameIsAReservedWord(employee.getGlobatiUsername())
-                    && (! employee.getEmail().equals(oliversEmail)
-                    && ! employee.getEmail().equals(danielsEmail)
-                    && ! employee.getEmail().equals(edwardsEmail)
-            ) ){
-                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
-            }
+//            if( userNameIsAReservedWord(employee.getGlobatiUsername())
+//                    && (! employee.getEmail().equals(oliversEmail)
+//                    && ! employee.getEmail().equals(danielsEmail)
+//                    && ! employee.getEmail().equals(edwardsEmail)
+//            ) ){
+//                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
+//            }
 
             return this.employeeRepository.save(employee);
         }catch(Exception e){
