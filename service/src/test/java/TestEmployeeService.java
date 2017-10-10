@@ -162,7 +162,7 @@ public class TestEmployeeService {
 
 //		Assert.assertNotNull(items.getApiKey());
 		Assert.assertNotNull(items.getEmployee());
-		Assert.assertNotNull(items.getNearByDeals());
+//		Assert.assertNotNull(items.getNearByDeals());
 
 
 	}

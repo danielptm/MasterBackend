@@ -10,6 +10,11 @@ public class EmployeeAndItems {
 
     Employee employee;
 
+    public EmployeeAndItems(Employee employee) {
+        this.employee = employee;
+        this.nearByDeals = null;
+    }
+
     @Override
     public String toString() {
         return "EmployeeAndItems{" +
