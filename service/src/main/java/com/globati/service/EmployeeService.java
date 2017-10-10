@@ -295,12 +295,19 @@ public class EmployeeService {
 
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException {
         log.info("updateEmployee(): employeeId: "+employee.getId());
+        String oliversEmail="wyman.oliver@gmail.com";
+        String danielsEmail = "daniel@globati.com";
+        String edwardsEmail = "owardbodie@gmail.com";
         try {
 
             //It is ok for to update for one of us to update our profiles to a reserved word name.
-//            if( userNameIsAReservedWord(employee.getGlobatiUsername()) && (employee.getId().longValue() != 1L && employee.getId().longValue() != 17L && employee.getId().longValue() != 49L) ){
-//                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
-//            }
+            if( userNameIsAReservedWord(employee.getGlobatiUsername())
+                    && (! employee.getEmail().equals(oliversEmail)
+                    && ! employee.getEmail().equals(danielsEmail)
+                    && ! employee.getEmail().equals(edwardsEmail)
+            ) ){
+                throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
+            }
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
