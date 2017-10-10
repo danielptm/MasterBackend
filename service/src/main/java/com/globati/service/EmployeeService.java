@@ -299,8 +299,6 @@ public class EmployeeService {
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
         try {
-
-            //It is ok for to update for one of us to update our profiles to a reserved word name.
             if( userNameIsAReservedWord(employee.getGlobatiUsername())
                     && (! employee.getEmail().equals(oliversEmail)
                     && ! employee.getEmail().equals(danielsEmail)
@@ -308,6 +306,7 @@ public class EmployeeService {
             ) ){
                 throw new UserDoesNotExistException("Username is a reserved word for user: "+employee.getGlobatiUsername());
             }
+
             return this.employeeRepository.save(employee);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
@@ -552,9 +551,9 @@ public class EmployeeService {
         log.info("getItemsForEmployeeAndIncrement(): id: "+id);
         try {
             Employee employee = getEmployeeByUserName(id);
-//            if(employee==null){
-//                throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: "+id);
-//            }
+            if(employee==null){
+                throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: "+id);
+            }
             incrementCounter(employee);
             updateEmployee(employee);
             return getItemsForEmployee(id);

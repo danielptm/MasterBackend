@@ -98,7 +98,7 @@ public class TestEmployeeService {
 		InputStream fis = new FileInputStream(file);
 
 		//Do this just to create the employee
-		Employee e = employeeService.createEmployee("Daniel", "er@gmail.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
 		//Trick the method that this users
 		e.setGlobatiUsername("London");
@@ -118,9 +118,8 @@ public class TestEmployeeService {
 		String uid = UUID.randomUUID().toString();
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 		InputStream fis = new FileInputStream(file);
-		Employee e = employeeService.createEmployee("Daniel", "owardbodie@gmail.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Employee e = employeeService.createEmployee("Daniel", "daniel@globati.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		e.setGlobatiUsername("London");
-		e.setId(1L);
 		employeeService.updateEmployee(e);
 		Assert.assertEquals("London", e.getGlobatiUsername());
 
