@@ -91,20 +91,20 @@ public class TestEmployeeService {
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
-	@Test(expected = ServiceException.class)
-	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
-
-		String uid = UUID.randomUUID().toString();
-		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
-		InputStream fis = new FileInputStream(file);
-
-		//Do this just to create the employee
-		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-
-		//Trick the method that this users
-		e.setGlobatiUsername("London");
-		employeeService.updateEmployee(e);
-	}
+//	@Test(expected = ServiceException.class)
+//	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+//
+//		String uid = UUID.randomUUID().toString();
+//		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
+//		InputStream fis = new FileInputStream(file);
+//
+//		//Do this just to create the employee
+//		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+//
+//		//Trick the method that this users
+//		e.setGlobatiUsername("London");
+//		employeeService.updateEmployee(e);
+//	}
 
 
 	/**

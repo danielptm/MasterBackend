@@ -297,11 +297,13 @@ public class EmployeeService {
 
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException {
         log.info("updateEmployee(): employeeId: " + employee.getId());
+        log.info("updateEmployee(): employeeUsername: "+employee.getGlobatiUsername());
+        log.info("updateEmployee(): "+employee.getEmail());
         String oliversEmail = "wyman.oliver@gmail.com";
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
 //        log.debug(employee.toString());
-        log.debug(employee.getGlobatiUsername());
+
         try {
             if (userNameIsAReservedWord(employee.getGlobatiUsername())
                     && (!employee.getEmail().equals(oliversEmail)
