@@ -581,6 +581,7 @@ public class EmployeeService {
                     break;
                 }
             }
+
         } catch (FileNotFoundException e1) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: userNameIsAReservedWord()");
             e1.printStackTrace();
@@ -590,7 +591,9 @@ public class EmployeeService {
             e.printStackTrace();
             throw new ServiceException("Could not calculate if the username is a reserved word for word:" + desiredUserName, e);
         } finally {
-            br.close();
+            if(br != null) {
+                br.close();
+            }
         }
         return isAReservedKeyWord;
 
