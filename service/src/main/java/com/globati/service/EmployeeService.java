@@ -221,7 +221,7 @@ public class EmployeeService {
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
-            employee.setDeals(null);
+            employee.setDeals(new ArrayList<>());
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
