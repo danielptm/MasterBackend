@@ -66,6 +66,7 @@ public class EmployeeService {
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
+            e.printStackTrace();
             throw new ServiceException("Was not able to retrieve employee by id: " + id, e);
         }
     }
@@ -92,7 +93,9 @@ public class EmployeeService {
 
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createProfileFromFacebookInfo()");
+            e.printStackTrace();
             throw new ServiceException("Could not create a profile from facebook info for person with facebook id: " + facebookId, e);
+
         }
     }
 
@@ -102,6 +105,7 @@ public class EmployeeService {
             return employeeInfoService.createEmployeeInfoForFacebookLogin(id, facebookid);
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployeeInfoFromFacebook()");
+            e.printStackTrace();
             throw new ServiceException("Could not create Employee info for facebook login with employee id: " + id, e);
         }
     }
@@ -117,6 +121,7 @@ public class EmployeeService {
             }
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeByFacebookId()");
+            e.printStackTrace();
             throw new ServiceException("Could not get employee by facebookid with id: " + id, e);
         }
     }
@@ -163,6 +168,7 @@ public class EmployeeService {
             }
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createAccountOrLoginWithFacebook()");
+            e.printStackTrace();
             throw new ServiceException("Could not create an account and/or login with facebookid: " + facebookId, e);
         }
 
@@ -175,6 +181,7 @@ public class EmployeeService {
             return employeeRepository.getEmployeeByGlobatiUsername(username);
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeByUserName()");
+            e.printStackTrace();
             throw new ServiceException("Could not retrieve employee by username", e);
         }
     }
@@ -213,13 +220,14 @@ public class EmployeeService {
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
-//            employee.setDeals(deals);
+            employee.setDeals(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
             return employeeAndItems;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployee()");
+            e.printStackTrace();
             throw new ServiceException("Could not retrieve employee by user name and pasword", e);
         }
     }
@@ -256,7 +264,7 @@ public class EmployeeService {
         log.info("createEmployee(): email: " + email);
         Employee employee = null;
         try {
-            if (userNameIsAReservedWord(username)) {
+            if( userNameIsAReservedWord(username) ) {
                 throw new UserDoesNotExistException("Username is a reserved word for user: " + employee.getGlobatiUsername());
             }
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
