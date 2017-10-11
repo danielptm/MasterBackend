@@ -299,6 +299,8 @@ public class EmployeeService {
         String oliversEmail = "wyman.oliver@gmail.com";
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
+        log.debug(employee.toString());
+        log.debug(employee.getGlobatiUsername());
         try {
             if (userNameIsAReservedWord(employee.getGlobatiUsername())
                     && (!employee.getEmail().equals(oliversEmail)
