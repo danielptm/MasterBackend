@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -265,7 +266,7 @@ public class EmployeeService {
         Employee employee = null;
         try {
             if( userNameIsAReservedWord(username) ) {
-                throw new UserDoesNotExistException("Username is a reserved word for user: " + employee.getGlobatiUsername());
+                throw new UserDoesNotExistException("Username is a reserved word for user: " + username);
             }
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             Employee savedEmployee = employeeRepository.save(employee);
@@ -299,7 +300,7 @@ public class EmployeeService {
         String oliversEmail = "wyman.oliver@gmail.com";
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
-        log.debug(employee.toString());
+//        log.debug(employee.toString());
         log.debug(employee.getGlobatiUsername());
         try {
             if (userNameIsAReservedWord(employee.getGlobatiUsername())
