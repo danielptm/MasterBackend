@@ -45,6 +45,7 @@ public class TestEmployeeService {
 
 	private static final Logger log = LogManager.getLogger(TestEmployeeService.class);
 
+	//Test
 
 
 	@Test
@@ -162,7 +163,7 @@ public class TestEmployeeService {
 
 //		Assert.assertNotNull(items.getApiKey());
 		Assert.assertNotNull(items.getEmployee());
-		Assert.assertNotNull(items.getNearByDeals());
+//		Assert.assertNotNull(items.getNearByDeals());
 
 
 	}
