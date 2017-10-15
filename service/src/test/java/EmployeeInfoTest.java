@@ -4,8 +4,10 @@ import com.globati.enums.Verified;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
 import com.globati.service.PayService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.ImageHandler;
 import org.junit.Assert;
@@ -16,10 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public class EmployeeInfoTest {
     PayService payService;
 
     @Test
-    public void testGetEmployeeInfoByVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testGetEmployeeInfoByVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         String uid2 = UUID.randomUUID().toString();
 
@@ -68,7 +67,7 @@ public class EmployeeInfoTest {
     }
 
     @Test
-    public void testCreateEmployeeInfo() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testCreateEmployeeInfo() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
@@ -80,7 +79,7 @@ public class EmployeeInfoTest {
     }
 
     @Test
-    public void testVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
@@ -105,7 +104,7 @@ public class EmployeeInfoTest {
 
 
     @Test
-    public void testGetEmployeeInfoByAuthToken() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testGetEmployeeInfoByAuthToken() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
         String uid = UUID.randomUUID().toString();
         String uid2 = UUID.randomUUID().toString();
@@ -127,7 +126,7 @@ public class EmployeeInfoTest {
 
 
     @Test
-    public void testSendVerifiedUsers() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+    public void testSendVerifiedUsers() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
@@ -154,7 +153,7 @@ public class EmployeeInfoTest {
      */
 
     @Test
-    public void createAccountOrLoginWithFacebook() throws ServiceException, UserDoesNotExistException {
+    public void createAccountOrLoginWithFacebook() throws ServiceException, UserDoesNotExistException, IOException {
         String facebookid="123";
         String name = "daniel";
         String email="hello@me.com";

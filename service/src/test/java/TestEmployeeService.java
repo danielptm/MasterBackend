@@ -1,11 +1,14 @@
 import com.globati.dbmodel.*;
 import com.globati.enums.Verified;
 import com.globati.service.*;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.GlobatiUtilException;
 import com.globati.utildb.ImageHandler;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -13,6 +16,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -48,7 +52,7 @@ public class TestEmployeeService {
 
 
 	@Test
-	public void createEmployeeAndGetEmployeeById() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+	public void createEmployeeAndGetEmployeeById() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String uid = UUID.randomUUID().toString();
 
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
@@ -62,8 +66,8 @@ public class TestEmployeeService {
 		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
 
-	@Test(expected = ServiceException.class)
-	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException {
+	@Test(expected = IllegalUserNameException.class)
+	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException, UserNameIsNotUniqueException, IllegalUserNameException {
 
 		String uid = UUID.randomUUID().toString();
 
@@ -77,7 +81,7 @@ public class TestEmployeeService {
 	}
 
 	@Test
-	public void updateEmployee() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+	public void updateEmployee() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String uid = UUID.randomUUID().toString();
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 		InputStream fis = new FileInputStream(file);
@@ -90,20 +94,6 @@ public class TestEmployeeService {
 		Assert.assertEquals("zebra", employeeService.getEmployeeById(e3.getId()).getFirstName());
 	}
 
-//	@Test(expected = ServiceException.class)
-//	public void attemptToUpdateEmployeeWithReservedWordAsUsername() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
-//
-//		String uid = UUID.randomUUID().toString();
-//		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
-//		InputStream fis = new FileInputStream(file);
-//
-//		//Do this just to create the employee
-//		Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-//
-//		//Trick the method that this users
-//		e.setGlobatiUsername("London");
-//		employeeService.updateEmployee(e);
-//	}
 
 
 	/**
@@ -113,7 +103,7 @@ public class TestEmployeeService {
 	 * @throws UserDoesNotExistException
 	 */
 	@Test
-	public void allowAuserWithReservedWordToUpdateTheirProfile() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+	public void allowAuserWithReservedWordToUpdateTheirProfile() throws IOException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
 		String uid = UUID.randomUUID().toString();
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
@@ -126,7 +116,7 @@ public class TestEmployeeService {
 	}
 
 	@Test
-	public void getEmployeebyUserName() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+	public void getEmployeebyUserName() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 
 		String image1 = "image1 file";
@@ -168,7 +158,7 @@ public class TestEmployeeService {
 	}
 
 	@Test
-	public void inrementCounter() throws ServiceException, UserDoesNotExistException {
+	public void inrementCounter() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
 		String uid = UUID.randomUUID().toString();
 
@@ -188,7 +178,7 @@ public class TestEmployeeService {
 	 * @throws ServiceException
 	 */
 	@Test
-	public void getEmployeesByCity() throws ServiceException, UserDoesNotExistException {
+	public void getEmployeesByCity() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String uid = UUID.randomUUID().toString();
 
 		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
@@ -321,12 +311,29 @@ public class TestEmployeeService {
 		String desieredName2="zebraface";
 		String desieredName3="Vienna";
 
-
 		Assert.assertTrue(employeeService.userNameIsAReservedWord(desiredName));
 		Assert.assertFalse(employeeService.userNameIsAReservedWord(desieredName2));
 		Assert.assertTrue(employeeService.userNameIsAReservedWord(desieredName3));
 	}
 
 
+	@Test(expected = UserDoesNotExistException.class)
+	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException {
+		String uid = UUID.randomUUID().toString();
+		EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeAndIncrement(uid);
 
+
+	}
+
+	@Test(expected = UserNameIsNotUniqueException.class)
+	public void attempttoCreateEmployeeButFailBecauseUsernameAlreadyExists() throws UserDoesNotExistException, UserNameIsNotUniqueException, ServiceException, IllegalUserNameException {
+
+		String uid = UUID.randomUUID().toString();
+
+		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+
+		Employee e2 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+
+
+	}
 }

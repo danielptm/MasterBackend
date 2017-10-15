@@ -6,9 +6,11 @@ import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.SendMail;
 import com.globati.deserialization_beans.ChangePasswordWithToken;
@@ -62,10 +64,9 @@ public class EmployeeResource{
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException {
-        try {
-            this.employeeService.createEmployee(
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException, IllegalUserNameException, UserNameIsNotUniqueException, ServiceException {
+            Employee employee = this.employeeService.createEmployee(
                     createEmployee.getFirstName(),
                     createEmployee.getEmail(),
                     createEmployee.getUsername(),
@@ -77,12 +78,8 @@ public class EmployeeResource{
                     createEmployee.getCity(),
                     createEmployee.getCountry()
             );
-            return Response.ok().build();
-        } catch (UserDoesNotExistException e) {
-            throw new WebException("user already exists", Response.Status.EXPECTATION_FAILED);
-        } catch (Exception e) {
-            throw new WebException("Could not create a new employee at this time", Response.Status.CONFLICT);
-        }
+            return Response.ok(employee).build();
+
     }
 
         /**

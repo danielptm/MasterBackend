@@ -3,8 +3,10 @@ import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Event;
 import com.globati.service.EmployeeService;
 import com.globati.service.EventService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.utildb.GlobatiUtilException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +39,7 @@ public class TestEventService {
     EmployeeService employeeService;
 
     @Test
-    public void createEventInDatabase() throws FileNotFoundException, ServiceException, UserDoesNotExistException, GlobatiUtilException {
+    public void createEventInDatabase() throws FileNotFoundException, ServiceException, UserDoesNotExistException, GlobatiUtilException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
 
@@ -56,7 +58,7 @@ public class TestEventService {
 
 
     @Test
-    public void createEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+    public void createEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
 
@@ -74,7 +76,7 @@ public class TestEventService {
     }
 
     @Test
-    public void updateEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+    public void updateEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
@@ -92,7 +94,7 @@ public class TestEventService {
     }
 
     @Test
-    public void getEventsByEmployeeId() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+    public void getEventsByEmployeeId() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         String imageToReplace = "35/d0/cc-5b6e-4941-ab82-3b1881fc94d0image.png"; //Make sure this file exists, otherwise the test will fail!!!!
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
@@ -108,7 +110,7 @@ public class TestEventService {
     }
 
     @Test
-    public void getAllActiveEvents() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException {
+    public void getAllActiveEvents() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         createEventInDatabase();
         createEventInDatabase();
         List<Event> events = eventService.getAllActiveEvents();
