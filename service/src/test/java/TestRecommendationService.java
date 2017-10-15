@@ -2,8 +2,10 @@ import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.service.EmployeeService;
 import com.globati.service.RecommendationService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +39,7 @@ public class TestRecommendationService {
 
 
     @Test
-    public void createReccomendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+    public void createReccomendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 
@@ -54,7 +56,7 @@ public class TestRecommendationService {
     }
 
     @Test
-    public void updateRecommendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+    public void updateRecommendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 
@@ -74,7 +76,7 @@ public class TestRecommendationService {
     }
 
     @Test
-    public void getRecommendationsByEmployeeId() throws ServiceException, FileNotFoundException, UserDoesNotExistException {
+    public void getRecommendationsByEmployeeId() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );

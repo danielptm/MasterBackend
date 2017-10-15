@@ -6,9 +6,11 @@ import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.SendMail;
 import com.globati.deserialization_beans.ChangePasswordWithToken;
@@ -62,10 +64,9 @@ public class EmployeeResource{
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException {
-        try {
-            this.employeeService.createEmployee(
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(CreateEmployee createEmployee) throws UserDoesNotExistException, IllegalUserNameException, UserNameIsNotUniqueException, ServiceException {
+            Employee employee = this.employeeService.createEmployee(
                     createEmployee.getFirstName(),
                     createEmployee.getEmail(),
                     createEmployee.getUsername(),
@@ -77,12 +78,8 @@ public class EmployeeResource{
                     createEmployee.getCity(),
                     createEmployee.getCountry()
             );
-            return Response.ok().build();
-        } catch (UserDoesNotExistException e) {
-            throw new WebException("user already exists", Response.Status.EXPECTATION_FAILED);
-        } catch (Exception e) {
-            throw new WebException("Could not create a new employee at this time", Response.Status.CONFLICT);
-        }
+            return Response.ok(employee).build();
+
     }
 
         /**
@@ -123,79 +120,75 @@ public class EmployeeResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
-    public Response update(@QueryParam("employeeId") Long employeeId, UpdateEmployee updateEmployee){
+    public Response update(@QueryParam("employeeId") Long employeeId, UpdateEmployee updateEmployee) throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         Employee employee = null;
-        try{
-            employee = employeeService.getEmployeeById(employeeId);
+        employee = employeeService.getEmployeeById(employeeId);
 
-            if(updateEmployee.getEmail()!=null){
-                employee.setEmail(updateEmployee.getEmail());
-            }
-            if(updateEmployee.getUsername()!=null){
-                employee.setGlobatiUsername(updateEmployee.getUsername());
-            }
-            if(updateEmployee.getInstagramUserName()!=null){
-                employee.setInstagramUser(updateEmployee.getInstagramUserName());
-            }
-            if(updateEmployee.getInstagramToken()!=null){
-                employee.setInstagramUserToken(updateEmployee.getInstagramToken());
-            }
-            if(updateEmployee.getInstagramUserId()!=null){
-                employee.setInstagramUserId(updateEmployee.getInstagramUserId());
-            }
-            if(updateEmployee.getPaypal()!=null){
-                employee.setPaypalEmail(updateEmployee.getPaypal());
-            }
-            if(updateEmployee.getDay30()!=null){
-                employee.setAddAmount(updateEmployee.getDay30());
-            }
-            if(updateEmployee.getDay60()!=null){
-                employee.setAdd2month(updateEmployee.getDay60());
-            }
-            if(updateEmployee.getDay90()!=null){
-                employee.setAdd3month(updateEmployee.getDay90());
-            }
-            if(updateEmployee.getPropLong()!=null){
-                employee.setPropLong(updateEmployee.getPropLong());
-            }
-            if(updateEmployee.getPropLat()!=null){
-                employee.setPropLat(updateEmployee.getPropLat());
-            }
-            if(updateEmployee.getStreet()!=null){
-                employee.setStreet(updateEmployee.getStreet());
-            }
-            if(updateEmployee.getCity()!=null){
-                employee.setCity(updateEmployee.getCity());
-            }
-            if(updateEmployee.getCountry()!=null){
-                employee.setCountry(updateEmployee.getCountry());
-            }
-            if(updateEmployee.getAbout()!=null){
-                employee.setAbout(updateEmployee.getAbout());
-            }
-            if(updateEmployee.getWelcomeMail()!=null){
-                employee.setWelcomeMail(updateEmployee.getWelcomeMail());
-            }
-            if(updateEmployee.getRecruitmentMail()!=null){
-                employee.setRecruitmentMail(updateEmployee.getRecruitmentMail());
-            }
-            if(updateEmployee.getDisplay()!=null){
-                employee.setDisplay(updateEmployee.getDisplay());
-            }
-            if(updateEmployee.getImage()!=null){
-                employee.setImage(updateEmployee.getImage());
-            }
-            if(updateEmployee.getImage2()!=null){
-                employee.setImage2(updateEmployee.getImage2());
-            }
-            if(updateEmployee.getImage3()!=null){
-                employee.setImage3(updateEmployee.getImage3());
-            }
-            Employee updatedEmployee = employeeService.updateEmployee(employee);
-            return Response.ok(updatedEmployee).build();
-        }catch(Exception e){
-            throw new WebException(Response.Status.CONFLICT);
+        if(updateEmployee.getEmail()!=null){
+            employee.setEmail(updateEmployee.getEmail());
         }
+        if(updateEmployee.getUsername()!=null){
+            employee.setGlobatiUsername(updateEmployee.getUsername());
+        }
+        if(updateEmployee.getInstagramUserName()!=null){
+            employee.setInstagramUser(updateEmployee.getInstagramUserName());
+        }
+        if(updateEmployee.getInstagramToken()!=null){
+            employee.setInstagramUserToken(updateEmployee.getInstagramToken());
+        }
+        if(updateEmployee.getInstagramUserId()!=null){
+            employee.setInstagramUserId(updateEmployee.getInstagramUserId());
+        }
+        if(updateEmployee.getPaypal()!=null){
+            employee.setPaypalEmail(updateEmployee.getPaypal());
+        }
+        if(updateEmployee.getDay30()!=null){
+            employee.setAddAmount(updateEmployee.getDay30());
+        }
+        if(updateEmployee.getDay60()!=null){
+            employee.setAdd2month(updateEmployee.getDay60());
+        }
+        if(updateEmployee.getDay90()!=null){
+            employee.setAdd3month(updateEmployee.getDay90());
+        }
+        if(updateEmployee.getPropLong()!=null){
+            employee.setPropLong(updateEmployee.getPropLong());
+        }
+        if(updateEmployee.getPropLat()!=null){
+            employee.setPropLat(updateEmployee.getPropLat());
+        }
+        if(updateEmployee.getStreet()!=null){
+            employee.setStreet(updateEmployee.getStreet());
+        }
+        if(updateEmployee.getCity()!=null){
+            employee.setCity(updateEmployee.getCity());
+        }
+        if(updateEmployee.getCountry()!=null){
+            employee.setCountry(updateEmployee.getCountry());
+        }
+        if(updateEmployee.getAbout()!=null){
+            employee.setAbout(updateEmployee.getAbout());
+        }
+        if(updateEmployee.getWelcomeMail()!=null){
+            employee.setWelcomeMail(updateEmployee.getWelcomeMail());
+        }
+        if(updateEmployee.getRecruitmentMail()!=null){
+            employee.setRecruitmentMail(updateEmployee.getRecruitmentMail());
+        }
+        if(updateEmployee.getDisplay()!=null){
+            employee.setDisplay(updateEmployee.getDisplay());
+        }
+        if(updateEmployee.getImage()!=null){
+            employee.setImage(updateEmployee.getImage());
+        }
+        if(updateEmployee.getImage2()!=null){
+            employee.setImage2(updateEmployee.getImage2());
+        }
+        if(updateEmployee.getImage3()!=null){
+            employee.setImage3(updateEmployee.getImage3());
+        }
+        Employee updatedEmployee = employeeService.updateEmployee(employee);
+        return Response.ok(updatedEmployee).build();
     }
 
     @POST

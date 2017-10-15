@@ -4,8 +4,10 @@ import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.service.EventService;
 import com.globati.service.PropertiesService;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.utildb.*;
 import com.globati.HelpObjects.HashedPassword;
 import org.apache.logging.log4j.LogManager;
@@ -86,7 +88,7 @@ public class TestGlobatiUtil {
 
 
     @Test
-    public void testRecommendationCheckPromixmity() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testRecommendationCheckPromixmity() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
@@ -147,7 +149,7 @@ public class TestGlobatiUtil {
 
 
     @Test
-    public void testCheckPassword() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testCheckPassword() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
@@ -166,7 +168,7 @@ public class TestGlobatiUtil {
     }
 
     @Test
-    public void testCheckPasswordAndFail() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+    public void testCheckPasswordAndFail() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
         String uid = UUID.randomUUID().toString();
 

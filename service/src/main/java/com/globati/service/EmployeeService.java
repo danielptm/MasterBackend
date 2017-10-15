@@ -4,18 +4,23 @@ package com.globati.service;
 import com.globati.dbmodel.*;
 import com.globati.enums.Verified;
 import com.globati.repository.EmployeeRepository;
+import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
+import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.FacebookUserId;
 import com.globati.HelpObjects.ApiKey;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.PBKDF2;
 import com.globati.utildb.SendMail;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import sun.nio.ch.IOUtil;
 
 import javax.transaction.Transactional;
 import java.io.*;
@@ -261,25 +266,35 @@ public class EmployeeService {
      * @throws ServiceException org.hibernate.exception.ConstraintViolationException
      */
 
-    public Employee createEmployee(String name, String email, String username, String password, double latvalue, double longvalue, String image, String street, String city, String country) throws ServiceException, UserDoesNotExistException {
-        log.info("createEmployee(): email: " + email);
-        Employee employee = null;
+
+    public Employee createEmployee(
+            String name, String email, String username, String password, double latvalue,
+            double longvalue, String image, String street, String city, String country)
+            throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+
+        log.info("createEmployee(): email: "+email);
+        Employee employee=null;
         try {
-            if( userNameIsAReservedWord(username) ) {
-                throw new UserDoesNotExistException("Username is a reserved word for user: " + username);
+            if (userNameIsAReservedWord(username)) {
+                throw new IllegalUserNameException("This username is a reserved word: " + username);
             }
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             Employee savedEmployee = employeeRepository.save(employee);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
             return savedEmployee;
-        } catch (Exception e) {
+        } catch (IllegalUserNameException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
-            if (e.getClass().toString().equals("class org.springframework.dao.DataIntegrityViolationException")) {
-                throw new UserDoesNotExistException("This username already exists");
-            } else {
-                throw new ServiceException("Could not create employee with username: " + username, e);
-            }
+            throw e;
+        } catch (IOException e) {
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
+            e.printStackTrace();
+            throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()", e);
+        }
+        catch(DataIntegrityViolationException e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
+            e.printStackTrace();
+            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: "+username);
         }
     }
 
@@ -295,11 +310,9 @@ public class EmployeeService {
      * @throws UserDoesNotExistException
      */
 
-    public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException {
-        log.info("updateEmployee(): employeeId: " + employee.getId());
-        log.info("updateEmployee(): employeeUsername: "+employee.getGlobatiUsername());
-        log.info("updateEmployee(): employeeEmail: "+employee.getEmail());
-        String oliversEmail = "wyman.oliver@gmail.com";
+    public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException, IOException, IllegalUserNameException, UserNameIsNotUniqueException {
+        log.info("updateEmployee(): employeeId: "+employee.getId());
+        String oliversEmail="wyman.oliver@gmail.com";
         String danielsEmail = "daniel@globati.com";
         String edwardsEmail = "owardbodie@gmail.com";
 //        log.debug(employee.toString());
@@ -309,17 +322,21 @@ public class EmployeeService {
                     && !employee.getEmail().equals(danielsEmail)
                     && !employee.getEmail().equals(edwardsEmail)
             )) {
-                throw new UserDoesNotExistException("Username is a reserved word for user: " + employee.getGlobatiUsername());
+                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
             }
             return this.employeeRepository.save(employee);
+        }catch(IllegalUserNameException e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
+            e.printStackTrace();
+            throw e;
+        } catch(DataIntegrityViolationException e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
+            e.printStackTrace();
+            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: "+employee.getGlobatiUsername());
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
             e.printStackTrace();
-            if (e.getClass().toString().equals("class org.springframework.dao.DataIntegrityViolationException")) {
-                throw new UserDoesNotExistException("This username already exists, or was a reserved word for username:" + employee.getGlobatiUsername());
-            } else {
-                throw new ServiceException("Could not update employee: " + employee.toString(), e);
-            }
+            throw e;
         }
     }
 
@@ -557,21 +574,23 @@ public class EmployeeService {
             }
             incrementCounter(employee);
             updateEmployee(employee);
-            return getItemsForEmployee(id);
-        } catch (ServiceException e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
-            e.printStackTrace();
-            throw new ServiceException("Could get items for an employeee and increment for employee with id: " + id, e);
-        } catch (UserDoesNotExistException e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
-            e.printStackTrace();
-            throw new ServiceException("Could get items for an employeee and increment for employee with id: ", e);
         }
+        catch(UserDoesNotExistException e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
+            e.printStackTrace();
+            throw e;
+        }catch (Exception e) {
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
+            e.printStackTrace();
+            throw new ServiceException("Could get items for an employeee and increment for employee with id: "+id, e);
+        }
+        return getItemsForEmployee(id);
     }
 
     public static boolean userNameIsAReservedWord(String desiredUserName) throws ServiceException, IOException {
         boolean isAReservedKeyWord = false;
-        BufferedReader br = null;
+        BufferedReader br=null;
+        String lowerCasedDesiredName = desiredUserName.toLowerCase();
         try {
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
             File file = new File(classLoader.getResource("reserved_words/ListOfReservedWords.txt").getFile());
@@ -579,7 +598,7 @@ public class EmployeeService {
             String reservedWordFromList = "";
             while (reservedWordFromList != null) {
                 reservedWordFromList = br.readLine();
-                if (reservedWordFromList != null && reservedWordFromList.equals(desiredUserName)) {
+                if(reservedWordFromList!=null && reservedWordFromList.equals(lowerCasedDesiredName)){
                     isAReservedKeyWord = true;
                     break;
                 }
