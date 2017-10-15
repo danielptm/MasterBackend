@@ -153,7 +153,7 @@ public class EmployeeInfoTest {
      */
 
     @Test
-    public void createAccountOrLoginWithFacebook() throws ServiceException, UserDoesNotExistException, IOException {
+    public void createAccountOrLoginWithFacebook() throws ServiceException, UserDoesNotExistException, IOException, UserNameIsNotUniqueException, IllegalUserNameException {
         String facebookid="123";
         String name = "daniel";
         String email="hello@me.com";

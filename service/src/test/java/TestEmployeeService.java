@@ -308,7 +308,7 @@ public class TestEmployeeService {
 	@Test
 	public void userNameIsAReservedWord() throws ServiceException, IOException {
 		String desiredName="London";
-		String desieredName2="zebraface";
+		String desieredName2="zebraFace";
 		String desieredName3="Vienna";
 
 		Assert.assertTrue(employeeService.userNameIsAReservedWord(desiredName));
