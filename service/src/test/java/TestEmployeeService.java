@@ -319,7 +319,7 @@ public class TestEmployeeService {
 
 
 	@Test(expected = UserDoesNotExistException.class)
-	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException {
+	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException, IllegalUserNameException {
 		String uid = UUID.randomUUID().toString();
 		EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeAndIncrement(uid);
 

@@ -317,11 +317,7 @@ public class EmployeeService {
         String edwardsEmail = "owardbodie@gmail.com";
 //        log.debug(employee.toString());
         try {
-            if (userNameIsAReservedWord(employee.getGlobatiUsername())
-                    && (!employee.getEmail().equals(oliversEmail)
-                    && !employee.getEmail().equals(danielsEmail)
-                    && !employee.getEmail().equals(edwardsEmail)
-            )) {
+            if (userNameIsAReservedWord(employee.getGlobatiUsername())) {
                 throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
             }
             return this.employeeRepository.save(employee);
@@ -565,6 +561,8 @@ public class EmployeeService {
      * @throws Exception
      */
 
+
+
     public EmployeeAndItems getItemsForEmployeeAndIncrement(String id) throws ServiceException, UserDoesNotExistException {
         log.info("getItemsForEmployeeAndIncrement(): id: " + id);
         try {
@@ -573,7 +571,7 @@ public class EmployeeService {
                 throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: " + id);
             }
             incrementCounter(employee);
-            updateEmployee(employee);
+            updateEmployeeWithoutCheckingUsername(employee);
         }
         catch(UserDoesNotExistException e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
@@ -585,6 +583,15 @@ public class EmployeeService {
             throw new ServiceException("Could get items for an employeee and increment for employee with id: "+id, e);
         }
         return getItemsForEmployee(id);
+    }
+
+    /**
+     * No unit test written for this. This is only called by getItemsForEmployeeAndIncrement().
+     * Maybe just put it there instead. It is only used for updating an employee when not making the
+     * isValidusername check. Which is used when
+     */
+    private Employee updateEmployeeWithoutCheckingUsername(Employee employee){
+        return this.employeeRepository.save(employee);
     }
 
     public static boolean userNameIsAReservedWord(String desiredUserName) throws ServiceException, IOException {
