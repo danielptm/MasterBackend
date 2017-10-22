@@ -62,6 +62,10 @@ public class EmployeeService {
     EmployeeService() {
     }
 
+    String oliversEmail="wyman.oliver@gmail.com";
+    String danielsEmail = "daniel@globati.com";
+    String edwardsEmail = "owardbodie@gmail.com";
+
     public Employee getEmployeeById(Long id) throws ServiceException {
         log.info("getEmployeeById(): " + id);
         try {
@@ -272,25 +276,26 @@ public class EmployeeService {
             double longvalue, String image, String street, String city, String country)
             throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
-        log.info("createEmployee(): email: "+email);
-        Employee employee=null;
+        log.info("createEmployee(): email: " + email);
+        Employee employee = null;
+
+        String oliversEmail = "wyman.oliver@gmail.com";
+        String danielsEmail = "daniel@globati.com";
+        String edwardsEmail = "owardbodie@gmail.com";
+
         try {
-            if (userNameIsAReservedWord(username)) {
-                throw new IllegalUserNameException("This username is a reserved word: " + username);
-            }
-            employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
-            Employee savedEmployee = employeeRepository.save(employee);
-            employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
-            return savedEmployee;
-        } catch (IllegalUserNameException e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
-            e.printStackTrace();
-            throw e;
-        } catch (IOException e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
-            e.printStackTrace();
-            throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()", e);
-        }
+//            if (userNameIsAReservedWord(email.toLowerCase())
+//                    && ! email.equals(oliversEmail)
+//                    && ! email.equals(danielsEmail)
+//                    && ! email.equals(edwardsEmail)
+//                    ) {
+//                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
+//            }
+        employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
+        Employee savedEmployee = employeeRepository.save(employee);
+        employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
+        return savedEmployee;
+         }
         catch(DataIntegrityViolationException e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
@@ -312,24 +317,20 @@ public class EmployeeService {
 
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException, IOException, IllegalUserNameException, UserNameIsNotUniqueException {
         log.info("updateEmployee(): employeeId: "+employee.getId());
-        String oliversEmail="wyman.oliver@gmail.com";
-        String danielsEmail = "daniel@globati.com";
-        String edwardsEmail = "owardbodie@gmail.com";
+//        String oliversEmail="wyman.oliver@gmail.com";
+//        String danielsEmail = "daniel@globati.com";
+//        String edwardsEmail = "owardbodie@gmail.com";
 //        log.debug(employee.toString());
         try {
-            if (userNameIsAReservedWord(employee.getGlobatiUsername())
-                    && ! employee.getEmail().equals(oliversEmail)
-                    && ! employee.getEmail().equals(danielsEmail)
-                    && ! employee.getEmail().equals(edwardsEmail)
-                ) {
-                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
-            }
+//            if (userNameIsAReservedWord(employee.getGlobatiUsername())
+//                    || employee.getEmail().equals(oliversEmail)
+//                    || employee.getEmail().equals(danielsEmail)
+//                    || employee.getEmail().equals(edwardsEmail)
+//                ) {
+//                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
+//            }
             return this.employeeRepository.save(employee);
-        }catch(IllegalUserNameException e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
-            e.printStackTrace();
-            throw e;
-        } catch(DataIntegrityViolationException e){
+        }catch(DataIntegrityViolationException e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
             throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: "+employee.getGlobatiUsername());
