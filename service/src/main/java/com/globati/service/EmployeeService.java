@@ -317,7 +317,11 @@ public class EmployeeService {
         String edwardsEmail = "owardbodie@gmail.com";
 //        log.debug(employee.toString());
         try {
-            if (userNameIsAReservedWord(employee.getGlobatiUsername())) {
+            if (userNameIsAReservedWord(employee.getGlobatiUsername())
+                    && ! employee.getEmail().equals(oliversEmail)
+                    && ! employee.getEmail().equals(danielsEmail)
+                    && ! employee.getEmail().equals(edwardsEmail)
+                ) {
                 throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
             }
             return this.employeeRepository.save(employee);
