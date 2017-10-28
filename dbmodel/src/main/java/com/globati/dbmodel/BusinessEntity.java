@@ -22,7 +22,7 @@ public abstract class BusinessEntity extends BaseEntity {
     protected String city;
     @Column(length = 100, name = "country")
     protected String country;
-    @Column(name = "image")
+    @Column(name = "image", length = 500)
     protected String image;
     @Column(length = 3000, name = "description")
     protected String description;
