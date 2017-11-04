@@ -9,49 +9,49 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UpdateEmployee {
 
-    @JsonProperty("_employeeId")
+    @JsonProperty("employeeId")
     private Long employeeId;
-    @JsonProperty("_email")
+    @JsonProperty("email")
     private String email;
-    @JsonProperty("_username")
+    @JsonProperty("username")
     private String username;
-    @JsonProperty("_instagramUserName")
+    @JsonProperty("instagramUserName")
     private String instagramUserName;
-    @JsonProperty("_instagramToken")
+    @JsonProperty("instagramToken")
     private String instagramToken;
-    @JsonProperty("_instagramUserId")
+    @JsonProperty("instagramUserId")
     private String instagramUserId;
-    @JsonProperty("_paypal")
+    @JsonProperty("paypal")
     private String paypal;
-    @JsonProperty("_day30")
+    @JsonProperty("day30")
     private Double day30;
-    @JsonProperty("_day60")
+    @JsonProperty("day60")
     private Double day60;
-    @JsonProperty("_day90")
+    @JsonProperty("day90")
     private Double day90;
-    @JsonProperty("_propLat")
+    @JsonProperty("propLat")
     private Double propLat;
-    @JsonProperty("_propLong")
+    @JsonProperty("propLong")
     private Double propLong;
-    @JsonProperty("_street")
+    @JsonProperty("street")
     private String street;
-    @JsonProperty("_city")
+    @JsonProperty("city")
     private String city;
-    @JsonProperty("_country")
+    @JsonProperty("country")
     private String country;
-    @JsonProperty("_about")
+    @JsonProperty("about")
     private String about;
-    @JsonProperty("_display")
+    @JsonProperty("display")
     private String display;
-    @JsonProperty("_welcomeMail")
+    @JsonProperty("welcomeMail")
     private String welcomeMail;
-    @JsonProperty("_recruitmentMail")
+    @JsonProperty("recruitmentMail")
     private String recruitmentMail;
-    @JsonProperty("_image")
+    @JsonProperty("image")
     private String image;
-    @JsonProperty("_image2")
+    @JsonProperty("image2")
     private String image2;
-    @JsonProperty("_image3")
+    @JsonProperty("image3")
     private String image3;
 
     public UpdateEmployee() {}

@@ -1,8 +1,10 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by daniel on 12/20/16.
@@ -17,6 +19,8 @@ public class Recommendation extends BusinessEntity {
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     private Employee employee;
 
+    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER)
+    List<RecommendationImage> recommendationimages;
 
     public Recommendation() {
     }
@@ -46,6 +50,13 @@ public class Recommendation extends BusinessEntity {
     }
 
 
+    public List<RecommendationImage> getRecommendationimages() {
+        return recommendationimages;
+    }
+
+    public void setRecommendationimages(List<RecommendationImage> recommendationimages) {
+        this.recommendationimages = recommendationimages;
+    }
 }
 
 

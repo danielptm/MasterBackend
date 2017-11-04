@@ -105,11 +105,11 @@ public class Employee extends BaseEntity {
     }
 
     //Used for a facebook login/create account
-    public Employee(String name, String _email, String _username, String _image){
+    public Employee(String name, String _email, String username, String image){
         this.firstName = name;
         this.email = _email;
-        this.globatiUsername = _username;
-        this.image = _image;
+        this.globatiUsername = username;
+        this.image = image;
         this.addAmount = 10;
         this.add2month = 10;
         this.add3month = 10;

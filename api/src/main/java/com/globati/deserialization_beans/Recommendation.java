@@ -9,27 +9,27 @@ public class Recommendation {
 
 
 
-    @JsonProperty("_employeeId")
+    @JsonProperty("employeeId")
     Long employeeId;
-    @JsonProperty("_title")
+    @JsonProperty("title")
     String title;
-    @JsonProperty("_description")
+    @JsonProperty("description")
     String description;
-    @JsonProperty("_targetLat")
+    @JsonProperty("targetLat")
     Double targetLat;
-    @JsonProperty("_targetLong")
+    @JsonProperty("targetLong")
     Double targetLong;
-    @JsonProperty("_street")
+    @JsonProperty("street")
     String street;
-    @JsonProperty("_city")
+    @JsonProperty("city")
     String city;
-    @JsonProperty("_country")
+    @JsonProperty("country")
     String country;
-    @JsonProperty("_image1")
+    @JsonProperty("image1")
     String image1;
-    @JsonProperty("_image2")
+    @JsonProperty("image2")
     String image2;
-    @JsonProperty("_image3")
+    @JsonProperty("image3")
     String image3;
 
     public Recommendation(){}

@@ -10,29 +10,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Event {
 
-    @JsonProperty("_date")
+    @JsonProperty("date")
     private String date;
-    @JsonProperty("_title")
+    @JsonProperty("title")
     private String title;
-    @JsonProperty("_description")
+    @JsonProperty("description")
     private String description;
-    @JsonProperty("_targetLat")
+    @JsonProperty("targetLat")
     private Double targetLat;
-    @JsonProperty("_targetLong")
+    @JsonProperty("targetLong")
     private Double targetLong;
-    @JsonProperty("_street")
+    @JsonProperty("street")
     private String street;
-    @JsonProperty("_city")
+    @JsonProperty("city")
     private String city;
-    @JsonProperty("_country")
+    @JsonProperty("country")
     private String country;
-    @JsonProperty("_employeeId")
+    @JsonProperty("employeeId")
     private Long employeeId;
-    @JsonProperty("_imageName1")
+    @JsonProperty("imageName1")
     private String imageName1;
-    @JsonProperty("_imageName2")
+    @JsonProperty("imageName2")
     private String imageName2;
-    @JsonProperty("_imageName3")
+    @JsonProperty("imageName3")
     private String imageName3;
 
     public Event() {}

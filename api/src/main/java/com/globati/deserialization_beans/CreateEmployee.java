@@ -7,25 +7,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CreateEmployee {
 
-    @JsonProperty("_firstName")
+    @JsonProperty("firstName")
     String firstName;
-    @JsonProperty("_email")
+    @JsonProperty("email")
     String email;
-    @JsonProperty("_username")
+    @JsonProperty("username")
     String username;
-    @JsonProperty("_password")
+    @JsonProperty("password")
     String password;
-    @JsonProperty("_targetLat")
+    @JsonProperty("targetLat")
     Double targetLat;
-    @JsonProperty("_targetLong")
+    @JsonProperty("targetLong")
     Double targetLong;
-    @JsonProperty("_street")
+    @JsonProperty("street")
     String street;
-    @JsonProperty("_city")
+    @JsonProperty("city")
     String city;
-    @JsonProperty("_country")
+    @JsonProperty("country")
     String country;
-    @JsonProperty("_image")
+    @JsonProperty("image")
     String image;
 
     public CreateEmployee(){ }

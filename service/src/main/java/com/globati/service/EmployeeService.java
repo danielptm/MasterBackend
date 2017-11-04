@@ -413,6 +413,58 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Returns the same as above but gets their recommendations too.
+     *
+     * This method is really bad. I get employees then get their recommendations and then remove some of them... tsk tsk tsk.
+     *
+     * @param city
+     * @return
+     * @throws ServiceException
+     */
+    public List<Employee> getEmployeesByCityAndTheirRecommendations(String city) throws ServiceException {
+        log.info("getEmployeesByCity(): city: " + city);
+        try {
+            List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
+            for (Employee employee : employees) {
+                employee.setDeals(null);
+                employee.setEvents(null);
+                employee.setRecommendations(getRecommendationsForEmployee(employee));
+                System.out.println("******");
+                System.out.println(employee.getRecommendations().size());
+            }
+            List<Employee> employees1 = removeNonVerifiedEmployeesfromList(employees);
+            return employees1;
+        } catch (Exception e) {
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCity()");
+            e.printStackTrace();
+            throw new ServiceException("Could not get employees by city: " + city, e);
+        }
+    }
+
+    /**
+     * This method is untested
+     *
+     * @param employee
+     * @return
+     * @throws ServiceException
+     */
+    public List<Recommendation> getRecommendationsForEmployee(Employee employee) throws ServiceException {
+        log.info("getRecommendationsForEmployee(): id: "+employee.getId());
+        try{
+            List<Recommendation> recommendations = this.recommendationService.getRecommendationByEmployeeId(employee.getId());
+            return recommendations;
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationsForEmployee");
+            e.printStackTrace();
+            throw new ServiceException("Could not get recommendations for employee");
+
+        }
+
+
+
+    }
+
 
     /**
      * This function takes a list of employees and removes the employees which are not verified. This function

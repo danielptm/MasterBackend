@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by daniel on 12/20/16.
@@ -19,11 +20,13 @@ public class Event extends BusinessEntity{
     @Column(name="publicvisible")
     private boolean publicVisible;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="employeeid")
     @JsonBackReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     Employee employee;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    List<EventImage> eventimages;
 
     public Event(){}
 
@@ -44,7 +47,6 @@ public class Event extends BusinessEntity{
         this.image2 = imageName2;
         this.image3 = imageName3;
     }
-
 
     public Date getDate() {
         return date;
@@ -76,6 +78,14 @@ public class Event extends BusinessEntity{
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public List<EventImage> getEventimages() {
+        return eventimages;
+    }
+
+    public void setEventimages(List<EventImage> eventimages) {
+        this.eventimages = eventimages;
     }
 
 

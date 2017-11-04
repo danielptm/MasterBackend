@@ -1,6 +1,7 @@
 package com.globati.resources;
 
 import com.globati.dbmodel.Employee;
+import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
@@ -122,4 +123,26 @@ public class GuestResource {
             throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
         }
     }
+
+    @GET
+    @Path("place/andrecommendations/{place}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
+        List<Employee> employeesInPlace;
+        try{
+            employeesInPlace = employeeService.getEmployeesByCityAndTheirRecommendations(place);
+
+            if(employeesInPlace.size()>0) {
+                return Response.ok(employeesInPlace).build();
+            }
+            else{
+                throw new Exception("Could not locate any employees for this place "+place);
+            }
+        }catch(Exception e){
+            throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
+        }
+    }
+
+
 }
