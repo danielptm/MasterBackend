@@ -40,7 +40,6 @@ public class RecommendationService{
         Recommendation rec=null;
         String imagepath=null;
         try {
-//            imagepath = ImageHandler.createNewImage(is);
             employee = employeeRepository.getEmployeeByid(employeeId);
             rec = new Recommendation(employee, title, description, targetLat, targetLong, street, city, country, image1, image2, image3);
             Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
@@ -100,4 +99,12 @@ public class RecommendationService{
             throw new ServiceException( "Could not get recommendations by employeeId: "+id, e );
         }
     }
+
+    Hello hello;
+
+    public String whatup(){
+        String y =  hello.sayHi();
+        return y;
+    }
+
 }

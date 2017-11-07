@@ -1,14 +1,21 @@
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.service.EmployeeService;
+import com.globati.service.Hello;
 import com.globati.service.RecommendationService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.internal.configuration.MockitoAnnotationsMockAnnotationProcessor;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +27,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 /**
  * Created by daniel on 12/21/16.
  */
@@ -29,13 +40,25 @@ import java.util.UUID;
 @ActiveProfiles("test")
 public class TestRecommendationService {
 
-
-
     @Autowired
     RecommendationService recommendationService;
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    @InjectMocks
+    RecommendationService mockRecommendationService;
+
+    @Mock
+    Hello hello;
+
+    @Before
+    public void setup(){
+        this.hello = new Hello("hjola");
+        MockitoAnnotations.initMocks(this);
+
+    }
 
 
     @Test
@@ -98,4 +121,16 @@ public class TestRecommendationService {
         Assert.assertEquals(2, recommendationList.size());
 
     }
+
+
+    @Test
+    public void testCreateRecommendation(){
+
+         when(hello.sayHi()).thenReturn("zzzzz");
+
+         Assert.assertEquals(mockRecommendationService.whatup(), "zzzzz");
+
+
+    }
+
 }
