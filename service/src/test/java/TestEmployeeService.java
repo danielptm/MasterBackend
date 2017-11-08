@@ -23,6 +23,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -146,8 +147,15 @@ public class TestEmployeeService {
 		String uid3 = UUID.randomUUID().toString();
 		Event e = eventService.createEvent(e1, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
 
+		List<String> images = new ArrayList<>();
+
+		images.add("image1/url");
+		images.add("image2/url");
+		images.add("image3/url");
+
+
 		String uid4 = UUID.randomUUID().toString();
-		Recommendation rec = recommendationService.createRecommendation(e1.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+		Recommendation rec = recommendationService.createRecommendation(e1.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
 
 
 		//
@@ -292,7 +300,13 @@ public class TestEmployeeService {
 
 		InputStream fis = new FileInputStream(file);
 
-		Recommendation rec = recommendationService.createRecommendation(employee.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+		List<String> images = new ArrayList<>();
+
+		images.add("image1/url");
+		images.add("image2/url");
+		images.add("image3/url");
+
+		Recommendation rec = recommendationService.createRecommendation(employee.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
 
 		File file2 = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 

@@ -87,21 +87,21 @@ public class TestGlobatiUtil {
 
 
 
-    @Test
+    @Ignore
     public void testRecommendationCheckPromixmity() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
 
-        //true
-        Recommendation recommendation = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-
-        //true
-        Recommendation recommendation2 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-
-        //false
-        Recommendation recommendation3 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+//        //true
+//        Recommendation recommendation = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+//
+//        //true
+//        Recommendation recommendation2 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+//
+//        //false
+//        Recommendation recommendation3 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
 
     }

@@ -15,8 +15,7 @@ public class RecommendationImage extends ImageEntity{
 
     public RecommendationImage(){}
 
-    public RecommendationImage(Recommendation recommendation, String path){
-        this.recommendation = recommendation;
+    public RecommendationImage(String path){
         this.path = path;
     }
 

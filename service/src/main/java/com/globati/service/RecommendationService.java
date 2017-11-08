@@ -3,6 +3,7 @@ package com.globati.service;
 
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
+import com.globati.dbmodel.RecommendationImage;
 import com.globati.repository.EmployeeRepository;
 import com.globati.repository.RecommendationRepository;
 import com.globati.service.exceptions.ServiceException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,16 +36,20 @@ public class RecommendationService{
     RecommendationService(){}
 
 
-    public Recommendation createRecommendation(Long employeeId, String title, String description, double targetLat, double targetLong, String street, String city, String country, String image1, String image2, String image3) throws ServiceException {
+    public Recommendation createRecommendation(Long employeeId, String title, String description, double targetLat,
+                                               double targetLong, String street, String city, String country,
+                                               List<String> rawImages) throws ServiceException {
+
         log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
         Employee employee=null;
         Recommendation rec=null;
         String imagepath=null;
         try {
+            List<RecommendationImage> images = translateToRecommendationImages(rawImages);
             employee = employeeRepository.getEmployeeByid(employeeId);
-            rec = new Recommendation(employee, title, description, targetLat, targetLong, street, city, country, image1, image2, image3);
-            Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
-            return recommendationRepository.save(rec2);
+            rec = new Recommendation(employee, title, description, targetLat, targetLong, street, city, country, images);
+//            Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
+            return recommendationRepository.save(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
             e.printStackTrace();
@@ -100,6 +106,26 @@ public class RecommendationService{
         }
     }
 
+
+    /**
+     * No test written for this yet.
+     * @param rawImages
+     * @return
+     * @throws ServiceException
+     */
+    public List<RecommendationImage> translateToRecommendationImages(List<String> rawImages) throws ServiceException {
+        try{
+            List<RecommendationImage> recommendationImages = new ArrayList<>();
+            for(String image: rawImages){
+                RecommendationImage newImage = new RecommendationImage(image);
+                recommendationImages.add(newImage);
+            }
+            return recommendationImages;
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: translateRecommendationImages()");
+            throw new ServiceException("Could not translate raw images to RecommendationImage", e);
+        }
+    }
 
     //Garbage, just to test mocks and injectmocks
     Hello hello;

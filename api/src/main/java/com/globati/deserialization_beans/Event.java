@@ -34,6 +34,8 @@ public class Event {
     private String imageName2;
     @JsonProperty("imageName3")
     private String imageName3;
+    @JsonProperty("images")
+    private String images;
 
     public Event() {}
 
@@ -131,6 +133,14 @@ public class Event {
 
     public void setImageName3(String imageName3) {
         this.imageName3 = imageName3;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 
 

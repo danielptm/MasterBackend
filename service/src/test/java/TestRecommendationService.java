@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -72,10 +73,21 @@ public class TestRecommendationService {
 
         Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
+        List<String> images = new ArrayList<>();
+
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+
         Employee e = employeeService.getEmployeeById(employee.getId());
-        Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
 
         Assert.assertEquals(rec.getTitle(), "title");
+        Assert.assertEquals(rec.getRecommendationimages().get(0).getPath(), image1);
     }
 
     @Test
@@ -90,12 +102,24 @@ public class TestRecommendationService {
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
 
+        List<String> images = new ArrayList<>();
+
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+
         Employee e = employeeService.getEmployeeById(employee.getId());
-        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
         Recommendation rec = recommendationService.getRecommendationById(re.getId());
         rec.setActive(true);
+        rec.getRecommendationimages().get(0).setPath("hello");
         recommendationService.updateRecommendation(rec);
         Assert.assertEquals(recommendationService.getRecommendationById(re.getId()).isActive(), true);
+//        Assert.assertEquals(recommendationService.getRecommendationById(re.getId()).getRecommendationimages().get(0).getPath(), "hello");
     }
 
     @Test
@@ -114,8 +138,14 @@ public class TestRecommendationService {
 
         Employee employee =  employeeService.getEmployeeById(e.getId());
 
-        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
+        List<String> images = new ArrayList<>();
+
+        images.add("image1/url");
+        images.add("image2/url");
+        images.add("image3/url");
+
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
 
         List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(employee.getId());
         Assert.assertEquals(2, recommendationList.size());

@@ -19,13 +19,14 @@ public class Recommendation extends BusinessEntity {
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     private Employee employee;
 
-    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     List<RecommendationImage> recommendationimages;
 
-    public Recommendation() {
-    }
+    public Recommendation() {}
 
-    public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong, String street, String city, String country, String image, String image2, String image3) {
+    public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong,
+                          String street, String city, String country,  List<RecommendationImage> images
+                          ) {
         this.employee = employee;
         this.title = title;
         this.description = description;
@@ -34,10 +35,8 @@ public class Recommendation extends BusinessEntity {
         this.street = street;
         this.city = city;
         this.country = country;
-        this.image = image;
         this.active = true;
-        this.image2 = image2;
-        this.image3 = image3;
+        this.recommendationimages = images;
     }
 
 
@@ -48,7 +47,6 @@ public class Recommendation extends BusinessEntity {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
 
     public List<RecommendationImage> getRecommendationimages() {
         return recommendationimages;
