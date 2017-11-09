@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -42,17 +43,21 @@ public class TestEventService {
     public void createEventInDatabase() throws FileNotFoundException, ServiceException, UserDoesNotExistException, GlobatiUtilException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
+        List<String> images = new ArrayList<>();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
 
-        InputStream fis2 = new FileInputStream(file);
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         Date date = new Date();
-        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
-
-
+        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
 
     }
 
@@ -61,52 +66,74 @@ public class TestEventService {
     public void createEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
+        List<String> images = new ArrayList<>();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         Date date = new Date();
-        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
+        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
 
-
+        Event e2 = eventService.getEventById(e.getId());
         Assert.assertEquals(e.getTitle(), "title");
+        Assert.assertEquals(3, e2.getEventimages().size());
     }
 
     @Test
     public void updateEvent() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
+        List<String> images = new ArrayList<>();
+
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         Date date = new Date();
-        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
+        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
         Event e2 = eventService.getEventById(e.getId());
         e2.setActive(false);
         Assert.assertEquals(eventService.updateEvent(e2).isActive(), false);
+        Assert.assertEquals(3, e2.getEventimages().size());
 
     }
 
     @Test
     public void getEventsByEmployeeId() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        String imageToReplace = "35/d0/cc-5b6e-4941-ab82-3b1881fc94d0image.png"; //Make sure this file exists, otherwise the test will fail!!!!
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
+
+        List<String> images = new ArrayList<>();
+
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
         Date date = new Date();
-        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
+        Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
         Employee employee1 = employeeService.getEmployeeById(employee.getId());
         List<Event> events = eventService.getEventsByEmployeeId(employee1.getId());
         Assert.assertEquals(1, events.size() );
+        Assert.assertEquals(3, e.getEventimages().size());
+
     }
 
     @Test

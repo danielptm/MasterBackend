@@ -73,9 +73,6 @@ public class TestEmployeeService {
 
 		String uid = UUID.randomUUID().toString();
 
-		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
-		InputStream fis = new FileInputStream(file);
-
 		Employee employee4 = employeeService.createEmployee("check this2", uid+"@me.com", "London", "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
 
@@ -122,17 +119,19 @@ public class TestEmployeeService {
 
 	@Test
 	public void getEmployeebyUserName() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
-		File file = new File(getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile());
 
 		String image1 = "image1 file";
 		String image2 = "iamge2 file";
 		String image3 = "image3 file";
 
+		List<String> images = new ArrayList<>();
 
-		InputStream fis = new FileInputStream(file);
-		InputStream fis2 = new FileInputStream(file);
-		InputStream fis3 = new FileInputStream(file);
-		InputStream fis4 = new FileInputStream(file);
+		images.add("image1/url");
+		images.add("image2/url");
+		images.add("image3/url");
+
+
+
 
 		String uid = UUID.randomUUID().toString();
 
@@ -145,13 +144,8 @@ public class TestEmployeeService {
 		Date date = new Date();
 
 		String uid3 = UUID.randomUUID().toString();
-		Event e = eventService.createEvent(e1, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
+		Event e = eventService.createEvent(e1, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
 
-		List<String> images = new ArrayList<>();
-
-		images.add("image1/url");
-		images.add("image2/url");
-		images.add("image3/url");
 
 
 		String uid4 = UUID.randomUUID().toString();
@@ -314,7 +308,7 @@ public class TestEmployeeService {
 
 		Date date = new Date();
 
-		Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", "A description", "imageNam2", "imageName3");
+		Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
 
 		InputStream fis1 = new FileInputStream(file2);
 

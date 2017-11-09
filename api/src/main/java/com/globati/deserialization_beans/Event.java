@@ -2,6 +2,8 @@ package com.globati.deserialization_beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * Created by daniel on 12/16/16.
  *
@@ -35,7 +37,7 @@ public class Event {
     @JsonProperty("imageName3")
     private String imageName3;
     @JsonProperty("images")
-    private String images;
+    private List<String> images;
 
     public Event() {}
 
@@ -135,11 +137,11 @@ public class Event {
         this.imageName3 = imageName3;
     }
 
-    public String getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 

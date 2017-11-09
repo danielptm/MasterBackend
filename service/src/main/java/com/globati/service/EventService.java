@@ -1,8 +1,7 @@
 package com.globati.service;
 
 
-import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.Event;
+import com.globati.dbmodel.*;
 import com.globati.repository.EventRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.CheckProximity;
@@ -41,12 +40,13 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Event createEvent(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description, String imageName1, String imageName2, String imageName3 ) throws ServiceException, GlobatiUtilException {
+    public Event createEvent(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description, List<String> images ) throws ServiceException, GlobatiUtilException {
         log.info("createEvent(): employeeId: "+employee.getId());
         Event event=null;
         try {
-            event = new Event(employee, date, targetLat, targetLong, street, city, country, title, description, imageName1, imageName2, imageName3 );
-
+            event = new Event(employee, date, targetLat, targetLong, street, city, country, title, description );
+            List<EventImage> eventImages = this.translateEventImages(event, images);
+            event.setEventimages(eventImages);
             return eventRepository.save(event);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEvent(): employeeId: "+employee.getId());
@@ -123,6 +123,26 @@ public class EventService {
 
     public List<Event> getAllActiveEvents(){
         return this.eventRepository.getAllActiveEvents(true);
+    }
+
+    /**
+     * No test written for this yet.
+     * @param rawImages
+     * @return
+     * @throws ServiceException
+     */
+    public List<EventImage> translateEventImages(Event event, List<String> rawImages) throws ServiceException {
+        try{
+            List<EventImage> eventImages = new ArrayList<>();
+            for(String image: rawImages){
+                EventImage newImage = new EventImage(event, image);
+                eventImages.add(newImage);
+            }
+            return eventImages;
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: translateRecommendationImages()");
+            throw new ServiceException("Could not translate raw images to RecommendationImage", e);
+        }
     }
 
 

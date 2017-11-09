@@ -25,13 +25,13 @@ public class Event extends BusinessEntity{
     @JsonBackReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     Employee employee;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     List<EventImage> eventimages;
 
     public Event(){}
 
     //Took away distance, because this value will vary depending on the receptionists location
-    public Event(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description, String imageName1, String imageName2, String imageName3) {
+    public Event(Employee employee, Date date, double targetLat, double targetLong, String street, String city, String country, String title, String description) {
         this.employee = employee;
         this.date = date;
         this.targetLat = targetLat;
@@ -43,9 +43,6 @@ public class Event extends BusinessEntity{
         this.description = description;
         this.active = true;
         this.title = title;
-        this.image = imageName1;
-        this.image2 = imageName2;
-        this.image3 = imageName3;
     }
 
     public Date getDate() {

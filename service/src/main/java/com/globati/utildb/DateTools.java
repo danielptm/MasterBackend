@@ -60,7 +60,7 @@ public class DateTools {
         Calendar c = Calendar.getInstance();
         c.setTime(event.getDate());
         c.add(Calendar.DATE, i);
-        Event newevent = new Event(event.getEmployee(), c.getTime(), event.getTargetLat(), event.getTargetLong(),event.getStreet(), event.getCity(), event.getCountry(), event.getTitle(), event.getDescription(), event.getImage(), event.getImage2(), event.getImage3());
+        Event newevent = new Event(event.getEmployee(), c.getTime(), event.getTargetLat(), event.getTargetLong(),event.getStreet(), event.getCity(), event.getCountry(), event.getTitle(), event.getDescription());
         newevent.setDistance(event.getDistance());
         return newevent;
     }
