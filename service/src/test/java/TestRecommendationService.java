@@ -65,13 +65,8 @@ public class TestRecommendationService {
     @Test
     public void createReccomendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
-
-
-        Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Employee employee = employeeService.createEmployee("hi", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "23dAD", "seattle", "usa");
 
         List<String> images = new ArrayList<>();
 
@@ -86,8 +81,11 @@ public class TestRecommendationService {
         Employee e = employeeService.getEmployeeById(employee.getId());
         Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
 
+        Recommendation rec2 = recommendationService.getRecommendationById(rec.getId());
+
         Assert.assertEquals(rec.getTitle(), "title");
         Assert.assertEquals(rec.getRecommendationimages().get(0).getPath(), image1);
+        Assert.assertEquals(3, rec2.getRecommendationimages().size());
     }
 
     @Test
@@ -126,15 +124,7 @@ public class TestRecommendationService {
     public void getRecommendationsByEmployeeId() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
-        InputStream fis3 = new FileInputStream(file);
-
         Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-
-        String country = "Sweden";
 
         Employee employee =  employeeService.getEmployeeById(e.getId());
 
@@ -148,6 +138,7 @@ public class TestRecommendationService {
         recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
 
         List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(employee.getId());
+
         Assert.assertEquals(2, recommendationList.size());
 
     }

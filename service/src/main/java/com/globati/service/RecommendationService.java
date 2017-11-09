@@ -43,12 +43,11 @@ public class RecommendationService{
         log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
         Employee employee=null;
         Recommendation rec=null;
-        String imagepath=null;
         try {
-            List<RecommendationImage> images = translateToRecommendationImages(rawImages);
-            employee = employeeRepository.getEmployeeByid(employeeId);
-            rec = new Recommendation(employee, title, description, targetLat, targetLong, street, city, country, images);
-//            Recommendation rec2 = CheckProximity.getRecommendationProximity(rec, employee);
+            Employee e2 = employeeRepository.getEmployeeByid(employeeId);
+            rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country);
+            List<RecommendationImage> images = translateToRecommendationImages(rec, rawImages);
+            rec.setRecommendationimages(images);
             return recommendationRepository.save(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
@@ -113,11 +112,11 @@ public class RecommendationService{
      * @return
      * @throws ServiceException
      */
-    public List<RecommendationImage> translateToRecommendationImages(List<String> rawImages) throws ServiceException {
+    public List<RecommendationImage> translateToRecommendationImages(Recommendation recommendation, List<String> rawImages) throws ServiceException {
         try{
             List<RecommendationImage> recommendationImages = new ArrayList<>();
             for(String image: rawImages){
-                RecommendationImage newImage = new RecommendationImage(image);
+                RecommendationImage newImage = new RecommendationImage(recommendation, image);
                 recommendationImages.add(newImage);
             }
             return recommendationImages;

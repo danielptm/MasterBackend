@@ -10,7 +10,6 @@ import javax.persistence.Table;
 public class EventImage extends ImageEntity {
 
     @ManyToOne
-    @JoinColumn(name = "eventid")
     private Event event;
 
     public EventImage(){}

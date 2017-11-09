@@ -1,19 +1,20 @@
 package com.globati.dbmodel;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "recommendationimage")
 public class RecommendationImage extends ImageEntity{
 
     @ManyToOne
-    @JoinColumn(name = "recommendationid")
     private Recommendation recommendation;
 
     public RecommendationImage(){}
+
+    public RecommendationImage(Recommendation recommendation, String path){
+        this.recommendation = recommendation;
+        this.path = path;
+    }
 
     public RecommendationImage(String path){
         this.path = path;

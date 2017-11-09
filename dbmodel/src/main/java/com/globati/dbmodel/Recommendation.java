@@ -1,8 +1,6 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,18 +12,18 @@ import java.util.List;
 public class Recommendation extends BusinessEntity {
 
     @ManyToOne
-    @JoinColumn(name = "employeeid")
+    @JoinColumn(name="employeeid")
     @JsonBackReference
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     private Employee employee;
 
-    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     List<RecommendationImage> recommendationimages;
 
-    public Recommendation() {}
+    public Recommendation(){}
 
     public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong,
-                          String street, String city, String country,  List<RecommendationImage> images
+                          String street, String city, String country
                           ) {
         this.employee = employee;
         this.title = title;
@@ -36,7 +34,6 @@ public class Recommendation extends BusinessEntity {
         this.city = city;
         this.country = country;
         this.active = true;
-        this.recommendationimages = images;
     }
 
 

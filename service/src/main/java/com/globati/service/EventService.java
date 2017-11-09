@@ -46,8 +46,7 @@ public class EventService {
         Event event=null;
         try {
             event = new Event(employee, date, targetLat, targetLong, street, city, country, title, description, imageName1, imageName2, imageName3 );
-//            Event event2 = CheckProximity.getEventProximity(event, employee);
-            //I believe this is not necessary anymore because the distance is being on client side now
+
             return eventRepository.save(event);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEvent(): employeeId: "+employee.getId());
