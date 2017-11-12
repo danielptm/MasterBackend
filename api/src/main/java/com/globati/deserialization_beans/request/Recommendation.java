@@ -1,52 +1,50 @@
-package com.globati.deserialization_beans;
+package com.globati.deserialization_beans.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 /**
- * Created by daniel on 12/16/16.
- *
- * Email will probably be moved to the application level
- * of the new Spring project
+ * Created by daniel on 6/5/17.
  */
-public class Event {
+public class Recommendation {
 
-    @JsonProperty("date")
-    private String date;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("targetLat")
-    private Double targetLat;
-    @JsonProperty("targetLong")
-    private Double targetLong;
-    @JsonProperty("street")
-    private String street;
-    @JsonProperty("city")
-    private String city;
-    @JsonProperty("country")
-    private String country;
+
+
     @JsonProperty("employeeId")
-    private Long employeeId;
-    @JsonProperty("imageName1")
-    private String imageName1;
-    @JsonProperty("imageName2")
-    private String imageName2;
-    @JsonProperty("imageName3")
-    private String imageName3;
+    Long employeeId;
+    @JsonProperty("title")
+    String title;
+    @JsonProperty("description")
+    String description;
+    @JsonProperty("targetLat")
+    Double targetLat;
+    @JsonProperty("targetLong")
+    Double targetLong;
+    @JsonProperty("street")
+    String street;
+    @JsonProperty("city")
+    String city;
+    @JsonProperty("country")
+    String country;
+    @JsonProperty("image1")
+    String image1;
+    @JsonProperty("image2")
+    String image2;
+    @JsonProperty("image3")
+    String image3;
     @JsonProperty("images")
-    private List<String> images;
+    List<String> images;
 
-    public Event() {}
+    public Recommendation(){}
 
-    public String getDate() {
-        return date;
+
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getTitle() {
@@ -105,36 +103,28 @@ public class Event {
         this.country = country;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public String getImage1() {
+        return image1;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setImage1(String image1) {
+        this.image1 = image1;
     }
 
-    public String getImageName1() {
-        return imageName1;
+    public String getImage2() {
+        return image2;
     }
 
-    public void setImageName1(String imageName1) {
-        this.imageName1 = imageName1;
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
-    public String getImageName2() {
-        return imageName2;
+    public String getImage3() {
+        return image3;
     }
 
-    public void setImageName2(String imageName2) {
-        this.imageName2 = imageName2;
-    }
-
-    public String getImageName3() {
-        return imageName3;
-    }
-
-    public void setImageName3(String imageName3) {
-        this.imageName3 = imageName3;
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
     public List<String> getImages() {

@@ -1,6 +1,7 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminDeal.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/HashedPassword.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/Email.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/AdReceipt.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/ApiKey.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEmployee.java
@@ -14,9 +15,10 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/ForgotPassword.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestDeal.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestEvent.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/BusinessEmail.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/Recruitment.java
-/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mapper/BeansMapper.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/third_party_api/AWSCredentials.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/MassPayEntry.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminRecommendation.java

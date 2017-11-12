@@ -1,7 +1,8 @@
 package com.globati.resources;
 
+import com.globati.adapter.EmployeeAdapter;
 import com.globati.dbmodel.Employee;
-import com.globati.resources.annotations.GlobatiAuthentication;
+import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
@@ -39,6 +40,9 @@ public class GuestResource {
 
     @Autowired
     DealService dealService;
+
+    @Autowired
+    EmployeeAdapter employeeAdapter;
 
     /**
      * Called when logging into myglobatiadmin.com
@@ -124,14 +128,21 @@ public class GuestResource {
         }
     }
 
+    /**
+     * Called by the admin page. This is the only function so far to use the adapater service
+     * on top of the db service.
+     *
+     * @param place
+     * @return
+     */
     @GET
     @Path("place/andrecommendations/{place}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
-        List<Employee> employeesInPlace;
+        List<ResponseEmployee> employeesInPlace;
         try{
-            employeesInPlace = employeeService.getEmployeesByCityAndTheirRecommendations(place);
+            employeesInPlace = employeeAdapter.translateEmployeeAndItems(place);
 
             if(employeesInPlace.size()>0) {
                 return Response.ok(employeesInPlace).build();
@@ -143,6 +154,5 @@ public class GuestResource {
             throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
         }
     }
-
 
 }

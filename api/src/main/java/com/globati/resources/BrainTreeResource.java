@@ -104,7 +104,7 @@ public class BrainTreeResource {
             @FormDataParam("billingCountry") String billingCountry,
             @FormDataParam("cost") Double cost
     ) throws Exception {
-//        String response = braintreeService.makeTransaction(
+//        String response_employee = braintreeService.makeTransaction(
 //                image1, image2, image3,
 //                title,description,businessName,
 //                website, category, plan, targetLat,
@@ -113,8 +113,8 @@ public class BrainTreeResource {
 //                billingRegion, billingCountry, cost
 //        );
 //
-//        if(response !=null){
-//            return Response.ok(response).build();
+//        if(response_employee !=null){
+//            return Response.ok(response_employee).build();
 //        }
 //        else{
 //            throw new WebException("Could not create deal", Response.Status.CONFLICT);

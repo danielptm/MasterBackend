@@ -1,6 +1,8 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Recommendation extends BusinessEntity {
     private Employee employee;
 
     @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
+    @JsonBackReference
     List<RecommendationImage> recommendationimages;
 
     public Recommendation(){}

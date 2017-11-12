@@ -7,8 +7,8 @@ import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.third_party_api.AWSCredentials;
-import com.globati.deserialization_beans.FacebookLogin;
-import com.globati.deserialization_beans.PasswordAttempt;
+import com.globati.deserialization_beans.request.FacebookLogin;
+import com.globati.deserialization_beans.request.PasswordAttempt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * Created by daniel on 1/17/17.

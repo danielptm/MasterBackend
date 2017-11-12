@@ -7,6 +7,7 @@ import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.GlobatiUtilException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -104,10 +105,17 @@ public class TestEventService {
 
         Date date = new Date();
         Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
-        Event e2 = eventService.getEventById(e.getId());
-        e2.setActive(false);
-        Assert.assertEquals(eventService.updateEvent(e2).isActive(), false);
-        Assert.assertEquals(3, e2.getEventimages().size());
+
+        e.setCity("hithere");
+        e.getEventimages().get(0).setPath("testvalue");
+
+        eventService.updateEvent(e);
+
+        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(employee.getGlobatiUsername());
+
+        Assert.assertEquals(1, employeeAndItems.getEmployee().getEvents().size());
+        Assert.assertEquals(3, employeeAndItems.getEmployee().getEvents().get(0).getEventimages().size());
+        Assert.assertEquals("testvalue", employeeAndItems.getEmployee().getEvents().get(0).getEventimages().get(0).getPath());
 
     }
 
@@ -129,10 +137,11 @@ public class TestEventService {
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
         Date date = new Date();
         Event e = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
-        Employee employee1 = employeeService.getEmployeeById(employee.getId());
-        List<Event> events = eventService.getEventsByEmployeeId(employee1.getId());
-        Assert.assertEquals(1, events.size() );
-        Assert.assertEquals(3, e.getEventimages().size());
+        Event e2 = eventService.createEvent(employee, date, 33.33, 33.33, "Regiringsgatan", "stockholm","sweden", "title", "description", images);
+
+        EmployeeAndItems eai = employeeService.getItemsForEmployee(employee.getGlobatiUsername());
+
+        Assert.assertEquals(3, eai.getEmployee().getEvents().get(0).getEventimages().size());
 
     }
 
@@ -147,9 +156,6 @@ public class TestEventService {
         for(Event e: events){
             Assert.assertTrue(e.isActive());
         }
-
-
-
     }
 
 }

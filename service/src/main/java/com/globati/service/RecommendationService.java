@@ -126,12 +126,8 @@ public class RecommendationService{
         }
     }
 
-    //Garbage, just to test mocks and injectmocks
-    Hello hello;
 
-    public String whatup(){
-        String y =  hello.sayHi();
-        return y;
-    }
+
+
 
 }

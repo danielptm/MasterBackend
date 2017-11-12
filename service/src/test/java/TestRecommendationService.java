@@ -7,6 +7,7 @@ import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,20 +48,6 @@ public class TestRecommendationService {
     @Autowired
     EmployeeService employeeService;
 
-    @Autowired
-    @InjectMocks
-    RecommendationService mockRecommendationService;
-
-    @Mock
-    Hello hello;
-
-    @Before
-    public void setup(){
-        this.hello = new Hello("hjola");
-        MockitoAnnotations.initMocks(this);
-
-    }
-
 
     @Test
     public void createReccomendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
@@ -81,24 +68,25 @@ public class TestRecommendationService {
         Employee e = employeeService.getEmployeeById(employee.getId());
         Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
 
-        Recommendation rec2 = recommendationService.getRecommendationById(rec.getId());
 
-        Assert.assertEquals(rec.getTitle(), "title");
-        Assert.assertEquals(rec.getRecommendationimages().get(0).getPath(), image1);
-        Assert.assertEquals(3, rec2.getRecommendationimages().size());
+        Recommendation re3 = recommendationService.getRecommendationById(rec.getId());
+        re3.getRecommendationimages().get(0).setPath("asdfasdf");
+        re3.setCity("sdsdf");
+
+        recommendationService.updateRecommendation(re3);
+
+        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(e.getGlobatiUsername());
+
+
+        Assert.assertEquals(1, employeeAndItems.getEmployee().getRecommendations().size());
+        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
     }
 
     @Test
-    public void updateRecommendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void updateRecommendationAndRecommendationImages() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-
-        InputStream fis = new FileInputStream(file);
-        InputStream fis2 = new FileInputStream(file);
-
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-
 
         List<String> images = new ArrayList<>();
 
@@ -112,16 +100,23 @@ public class TestRecommendationService {
 
         Employee e = employeeService.getEmployeeById(employee.getId());
         Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
-        Recommendation rec = recommendationService.getRecommendationById(re.getId());
-        rec.setActive(true);
-        rec.getRecommendationimages().get(0).setPath("hello");
-        recommendationService.updateRecommendation(rec);
-        Assert.assertEquals(recommendationService.getRecommendationById(re.getId()).isActive(), true);
-//        Assert.assertEquals(recommendationService.getRecommendationById(re.getId()).getRecommendationimages().get(0).getPath(), "hello");
+
+        re.setCity("hithere");
+        re.getRecommendationimages().get(0).setPath("hithere");
+
+        recommendationService.updateRecommendation(re);
+
+        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(e.getGlobatiUsername());
+
+
+        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals("hithere", employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+
+
     }
 
     @Test
-    public void getRecommendationsByEmployeeId() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void getRecommendationsFromItemsOfEmployee() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
@@ -137,21 +132,17 @@ public class TestRecommendationService {
         recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
         recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
 
-        List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(employee.getId());
+        List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(e.getId());
+
+        EmployeeAndItems e3 = employeeService.getItemsForEmployee(e.getGlobatiUsername());
 
         Assert.assertEquals(2, recommendationList.size());
+        Assert.assertEquals(2, e3.getEmployee().getRecommendations().size());
+        Assert.assertEquals(3, e3.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
 
     }
 
 
-    @Test
-    public void testCreateRecommendation(){
 
-         when(hello.sayHi()).thenReturn("zzzzz");
-
-         Assert.assertEquals(mockRecommendationService.whatup(), "zzzzz");
-
-
-    }
 
 }

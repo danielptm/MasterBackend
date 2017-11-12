@@ -26,6 +26,7 @@ public class Event extends BusinessEntity{
     Employee employee;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
+    @JsonBackReference
     List<EventImage> eventimages;
 
     public Event(){}

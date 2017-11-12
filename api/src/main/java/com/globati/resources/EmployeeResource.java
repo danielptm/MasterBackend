@@ -1,6 +1,7 @@
 package com.globati.resources;
 
 import com.globati.dbmodel.Employee;
+import com.globati.deserialization_beans.request.CreateEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
@@ -13,9 +14,8 @@ import com.globati.HelpObjects.ChangePassword;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.SendMail;
-import com.globati.deserialization_beans.ChangePasswordWithToken;
-import com.globati.deserialization_beans.CreateEmployee;
-import com.globati.deserialization_beans.UpdateEmployee;
+import com.globati.deserialization_beans.request.ChangePasswordWithToken;
+import com.globati.deserialization_beans.request.UpdateEmployee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -265,5 +265,15 @@ public class EmployeeResource{
         }catch(Exception e){
             throw new WebException("Could not send emails", Response.Status.BAD_REQUEST);
         }
+    }
+
+    @GET
+    @Path("refactor-employee")
+    @Produces(MediaType.APPLICATION_JSON)
+    public  Response updateEmployee() throws ServiceException {
+        List<Employee> employees = employeeService.updateImagesAfterRefactor();
+        System.out.println("** api");
+        System.out.println(employees.get(0).getRecommendations().get(0).getRecommendationimages().size());
+        return Response.ok(employees.get(0).getRecommendations()).build();
     }
 }

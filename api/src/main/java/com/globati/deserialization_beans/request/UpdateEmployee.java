@@ -1,4 +1,4 @@
-package com.globati.deserialization_beans;
+package com.globati.deserialization_beans.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

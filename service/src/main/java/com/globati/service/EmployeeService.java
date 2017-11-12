@@ -228,9 +228,12 @@ public class EmployeeService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
+            List<RecommendationImage> recommendationImages = null;
+            List<EventImage> eventImages = null;
+
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
-            employee.setDeals(new ArrayList<>());
+            employee.setDeals(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
@@ -367,10 +370,10 @@ public class EmployeeService {
         }
     }
 
-    public Iterable<Employee> getAllEmployees() throws ServiceException {
+    public List<Employee> getAllEmployees() throws ServiceException {
         log.info("getAllEmployees()");
         try {
-            return employeeRepository.findAll();
+            return employeeRepository.getAllEmployees();
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getAllEmployees()");
             e.printStackTrace();
@@ -395,13 +398,20 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Have changed this function but not updated the test for it. This is called when sombody searches for employees
+     * of a city in the
+     * @param city
+     * @return
+     * @throws ServiceException
+     */
     public List<Employee> getEmployeesByCity(String city) throws ServiceException {
         log.info("getEmployeesByCity(): city: " + city);
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
             for (Employee employee : employees) {
-                employee.setDeals(null);
                 employee.setRecommendations(null);
+                employee.setDeals(null);
                 employee.setEvents(null);
             }
             List<Employee> employees1 = removeNonVerifiedEmployeesfromList(employees);
@@ -426,14 +436,13 @@ public class EmployeeService {
         log.info("getEmployeesByCity(): city: " + city);
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
+            List<Employee> returnEmployees = new ArrayList<>();
+
             for (Employee employee : employees) {
-                employee.setDeals(null);
-                employee.setEvents(null);
-                employee.setRecommendations(getRecommendationsForEmployee(employee));
-                System.out.println("******");
-                System.out.println(employee.getRecommendations().size());
+                EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
+                returnEmployees.add(employeeAndItems.getEmployee());
             }
-            List<Employee> employees1 = removeNonVerifiedEmployeesfromList(employees);
+            List<Employee> employees1 = removeNonVerifiedEmployeesfromList(returnEmployees);
             return employees1;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCity()");
@@ -683,5 +692,116 @@ public class EmployeeService {
         }
         return isAReservedKeyWord;
 
+    }
+
+
+    /**
+     * This method is a utility function that migrates image string from existing recommendations and events
+     * to the new RecommendationImage and EventImage tables.
+     * @return
+     * @throws ServiceException
+     */
+    public List<Employee> updateImagesAfterRefactor() throws ServiceException {
+        List<Employee> employees = getAllEmployees();
+        List<Employee> employeeList = new ArrayList<>();
+
+        try{
+            for(Employee employee: employees){
+
+                EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
+
+                //This employee has the items, the one aboce does not.
+                employee = employeeAndItems.getEmployee();
+
+                String rec1Image=null;
+                String rec2Image=null;
+                String rec3Image=null;
+
+                String event1Image=null;
+                String event2Image=null;
+                String event3Image=null;
+
+                for(Recommendation rec: employee.getRecommendations()){
+                    List<RecommendationImage> newRecommendationImages = new ArrayList<>();
+
+                    if(rec.getImage() != null) {
+                        rec1Image = rec.getImage();
+                    }
+
+                    if(rec.getImage2() !=null) {
+                        rec2Image = rec.getImage2();
+                    }
+
+                    if(rec.getImage3() != null) {
+                        rec3Image = rec.getImage3();
+                    }
+
+                    if(rec.getRecommendationimages() == null || rec.getRecommendationimages().isEmpty() ) {
+                        RecommendationImage newRecomendationImage = new RecommendationImage(rec, rec1Image);
+                        RecommendationImage newRecomendationImage2 = new RecommendationImage(rec, rec2Image);
+                        RecommendationImage newRecomendationImage3 = new RecommendationImage(rec, rec3Image);
+
+                        newRecomendationImage.setRecommendation(rec);
+                        newRecomendationImage2.setRecommendation(rec);
+                        newRecomendationImage3.setRecommendation(rec);
+
+                        newRecommendationImages.add(newRecomendationImage);
+                        newRecommendationImages.add(newRecomendationImage2);
+                        newRecommendationImages.add(newRecomendationImage3);
+
+                        rec.setRecommendationimages(newRecommendationImages);
+
+                        recommendationService.updateRecommendation(rec);
+
+//                        Recommendation rec2 = getItemsForEmployee(employee.getGlobatiUsername()).getEmployee().getRecommendations().get(0);
+                    }
+//                    System.out.println("****");
+//                    System.out.println(rec2.getRecommendationimages().get(0).getPath());
+
+                }
+
+                for(Event eve: employee.getEvents()){
+                    List<EventImage> eventImages = new ArrayList<>();
+
+                    if(eve.getImage() != null) {
+                        event1Image = eve.getImage();
+                    }
+
+                    if(eve.getImage2() != null) {
+                        event2Image = eve.getImage2();
+                    }
+
+                    if(eve.getImage3() != null ){
+                        event3Image = eve.getImage3();
+                    }
+
+                    if(eve.getEventimages() == null || eve.getEventimages().isEmpty()) {
+                        EventImage ei = new EventImage(eve, event1Image);
+                        EventImage ei2 = new EventImage(eve, event2Image);
+                        EventImage ei3 = new EventImage(eve, event3Image);
+
+                        ei.setEvent(eve);
+                        ei2.setEvent(eve);
+                        ei3.setEvent(eve);
+
+                        eventImages.add(ei);
+                        eventImages.add(ei2);
+                        eventImages.add(ei3);
+
+                        eve.setEventimages(eventImages);
+
+//                    System.out.println(eventService.updateEvent(eve));
+                    }
+                }
+
+                EmployeeAndItems employeeForList = getItemsForEmployee(employee.getGlobatiUsername());
+                employeeList.add(employeeForList.getEmployee());
+
+            }
+        }catch(Exception e){
+            log.warn("Somthing went wrong when trying to update employee after image refactor: Empoyee: ");
+            e.printStackTrace();
+        }
+        return employeeList;
     }
 }

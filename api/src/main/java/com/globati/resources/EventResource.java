@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,10 +21,9 @@ import java.util.List;
 
 /**
  * Created by daniel on 12/13/16.
- *
+ * <p>
  * Refactoring:
  * ok
- *
  */
 
 @Component
@@ -43,13 +43,13 @@ public class EventResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Path("{id}")
-    public Response update(@PathParam("id") Long id){
-        try{
+    public Response update(@PathParam("id") Long id) {
+        try {
             Event event = eventService.getEventById(id);
             event.setActive(false);
             this.eventService.updateEvent(event);
             return Response.ok().build();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new WebException("Could not update event", Response.Status.CONFLICT);
         }
     }
@@ -57,11 +57,11 @@ public class EventResource {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEvents(@QueryParam("id") Long id){
-        try{
+    public Response getEvents(@QueryParam("id") Long id) {
+        try {
             List<Event> events = this.eventService.getEventsByEmployeeId(id);
             return Response.ok(events).build();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new WebException("Could not get events by id", Response.Status.BAD_REQUEST);
         }
     }
@@ -70,15 +70,20 @@ public class EventResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.deserialization_beans.Event event) throws ServiceException, GlobatiUtilException, ParseException {
-        try{
+    public Response create(com.globati.deserialization_beans.request.Event event) throws ServiceException,
+            GlobatiUtilException, ParseException {
+        try {
             log.debug(event);
             Employee employee = employeeService.getEmployeeById(event.getEmployeeId());
             log.debug(employee);
-            Event event1 = this.eventService.createEvent(employee, com.globati.utildb.DateTools.getDate(event.getDate()), event.getTargetLat(), event.getTargetLong(), event.getStreet(), event.getCity(), event.getCountry(), event.getTitle(), event.getDescription(), event.getImageName1(), event.getImageName2(), event.getImageName3());
-            log.debug("created event: "+event1);
+            Event event1 = this.eventService.createEvent(
+                    employee,
+                    com.globati.utildb.DateTools.getDate(event.getDate()), event.getTargetLat(),
+                    event.getTargetLong(), event.getStreet(), event.getCity(), event.getCountry(),
+                    event.getTitle(), event.getDescription(), event.getImages());
+            log.debug("created event: " + event1);
             return Response.ok(event1).build();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
