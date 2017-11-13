@@ -1,7 +1,9 @@
 package com.globati.resources;
 
+import com.globati.adapter.EmployeeAdapter;
 import com.globati.dbmodel.Employee;
 import com.globati.deserialization_beans.request.CreateEmployee;
+import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
@@ -60,6 +62,9 @@ public class EmployeeResource{
 
     @Autowired
     DealService dealService;
+
+    @Autowired
+    EmployeeAdapter employeeAdapter;
 
 
     @POST
@@ -275,5 +280,33 @@ public class EmployeeResource{
         System.out.println("** api");
         System.out.println(employees.get(0).getRecommendations().get(0).getRecommendationimages().size());
         return Response.ok(employees.get(0).getRecommendations()).build();
+    }
+
+    /**
+     * Called by the admin page. This is the only function so far to use the adapater service
+     * on top of the db service. This is being called by fro the admin page, so should be moved to the employees resource
+     *
+     *
+     * @param place
+     * @return
+     */
+    @GET
+    @Path("place/andrecommendations/{place}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
+        List<ResponseEmployee> employeesInPlace;
+        try{
+            employeesInPlace = employeeAdapter.translateEmployeeAndItems(place);
+
+            if(employeesInPlace.size()>0) {
+                return Response.ok(employeesInPlace).build();
+            }
+            else{
+                throw new Exception("Could not locate any employees for this place "+place);
+            }
+        }catch(Exception e){
+            throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
+        }
     }
 }

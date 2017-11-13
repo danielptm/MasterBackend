@@ -45,7 +45,9 @@ public class GuestResource {
     EmployeeAdapter employeeAdapter;
 
     /**
-     * Called when logging into myglobatiadmin.com
+     * Called when logging into myglobatiadmin.com.
+     *
+     * See if this method is necesseary
      *
      * @param id
      * @return
@@ -85,6 +87,9 @@ public class GuestResource {
 
     /**
      * Called in globati.com/connect/userid
+     *
+     * This method can be taken away because we are not doing deals.
+     *
      * @param id
      * @return
      */
@@ -128,31 +133,5 @@ public class GuestResource {
         }
     }
 
-    /**
-     * Called by the admin page. This is the only function so far to use the adapater service
-     * on top of the db service.
-     *
-     * @param place
-     * @return
-     */
-    @GET
-    @Path("place/andrecommendations/{place}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
-        List<ResponseEmployee> employeesInPlace;
-        try{
-            employeesInPlace = employeeAdapter.translateEmployeeAndItems(place);
-
-            if(employeesInPlace.size()>0) {
-                return Response.ok(employeesInPlace).build();
-            }
-            else{
-                throw new Exception("Could not locate any employees for this place "+place);
-            }
-        }catch(Exception e){
-            throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
-        }
-    }
 
 }
