@@ -4,12 +4,13 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/AdReceipt.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/ApiKey.java
-/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperRecommendation.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/ChangePassword.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/Password.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseImage.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/GuestRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/mail/beans/ForgotPassword.java
@@ -21,8 +22,8 @@
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEvent.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/third_party_api/AWSCredentials.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/HelpObjects/MassPayEntry.java
-/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/super_beans/SuperDeal.java
+/Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminRecommendation.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/guest/EmployeeAndItems.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/service_beans/admin/AdminEmployee.java
 /Users/danieltuttle/Documents/globati/code/super/beans/src/main/java/com/globati/third_party_api/BraintreeToken.java

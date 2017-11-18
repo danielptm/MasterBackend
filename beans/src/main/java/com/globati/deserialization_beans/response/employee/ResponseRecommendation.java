@@ -4,117 +4,82 @@ import java.util.List;
 
 public class ResponseRecommendation {
 
-    protected double targetLat;
+    private Long id;
+    private String city;
+    private String country;
+    private String description;
+    private String distance;
+    private String location;
+    private String street;
+    private Double targetLat;
+    private Double targetLong;
+    private String title;
+    private boolean active;
+    private List<ResponseImage> recommendationImages;
 
-    @Override
-    public String toString() {
-        return "ResponseRecommendation{" +
-                "targetLat=" + targetLat +
-                ", targetLong=" + targetLong +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", description='" + description + '\'' +
-                ", location='" + location + '\'' +
-                ", title='" + title + '\'' +
-                ", recommendationImages=" + recommendationImages +
-                '}';
+    public ResponseRecommendation() {
     }
 
-    protected double targetLong;
-    protected String street;
-    protected String city;
-    protected String country;
-    protected String description;
-    protected String location;
-    protected String title;
-    List<String> recommendationImages;
-
-    public ResponseRecommendation(double targetLat, double targetLong, String street, String city, String country, String description, String location, String title, List<String> recommendationImages) {
-        this.targetLat = targetLat;
-        this.targetLong = targetLong;
-        this.street = street;
+    public ResponseRecommendation(Long id, String city, String country, String description, String distance, String location, String street, Double targetLat, Double targetLong, String title, boolean active, List<ResponseImage> recommendationImages) {
+        this.id = id;
         this.city = city;
         this.country = country;
         this.description = description;
+        this.distance = distance;
         this.location = location;
+        this.street = street;
+        this.targetLat = targetLat;
+        this.targetLong = targetLong;
         this.title = title;
         this.recommendationImages = recommendationImages;
+        this.active = active;
     }
 
-    public ResponseRecommendation(){}
-
-    public double getTargetLat() {
-        return targetLat;
-    }
-
-    public void setTargetLat(double targetLat) {
-        this.targetLat = targetLat;
-    }
-
-    public double getTargetLong() {
-        return targetLong;
-    }
-
-    public void setTargetLong(double targetLong) {
-        this.targetLong = targetLong;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
+    public Long getId() {
+        return id;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDistance() {
+        return distance;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public String getStreet() {
+        return street;
+    }
+
+    public Double getTargetLat() {
+        return targetLat;
+    }
+
+    public Double getTargetLong() {
+        return targetLong;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public boolean isActive() {
+        return active;
     }
 
-    public List<String> getRecommendationImages() {
+    public List<ResponseImage> getRecommendationImages() {
         return recommendationImages;
     }
-
-    public void setRecommendationImages(List<String> recommendationImages) {
-        this.recommendationImages = recommendationImages;
-    }
-
-
 }

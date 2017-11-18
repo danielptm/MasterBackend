@@ -211,20 +211,11 @@ public class EmployeeService {
         ArrayList<Object> items = new ArrayList<>();
         try {
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
+            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
             if (employee == null) {
                 throw new Exception("this username could not be found");
             }
-
-//            List<Deal> deals = dealService.getActiveDealsByEmployee(employee.getId());
-//            for (Deal deal : deals) {
-//                deal.setTransactionId(null);
-//            }
-//
-//            List<Deal> nearbydeals = this.dealService.getNearbyActiveDeals(employee.getCountry(), employee.getId());
-//            for (Deal deal : nearbydeals) {
-//                deal.setTransactionId(null);
-//            }
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
@@ -235,7 +226,12 @@ public class EmployeeService {
             employee.setEvents(events);
             employee.setDeals(null);
 
+            String jwt = jwtService.buildJwt(employeeInfo.getAuthToken());
+
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
+            employeeAndItems.setApiKey(jwt);
+            System.out.println("**** getItemsForEmployee(String username)");
+            System.out.println(employeeAndItems);
 
             return employeeAndItems;
         } catch (Exception e) {
@@ -711,7 +707,7 @@ public class EmployeeService {
                 EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
 
                 //This employee has the items, the one aboce does not.
-                employee = employeeAndItems.getEmployee();
+                Employee employeeWith = employeeAndItems.getEmployee();
 
                 String rec1Image=null;
                 String rec2Image=null;
@@ -721,20 +717,13 @@ public class EmployeeService {
                 String event2Image=null;
                 String event3Image=null;
 
-                for(Recommendation rec: employee.getRecommendations()){
+                for(Recommendation rec: employeeWith.getRecommendations()){
                     List<RecommendationImage> newRecommendationImages = new ArrayList<>();
 
-                    if(rec.getImage() != null) {
                         rec1Image = rec.getImage();
-                    }
-
-                    if(rec.getImage2() !=null) {
                         rec2Image = rec.getImage2();
-                    }
-
-                    if(rec.getImage3() != null) {
                         rec3Image = rec.getImage3();
-                    }
+
 
                     if(rec.getRecommendationimages() == null || rec.getRecommendationimages().isEmpty() ) {
                         RecommendationImage newRecomendationImage = new RecommendationImage(rec, rec1Image);
@@ -760,20 +749,13 @@ public class EmployeeService {
 
                 }
 
-                for(Event eve: employee.getEvents()){
+                for(Event eve: employeeWith.getEvents()){
                     List<EventImage> eventImages = new ArrayList<>();
 
-                    if(eve.getImage() != null) {
-                        event1Image = eve.getImage();
-                    }
+                    event1Image = eve.getImage();
+                    event2Image = eve.getImage2();
+                    event3Image = eve.getImage3();
 
-                    if(eve.getImage2() != null) {
-                        event2Image = eve.getImage2();
-                    }
-
-                    if(eve.getImage3() != null ){
-                        event3Image = eve.getImage3();
-                    }
 
                     if(eve.getEventimages() == null || eve.getEventimages().isEmpty()) {
                         EventImage ei = new EventImage(eve, event1Image);
@@ -794,7 +776,7 @@ public class EmployeeService {
                     }
                 }
 
-                EmployeeAndItems employeeForList = getItemsForEmployee(employee.getGlobatiUsername());
+                EmployeeAndItems employeeForList = getItemsForEmployee(employeeWith.getGlobatiUsername());
                 employeeList.add(employeeForList.getEmployee());
 
             }

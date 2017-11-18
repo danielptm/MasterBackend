@@ -4,35 +4,47 @@ import java.util.List;
 
 public class ResponseEmployee {
 
+    private Long id;
+    private String firstName;
+    private String image;
+    private String image2;
+    private String image3;
     private String email;
     private String paypalEmail;
     private String about;
     private String welcomeMail;
     private String recruitmentMail;
-    private String instagramUser;
+    private String instagramUserName;
     private String instagramUserId;
-    private String instagramUserToken;
-    private double propLat;
-    private double propLong;
+    private String instagramToken;
+    private Double propLat;
+    private Double propLong;
     private String street;
     private String city;
     private String country;
     private String display;
     private String globatiUsername;
-    List<ResponseRecommendation> recommendations;
-    List<ResponseEvent> events;
+    private boolean facebookProfile;
+    private List<ResponseRecommendation> recommendations;
+    private List<ResponseEvent> events;
+    private String apiKey;
 
     public ResponseEmployee(){}
 
-    public ResponseEmployee(String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUser, String instagramUserId, String instagramUserToken, double propLat, double propLong, String street, String city, String country, String display, String globatiUsername, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String firstName) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey) {
+        this.id = id;
+        this.firstName = firstName;
+        this.image = image;
+        this.image2 = image2;
+        this.image3 = image3;
         this.email = email;
         this.paypalEmail = paypalEmail;
         this.about = about;
         this.welcomeMail = welcomeMail;
         this.recruitmentMail = recruitmentMail;
-        this.instagramUser = instagramUser;
+        this.instagramUserName = instagramUserName;
         this.instagramUserId = instagramUserId;
-        this.instagramUserToken = instagramUserToken;
+        this.instagramToken = instagramToken;
         this.propLat = propLat;
         this.propLong = propLong;
         this.street = street;
@@ -40,165 +52,105 @@ public class ResponseEmployee {
         this.country = country;
         this.display = display;
         this.globatiUsername = globatiUsername;
-        this.firstName = firstName;
-        this.recommendations= recommendations;
+        this.facebookProfile = facebookProfile;
+        this.recommendations = recommendations;
         this.events = events;
+        this.apiKey = apikey;
     }
 
-    private String firstName;
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public String getImage3() {
+        return image3;
+    }
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPaypalEmail() {
         return paypalEmail;
     }
 
-    public void setPaypalEmail(String paypalEmail) {
-        this.paypalEmail = paypalEmail;
-    }
-
     public String getAbout() {
         return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
     }
 
     public String getWelcomeMail() {
         return welcomeMail;
     }
 
-    public void setWelcomeMail(String welcomeMail) {
-        this.welcomeMail = welcomeMail;
-    }
-
     public String getRecruitmentMail() {
         return recruitmentMail;
     }
 
-    public void setRecruitmentMail(String recruitmentMail) {
-        this.recruitmentMail = recruitmentMail;
-    }
-
-    public String getInstagramUser() {
-        return instagramUser;
-    }
-
-    public void setInstagramUser(String instagramUser) {
-        this.instagramUser = instagramUser;
+    public String getInstagramUserName() {
+        return instagramUserName;
     }
 
     public String getInstagramUserId() {
         return instagramUserId;
     }
 
-    public void setInstagramUserId(String instagramUserId) {
-        this.instagramUserId = instagramUserId;
+    public String getInstagramToken() {
+        return instagramToken;
     }
 
-    public String getInstagramUserToken() {
-        return instagramUserToken;
-    }
-
-    public void setInstagramUserToken(String instagramUserToken) {
-        this.instagramUserToken = instagramUserToken;
-    }
-
-    public double getPropLat() {
+    public Double getPropLat() {
         return propLat;
     }
 
-    public void setPropLat(double propLat) {
-        this.propLat = propLat;
-    }
-
-    public double getPropLong() {
+    public Double getPropLong() {
         return propLong;
-    }
-
-    public void setPropLong(double propLong) {
-        this.propLong = propLong;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getDisplay() {
         return display;
     }
 
-    public void setDisplay(String display) {
-        this.display = display;
+    public String getGlobatiUsername() {
+        return globatiUsername;
+    }
+
+    public boolean isFacebookProfile() {
+        return facebookProfile;
     }
 
     public List<ResponseRecommendation> getRecommendations() {
         return recommendations;
     }
 
-    public void setRecommendations(List<ResponseRecommendation> recommendations) {
-        this.recommendations = recommendations;
-    }
-
     public List<ResponseEvent> getEvents() {
         return events;
     }
 
-    public void setEvents(List<ResponseEvent> events) {
-        this.events = events;
+    public String getApiKey() {
+        return apiKey;
     }
-
-
-    @Override
-    public String toString() {
-        return "ResponseEmployee{" +
-                "email='" + email + '\'' +
-                ", paypalEmail='" + paypalEmail + '\'' +
-                ", about='" + about + '\'' +
-                ", welcomeMail='" + welcomeMail + '\'' +
-                ", recruitmentMail='" + recruitmentMail + '\'' +
-                ", instagramUser='" + instagramUser + '\'' +
-                ", instagramUserId='" + instagramUserId + '\'' +
-                ", instagramUserToken='" + instagramUserToken + '\'' +
-                ", propLat=" + propLat +
-                ", propLong=" + propLong +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", display='" + display + '\'' +
-                ", globatiUsername='" + globatiUsername + '\'' +
-                ", recommendations=" + recommendations +
-                ", events=" + events +
-                ", firstName='" + firstName + '\'' +
-                '}';
-    }
-
-
 }

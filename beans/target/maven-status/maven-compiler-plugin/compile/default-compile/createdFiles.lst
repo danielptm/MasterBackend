@@ -1,5 +1,5 @@
-com/globati/HelpObjects/Email.class
 com/globati/super_beans/SuperEmployee.class
+com/globati/HelpObjects/Email.class
 com/globati/service_beans/guest/GuestEmployee.class
 com/globati/service_beans/admin/AdminEvent.class
 com/globati/service_beans/guest/EmployeeAndItems.class
@@ -21,9 +21,9 @@ com/globati/HelpObjects/Password.class
 com/globati/deserialization_beans/response/employee/ResponseEvent.class
 com/globati/HelpObjects/ChangePassword.class
 com/globati/third_party_api/BraintreeToken.class
+com/globati/third_party_api/AWSCredentials.class
 com/globati/deserialization_beans/response/employee/ResponseEmployee.class
 com/globati/mail/beans/AdReceipt.class
-com/globati/third_party_api/AWSCredentials.class
 com/globati/mail/beans/Welcome.class
 com/globati/service_beans/admin/AdminEmployee.class
 com/globati/mail/beans/Recruitment.class

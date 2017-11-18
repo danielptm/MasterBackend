@@ -87,12 +87,10 @@ public class EmployeeResource{
 
     }
 
-        /**
-     * Dude, I am not sure where this is being called in the app, I thought this was at as the name says
-     * login(). But a login to myglobatiadmi occurs in AuthenticationResource.
+    /**
      *
-     * This is called after the authenticationResource is accessed, because that just returned credentials. This logs
-         * the user in and gets their data.
+     * This is called after the authenticationResource is accessed, because that just returned credentials.
+     * This logs the user in and gets their data.
      *
      * @param username
      * @return
@@ -104,7 +102,7 @@ public class EmployeeResource{
     @GlobatiAuthentication
     public Response login(String username){
         try{
-            EmployeeAndItems employeeitems = employeeService.getItemsForEmployee(username);
+            ResponseEmployee employeeitems = employeeAdapter.getAndTranslateEmployeeByUserName(username);
             return Response.ok(employeeitems).build();
         }catch(Exception e){
             e.printStackTrace();
@@ -115,6 +113,9 @@ public class EmployeeResource{
 
 
     /**
+     *
+     * Try and take this away. If I use an UpdateEmployee object on the client site, update all its fields, and
+     * then just do the same here, then it should work to take away the check with null checks.
      *
      *
      * @return
@@ -196,6 +197,12 @@ public class EmployeeResource{
         return Response.ok(updatedEmployee).build();
     }
 
+    /**
+     * Take this away.
+     * @param id
+     * @param is
+     * @return
+     */
     @POST
     @Path("picture")
     @Produces(MediaType.TEXT_PLAIN)
@@ -272,13 +279,20 @@ public class EmployeeResource{
         }
     }
 
+
+    /**
+     * This method is called to move all images from an employees events and recommendations to the EventImages and
+     * RecommendationImages tables. It is not used in production for any purpose, just to update DB after refactoring.
+     *
+     *
+     * @return
+     * @throws ServiceException
+     */
     @GET
     @Path("refactor-employee")
     @Produces(MediaType.APPLICATION_JSON)
     public  Response updateEmployee() throws ServiceException {
         List<Employee> employees = employeeService.updateImagesAfterRefactor();
-        System.out.println("** api");
-        System.out.println(employees.get(0).getRecommendations().get(0).getRecommendationimages().size());
         return Response.ok(employees.get(0).getRecommendations()).build();
     }
 
@@ -297,7 +311,7 @@ public class EmployeeResource{
     public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
         List<ResponseEmployee> employeesInPlace;
         try{
-            employeesInPlace = employeeAdapter.translateEmployeeAndItems(place);
+            employeesInPlace = employeeAdapter.getAndTranslateEmployeesByCitySearch(place);
 
             if(employeesInPlace.size()>0) {
                 return Response.ok(employeesInPlace).build();
