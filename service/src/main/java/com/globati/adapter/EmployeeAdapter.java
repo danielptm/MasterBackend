@@ -35,70 +35,48 @@ public class EmployeeAdapter {
      * @return
      * @throws ServiceException
      */
-
-
-//    public Employee transLateOneEmployeeAndItems(String username) throws AdapaterException {
-//        try{
-//            return transLateOneEmployeeAndItems(username);
-//        }catch(Exception e){
-//            log.warn("** Adapater exception ");
-//            e.printStackTrace();
-//            throw new AdapaterException("There was a problem translating 1 employee");
-//        }
-//    }
-
-
     //This is bad, I have to call getItemsForEmployee() becase createAccountOrLoginWithFacebookId, does not return an apikey
     public ResponseEmployee translateFacebookLogin(String id, String name, String email, String image) throws AdapaterException {
-        try{
+        try {
             EmployeeAndItems profileItems = employeeService.createAccountOrLoginWithFacebook(id, name, email, image);
             EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(profileItems.getEmployee().getGlobatiUsername());
             return translateOneEmployee(employeeAndItems);
-
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("An adapater exception occurred");
             e.printStackTrace();
             throw new AdapaterException("An adpater exception occurred");
 
         }
-
     }
 
-
     public ResponseEmployee getAndTranslateEmployeeByUserName(String username) throws AdapaterException {
-        try{
+        try {
             return translateOneEmployee(employeeService.getItemsForEmployee(username));
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("** GLOBATI ADAPATER EXCEPTION **");
             e.printStackTrace();
             throw new AdapaterException("Could not get employee by username: getEmployeeByUsername()");
         }
     }
 
-
-
-    private ResponseEmployee translateOneEmployee(EmployeeAndItems employeeAndItems) throws AdapaterException {
+    public ResponseEmployee translateOneEmployee(EmployeeAndItems employeeAndItems) throws AdapaterException {
         try {
-
-
 
             Employee employee = employeeAndItems.getEmployee();
 
-                ResponseEmployee responseEmployee = new ResponseEmployee(
-                        employee.getId(), employee.getFirstName(), employee.getImage(),
-                        employee.getImage2(), employee.getImage3(), employee.getEmail(),
-                        employee.getPaypalEmail(), employee.getAbout(), employee.getWelcomeMail(),
-                        employee.getRecruitmentMail(), employee.getFirstName(), employee.getInstagramUserId(),
-                        employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
-                        employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
-                        employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee), employeeAndItems.getApiKey()
-                );
+            ResponseEmployee responseEmployee = new ResponseEmployee(
+                    employee.getId(), employee.getFirstName(), employee.getImage(),
+                    employee.getImage2(), employee.getImage3(), employee.getEmail(),
+                    employee.getPaypalEmail(), employee.getAbout(), employee.getWelcomeMail(),
+                    employee.getRecruitmentMail(), employee.getFirstName(), employee.getInstagramUserId(),
+                    employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
+                    employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
+                    employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
+                    translateResponseEvents(employee), employeeAndItems.getApiKey()
+            );
 
-                System.out.println("*****U");
-                System.out.println(employeeAndItems.getApiKey());
             return responseEmployee;
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("An adapater exception occurred");
             e.printStackTrace();
             throw new AdapaterException("An adpater exception occurred");
@@ -126,9 +104,10 @@ public class EmployeeAdapter {
                         translateResponseEvents(employee), null
                 );
 
+
                 responseEmployees.add(responseEmployee);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("An adapater exception occurred");
             e.printStackTrace();
             throw new AdapaterException("An adpater exception occurred");
@@ -142,10 +121,9 @@ public class EmployeeAdapter {
 
         List<Recommendation> items = null;
 
-        if(employee.getRecommendations() !=null || ! employee.getRecommendations().isEmpty()){
+        if (employee.getRecommendations() != null || !employee.getRecommendations().isEmpty()) {
             items = employee.getRecommendations();
-        }
-        else{
+        } else {
             return null;
         }
 
@@ -158,7 +136,7 @@ public class EmployeeAdapter {
             );
             responseRecomendations.add(responseRecommendation);
         }
-        System.out.println("***: "+responseRecomendations.size());
+        System.out.println("***: " + responseRecomendations.size());
         return responseRecomendations;
     }
 
@@ -166,18 +144,21 @@ public class EmployeeAdapter {
         List<ResponseEvent> responses = new ArrayList<>();
 
         List<Event> items = null;
-        if(employee.getRecommendations() != null || ! employee.getRecommendations().isEmpty()){
+        if (employee.getRecommendations() != null || !employee.getRecommendations().isEmpty()) {
             items = employee.getEvents();
-        }
-        else{
+        } else {
             return null;
         }
 
-
-        for (Event item : items) {
-            ResponseEvent event = new ResponseEvent(
+        for (Event event : items) {
+            ResponseEvent responseEvent = new ResponseEvent(
+                    event.getId(), event.getCity(), event.getCountry(),
+                    event.getRepeat(), event.getDescription(), event.getLocation(),
+                    event.getStreet(), event.getTargetLat(), event.getTargetLong(),
+                    event.getTitle(), translateEventImages(event.getEventimages()),
+                    event.getDate()
             );
-            responses.add(event);
+            responses.add(responseEvent);
         }
         return responses;
     }

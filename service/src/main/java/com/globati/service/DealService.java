@@ -54,7 +54,6 @@ public class DealService {
                     country, street, city, DealType.valueOf(dealtype), website, email, DealPlan.valueOf(plan), cost, transactionId, billingStreet,
                     billingCity, billingRegion, billingCountry
             );
-//            GuestDeal withDistanceDeal = CheckProximity.getDealProximity(deal, employee);
             return dealRepository.save(deal);
         } catch (Exception e) {
             log.warn("** GLOBATI DEAL SERVICE EXCEPTION ** FOR METHOD: createDeal()");

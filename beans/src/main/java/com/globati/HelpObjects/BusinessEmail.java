@@ -2,6 +2,8 @@ package com.globati.HelpObjects;
 
 /**
  * Created by daniel on 1/21/17.
+ *
+ *
  */
 public class BusinessEmail {
 

@@ -14,8 +14,6 @@ import java.util.Date;
 @Table(name = "employeeInfo")
 public class EmployeeInfo extends BaseEntity{
 
-
-
     @Column(name="employeeid")
     Long employeeId;
     @Column(name="globatipassword")

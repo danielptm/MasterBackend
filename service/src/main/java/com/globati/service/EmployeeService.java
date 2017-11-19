@@ -1,6 +1,7 @@
 package com.globati.service;
 
 
+import com.globati.HelpObjects.ApiKey;
 import com.globati.dbmodel.*;
 import com.globati.enums.Verified;
 import com.globati.repository.EmployeeRepository;
@@ -10,19 +11,15 @@ import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.FacebookUserId;
-import com.globati.HelpObjects.ApiKey;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.PBKDF2;
 import com.globati.utildb.SendMail;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import sun.nio.ch.IOUtil;
 
-import javax.transaction.Transactional;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +59,7 @@ public class EmployeeService {
     EmployeeService() {
     }
 
-    String oliversEmail="wyman.oliver@gmail.com";
+    String oliversEmail = "wyman.oliver@gmail.com";
     String danielsEmail = "daniel@globati.com";
     String edwardsEmail = "owardbodie@gmail.com";
 
@@ -109,6 +106,7 @@ public class EmployeeService {
         }
     }
 
+    //This should be moved to the employee Info repository
     public EmployeeInfo createEmployeeInfoFromFacebook(Long id, String facebookid) throws ServiceException {
         log.info("createEmployeeInfoFromFacebook(): id: " + id);
         try {
@@ -219,19 +217,12 @@ public class EmployeeService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
-            List<RecommendationImage> recommendationImages = null;
-            List<EventImage> eventImages = null;
 
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
 
-            String jwt = jwtService.buildJwt(employeeInfo.getAuthToken());
-
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
-            employeeAndItems.setApiKey(jwt);
-            System.out.println("**** getItemsForEmployee(String username)");
-            System.out.println(employeeAndItems);
 
             return employeeAndItems;
         } catch (Exception e) {
@@ -277,28 +268,15 @@ public class EmployeeService {
 
         log.info("createEmployee(): email: " + email);
         Employee employee = null;
-
-        String oliversEmail = "wyman.oliver@gmail.com";
-        String danielsEmail = "daniel@globati.com";
-        String edwardsEmail = "owardbodie@gmail.com";
-
         try {
-//            if (userNameIsAReservedWord(email.toLowerCase())
-//                    && ! email.equals(oliversEmail)
-//                    && ! email.equals(danielsEmail)
-//                    && ! email.equals(edwardsEmail)
-//                    ) {
-//                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
-//            }
-        employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
-        Employee savedEmployee = employeeRepository.save(employee);
-        employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
-        return savedEmployee;
-         }
-        catch(DataIntegrityViolationException e){
+            employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
+            Employee savedEmployee = employeeRepository.save(employee);
+            employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
+            return savedEmployee;
+        } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
-            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: "+username);
+            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: " + username);
         }
     }
 
@@ -315,24 +293,13 @@ public class EmployeeService {
      */
 
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException, IOException, IllegalUserNameException, UserNameIsNotUniqueException {
-        log.info("updateEmployee(): employeeId: "+employee.getId());
-//        String oliversEmail="wyman.oliver@gmail.com";
-//        String danielsEmail = "daniel@globati.com";
-//        String edwardsEmail = "owardbodie@gmail.com";
-//        log.debug(employee.toString());
+        log.info("updateEmployee(): employeeId: " + employee.getId());
         try {
-//            if (userNameIsAReservedWord(employee.getGlobatiUsername())
-//                    || employee.getEmail().equals(oliversEmail)
-//                    || employee.getEmail().equals(danielsEmail)
-//                    || employee.getEmail().equals(edwardsEmail)
-//                ) {
-//                throw new IllegalUserNameException("Username is a reserved word for user: " + employee.getGlobatiUsername());
-//            }
             return this.employeeRepository.save(employee);
-        }catch(DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
-            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: "+employee.getGlobatiUsername());
+            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: " + employee.getGlobatiUsername());
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateEmployee()");
             e.printStackTrace();
@@ -397,6 +364,7 @@ public class EmployeeService {
     /**
      * Have changed this function but not updated the test for it. This is called when sombody searches for employees
      * of a city in the
+     *
      * @param city
      * @return
      * @throws ServiceException
@@ -421,7 +389,7 @@ public class EmployeeService {
 
     /**
      * Returns the same as above but gets their recommendations too.
-     *
+     * <p>
      * This method is really bad. I get employees then get their recommendations and then remove some of them... tsk tsk tsk.
      *
      * @param city
@@ -455,17 +423,16 @@ public class EmployeeService {
      * @throws ServiceException
      */
     public List<Recommendation> getRecommendationsForEmployee(Employee employee) throws ServiceException {
-        log.info("getRecommendationsForEmployee(): id: "+employee.getId());
-        try{
+        log.info("getRecommendationsForEmployee(): id: " + employee.getId());
+        try {
             List<Recommendation> recommendations = this.recommendationService.getRecommendationByEmployeeId(employee.getId());
             return recommendations;
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationsForEmployee");
             e.printStackTrace();
             throw new ServiceException("Could not get recommendations for employee");
 
         }
-
 
 
     }
@@ -624,7 +591,6 @@ public class EmployeeService {
      */
 
 
-
     public EmployeeAndItems getItemsForEmployeeAndIncrement(String id) throws ServiceException, UserDoesNotExistException {
         log.info("getItemsForEmployeeAndIncrement(): id: " + id);
         try {
@@ -634,15 +600,14 @@ public class EmployeeService {
             }
             incrementCounter(employee);
             updateEmployeeWithoutCheckingUsername(employee);
-        }
-        catch(UserDoesNotExistException e){
+        } catch (UserDoesNotExistException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
             e.printStackTrace();
             throw e;
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
             e.printStackTrace();
-            throw new ServiceException("Could get items for an employeee and increment for employee with id: "+id, e);
+            throw new ServiceException("Could get items for an employeee and increment for employee with id: " + id, e);
         }
         return getItemsForEmployee(id);
     }
@@ -652,13 +617,13 @@ public class EmployeeService {
      * Maybe just put it there instead. It is only used for updating an employee when not making the
      * isValidusername check. Which is used when
      */
-    private Employee updateEmployeeWithoutCheckingUsername(Employee employee){
+    private Employee updateEmployeeWithoutCheckingUsername(Employee employee) {
         return this.employeeRepository.save(employee);
     }
 
     public static boolean userNameIsAReservedWord(String desiredUserName) throws ServiceException, IOException {
         boolean isAReservedKeyWord = false;
-        BufferedReader br=null;
+        BufferedReader br = null;
         String lowerCasedDesiredName = desiredUserName.toLowerCase();
         try {
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -667,7 +632,7 @@ public class EmployeeService {
             String reservedWordFromList = "";
             while (reservedWordFromList != null) {
                 reservedWordFromList = br.readLine();
-                if(reservedWordFromList!=null && reservedWordFromList.equals(lowerCasedDesiredName)){
+                if (reservedWordFromList != null && reservedWordFromList.equals(lowerCasedDesiredName)) {
                     isAReservedKeyWord = true;
                     break;
                 }
@@ -682,7 +647,7 @@ public class EmployeeService {
             e.printStackTrace();
             throw new ServiceException("Could not calculate if the username is a reserved word for word:" + desiredUserName, e);
         } finally {
-            if(br != null) {
+            if (br != null) {
                 br.close();
             }
         }
@@ -694,6 +659,7 @@ public class EmployeeService {
     /**
      * This method is a utility function that migrates image string from existing recommendations and events
      * to the new RecommendationImage and EventImage tables.
+     *
      * @return
      * @throws ServiceException
      */
@@ -701,31 +667,31 @@ public class EmployeeService {
         List<Employee> employees = getAllEmployees();
         List<Employee> employeeList = new ArrayList<>();
 
-        try{
-            for(Employee employee: employees){
+        try {
+            for (Employee employee : employees) {
 
                 EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
 
                 //This employee has the items, the one aboce does not.
                 Employee employeeWith = employeeAndItems.getEmployee();
 
-                String rec1Image=null;
-                String rec2Image=null;
-                String rec3Image=null;
+                String rec1Image = null;
+                String rec2Image = null;
+                String rec3Image = null;
 
-                String event1Image=null;
-                String event2Image=null;
-                String event3Image=null;
+                String event1Image = null;
+                String event2Image = null;
+                String event3Image = null;
 
-                for(Recommendation rec: employeeWith.getRecommendations()){
+                for (Recommendation rec : employeeWith.getRecommendations()) {
                     List<RecommendationImage> newRecommendationImages = new ArrayList<>();
 
-                        rec1Image = rec.getImage();
-                        rec2Image = rec.getImage2();
-                        rec3Image = rec.getImage3();
+                    rec1Image = rec.getImage();
+                    rec2Image = rec.getImage2();
+                    rec3Image = rec.getImage3();
 
 
-                    if(rec.getRecommendationimages() == null || rec.getRecommendationimages().isEmpty() ) {
+                    if (rec.getRecommendationimages() == null || rec.getRecommendationimages().isEmpty()) {
                         RecommendationImage newRecomendationImage = new RecommendationImage(rec, rec1Image);
                         RecommendationImage newRecomendationImage2 = new RecommendationImage(rec, rec2Image);
                         RecommendationImage newRecomendationImage3 = new RecommendationImage(rec, rec3Image);
@@ -749,7 +715,7 @@ public class EmployeeService {
 
                 }
 
-                for(Event eve: employeeWith.getEvents()){
+                for (Event eve : employeeWith.getEvents()) {
                     List<EventImage> eventImages = new ArrayList<>();
 
                     event1Image = eve.getImage();
@@ -757,7 +723,7 @@ public class EmployeeService {
                     event3Image = eve.getImage3();
 
 
-                    if(eve.getEventimages() == null || eve.getEventimages().isEmpty()) {
+                    if (eve.getEventimages() == null || eve.getEventimages().isEmpty()) {
                         EventImage ei = new EventImage(eve, event1Image);
                         EventImage ei2 = new EventImage(eve, event2Image);
                         EventImage ei3 = new EventImage(eve, event3Image);
@@ -780,7 +746,7 @@ public class EmployeeService {
                 employeeList.add(employeeForList.getEmployee());
 
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("Somthing went wrong when trying to update employee after image refactor: Empoyee: ");
             e.printStackTrace();
         }

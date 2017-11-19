@@ -1,6 +1,5 @@
 package com.globati.deserialization_beans.response.employee;
 
-import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 
@@ -16,14 +15,16 @@ public class ResponseEvent {
     private Double targetLat;
     private Double targetLong;
     private String title;
-    private String showOnMap;
-    private Long imageIncrement; // This should be taken away, because it is a value need on client not server.
+    private Date date;
+
+
+
     private List<ResponseImage> images;
 
     public ResponseEvent() {
     }
 
-    public ResponseEvent(Long id, String city, String country, String dateInactive, String description, String location, String street, Double targetLat, Double targetLong, String title, String showOnMap,Long imageIncrement, List<ResponseImage> images) {
+    public ResponseEvent(Long id, String city, String country, String dateInactive, String description, String location, String street, Double targetLat, Double targetLong, String title, List<ResponseImage> images, Date date) {
         this.id = id;
         this.city = city;
         this.country = country;
@@ -34,9 +35,8 @@ public class ResponseEvent {
         this.targetLat = targetLat;
         this.targetLong = targetLong;
         this.title = title;
-        this.showOnMap = showOnMap;
         this.images = images;
-        this.imageIncrement = imageIncrement;
+        this.date = date;
 
     }
 
@@ -80,14 +80,18 @@ public class ResponseEvent {
         return title;
     }
 
-    public String getShowOnMap() {
-        return showOnMap;
+    public Date getDate() {
+        return date;
     }
 
-    public Long getImageIncrement() {
-        return imageIncrement;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
+
+    public List<ResponseImage> getImages() {
+        return images;
+    }
 
     @Override
     public String toString() {
@@ -102,9 +106,7 @@ public class ResponseEvent {
         sb.append(", targetLat=").append(targetLat);
         sb.append(", targetLong=").append(targetLong);
         sb.append(", title='").append(title).append('\'');
-        sb.append(", showOnMap='").append(showOnMap).append('\'');
         sb.append(", images='").append(images).append('\'');
-        sb.append(", imageIncrement=").append(imageIncrement);
         sb.append('}');
         return sb.toString();
     }

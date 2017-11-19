@@ -153,4 +153,96 @@ public class ResponseEmployee {
     public String getApiKey() {
         return apiKey;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPaypalEmail(String paypalEmail) {
+        this.paypalEmail = paypalEmail;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public void setWelcomeMail(String welcomeMail) {
+        this.welcomeMail = welcomeMail;
+    }
+
+    public void setRecruitmentMail(String recruitmentMail) {
+        this.recruitmentMail = recruitmentMail;
+    }
+
+    public void setInstagramUserName(String instagramUserName) {
+        this.instagramUserName = instagramUserName;
+    }
+
+    public void setInstagramUserId(String instagramUserId) {
+        this.instagramUserId = instagramUserId;
+    }
+
+    public void setInstagramToken(String instagramToken) {
+        this.instagramToken = instagramToken;
+    }
+
+    public void setPropLat(Double propLat) {
+        this.propLat = propLat;
+    }
+
+    public void setPropLong(Double propLong) {
+        this.propLong = propLong;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
+
+    public void setGlobatiUsername(String globatiUsername) {
+        this.globatiUsername = globatiUsername;
+    }
+
+    public void setFacebookProfile(boolean facebookProfile) {
+        this.facebookProfile = facebookProfile;
+    }
+
+    public void setRecommendations(List<ResponseRecommendation> recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public void setEvents(List<ResponseEvent> events) {
+        this.events = events;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 }

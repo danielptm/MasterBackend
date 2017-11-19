@@ -6,15 +6,11 @@ import com.globati.resources.exceptions.UserDoesNotExistMapper;
 import com.globati.resources.exceptions.UserNameIsNotUniqueExceptionMapper;
 import com.globati.resources.filters.DefaultAuthentication;
 import com.globati.resources.filters.ResponseFilter;
-import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.test.context.ActiveProfiles;
-
-import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by daniel on 12/11/16.
@@ -33,7 +29,6 @@ public class JerseyConfig extends ResourceConfig{
         register(IllegalIUsernameExceptionMapper.class);
         register(UserNameIsNotUniqueExceptionMapper.class);
         register(DealResource.class);
-        register(BrainTreeResource.class);
         register(AuthenticationResource.class);
         register(ResponseFilter.class);
         register(FacebookConnectionFactory.class);
