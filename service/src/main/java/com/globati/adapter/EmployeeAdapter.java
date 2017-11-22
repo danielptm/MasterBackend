@@ -25,7 +25,6 @@ public class EmployeeAdapter {
 
     private static final Logger log = LogManager.getLogger(EmployeeAdapter.class);
 
-
     @Autowired
     EmployeeService employeeService;
 
@@ -53,6 +52,16 @@ public class EmployeeAdapter {
         try {
             return translateOneEmployee(employeeService.getItemsForEmployee(username));
         } catch (Exception e) {
+            log.warn("** GLOBATI ADAPATER EXCEPTION **");
+            e.printStackTrace();
+            throw new AdapaterException("Could not get employee by username: getEmployeeByUsername()");
+        }
+    }
+
+    public ResponseEmployee getTranslateEmployeeAndIncrement(String username) throws AdapaterException {
+        try{
+            return translateOneEmployee(employeeService.getItemsForEmployeeAndIncrement(username));
+        }catch(Exception e){
             log.warn("** GLOBATI ADAPATER EXCEPTION **");
             e.printStackTrace();
             throw new AdapaterException("Could not get employee by username: getEmployeeByUsername()");
@@ -103,8 +112,6 @@ public class EmployeeAdapter {
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                         translateResponseEvents(employee), null
                 );
-
-
                 responseEmployees.add(responseEmployee);
             }
         } catch (Exception e) {
@@ -117,40 +124,37 @@ public class EmployeeAdapter {
     }
 
     private List<ResponseRecommendation> translateResponseRecommendations(Employee employee) {
+
         List<ResponseRecommendation> responseRecomendations = new ArrayList<>();
 
         List<Recommendation> items = null;
 
         if (employee.getRecommendations() != null || !employee.getRecommendations().isEmpty()) {
             items = employee.getRecommendations();
-        } else {
-            return null;
         }
 
         for (Recommendation recommendation : items) {
             ResponseRecommendation responseRecommendation = new ResponseRecommendation(
                     recommendation.getId(), recommendation.getCity(), recommendation.getCountry(),
-                    recommendation.getDescription(), recommendation.getCity(), recommendation.getLocation(),
+                    recommendation.getDescription(), recommendation.getLocation(),
                     recommendation.getStreet(), recommendation.getTargetLat(), recommendation.getTargetLong(),
                     recommendation.getTitle(), recommendation.isActive(), translateRecommendationImages(recommendation.getRecommendationimages())
             );
             responseRecomendations.add(responseRecommendation);
         }
-        System.out.println("***: " + responseRecomendations.size());
+
         return responseRecomendations;
+
     }
 
     private List<ResponseEvent> translateResponseEvents(Employee employee) throws Exception {
         List<ResponseEvent> responses = new ArrayList<>();
 
         List<Event> items = null;
-        if (employee.getRecommendations() != null || !employee.getRecommendations().isEmpty()) {
+        if ( employee.getRecommendations() != null || ! employee.getRecommendations().isEmpty() ) {
             items = employee.getEvents();
-        } else {
-            return null;
         }
-
-        for (Event event : items) {
+        for ( Event event : items ) {
             ResponseEvent responseEvent = new ResponseEvent(
                     event.getId(), event.getCity(), event.getCountry(),
                     event.getRepeat(), event.getDescription(), event.getLocation(),

@@ -8,30 +8,28 @@ public class ResponseRecommendation {
     private String city;
     private String country;
     private String description;
-    private String distance;
     private String location;
     private String street;
     private Double targetLat;
     private Double targetLong;
     private String title;
     private boolean active;
-    private List<ResponseImage> recommendationImages;
+    private List<ResponseImage> images;
 
     public ResponseRecommendation() {
     }
 
-    public ResponseRecommendation(Long id, String city, String country, String description, String distance, String location, String street, Double targetLat, Double targetLong, String title, boolean active, List<ResponseImage> recommendationImages) {
+    public ResponseRecommendation(Long id, String city, String country, String description,  String location, String street, Double targetLat, Double targetLong, String title, boolean active, List<ResponseImage> recommendationImages) {
         this.id = id;
         this.city = city;
         this.country = country;
         this.description = description;
-        this.distance = distance;
         this.location = location;
         this.street = street;
         this.targetLat = targetLat;
         this.targetLong = targetLong;
         this.title = title;
-        this.recommendationImages = recommendationImages;
+        this.images = recommendationImages;
         this.active = active;
     }
 
@@ -51,9 +49,6 @@ public class ResponseRecommendation {
         return description;
     }
 
-    public String getDistance() {
-        return distance;
-    }
 
     public String getLocation() {
         return location;
@@ -79,7 +74,9 @@ public class ResponseRecommendation {
         return active;
     }
 
-    public List<ResponseImage> getRecommendationImages() {
-        return recommendationImages;
+    public List<ResponseImage> getImages() {
+        return images;
     }
+
+
 }

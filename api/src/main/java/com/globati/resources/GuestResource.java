@@ -6,6 +6,7 @@ import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
+import com.globati.service.exceptions.AdapaterException;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -79,9 +80,9 @@ public class GuestResource {
     @Path("visitprofile/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response visitProfile(@PathParam("username") String id) throws ServiceException, UserDoesNotExistException, IllegalUserNameException {
-        EmployeeAndItems employeeAndNearbyDeals;
-        employeeAndNearbyDeals = employeeService.getItemsForEmployeeAndIncrement(id);
+    public Response visitProfile(@PathParam("username") String id) throws ServiceException, UserDoesNotExistException, IllegalUserNameException, AdapaterException {
+        ResponseEmployee employeeAndNearbyDeals;
+        employeeAndNearbyDeals = employeeAdapter.getTranslateEmployeeAndIncrement(id);
         return Response.ok(employeeAndNearbyDeals).build();
 
     }
