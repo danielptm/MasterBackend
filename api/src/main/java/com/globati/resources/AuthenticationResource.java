@@ -68,11 +68,10 @@ public class AuthenticationResource {
      * sent from the client. If the 2 ids match then the user is authenticated on the globati side. If not, then an
      * exception is thrown.
      *
-     *
-     *
      * @param facebookLogin
      * @return
      * @throws ServiceException
+     *
      */
     @POST
     @Path("facebooklogin")

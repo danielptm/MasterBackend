@@ -1,14 +1,13 @@
 package com.globati.service;
 
 
+import com.globati.adapter.ImageAdapater;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.dbmodel.RecommendationImage;
 import com.globati.repository.EmployeeRepository;
 import com.globati.repository.RecommendationRepository;
 import com.globati.service.exceptions.ServiceException;
-import com.globati.utildb.CheckProximity;
-import com.globati.utildb.ImageHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,9 @@ public class RecommendationService{
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    ImageAdapater imageAdapater;
+
     RecommendationService(){}
 
 
@@ -46,7 +48,7 @@ public class RecommendationService{
         try {
             Employee e2 = employeeRepository.getEmployeeByid(employeeId);
             rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country);
-            List<RecommendationImage> images = translateToRecommendationImages(rec, rawImages);
+            List<RecommendationImage> images = imageAdapater.translateToRecommendationImages(rec, rawImages);
             rec.setRecommendationimages(images);
             return recommendationRepository.save(rec);
         }catch(Exception e){
@@ -60,13 +62,11 @@ public class RecommendationService{
         return recommendationRepository.findOne(id);
     }
 
-
-
     public Recommendation inactivateRecommendation(Long id) throws ServiceException {
         try{
             Recommendation rec = recommendationRepository.findOne(id);
             rec.setActive(false);
-            return updateRecommendation(rec);
+            return recommendationRepository.save(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: inactivateRecommendation(): id: "+id);
             e.printStackTrace();
@@ -75,12 +75,32 @@ public class RecommendationService{
     }
 
     public Recommendation updateRecommendation(Recommendation recommendation) throws ServiceException {
-        try {
+        try{
             return recommendationRepository.save(recommendation);
         }catch(Exception e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: "+recommendation.getId());
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: ");
             e.printStackTrace();
-            throw new ServiceException("Could not update recommendation with id: "+recommendation.getId(), e);
+            throw new ServiceException("Could not update recommendation with id: ", e);
+        }
+    }
+
+    public Recommendation updateRecommendation(Long id, String title, String description, List<String> images) throws ServiceException {
+        try {
+
+            Recommendation returnRecommendation = getRecommendationById(id);
+
+            returnRecommendation.setDescription(description);
+            returnRecommendation.setTitle(title);
+
+            List<RecommendationImage> translatedImages = imageAdapater.translateToRecommendationImages(returnRecommendation, images);
+
+            returnRecommendation.setRecommendationimages(translatedImages);
+
+            return recommendationRepository.save(returnRecommendation);
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: ");
+            e.printStackTrace();
+            throw new ServiceException("Could not update recommendation with id: ", e);
         }
     }
 
@@ -94,7 +114,6 @@ public class RecommendationService{
         }
     }
 
-
     public List<Recommendation> getRecommendationByEmployeeId(Long id) throws ServiceException {
         try{
             return recommendationRepository.getAllRecommendationsByEmployeeIdAndActive(id, true);
@@ -104,30 +123,5 @@ public class RecommendationService{
             throw new ServiceException( "Could not get recommendations by employeeId: "+id, e );
         }
     }
-
-
-    /**
-     * No test written for this yet.
-     * @param rawImages
-     * @return
-     * @throws ServiceException
-     */
-    public List<RecommendationImage> translateToRecommendationImages(Recommendation recommendation, List<String> rawImages) throws ServiceException {
-        try{
-            List<RecommendationImage> recommendationImages = new ArrayList<>();
-            for(String image: rawImages){
-                RecommendationImage newImage = new RecommendationImage(recommendation, image);
-                recommendationImages.add(newImage);
-            }
-            return recommendationImages;
-        }catch(Exception e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: translateRecommendationImages()");
-            throw new ServiceException("Could not translate raw images to RecommendationImage", e);
-        }
-    }
-
-
-
-
 
 }

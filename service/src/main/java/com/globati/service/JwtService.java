@@ -25,7 +25,6 @@ public class JwtService {
         return Jwts.builder().setSubject(apiToken).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
-
     /**
      * Validates the JWT.
      * @param compactJws

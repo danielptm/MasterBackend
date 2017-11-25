@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Recommendation {
 
-
-
+    @JsonProperty("id")
+    Long id;
     @JsonProperty("employeeId")
     Long employeeId;
     @JsonProperty("title")
@@ -37,7 +37,6 @@ public class Recommendation {
     List<String> images;
 
     public Recommendation(){}
-
 
     public Long getEmployeeId() {
         return employeeId;
@@ -135,8 +134,31 @@ public class Recommendation {
         this.images = images;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Recommendation{");
+        sb.append("id=").append(id);
+        sb.append(", employeeId=").append(employeeId);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", targetLat=").append(targetLat);
+        sb.append(", targetLong=").append(targetLong);
+        sb.append(", street='").append(street).append('\'');
+        sb.append(", city='").append(city).append('\'');
+        sb.append(", country='").append(country).append('\'');
+        sb.append(", image1='").append(image1).append('\'');
+        sb.append(", image2='").append(image2).append('\'');
+        sb.append(", image3='").append(image3).append('\'');
+        sb.append(", images=").append(images);
+        sb.append('}');
+        return sb.toString();
+    }
 }

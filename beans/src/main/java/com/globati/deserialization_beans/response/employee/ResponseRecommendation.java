@@ -49,7 +49,6 @@ public class ResponseRecommendation {
         return description;
     }
 
-
     public String getLocation() {
         return location;
     }

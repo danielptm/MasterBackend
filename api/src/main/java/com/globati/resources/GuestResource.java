@@ -87,27 +87,6 @@ public class GuestResource {
 
     }
 
-//    /**
-//     * Called in globati.com/connect/userid
-//     *
-//     * This method can be taken away because we are not doing deals.
-//     *
-//     * @param id
-//     * @return
-//     */
-//    @GET
-//    @Path("userid/{id}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getEmployeeDataByUserName(@PathParam("id") Long id){
-//        try{
-//            Employee employee =  employeeService.getEmployeeById(id);
-//            return Response.ok(employee).build();
-//        }catch(Exception e){
-//            throw new WebException("Could not find employee  by username", Response.Status.CONFLICT);
-//        }
-//    }
-
     /**
      * Called in globati.com when a user searches for employees by location.
      *

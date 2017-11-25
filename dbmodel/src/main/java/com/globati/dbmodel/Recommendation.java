@@ -55,6 +55,9 @@ public class Recommendation extends BusinessEntity {
     public void setRecommendationimages(List<RecommendationImage> recommendationimages) {
         this.recommendationimages = recommendationimages;
     }
+
+
+
 }
 
 

@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class does not have tests written for it.
- */
+//TODO: This class is untested
 @Service
 public class EmployeeAdapter {
 
@@ -27,6 +25,9 @@ public class EmployeeAdapter {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    ImageAdapater imageAdapater;
 
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
@@ -39,12 +40,12 @@ public class EmployeeAdapter {
         try {
             EmployeeAndItems profileItems = employeeService.createAccountOrLoginWithFacebook(id, name, email, image);
             EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(profileItems.getEmployee().getGlobatiUsername());
+            employeeAndItems.setApiKey(profileItems.getApiKey());
             return translateOneEmployee(employeeAndItems);
         } catch (Exception e) {
             log.warn("An adapater exception occurred");
             e.printStackTrace();
             throw new AdapaterException("An adpater exception occurred");
-
         }
     }
 
@@ -138,7 +139,7 @@ public class EmployeeAdapter {
                     recommendation.getId(), recommendation.getCity(), recommendation.getCountry(),
                     recommendation.getDescription(), recommendation.getLocation(),
                     recommendation.getStreet(), recommendation.getTargetLat(), recommendation.getTargetLong(),
-                    recommendation.getTitle(), recommendation.isActive(), translateRecommendationImages(recommendation.getRecommendationimages())
+                    recommendation.getTitle(), recommendation.isActive(), imageAdapater.translateRecommendationImages(recommendation.getRecommendationimages())
             );
             responseRecomendations.add(responseRecommendation);
         }
@@ -159,7 +160,7 @@ public class EmployeeAdapter {
                     event.getId(), event.getCity(), event.getCountry(),
                     event.getRepeat(), event.getDescription(), event.getLocation(),
                     event.getStreet(), event.getTargetLat(), event.getTargetLong(),
-                    event.getTitle(), translateEventImages(event.getEventimages()),
+                    event.getTitle(), imageAdapater.translateEventImages(event.getEventimages()),
                     event.getDate()
             );
             responses.add(responseEvent);
@@ -167,22 +168,6 @@ public class EmployeeAdapter {
         return responses;
     }
 
-    private List<ResponseImage> translateRecommendationImages(List<RecommendationImage> items) {
-        List<ResponseImage> recommendationImages = new ArrayList<>();
-        for (RecommendationImage item : items) {
-            ResponseImage responseImage = new ResponseImage(item.getId(), item.getPath());
-            recommendationImages.add(responseImage);
-        }
-        return recommendationImages;
-    }
 
-    private List<ResponseImage> translateEventImages(List<EventImage> items) {
-        List<ResponseImage> eventImages = new ArrayList<>();
-        for (EventImage item : items) {
-            ResponseImage image = new ResponseImage(item.getId(), item.getPath());
-            eventImages.add(image);
-        }
-        return eventImages;
-    }
 
 }

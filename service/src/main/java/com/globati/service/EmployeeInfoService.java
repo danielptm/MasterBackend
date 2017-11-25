@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class EmployeeInfoService {
 
-    private static final Logger log = LogManager.getLogger(DealService.class);
+    private static final Logger log = LogManager.getLogger(EmployeeInfoService.class);
 
 
     @Autowired

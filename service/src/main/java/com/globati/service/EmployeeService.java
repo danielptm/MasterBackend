@@ -223,6 +223,7 @@ public class EmployeeService {
             employee.setDeals(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
+            employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));
 
             return employeeAndItems;
         } catch (Exception e) {
@@ -388,6 +389,45 @@ public class EmployeeService {
     }
 
     /**
+     * This method is the same as getItemsForEmployee() but it does not get the JWT. This is necessary for listing
+     * other employees in the admin page.
+     * @param username
+     * @return
+     * @throws ServiceException
+     */
+
+    public EmployeeAndItems getItemsForEmployeeButNoWebToken(String username) throws ServiceException {
+
+        log.info("getItemsForEmployee(): username: " + username);
+        ArrayList<Object> items = new ArrayList<>();
+        try {
+            Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
+            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
+
+            if (employee == null) {
+                throw new Exception("this username could not be found");
+            }
+
+            List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
+            List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
+
+            employee.setRecommendations(recommendations);
+            employee.setEvents(events);
+            employee.setDeals(null);
+
+            EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
+
+            return employeeAndItems;
+        } catch (Exception e) {
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployee()");
+            e.printStackTrace();
+            throw new ServiceException("Could not retrieve employee by user name and pasword", e);
+        }
+
+
+    }
+
+    /**
      * Returns the same as above but gets their recommendations too.
      * <p>
      * This method is really bad. I get employees then get their recommendations and then remove some of them... tsk tsk tsk.
@@ -403,7 +443,7 @@ public class EmployeeService {
             List<Employee> returnEmployees = new ArrayList<>();
 
             for (Employee employee : employees) {
-                EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
+                EmployeeAndItems employeeAndItems = getItemsForEmployeeButNoWebToken(employee.getGlobatiUsername());
                 returnEmployees.add(employeeAndItems.getEmployee());
             }
             List<Employee> employees1 = removeNonVerifiedEmployeesfromList(returnEmployees);
@@ -670,7 +710,7 @@ public class EmployeeService {
         try {
             for (Employee employee : employees) {
 
-                EmployeeAndItems employeeAndItems = getItemsForEmployee(employee.getGlobatiUsername());
+                EmployeeAndItems employeeAndItems = getItemsForEmployeeButNoWebToken(employee.getGlobatiUsername());
 
                 //This employee has the items, the one aboce does not.
                 Employee employeeWith = employeeAndItems.getEmployee();
@@ -742,7 +782,7 @@ public class EmployeeService {
                     }
                 }
 
-                EmployeeAndItems employeeForList = getItemsForEmployee(employeeWith.getGlobatiUsername());
+                EmployeeAndItems employeeForList = getItemsForEmployeeButNoWebToken(employeeWith.getGlobatiUsername());
                 employeeList.add(employeeForList.getEmployee());
 
             }

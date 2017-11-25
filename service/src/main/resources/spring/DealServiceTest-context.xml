@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-
     <bean id="DataSource" class="com.globati.config.TestProfile"></bean>
 
     <bean id="DealService" class="com.globati.service.DealService" ></bean>
@@ -23,12 +22,6 @@
 
     <bean id="JwtService" class="com.globati.service.JwtService"></bean>
 
-
-
-
-
-
-
-
+    <bean id="ImageAdapater" class="com.globati.adapter.ImageAdapater"></bean>
 
 </beans>

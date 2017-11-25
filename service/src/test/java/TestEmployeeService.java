@@ -16,6 +16,11 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,11 +34,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.Mockito.when;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
 public class TestEmployeeService {
 
+	@InjectMocks
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -53,9 +61,14 @@ public class TestEmployeeService {
 
 	String randomString;
 
+	@Mock
+	JwtService jwtService;
+
+
 	@Before
 	public void prep(){
 		randomString = UUID.randomUUID().toString();
+		MockitoAnnotations.initMocks(this);
 	}
 
 
@@ -106,10 +119,14 @@ public class TestEmployeeService {
 		images.add("image1/url");
 		images.add("image2/url");
 		images.add("image3/url");
+
+		when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockApiToken");
+
 		String uid = UUID.randomUUID().toString();
 		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		EmployeeAndItems items = employeeService.getItemsForEmployee(e1.getGlobatiUsername());
 		Assert.assertNotNull(items.getEmployee());
+
 	}
 
 	@Test

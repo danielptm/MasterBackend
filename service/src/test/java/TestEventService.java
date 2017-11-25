@@ -3,6 +3,7 @@ import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Event;
 import com.globati.service.EmployeeService;
 import com.globati.service.EventService;
+import com.globati.service.JwtService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -10,8 +11,13 @@ import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.GlobatiUtilException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.Mockito.when;
+
 /**
  * Created by daniel on 12/21/16.
  */
@@ -37,8 +45,19 @@ public class TestEventService {
     @Autowired
     EventService eventService;
 
+    @InjectMocks
     @Autowired
     EmployeeService employeeService;
+
+    @Mock
+    JwtService jwtService;
+
+
+    @Before
+    public void setup(){
+        MockitoAnnotations.initMocks(this);
+        when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockapistring!");
+    }
 
     @Test
     public void createEventInDatabase() throws FileNotFoundException, ServiceException, UserDoesNotExistException, GlobatiUtilException, UserNameIsNotUniqueException, IllegalUserNameException {

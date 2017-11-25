@@ -47,8 +47,6 @@ import com.globati.HelpObjects.Email;
 @Path("employees")
 public class EmployeeResource{
 
-
-    //This does work.
     private static final Logger log = LogManager.getLogger(EmployeeResource.class);
 
     @Context
@@ -312,13 +310,7 @@ public class EmployeeResource{
         List<ResponseEmployee> employeesInPlace;
         try{
             employeesInPlace = employeeAdapter.getAndTranslateEmployeesByCitySearch(place);
-
-            if(employeesInPlace.size()>0) {
                 return Response.ok(employeesInPlace).build();
-            }
-            else{
-                throw new Exception("Could not locate any employees for this place "+place);
-            }
         }catch(Exception e){
             throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);
         }

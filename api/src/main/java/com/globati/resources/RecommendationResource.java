@@ -1,5 +1,6 @@
 package com.globati.resources;
 
+import com.globati.adapter.RecommendationAdapater;
 import com.globati.dbmodel.Recommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -44,6 +45,9 @@ public class RecommendationResource {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    RecommendationAdapater recommendationAdapater;
 
     @Context
     UriInfo uriInfo;
@@ -115,7 +119,9 @@ public class RecommendationResource {
                     recommendation.getImages()
             );
 //            recommendationService.createRecommendation(id, title, description, targetLat, targetLong, street, city, country, is);
-            return Response.ok(returnRecommendation).build();
+
+
+            return Response.ok(recommendationAdapater.translateRecommendationForResponse(returnRecommendation)).build();
         }catch(Exception e){
             throw new WebException("Could not create new recommendation", Response.Status.CONFLICT);
         }
@@ -127,17 +133,17 @@ public class RecommendationResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id,  com.globati.deserialization_beans.request.Recommendation recommendation){
-//        System.out.println("updateRecommendation()");
-//        System.out.println(recommendation);
+        log.debug("recommendationResource");
+        log.debug(id);
+        log.debug(recommendation.toString());
         try{
-            Recommendation returnRecommendation = recommendationService.getRecommendationById(id);
-            returnRecommendation.setDescription(recommendation.getDescription());
-            returnRecommendation.setImage(recommendation.getImage1());
-            returnRecommendation.setImage2(recommendation.getImage2());
-            returnRecommendation.setImage3(recommendation.getImage3());
-            returnRecommendation.setTitle(recommendation.getTitle());
-            recommendationService.updateRecommendation(returnRecommendation);
-            return Response.ok(returnRecommendation).build();
+            Recommendation returnRecommendation = recommendationService.updateRecommendation(
+                    recommendation.getId(),
+                    recommendation.getTitle(),
+                    recommendation.getDescription(),
+                    recommendation.getImages()
+            );
+            return Response.ok(recommendationAdapater.translateRecommendationForResponse(returnRecommendation)).build();
         }catch(Exception e){
             throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);
         }
