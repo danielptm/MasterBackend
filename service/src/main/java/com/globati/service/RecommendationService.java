@@ -35,6 +35,12 @@ public class RecommendationService{
     @Autowired
     ImageAdapater imageAdapater;
 
+    @Autowired
+    EventImageService eventImageService;
+
+    @Autowired
+    RecommendationImageService recommendationImageService;
+
     RecommendationService(){}
 
 
@@ -84,19 +90,26 @@ public class RecommendationService{
         }
     }
 
+
     public Recommendation updateRecommendation(Long id, String title, String description, List<String> images) throws ServiceException {
         try {
 
             Recommendation returnRecommendation = getRecommendationById(id);
 
-            returnRecommendation.setDescription(description);
-            returnRecommendation.setTitle(title);
+            for(RecommendationImage image : returnRecommendation.getRecommendationimages()){
+                recommendationImageService.deleteRecommendationImage(image.getId());
+            }
 
             List<RecommendationImage> translatedImages = imageAdapater.translateToRecommendationImages(returnRecommendation, images);
 
             returnRecommendation.setRecommendationimages(translatedImages);
+            returnRecommendation.setDescription(description);
+            returnRecommendation.setTitle(title);
 
-            return recommendationRepository.save(returnRecommendation);
+
+            Recommendation updatedRecommendation = recommendationRepository.save(returnRecommendation);
+
+            return updatedRecommendation;
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateRecommendation(): recommendationId: ");
             e.printStackTrace();

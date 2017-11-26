@@ -1,7 +1,6 @@
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.service.EmployeeService;
-import com.globati.service.Hello;
 import com.globati.service.RecommendationService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
@@ -9,29 +8,20 @@ import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.internal.configuration.MockitoAnnotationsMockAnnotationProcessor;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by daniel on 12/21/16.
@@ -106,11 +96,55 @@ public class TestRecommendationService {
 
         recommendationService.updateRecommendation(re);
 
-        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(e.getGlobatiUsername());
-
+        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeButNoWebToken(e.getGlobatiUsername());
 
         Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
         Assert.assertEquals("hithere", employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+
+
+    }
+
+    @Test
+    public void updateRecommendationAndRecommendationImagesWithParameters() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+        String uid = UUID.randomUUID().toString();
+
+        Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+
+        List<String> images = new ArrayList<>();
+        List<String> newImages = new ArrayList<>();
+
+        String image1 = "image1/url";
+        String image2 = "image2/url";
+        String image3 = "image3/url";
+
+        String newImage1 = "newImage1";
+        String newImage2 = "newImage2";
+        String newImage3 = "newImage3";
+        String newTitle = "newTitle";
+        String newDescription = "newDescription";
+
+
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+
+        newImages.add(newImage1);
+        newImages.add(newImage2);
+        newImages.add(newImage3);
+
+        Employee e = employeeService.getEmployeeById(employee.getId());
+        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
+
+        Recommendation updated = recommendationService.updateRecommendation(re.getId(), newTitle, newDescription, newImages);
+
+        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeButNoWebToken(e.getGlobatiUsername());
+
+
+        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(1, employeeAndItems.getEmployee().getRecommendations().size());
+        Assert.assertEquals(newImage1, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+        Assert.assertEquals(newImage2, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(1).getPath());
+        Assert.assertEquals(newImage3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(2).getPath());
 
 
     }

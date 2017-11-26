@@ -402,13 +402,13 @@ public class EmployeeService {
         ArrayList<Object> items = new ArrayList<>();
         try {
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
-            EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
             if (employee == null) {
                 throw new Exception("this username could not be found");
             }
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
+
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
 
             employee.setRecommendations(recommendations);

@@ -1,7 +1,9 @@
 package com.globati.resources;
 
+import com.globati.adapter.EventAdapter;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Event;
+import com.globati.deserialization_beans.response.employee.ResponseEvent;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeService;
@@ -39,6 +41,9 @@ public class EventResource {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    EventAdapter eventAdapter;
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
@@ -70,19 +75,21 @@ public class EventResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.deserialization_beans.request.Event event) throws ServiceException,
-            GlobatiUtilException, ParseException {
+    public Response create(com.globati.deserialization_beans.request.Event event) throws Exception {
         try {
-            log.debug(event);
             Employee employee = employeeService.getEmployeeById(event.getEmployeeId());
-            log.debug(employee);
             Event event1 = this.eventService.createEvent(
                     employee,
                     com.globati.utildb.DateTools.getDate(event.getDate()), event.getTargetLat(),
                     event.getTargetLong(), event.getStreet(), event.getCity(), event.getCountry(),
                     event.getTitle(), event.getDescription(), event.getImages());
-            log.debug("created event: " + event1);
-            return Response.ok(event1).build();
+
+
+            ResponseEvent responseEvent = eventAdapter.getAndTranslateAnEvent(event1);
+
+            return Response.ok(responseEvent).build();
+
+
         } catch (Exception e) {
             throw e;
         }

@@ -3,7 +3,6 @@ package com.globati.adapter;
 import com.globati.dbmodel.*;
 import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.deserialization_beans.response.employee.ResponseEvent;
-import com.globati.deserialization_beans.response.employee.ResponseImage;
 import com.globati.deserialization_beans.response.employee.ResponseRecommendation;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.AdapaterException;
@@ -124,6 +123,7 @@ public class EmployeeAdapter {
 
     }
 
+    //This should be moved to RecommendationAdapter
     private List<ResponseRecommendation> translateResponseRecommendations(Employee employee) {
 
         List<ResponseRecommendation> responseRecomendations = new ArrayList<>();
@@ -148,6 +148,7 @@ public class EmployeeAdapter {
 
     }
 
+    //This should be moved to EventAdapater
     private List<ResponseEvent> translateResponseEvents(Employee employee) throws Exception {
         List<ResponseEvent> responses = new ArrayList<>();
 

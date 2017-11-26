@@ -16,9 +16,6 @@ public class ResponseEvent {
     private Double targetLong;
     private String title;
     private Date date;
-
-
-
     private List<ResponseImage> images;
 
     public ResponseEvent() {

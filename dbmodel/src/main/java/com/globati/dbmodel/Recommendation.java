@@ -19,7 +19,7 @@ public class Recommendation extends BusinessEntity {
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     private Employee employee;
 
-    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     List<RecommendationImage> recommendationimages;
 

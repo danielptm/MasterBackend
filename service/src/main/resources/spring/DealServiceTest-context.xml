@@ -24,4 +24,8 @@
 
     <bean id="ImageAdapater" class="com.globati.adapter.ImageAdapater"></bean>
 
+    <bean id="RecommendationImageService" class="com.globati.service.RecommendationImageService"></bean>
+
+    <bean id="EventImageService" class="com.globati.service.EventImageService"></bean>
+
 </beans>
