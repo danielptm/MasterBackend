@@ -100,12 +100,15 @@ public class GuestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSplashData(@PathParam("place") String place) {
-        List<Employee> employeesInPlace;
+        List<ResponseEmployee> employeesInPlace;
         try{
-            employeesInPlace = employeeService.getEmployeesByCity(place);
-            if(employeesInPlace.size()==0){
-                employeesInPlace = employeeService.getEmployeesByCountry(place);
-            }
+            employeesInPlace = employeeAdapter.getAndTranslateEmployeesByCitySearch(place);
+//            if(employeesInPlace.size()==0){
+//                employeesInPlace = employeeService.getEmployeesByCountry(place);
+//            }
+
+            System.out.println(employeesInPlace.size());
+
             if(employeesInPlace.size()>0) {
                 return Response.ok(employeesInPlace).build();
             }

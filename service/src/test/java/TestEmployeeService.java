@@ -145,24 +145,26 @@ public class TestEmployeeService {
 	 */
 	@Test
 	public void getEmployeesByCity() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
-		Employee e1 = this.employeeService.createEmployee("Daniel", randomString+"@me.com", randomString+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		String city = "xxx432";
+		String city2="yy3324";
+		Employee e1 = this.employeeService.createEmployee("Daniel", randomString+"@me.com", randomString+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", city, "usa");
 		EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(e1.getId());
 		employeeInfo.set_verified(Verified.STANDARD);
 		employeeInfoService.updateEmployeeInfo(employeeInfo);
 		String uid2 = UUID.randomUUID().toString();
-		Employee e2 = this.employeeService.createEmployee("Daniel", uid2+"@me.com", uid2+"b", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		Employee e2 = this.employeeService.createEmployee("Daniel", uid2+"@me.com", uid2+"b", "secret password", 23.234, 23.23, "image", "2308 n 44 st", city, "usa");
 		EmployeeInfo employeeInfo1 = employeeInfoService.getEmployeeInfoByEmployeeId(e2.getId());
 		employeeInfo1.set_verified(Verified.STANDARD);
 		employeeInfoService.updateEmployeeInfo(employeeInfo1);
 		String uid3 = UUID.randomUUID().toString();
-		Employee e3 = this.employeeService.createEmployee("Daniel", uid3+"@me.com", uid3+"c", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "yy3324", "usa");
+		Employee e3 = this.employeeService.createEmployee("Daniel", uid3+"@me.com", uid3+"c", "secret password", 23.234, 23.23, "image", "2308 n 44 st", city2, "usa");
 		String uid4 = UUID.randomUUID().toString();
-		Employee e4 = this.employeeService.createEmployee("Daniel", uid4+"@me.com", uid4+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "xxx432", "usa");
+		Employee e4 = this.employeeService.createEmployee("Daniel", uid4+"@me.com", uid4+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", city2, "usa");
 		EmployeeInfo employeeInfo4 = employeeInfoService.getEmployeeInfoByEmployeeId(e1.getId());
 		employeeInfo.set_verified(null);
 		employeeInfoService.updateEmployeeInfo(employeeInfo4);
-		List<Employee> employees = employeeService.getEmployeesByCity("xxx432");
-		List<Employee> employees2 = employeeService.getEmployeesByCity("yy3324");
+		List<Employee> employees = employeeService.getEmployeesByCity(city);
+		List<Employee> employees2 = employeeService.getEmployeesByCity(city2);
 		Assert.assertEquals(2, employees.size());
 		Assert.assertEquals(0, employees2.size());
 	}

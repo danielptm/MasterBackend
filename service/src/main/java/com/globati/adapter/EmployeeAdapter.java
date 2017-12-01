@@ -100,6 +100,7 @@ public class EmployeeAdapter {
             responseEmployees = new ArrayList<>();
 
             List<Employee> employeeList = employeeService.getEmployeesByCityAndTheirRecommendations(city);
+            System.out.println(employeeList.size());
 
             for (Employee employee : employeeList) {
                 ResponseEmployee responseEmployee = new ResponseEmployee(
@@ -113,6 +114,7 @@ public class EmployeeAdapter {
                         translateResponseEvents(employee), null
                 );
                 responseEmployees.add(responseEmployee);
+                System.out.println(responseEmployees.size());
             }
         } catch (Exception e) {
             log.warn("An adapater exception occurred");
