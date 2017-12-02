@@ -104,9 +104,9 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.sun.mail</groupId>-->
-            <!--<artifactId>javax.mail</artifactId>-->
-            <!--<version>1.5.1</version>-->
+        <!--<groupId>com.sun.mail</groupId>-->
+        <!--<artifactId>javax.mail</artifactId>-->
+        <!--<version>1.5.1</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -187,7 +187,29 @@
             <artifactId>beans</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.23.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.23.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>1.23.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-sheets</artifactId>
+            <version>v4-rev1-1.21.0</version>
+        </dependency>
 
     </dependencies>
 

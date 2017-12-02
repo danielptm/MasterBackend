@@ -237,4 +237,9 @@ public class TestGlobatiUtil {
         System.out.println(fakeusername);
         Assert.assertEquals(fakeusername.length(), 10);
     }
+
+    @Test
+    public void googleDocumentApi() throws IOException {
+        Quickstart.getGoogleDocument();
+    }
 }
