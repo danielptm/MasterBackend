@@ -25,6 +25,7 @@ public class DateTools {
         return java.sql.Date.valueOf(parsedDate);
     }
 
+
     public static Date todaysDate(){
         return java.sql.Date.valueOf(LocalDate.now());
     }

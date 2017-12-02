@@ -234,6 +234,50 @@ public class SendMail {
 
     }
 
+    public static boolean sendCustomMailToGlobatiStaff(String email, String contentMessage) throws Exception {
+        String[] emails = new String[]{email};
+
+
+        // Construct an object to contain the recipient address.
+        Destination destination = new Destination().withToAddresses(emails);
+
+        // Create the subject and body of the message.
+        Content subject = new Content().withData("Email from server to Globati AB: This is an automated email sent from the globati server.");
+
+        Content textBody = new Content().withData(
+                contentMessage
+        );
+
+        Body body = new Body().withHtml(textBody);
+
+        // Create a message with the specified subject and body.
+        com.amazonaws.services.simpleemail.model.Message message = new com.amazonaws.services.simpleemail.model.Message().withSubject(subject).withBody(body);
+
+        // Assemble the email.
+        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
+
+        try {
+            AWSCredentials credentials = new BasicAWSCredentials(
+                    key,
+                    password);
+
+            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
+
+            Region REGION = Region.getRegion(Regions.EU_WEST_1);
+            client.setRegion(REGION);
+
+            // Send the email.
+            client.sendEmail(request);
+            return true;
+        } catch (Exception ex) {
+            log.error("Email send through AWS not sent.");
+            log.error("Error message: " + ex.getMessage());
+            throw new Exception(ex.toString());
+        }
+
+
+    }
+
 
 
 }

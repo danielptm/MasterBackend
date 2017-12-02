@@ -1,5 +1,6 @@
 
 import com.globati.dbmodel.*;
+import com.globati.google_sheets.FlightBookingRow;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.service.EventService;
@@ -238,8 +239,12 @@ public class TestGlobatiUtil {
         Assert.assertEquals(fakeusername.length(), 10);
     }
 
-    @Test
-    public void googleDocumentApi() throws IOException {
-        Quickstart.getGoogleDocument();
+    /**
+     * @throws Exception
+     */
+    @Ignore
+    public void googleDocumentApi() throws Exception {
+        List<FlightBookingRow> rows = GoogleSheets.getGoogleDocument();
+        Assert.assertEquals(1, rows.size());
     }
 }
