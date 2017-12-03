@@ -279,22 +279,6 @@ public class EmployeeResource{
 
 
     /**
-     * This method is called to move all images from an employees events and recommendations to the EventImages and
-     * RecommendationImages tables. It is not used in production for any purpose, just to update DB after refactoring.
-     *
-     *
-     * @return
-     * @throws ServiceException
-     */
-    @GET
-    @Path("refactor-employee")
-    @Produces(MediaType.APPLICATION_JSON)
-    public  Response updateEmployee() throws ServiceException {
-        List<Employee> employees = employeeService.updateImagesAfterRefactor();
-        return Response.ok(employees.get(0).getRecommendations()).build();
-    }
-
-    /**
      * Called by the admin page. This is the only function so far to use the adapater service
      * on top of the db service. This is being called by fro the admin page, so should be moved to the employees resource
      *
