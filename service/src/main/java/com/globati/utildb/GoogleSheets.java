@@ -1,5 +1,6 @@
 package com.globati.utildb;
 
+import com.globati.dbmodel.FlightBooking;
 import com.globati.google_sheets.FlightBookingRow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -24,7 +25,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class GoogleSheets {
+
+
+    private static final String UNPERSISTED_FLIGHT_SHEET = "1j1A9tE_okqO2QkJ-ou9yze0M6psM6fRcQJq9GlbuhNw";
+    private static final String PERSISTED_FLIGHT_SHEET = "1o3xElRyP_w-s0EwIYg_qDK3yf7uCRagm_kbNBJss27I";
+    private static final String RANGE = "A2:J1000";
 
     private static final Logger log = LogManager.getLogger(GoogleSheets.class);
 
@@ -53,7 +60,7 @@ public class GoogleSheets {
      * at ~/.credentials/sheets.googleapis.com-java-quickstart
      */
     private static final List<String> SCOPES =
-            Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
+            Arrays.asList(SheetsScopes.SPREADSHEETS);
 
     static {
         try {
@@ -110,12 +117,9 @@ public class GoogleSheets {
             // Build a new authorized API client service.
             Sheets service = getSheetsService();
 
-            // Prints the names and majors of students in a sample spreadsheet:
-            // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-            String spreadsheetId = "1j1A9tE_okqO2QkJ-ou9yze0M6psM6fRcQJq9GlbuhNw";
-            String range = "A2:J1000";
+
             ValueRange response = service.spreadsheets().values()
-                    .get(spreadsheetId, range)
+                    .get(UNPERSISTED_FLIGHT_SHEET, RANGE)
                     .execute();
             List<List<Object>> values = response.getValues();
             if (values == null || values.size() == 0) {
@@ -150,6 +154,7 @@ public class GoogleSheets {
 
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", message);
         }
+        writeToPersistedGoogleDoc(flightBookings);
         return flightBookings;
 
     }
@@ -158,9 +163,42 @@ public class GoogleSheets {
         return false;
     }
 
-    public static boolean writeToPersistedGoogleDoc(){
+    public static boolean writeToPersistedGoogleDoc(List<FlightBookingRow> rows) throws IOException {
 
-        return false;
+        Sheets service = getSheetsService();
+
+        String valueInputOption = "USER_ENTERED";
+
+        List<List<Object>> values = new ArrayList<>();
+
+        for(FlightBookingRow row: rows){
+            List<Object> list = new ArrayList<>();
+            list.add(row.getTimeBooked());
+            list.add(row.getPaidStatus());
+            list.add(row.getCostOfTicket());
+            list.add(row.getGlobatiCommission());
+            list.add(row.getFlightPlan());
+            list.add(row.getNumberOfPeople().toString());
+            list.add(row.getDepartureDate().toString());
+            list.add(row.getReturnDate().toString());
+            list.add(row.getGlobatiMarker());
+            list.add(row.getCompanyBookedWith());
+            values.add(list);
+        }
+
+
+
+
+        ValueRange body = new ValueRange()
+                .setValues(values);
+        UpdateValuesResponse result =
+                service.spreadsheets().values().update(PERSISTED_FLIGHT_SHEET, RANGE, body)
+                        .setValueInputOption(valueInputOption)
+                        .execute();
+        System.out.printf("%d cells updated.", result.getUpdatedCells());
+
+
+        return true;
     }
 
 }
