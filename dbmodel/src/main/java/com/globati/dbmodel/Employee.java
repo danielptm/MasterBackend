@@ -81,6 +81,10 @@ public class Employee extends BaseEntity {
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     List<Event> events;
 
+    @OneToMany
+    @JsonManagedReference
+    List<FlightBooking> flights;
+
     public Employee(){}
 
     public Employee(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country) {
@@ -344,6 +348,13 @@ public class Employee extends BaseEntity {
         this.events = events;
     }
 
+    public List<FlightBooking> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<FlightBooking> flights) {
+        this.flights = flights;
+    }
 
     @Override
     public String toString() {
@@ -378,7 +389,6 @@ public class Employee extends BaseEntity {
                 ", _events=" + events +
                 '}';
     }
-
 
 }
 

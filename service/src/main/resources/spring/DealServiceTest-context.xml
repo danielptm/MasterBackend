@@ -28,4 +28,6 @@
 
     <bean id="EventImageService" class="com.globati.service.EventImageService"></bean>
 
+    <bean id="FlightBookingService" class="com.globati.service.FlightBookingService"></bean>
+
 </beans>

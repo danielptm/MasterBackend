@@ -154,10 +154,13 @@ public class GoogleSheets {
 
     }
 
-    public static Integer getEmployeeIdFromMarker(String marker){
-        return null;
-
+    public static boolean emptyUnpersistedDoc(){
+        return false;
     }
 
+    public static boolean writeToPersistedGoogleDoc(){
+
+        return false;
+    }
 
 }

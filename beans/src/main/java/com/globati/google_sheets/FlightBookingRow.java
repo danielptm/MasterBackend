@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class FlightBookingRow {
 
-    Integer employeeId;
+    Long employeeId;
     String timeBooked;
     String paidStatus;
     Double costOfTicket;
@@ -46,7 +46,7 @@ public class FlightBookingRow {
         return java.sql.Date.valueOf(parsedDate);
     }
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
@@ -86,11 +86,11 @@ public class FlightBookingRow {
         return globatiMarker;
     }
 
-    public String getCompanyBoojkedWith() {
+    public String getCompanyBookedWith() {
         return companyBookedWith;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
