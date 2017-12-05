@@ -165,8 +165,6 @@ public class GoogleSheets {
 
     public static boolean writeToPersistedGoogleDoc(List<FlightBookingRow> rows) throws IOException {
 
-        Sheets service = getSheetsService();
-
         String valueInputOption = "USER_ENTERED";
 
         List<List<Object>> values = new ArrayList<>();
@@ -187,16 +185,23 @@ public class GoogleSheets {
         }
 
 
+        // How the input data should be inserted.
+        String insertDataOption = "INSERT_ROWS"; // TODO: Update placeholder value.
 
+        // TODO: Assign values to desired fields of `requestBody`:
+        ValueRange requestBody = new ValueRange();
+        requestBody.setValues(values);
 
-        ValueRange body = new ValueRange()
-                .setValues(values);
-        UpdateValuesResponse result =
-                service.spreadsheets().values().update(PERSISTED_FLIGHT_SHEET, RANGE, body)
-                        .setValueInputOption(valueInputOption)
-                        .execute();
-        System.out.printf("%d cells updated.", result.getUpdatedCells());
+        Sheets sheetsService = getSheetsService();
+        Sheets.Spreadsheets.Values.Append request =
+                sheetsService.spreadsheets().values().append(PERSISTED_FLIGHT_SHEET, RANGE, requestBody);
+        request.setValueInputOption(valueInputOption);
+        request.setInsertDataOption(insertDataOption);
 
+        AppendValuesResponse response = request.execute();
+
+        // TODO: Change code below to process the `response` object:
+        System.out.println(response);
 
         return true;
     }
