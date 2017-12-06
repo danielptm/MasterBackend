@@ -154,18 +154,27 @@ public class GoogleSheets {
 
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", message);
         }
-        writeToPersistedGoogleDoc(flightBookings);
+
+        boolean successfulWrite = writeToPersistedGoogleDoc(flightBookings);
+
+        if(successfulWrite){
+            emptyUnpersistedDoc();
+        }
         return flightBookings;
 
     }
 
-    public static boolean emptyUnpersistedDoc(){
-        return false;
-    }
-
+    /**
+     * Writes the the data to the documnt for data which HAS been persisted.
+     * @param rows
+     * @return
+     * @throws IOException
+     */
     public static boolean writeToPersistedGoogleDoc(List<FlightBookingRow> rows) throws IOException {
 
         String valueInputOption = "USER_ENTERED";
+        String insertDataOption = "INSERT_ROWS";
+
 
         List<List<Object>> values = new ArrayList<>();
 
@@ -186,9 +195,6 @@ public class GoogleSheets {
 
 
         // How the input data should be inserted.
-        String insertDataOption = "INSERT_ROWS"; // TODO: Update placeholder value.
-
-        // TODO: Assign values to desired fields of `requestBody`:
         ValueRange requestBody = new ValueRange();
         requestBody.setValues(values);
 
@@ -199,11 +205,25 @@ public class GoogleSheets {
         request.setInsertDataOption(insertDataOption);
 
         AppendValuesResponse response = request.execute();
-
-        // TODO: Change code below to process the `response` object:
         System.out.println(response);
 
         return true;
     }
+
+    /**
+     * Clears the document for data that HAS NOT been persisted yet
+     * @return
+     * @throws IOException
+     */
+    public static boolean emptyUnpersistedDoc() throws IOException {
+        System.out.println("*** empty()");
+        Sheets sheetsService = getSheetsService();
+        ClearValuesResponse request =
+                sheetsService.spreadsheets().values().clear(UNPERSISTED_FLIGHT_SHEET, RANGE, new ClearValuesRequest()).execute();
+
+        return true;
+    }
+
+
 
 }
