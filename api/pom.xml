@@ -90,7 +90,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
@@ -98,11 +97,10 @@
 				<configuration>
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
 					<buildArgs>
-						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+						<JAR_FILE>target/app.jar</JAR_FILE>
 					</buildArgs>
 				</configuration>
 			</plugin>
-
 		</plugins>
 		<finalName>application</finalName>
 	</build>
