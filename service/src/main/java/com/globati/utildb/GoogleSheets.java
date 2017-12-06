@@ -175,7 +175,6 @@ public class GoogleSheets {
         String valueInputOption = "USER_ENTERED";
         String insertDataOption = "INSERT_ROWS";
 
-
         List<List<Object>> values = new ArrayList<>();
 
         for(FlightBookingRow row: rows){
@@ -216,7 +215,6 @@ public class GoogleSheets {
      * @throws IOException
      */
     public static boolean emptyUnpersistedDoc() throws IOException {
-        System.out.println("*** empty()");
         Sheets sheetsService = getSheetsService();
         ClearValuesResponse request =
                 sheetsService.spreadsheets().values().clear(UNPERSISTED_FLIGHT_SHEET, RANGE, new ClearValuesRequest()).execute();

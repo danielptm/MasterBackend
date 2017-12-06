@@ -7,6 +7,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
@@ -45,6 +48,18 @@ public class TestJwt {
         String body = jwtService.getPayloadFromJwt(jwt);
 
         Assert.assertEquals("hello", body);
+
+    }
+
+
+    @Test
+    public void test(){
+        List<String> list = new ArrayList<>();
+        list.add("hi");
+        list.add("bye");
+
+        System.out.println(list);
+
 
     }
 }
