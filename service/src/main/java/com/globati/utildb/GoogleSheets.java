@@ -31,7 +31,7 @@ public class GoogleSheets {
 
     private static final String UNPERSISTED_FLIGHT_SHEET = "1j1A9tE_okqO2QkJ-ou9yze0M6psM6fRcQJq9GlbuhNw";
     private static final String PERSISTED_FLIGHT_SHEET = "1o3xElRyP_w-s0EwIYg_qDK3yf7uCRagm_kbNBJss27I";
-    private static final String RANGE = "A2:J1000";
+    private static final String RANGE = "A2:K1000";
 
     private static final Logger log = LogManager.getLogger(GoogleSheets.class);
 
@@ -126,6 +126,8 @@ public class GoogleSheets {
                 System.out.println("No data found.");
             } else {
                 for (List row : values) {
+                    System.out.println("*** rows");
+                    System.out.println(row);
                     FlightBookingRow flightBookingRow = new FlightBookingRow(
                             row.get(0).toString(),
                             row.get(1).toString(),
@@ -136,8 +138,13 @@ public class GoogleSheets {
                             row.get(6).toString(),
                             row.get(7).toString(),
                             row.get(8).toString(),
-                            row.get(9).toString()
+                            row.get(9).toString(),
+                            row.get(10).toString()
                     );
+
+                    System.out.println("***");
+                    System.out.println(flightBookingRow);
+
 
                     flightBookings.add(flightBookingRow);
                 }
@@ -179,6 +186,7 @@ public class GoogleSheets {
 
         for(FlightBookingRow row: rows){
             List<Object> list = new ArrayList<>();
+            list.add(row.getDateBooked().toString());
             list.add(row.getTimeBooked());
             list.add(row.getPaidStatus());
             list.add(row.getCostOfTicket());

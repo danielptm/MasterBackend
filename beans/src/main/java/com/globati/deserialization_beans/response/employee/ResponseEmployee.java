@@ -29,7 +29,7 @@ public class ResponseEmployee {
     private boolean facebookProfile;
     private List<ResponseRecommendation> recommendations;
     private List<ResponseEvent> events;
-    private List<FlightBooking> flightBookings;
+    private List<ResponseFlight> flightBookings;
     private String apiKey;
 
     public ResponseEmployee(){}
@@ -61,7 +61,7 @@ public class ResponseEmployee {
         this.apiKey = apikey;
     }
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<FlightBooking> flightBookings) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -277,11 +277,11 @@ public class ResponseEmployee {
         this.apiKey = apiKey;
     }
 
-    public List<FlightBooking> getFlightBookings() {
+    public List<ResponseFlight> getFlightBookings() {
         return flightBookings;
     }
 
-    public void setFlightBookings(List<FlightBooking> flightBookings) {
+    public void setFlightBookings(List<ResponseFlight> flightBookings) {
         this.flightBookings = flightBookings;
     }
 
@@ -316,5 +316,4 @@ public class ResponseEmployee {
         sb.append('}');
         return sb.toString();
     }
-
 }

@@ -10,6 +10,8 @@ import java.util.Date;
 public class FlightBooking extends BookingEntity{
 
 
+    @Column(name="datebooked")
+    Date dateBooked;
     @Column(name = "timebooked")
     String timeBooked;
     @Column(name = "paidstatus")
@@ -20,7 +22,7 @@ public class FlightBooking extends BookingEntity{
     @Column(name = "globaticomission")
     Double globatiCommission;
     @Column(name = "employeecomission")
-    Double employeecomission;
+    Double employeeComission;
     @Column(name = "flightplan")
     String flightPlan;
     @Column(name = "numberofpeople")
@@ -43,12 +45,13 @@ public class FlightBooking extends BookingEntity{
 
     public FlightBooking() {}
 
-    public FlightBooking(String timeBooked, TicketPaidStatus paidStatus, Double costOfTicket, Double globatiCommission, Double employeecomission, String flightPlan, Integer numberOfPeople, Date departureDate, Date returnDate, String globatiMarker, String companyBookedWith, Employee employee) {
+    public FlightBooking(Date dateBooked, String timeBooked, TicketPaidStatus paidStatus, Double costOfTicket, Double globatiCommission, Double employeecomission, String flightPlan, Integer numberOfPeople, Date departureDate, Date returnDate, String globatiMarker, String companyBookedWith, Employee employee) {
+        this.dateBooked = dateBooked;
         this.timeBooked = timeBooked;
         this.paidStatus = paidStatus;
         this.costOfTicket = costOfTicket;
         this.globatiCommission = globatiCommission;
-        this.employeecomission = employeecomission;
+        this.employeeComission = employeecomission;
         this.flightPlan = flightPlan;
         this.numberOfPeople = numberOfPeople;
         this.departureDate = departureDate;
@@ -58,6 +61,13 @@ public class FlightBooking extends BookingEntity{
         this.employee = employee;
     }
 
+    public Date getDateBooked() {
+        return dateBooked;
+    }
+
+    public void setDateBooked(Date dateBooked) {
+        this.dateBooked = dateBooked;
+    }
 
 
     public String getTimeBooked() {
@@ -84,12 +94,12 @@ public class FlightBooking extends BookingEntity{
         this.costOfTicket = costOfTicket;
     }
 
-    public Double getEmployeecomission() {
-        return employeecomission;
+    public Double getEmployeeComission() {
+        return employeeComission;
     }
 
-    public void setEmployeecomission(Double employeecomission) {
-        this.employeecomission = employeecomission;
+    public void setEmployeeComission(Double employeeComission) {
+        this.employeeComission = employeeComission;
     }
 
     public Double getGlobatiCommission() {
@@ -163,7 +173,7 @@ public class FlightBooking extends BookingEntity{
         sb.append(", paidStatus=").append(paidStatus);
         sb.append(", costOfTicket=").append(costOfTicket);
         sb.append(", globatiCommission=").append(globatiCommission);
-        sb.append(", employeecomission=").append(employeecomission);
+        sb.append(", employeecomission=").append(employeeComission);
         sb.append(", flightPlan='").append(flightPlan).append('\'');
         sb.append(", numberOfPeople=").append(numberOfPeople);
         sb.append(", departureDate=").append(departureDate);

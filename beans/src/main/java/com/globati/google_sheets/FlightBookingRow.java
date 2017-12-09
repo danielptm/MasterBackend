@@ -17,8 +17,9 @@ public class FlightBookingRow {
     Date returnDate;
     String globatiMarker;
     String companyBookedWith;
+    Date dateBooked;
 
-    public FlightBookingRow(String timeBooked, String paidStatus, String costOfTicket, String globatiCommission, String flightPlan, String numberOfPeople, String departureDate, String returnDate, String globatiMarker, String companyBookedWith) {
+    public FlightBookingRow(String dateBooked, String timeBooked, String paidStatus, String costOfTicket, String globatiCommission, String flightPlan, String numberOfPeople, String departureDate, String returnDate, String globatiMarker, String companyBookedWith) {
         this.timeBooked = timeBooked;
         this.paidStatus = paidStatus;
         this.costOfTicket = adaptCost(costOfTicket);
@@ -29,6 +30,7 @@ public class FlightBookingRow {
         this.returnDate = adaptDate(returnDate);
         this.globatiMarker = globatiMarker;
         this.companyBookedWith = companyBookedWith;
+        this.dateBooked = adaptBookingDate(dateBooked);
     }
 
     private Integer adaptNumber(String marker){
@@ -42,6 +44,12 @@ public class FlightBookingRow {
 
     private Date adaptDate(String stringDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        LocalDate parsedDate = LocalDate.parse(stringDate, formatter);
+        return java.sql.Date.valueOf(parsedDate);
+    }
+
+    private Date adaptBookingDate(String stringDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(stringDate, formatter);
         return java.sql.Date.valueOf(parsedDate);
     }
@@ -94,6 +102,14 @@ public class FlightBookingRow {
         this.employeeId = employeeId;
     }
 
+    public Date getDateBooked() {
+        return dateBooked;
+    }
+
+    public void setDateBooked(Date dateBooked) {
+        this.dateBooked = dateBooked;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FlightBookingRow{");
@@ -107,7 +123,8 @@ public class FlightBookingRow {
         sb.append(", departureDate=").append(departureDate);
         sb.append(", returnDate=").append(returnDate);
         sb.append(", globatiMarker='").append(globatiMarker).append('\'');
-        sb.append(", companyBoojkedWith='").append(companyBookedWith).append('\'');
+        sb.append(", companyBookedWith='").append(companyBookedWith).append('\'');
+        sb.append(", dateBooked=").append(dateBooked);
         sb.append('}');
         return sb.toString();
     }

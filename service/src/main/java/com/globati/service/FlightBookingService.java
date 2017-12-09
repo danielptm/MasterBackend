@@ -31,6 +31,7 @@ public class FlightBookingService {
 
         for(FlightBookingRow booking: bookings){
             createFlightBooking(
+                    booking.getDateBooked(),
                     booking.getTimeBooked(), booking.getPaidStatus(), booking.getCostOfTicket(),
                     booking.getGlobatiCommission(), booking.getFlightPlan(),
                     booking.getNumberOfPeople(), booking.getDepartureDate(), booking.getReturnDate(),
@@ -43,6 +44,7 @@ public class FlightBookingService {
 
     public FlightBooking createFlightBooking(
 
+            Date dateBooked,
             String timeBooked, String paidStatus,
             Double costOfTicket, Double globatiCommission, String flightPlan,
             Integer numberOfPeople, Date departureDate, Date returnDate, String globatiMarker,
@@ -56,8 +58,8 @@ public class FlightBookingService {
                 employee = employeeService.getEmployeeById(id);
             }
             TicketPaidStatus ticketPaidStatus = TicketPaidStatus.valueOf(paidStatus.toUpperCase());
-            FlightBooking flightBooking = new FlightBooking(timeBooked,
-                    ticketPaidStatus, costOfTicket, globatiCommission, flightPlan,
+            FlightBooking flightBooking = new FlightBooking(dateBooked, timeBooked,
+                    ticketPaidStatus, costOfTicket, globatiCommission, calculateEmployeeComission(globatiCommission), flightPlan,
                     numberOfPeople, departureDate, returnDate, globatiMarker, companyBookedWith,
                     employee
                     );
@@ -110,7 +112,8 @@ public class FlightBookingService {
     }
 
 
-
-
+    public Double calculateEmployeeComission(Double globaticomission){
+        return globaticomission/2;
+    }
 
 }

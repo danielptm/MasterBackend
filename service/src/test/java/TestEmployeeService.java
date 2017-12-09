@@ -69,7 +69,7 @@ public class TestEmployeeService {
 
 	@Before
 	public void prep() throws ServiceException, UserNameIsNotUniqueException, UserDoesNotExistException, IllegalUserNameException {
-		randomString = UUID.randomUUID().toString();
+		String randomString = UUID.randomUUID().toString();
 		MockitoAnnotations.initMocks(this);
 		this.commonEmployee = employeeService.createEmployee(
 				"check this2", randomString+"@me.com", randomString, "secret password",
@@ -80,6 +80,7 @@ public class TestEmployeeService {
 
 	@Test
 	public void createEmployeeAndGetEmployeeById() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		Employee employee4 = employeeService.createEmployee("check this2", randomString+"@me.com", randomString, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 		Employee employee5 = this.employeeService.getEmployeeById(employee4.getId());
 		Assert.assertEquals(employee4.getId(), employee5.getId());
@@ -87,12 +88,14 @@ public class TestEmployeeService {
 
 	@Ignore
 	public void createEmployeeAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		Employee employee4 = employeeService.createEmployee("check this2", randomString+"@me.com", "London", "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
 	}
 
 	@Test
 	public void updateEmployee() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		Employee e = employeeService.createEmployee("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		Employee e2 = employeeService.getEmployeeById(e.getId());
 		e2.setFirstName("zebra");
@@ -113,6 +116,7 @@ public class TestEmployeeService {
 	 */
 	@Ignore
 	public void allowAuserWithReservedWordToUpdateTheirProfile() throws IOException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		Employee e = employeeService.createEmployee("Daniel", "daniel@globati.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		e.setGlobatiUsername("London");
 		employeeService.updateEmployee(e);
@@ -121,6 +125,7 @@ public class TestEmployeeService {
 
 	@Test
 	public void getEmployeebyUserName() throws ServiceException, FileNotFoundException, GlobatiUtilException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		List<String> images = new ArrayList<>();
 		images.add("image1/url");
 		images.add("image2/url");
@@ -128,8 +133,7 @@ public class TestEmployeeService {
 
 		when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockApiToken");
 
-		String uid = UUID.randomUUID().toString();
-		Employee e1 = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Employee e1 = this.employeeService.createEmployee("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 		EmployeeAndItems items = employeeService.getItemsForEmployee(e1.getGlobatiUsername());
 		Assert.assertNotNull(items.getEmployee());
 
@@ -151,6 +155,7 @@ public class TestEmployeeService {
 	 */
 	@Test
 	public void getEmployeesByCity() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+		String randomString = UUID.randomUUID().toString();
 		String city = "xxx432";
 		String city2="yy3324";
 		Employee e1 = this.employeeService.createEmployee("Daniel", randomString+"@me.com", randomString+"a", "secret password", 23.234, 23.23, "image", "2308 n 44 st", city, "usa");
@@ -183,6 +188,7 @@ public class TestEmployeeService {
 
 	@Test
 	public void createEmployeeWithFacebookInfo() throws ServiceException {
+		String randomString = UUID.randomUUID().toString();
 		Employee employee = employeeService.createProfileFromFacebookInfo("FacebookEmployee", "Daniel", "emailaddress1@me.com","image/path");
 		Assert.assertNotNull(employee);
 		Assert.assertEquals(employee.getFirstName(), "Daniel");
@@ -190,6 +196,7 @@ public class TestEmployeeService {
 
 	@Test
 	public void getEmployeeByFacebookId() throws FileNotFoundException, ServiceException, UserDoesNotExistException {
+		String randomString = UUID.randomUUID().toString();
 		Employee employee = employeeService.createProfileFromFacebookInfo("FacebookEmployee1", "Daniel", "emailaddress2@me.com","image/path");
 		Assert.assertNotNull(employee);
 		EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());

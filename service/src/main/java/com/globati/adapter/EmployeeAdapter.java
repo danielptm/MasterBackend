@@ -3,6 +3,7 @@ package com.globati.adapter;
 import com.globati.dbmodel.*;
 import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.deserialization_beans.response.employee.ResponseEvent;
+import com.globati.deserialization_beans.response.employee.ResponseFlight;
 import com.globati.deserialization_beans.response.employee.ResponseRecommendation;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.AdapaterException;
@@ -27,6 +28,9 @@ public class EmployeeAdapter {
 
     @Autowired
     ImageAdapater imageAdapater;
+
+    @Autowired
+    FlightAdapater flightAdapater;
 
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
@@ -73,6 +77,7 @@ public class EmployeeAdapter {
 
             Employee employee = employeeAndItems.getEmployee();
 
+
             ResponseEmployee responseEmployee = new ResponseEmployee(
                     employee.getId(), employee.getFirstName(), employee.getImage(),
                     employee.getImage2(), employee.getImage3(), employee.getEmail(),
@@ -81,7 +86,7 @@ public class EmployeeAdapter {
                     employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                    translateResponseEvents(employee), employeeAndItems.getApiKey(), employeeAndItems.getEmployee().getFlights()
+                    translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee)
             );
 
             return responseEmployee;
@@ -171,6 +176,16 @@ public class EmployeeAdapter {
         return responses;
     }
 
+    public List<ResponseFlight> translateResponseFlights(Employee employee){
+        List<ResponseFlight> responseFlights = new ArrayList<>();
 
+        for(FlightBooking flight: employee.getFlights()){
+            ResponseFlight responseFlight = flightAdapater.getAndTranslateAflight(flight);
+            responseFlights.add(responseFlight);
+        }
+
+        return responseFlights;
+
+    }
 
 }
