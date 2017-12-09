@@ -64,11 +64,17 @@ public class TestEmployeeService {
 	@Mock
 	JwtService jwtService;
 
+	Employee commonEmployee;
+
 
 	@Before
-	public void prep(){
+	public void prep() throws ServiceException, UserNameIsNotUniqueException, UserDoesNotExistException, IllegalUserNameException {
 		randomString = UUID.randomUUID().toString();
 		MockitoAnnotations.initMocks(this);
+		this.commonEmployee = employeeService.createEmployee(
+				"check this2", randomString+"@me.com", randomString, "secret password",
+				59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa"
+		);
 	}
 
 

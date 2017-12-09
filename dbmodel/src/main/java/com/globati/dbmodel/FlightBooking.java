@@ -2,7 +2,6 @@ package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.globati.enums.TicketPaidStatus;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +19,8 @@ public class FlightBooking extends BookingEntity{
     Double costOfTicket;
     @Column(name = "globaticomission")
     Double globatiCommission;
+    @Column(name = "employeecomission")
+    Double employeecomission;
     @Column(name = "flightplan")
     String flightPlan;
     @Column(name = "numberofpeople")
@@ -33,6 +34,8 @@ public class FlightBooking extends BookingEntity{
     @Column(name = "companybookedwith")
     String companyBookedWith;
 
+
+
     @ManyToOne
     @JoinColumn(name="employeeid")
     @JsonBackReference
@@ -40,11 +43,12 @@ public class FlightBooking extends BookingEntity{
 
     public FlightBooking() {}
 
-    public FlightBooking(String timeBooked, TicketPaidStatus paidStatus, Double costOfTicket, Double globatiCommission, String flightPlan, Integer numberOfPeople, Date departureDate, Date returnDate, String globatiMarker, String companyBookedWith, Employee employee) {
+    public FlightBooking(String timeBooked, TicketPaidStatus paidStatus, Double costOfTicket, Double globatiCommission, Double employeecomission, String flightPlan, Integer numberOfPeople, Date departureDate, Date returnDate, String globatiMarker, String companyBookedWith, Employee employee) {
         this.timeBooked = timeBooked;
         this.paidStatus = paidStatus;
         this.costOfTicket = costOfTicket;
         this.globatiCommission = globatiCommission;
+        this.employeecomission = employeecomission;
         this.flightPlan = flightPlan;
         this.numberOfPeople = numberOfPeople;
         this.departureDate = departureDate;
@@ -78,6 +82,14 @@ public class FlightBooking extends BookingEntity{
 
     public void setCostOfTicket(Double costOfTicket) {
         this.costOfTicket = costOfTicket;
+    }
+
+    public Double getEmployeecomission() {
+        return employeecomission;
+    }
+
+    public void setEmployeecomission(Double employeecomission) {
+        this.employeecomission = employeecomission;
     }
 
     public Double getGlobatiCommission() {
@@ -147,10 +159,11 @@ public class FlightBooking extends BookingEntity{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FlightBooking{");
-        sb.append(", timeBooked='").append(timeBooked).append('\'');
+        sb.append("timeBooked='").append(timeBooked).append('\'');
         sb.append(", paidStatus=").append(paidStatus);
         sb.append(", costOfTicket=").append(costOfTicket);
         sb.append(", globatiCommission=").append(globatiCommission);
+        sb.append(", employeecomission=").append(employeecomission);
         sb.append(", flightPlan='").append(flightPlan).append('\'');
         sb.append(", numberOfPeople=").append(numberOfPeople);
         sb.append(", departureDate=").append(departureDate);
@@ -161,5 +174,4 @@ public class FlightBooking extends BookingEntity{
         sb.append('}');
         return sb.toString();
     }
-
 }

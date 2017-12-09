@@ -81,7 +81,7 @@ public class EmployeeAdapter {
                     employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                    translateResponseEvents(employee), employeeAndItems.getApiKey()
+                    translateResponseEvents(employee), employeeAndItems.getApiKey(), employeeAndItems.getEmployee().getFlights()
             );
 
             return responseEmployee;

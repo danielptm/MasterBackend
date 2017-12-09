@@ -116,8 +116,8 @@ public class TestFlightBookingService {
     public void getFlightBookingById() throws ServiceException {
         FlightBooking fb = flightBookingService.getFlightBookingById(flightBooking1.getId());
         FlightBooking fb2 = flightBookingService.getFlightBookingById(flightBooking2.getId());
-        Assert.assertEquals(1, fb.getEmployee().getId().longValue());
-        Assert.assertEquals(null, fb.getEmployee());
+        Assert.assertEquals(flightBooking1.getEmployee().getId(), fb.getEmployee().getId());
+        Assert.assertEquals(null, fb2.getEmployee());
     }
 
 

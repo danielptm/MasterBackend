@@ -1,5 +1,7 @@
 package com.globati.deserialization_beans.response.employee;
 
+import com.globati.dbmodel.FlightBooking;
+
 import java.util.List;
 
 public class ResponseEmployee {
@@ -27,6 +29,7 @@ public class ResponseEmployee {
     private boolean facebookProfile;
     private List<ResponseRecommendation> recommendations;
     private List<ResponseEvent> events;
+    private List<FlightBooking> flightBookings;
     private String apiKey;
 
     public ResponseEmployee(){}
@@ -56,6 +59,34 @@ public class ResponseEmployee {
         this.recommendations = recommendations;
         this.events = events;
         this.apiKey = apikey;
+    }
+
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<FlightBooking> flightBookings) {
+        this.id = id;
+        this.firstName = firstName;
+        this.image = image;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.email = email;
+        this.paypalEmail = paypalEmail;
+        this.about = about;
+        this.welcomeMail = welcomeMail;
+        this.recruitmentMail = recruitmentMail;
+        this.instagramUserName = instagramUserName;
+        this.instagramUserId = instagramUserId;
+        this.instagramToken = instagramToken;
+        this.propLat = propLat;
+        this.propLong = propLong;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.display = display;
+        this.globatiUsername = globatiUsername;
+        this.facebookProfile = facebookProfile;
+        this.recommendations = recommendations;
+        this.events = events;
+        this.apiKey = apikey;
+        this.flightBookings = flightBookings;
     }
 
     public Long getId() {
@@ -245,4 +276,45 @@ public class ResponseEmployee {
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
+    public List<FlightBooking> getFlightBookings() {
+        return flightBookings;
+    }
+
+    public void setFlightBookings(List<FlightBooking> flightBookings) {
+        this.flightBookings = flightBookings;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ResponseEmployee{");
+        sb.append("id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", image='").append(image).append('\'');
+        sb.append(", image2='").append(image2).append('\'');
+        sb.append(", image3='").append(image3).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", paypalEmail='").append(paypalEmail).append('\'');
+        sb.append(", about='").append(about).append('\'');
+        sb.append(", welcomeMail='").append(welcomeMail).append('\'');
+        sb.append(", recruitmentMail='").append(recruitmentMail).append('\'');
+        sb.append(", instagramUserName='").append(instagramUserName).append('\'');
+        sb.append(", instagramUserId='").append(instagramUserId).append('\'');
+        sb.append(", instagramToken='").append(instagramToken).append('\'');
+        sb.append(", propLat=").append(propLat);
+        sb.append(", propLong=").append(propLong);
+        sb.append(", street='").append(street).append('\'');
+        sb.append(", city='").append(city).append('\'');
+        sb.append(", country='").append(country).append('\'');
+        sb.append(", display='").append(display).append('\'');
+        sb.append(", globatiUsername='").append(globatiUsername).append('\'');
+        sb.append(", facebookProfile=").append(facebookProfile);
+        sb.append(", recommendations=").append(recommendations);
+        sb.append(", events=").append(events);
+        sb.append(", flightBookings=").append(flightBookings);
+        sb.append(", apiKey='").append(apiKey).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

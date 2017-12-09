@@ -16,6 +16,7 @@ import com.globati.utildb.PBKDF2;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -56,12 +57,12 @@ public class EmployeeService {
     @Autowired
     JwtService jwtService;
 
+    @Autowired
+    FlightBookingService flightBookingService;
+
     EmployeeService() {
     }
 
-    String oliversEmail = "wyman.oliver@gmail.com";
-    String danielsEmail = "daniel@globati.com";
-    String edwardsEmail = "owardbodie@gmail.com";
 
     public Employee getEmployeeById(Long id) throws ServiceException {
         log.info("getEmployeeById(): " + id);
@@ -70,6 +71,7 @@ public class EmployeeService {
             employee.setDeals(null);
             employee.setEvents(null);
             employee.setRecommendations(null);
+            employee.setFlights(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -217,10 +219,12 @@ public class EmployeeService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
+            List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeId(employee.getId());
 
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
+            employee.setFlights(bookings);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));

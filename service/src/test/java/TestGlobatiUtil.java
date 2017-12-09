@@ -242,7 +242,7 @@ public class TestGlobatiUtil {
     /**
      * @throws Exception
      */
-    @Test
+    @Ignore
     public void googleDocumentApi() throws Exception {
         List<FlightBookingRow> rows = GoogleSheets.getGoogleDocument();
         Assert.assertEquals(1, rows.size());
