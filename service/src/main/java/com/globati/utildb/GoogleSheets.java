@@ -126,8 +126,6 @@ public class GoogleSheets {
                 System.out.println("No data found.");
             } else {
                 for (List row : values) {
-                    System.out.println("*** rows");
-                    System.out.println(row);
                     FlightBookingRow flightBookingRow = new FlightBookingRow(
                             row.get(0).toString(),
                             row.get(1).toString(),
@@ -141,10 +139,6 @@ public class GoogleSheets {
                             row.get(9).toString(),
                             row.get(10).toString()
                     );
-
-                    System.out.println("***");
-                    System.out.println(flightBookingRow);
-
 
                     flightBookings.add(flightBookingRow);
                 }
