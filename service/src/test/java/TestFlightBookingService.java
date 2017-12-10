@@ -145,6 +145,11 @@ public class TestFlightBookingService {
         Assert.assertEquals(id, flightBookingService.getEmployeeIdFromMarker(marker));
     }
 
+    /**
+     * This is an integration test with the globati.network accoutn with the sheets api. It will fail in a production environemnt.
+     * Only do this when checking cross checking manually, and setting up the test properly.
+     * @throws Exception
+     */
     @Ignore
     public void googleSheetsIntegration() throws Exception {
         System.out.println(employee.getId());
