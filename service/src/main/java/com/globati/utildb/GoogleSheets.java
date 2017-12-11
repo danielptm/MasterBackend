@@ -79,6 +79,7 @@ public class GoogleSheets {
      * @throws IOException
      */
     public static Credential authorize() throws IOException {
+
         // Load client secrets.
         InputStream in =
                 ClassLoader.getSystemClassLoader().getResourceAsStream("google_sheets/client_secret.json");
