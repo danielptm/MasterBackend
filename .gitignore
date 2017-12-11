@@ -1,5 +1,6 @@
 service/target
 dbmodel/target
+beans/target
 api/target
 service/derby.log
 
