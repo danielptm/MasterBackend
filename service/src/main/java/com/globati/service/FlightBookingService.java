@@ -26,7 +26,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 00 12 * * ?")
+    @Scheduled(cron = "0 15 1 * * ?")
     public boolean getDataFromGoogleDriveAndCreateBookings() throws Exception {
 
         List<FlightBookingRow> bookings = GoogleSheets.getGoogleDocument();
