@@ -42,7 +42,7 @@ public class GoogleSheets {
 
     /** Directory to store user credentials for this application. */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            GoogleSheets.class.getClassLoader().getResource("google_sheets/credentials").toString()
+                    GoogleSheets.class.getClassLoader().getResource("google_sheets/StoredCredential").toString()
     );
 
     /** Global instance of the {@link FileDataStoreFactory}. */
@@ -95,7 +95,7 @@ public class GoogleSheets {
         Credential credential = new AuthorizationCodeInstalledApp(
                 flow, new LocalServerReceiver()).authorize("user");
         System.out.println(
-                "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+                "Credentials saved to " + DATA_STORE_DIR);
         return credential;
     }
 
