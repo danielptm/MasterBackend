@@ -10,6 +10,7 @@ import com.globati.utildb.GoogleSheets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
+    @Scheduled(cron = "0 00 12 * * ?")
     public boolean getDataFromGoogleDriveAndCreateBookings() throws Exception {
 
         List<FlightBookingRow> bookings = GoogleSheets.getGoogleDocument();
