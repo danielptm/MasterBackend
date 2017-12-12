@@ -150,7 +150,7 @@ public class TestFlightBookingService {
      * Only do this when checking cross checking manually, and setting up the test properly.
      * @throws Exception
      */
-    @Ignore
+    @Test
     public void googleSheetsIntegration() throws Exception {
         System.out.println(employee.getId());
         Assert.assertTrue(flightBookingService.getDataFromGoogleDriveAndCreateBookings());
