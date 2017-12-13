@@ -34,6 +34,7 @@ public class FlightBookingRow {
     }
 
     private Integer adaptNumber(String marker){
+
         return Integer.parseInt(marker);
     }
 

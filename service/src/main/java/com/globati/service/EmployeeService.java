@@ -38,7 +38,6 @@ public class EmployeeService {
     @Autowired
     PropertiesService propertiesService;
 
-
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -219,7 +218,7 @@ public class EmployeeService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
-            List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeId(employee.getId());
+            List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
 
             employee.setRecommendations(recommendations);
             employee.setEvents(events);

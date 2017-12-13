@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.globati.dbmodel.FlightBooking;
 import com.globati.google_sheets.FlightBookingRow;
 import com.globati.service.PropertiesService;
 import org.apache.commons.io.IOUtils;
@@ -15,7 +16,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,22 +51,6 @@ public class ImageHandler {
         return UUID.randomUUID().toString();
     }
 
-    public static boolean checkIfImageExists(String path){
-        StringBuilder sb = new StringBuilder();
-        String root = propertiesService.getImageBucket();
-        sb.append(root);
-        sb.append(path);
-
-        File file = new File(sb.toString());
-
-        if(file.exists()){
-            return true;
-        }
-
-        else{
-            return false;
-        }
-    }
 
     /**
      * This function used to have more functinoality, now it looks like it just sends the inputstream to getFileFromImage;
@@ -153,7 +141,7 @@ public class ImageHandler {
 
     }
 
-    public static File getFileFromFlightBookings(){
+    public static File getFlightBookingsFromS3(){
         InputStream inputStream = null;
         FileOutputStream outputStream = null;
 
@@ -206,6 +194,72 @@ public class ImageHandler {
         return file;
     }
 
+    public static List<FlightBookingRow> getFlightBookingRowsFromFile(File file) throws ParseException {
+        BufferedReader br = null;
+        FileReader fr = null;
+        List<FlightBookingRow> flightBookings = new ArrayList<>();
 
+        try {
 
+            //br = new BufferedReader(new FileReader(FILENAME));
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+            String date=null;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+//                System.out.println(sCurrentLine);
+                if(DateTools.isValidDateFormat(sCurrentLine)){
+                    date = sCurrentLine;
+                }
+                else{
+                    String lineItems[] = sCurrentLine.split(",");
+                    FlightBookingRow flightBookingRow = new FlightBookingRow(
+                            date,
+                            lineItems[0],
+                            lineItems[1],
+                            lineItems[2],
+                            lineItems[3],
+                            lineItems[4],
+                            lineItems[5],
+                            lineItems[6],
+                            lineItems[7],
+                            lineItems[8],
+                            lineItems[9]
+                    );
+                    flightBookings.add(flightBookingRow);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+                if (fr != null)
+                    fr.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return flightBookings;
+    }
+
+    public static boolean deleteBookingFileFromS3(){
+
+            String bucketName = "globati-flight-bookings";
+            String keyName = "flightbookings.csv";
+
+            AWSCredentials credentials = new BasicAWSCredentials(
+                    "AKIAJSYT5343PVMDHCRQ",
+                    "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+
+            s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
+
+            return true;
+
+    }
 }

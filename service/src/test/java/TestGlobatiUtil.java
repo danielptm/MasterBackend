@@ -239,12 +239,38 @@ public class TestGlobatiUtil {
         Assert.assertEquals(fakeusername.length(), 10);
     }
 
+
+
+    @Test
+    public void isValidDateFormat(){
+        String validDate = "9999-99-99";
+        String invalidDate = "22-22-22";
+
+        Assert.assertTrue(DateTools.isValidDateFormat(validDate));
+        Assert.assertFalse(DateTools.isValidDateFormat(invalidDate));
+
+    }
+
     /**
+     *
+     * Tests getting a file from S3. If the file flightbookings.csv does not exist in the S3 bucket, then this test will
+     * fail. So Ignore this test when building on server. Only use it for manually debugging.
+     *
      * @throws Exception
      */
     @Ignore
-    public void googleDocumentApi() throws Exception {
-        List<FlightBookingRow> rows = GoogleSheets.getGoogleDocument();
-        Assert.assertEquals(1, rows.size());
+    public void getBookingFromS3() throws Exception {
+        File file = ImageHandler.getFlightBookingsFromS3();
+        Assert.assertNotNull(file);
+    }
+
+    /**
+     * Same as above. Dont run this on the server, just for manually testing.
+     */
+    @Ignore
+    public void getFlightBookings() throws ParseException {
+        List<FlightBookingRow> rows = ImageHandler.getFlightBookingRowsFromFile(ImageHandler.getFlightBookingsFromS3());
+        System.out.println(rows);
+        Assert.assertTrue(rows.size()>0);
     }
 }

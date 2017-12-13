@@ -19,6 +19,22 @@ public class DateTools {
 
     private static final Logger log = LogManager.getLogger(DateTools.class);
 
+
+    /**
+     * Returns true if the string matches a date in the format dddd-dd-dd. False otherwise.
+     * @param date
+     * @return
+     */
+    public static boolean isValidDateFormat(String date){
+        return date.matches("\\d\\d\\d\\d-\\d\\d-\\d\\d");
+    }
+
+    /**
+     * Formats a string in the format of dddd-dd-dd and creates a date object from it.
+     * @param stringDate
+     * @return
+     * @throws ParseException
+     */
     public static Date getDate(String stringDate) throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(stringDate, formatter);

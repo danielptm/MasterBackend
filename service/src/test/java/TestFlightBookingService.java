@@ -15,8 +15,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,6 +62,7 @@ public class TestFlightBookingService {
         String dateBooked = "2017-12-19";
         String time = "14:34";
         String paidStatus = "PAID";
+        String paidStatus2 = "CANCELLED";
         String cost = "$726.22";
         String comission = "$5.96";
         String flightPlan = "Stockholm (STO) - Seattle (SEA)";
@@ -78,7 +81,7 @@ public class TestFlightBookingService {
 
         row2 = new FlightBookingRow(
                 dateBooked,
-                time, paidStatus, cost, comission, flightPlan, passengers,
+                time, paidStatus2, cost, comission, flightPlan, passengers,
                 departureDate, returnDate, markerWithOutId, company
         );
 
@@ -138,6 +141,12 @@ public class TestFlightBookingService {
         Assert.assertEquals(id, flightBookingService.getEmployeeIdFromMarker(marker));
     }
 
+    @Test
+    public void getFlightBookingAndPaidStatusEqualsPaid() throws ServiceException {
+        List<FlightBooking> rows = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
+        Assert.assertEquals(1, rows.size());
+    }
+
     @Ignore
     public void idParserWithGreaterValue(){
         Long id = 23422L;
@@ -150,13 +159,9 @@ public class TestFlightBookingService {
      * Only do this when checking cross checking manually, and setting up the test properly.
      * @throws Exception
      */
-    @Test
+    @Ignore
     public void googleSheetsIntegration() throws Exception {
         System.out.println(employee.getId());
-
-
-
-
         Assert.assertTrue(flightBookingService.getDataFromGoogleDriveAndCreateBookings());
     }
 

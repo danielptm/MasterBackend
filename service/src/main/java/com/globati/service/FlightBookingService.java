@@ -7,6 +7,8 @@ import com.globati.google_sheets.FlightBookingRow;
 import com.globati.repository.FlightBookingRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.GoogleSheets;
+import com.globati.utildb.ImageHandler;
+import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +28,32 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 35 20 * * ?")
+    @Scheduled(cron = "0 40 4 * * ?")
     public boolean getDataFromGoogleDriveAndCreateBookings() throws Exception {
 
-        List<FlightBookingRow> bookings = GoogleSheets.getGoogleDocument();
+        try {
+            List<FlightBookingRow> bookings = ImageHandler.getFlightBookingRowsFromFile(ImageHandler.getFlightBookingsFromS3());
 
-        for(FlightBookingRow booking: bookings){
-            createFlightBooking(
-                    booking.getDateBooked(),
-                    booking.getTimeBooked(), booking.getPaidStatus(), booking.getCostOfTicket(),
-                    booking.getGlobatiCommission(), booking.getFlightPlan(),
-                    booking.getNumberOfPeople(), booking.getDepartureDate(), booking.getReturnDate(),
-                    booking.getGlobatiMarker(),
-                    booking.getCompanyBookedWith()
-            );
+            for (FlightBookingRow booking : bookings) {
+                createFlightBooking(
+                        booking.getDateBooked(),
+                        booking.getTimeBooked(), booking.getPaidStatus(), booking.getCostOfTicket(),
+                        booking.getGlobatiCommission(), booking.getFlightPlan(),
+                        booking.getNumberOfPeople(), booking.getDepartureDate(), booking.getReturnDate(),
+                        booking.getGlobatiMarker(),
+                        booking.getCompanyBookedWith()
+                );
+            }
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getDataFromGoogleDriveAndCreateBookings(): ");
+            e.printStackTrace();
+            String message = "There was an error when running getGoogleDocument(): This method is called automatically from the server to get data from " +
+                    "The globati bookings spread sheets on the google drive. It is possible that a google spreadsheet was deleted, or " +
+                    "a different server error ocurred. Therefore it cannot be garunteed that booking data has been persisted " +
+                    "properly in the database. Here is the error message : "+"<br>"+"<br>"+"<br>"+
+                    org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e.fillInStackTrace());
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", message);
+            throw new ServiceException("An exception occured when getting the flight bookings file from S3");
         }
         return true;
     }
@@ -66,8 +80,8 @@ public class FlightBookingService {
                     employee
                     );
 
+            ImageHandler.deleteBookingFileFromS3();
             return flightBookingRepository.save(flightBooking);
-
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createFlightBooking(): ");
             e.printStackTrace();
@@ -86,23 +100,18 @@ public class FlightBookingService {
     }
 
 
+    /**
+     * Returns all flight bookings for an employee, whether the transaction was paid or cancelled.
+     * @param employeeId
+     * @return
+     * @throws ServiceException
+     */
 
     public List<FlightBooking> getFlightBookingsByEmployeeId(Long employeeId) throws ServiceException {
         try{
             return flightBookingRepository.getFlightBookingByEmployeeId(employeeId);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingsByEmployeeId(): ");
-            e.printStackTrace();
-            throw new ServiceException("An exception occured when retrieving flight information from the google drive");
-        }
-    }
-
-    public List<FlightBookingRow> getFlightBookingRowsFromGoogleDoc() throws ServiceException {
-        List<FlightBookingRow> flightBookingRows = null;
-        try {
-            return GoogleSheets.getGoogleDocument();
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingRowsFromGoogleDoc(): ");
             e.printStackTrace();
             throw new ServiceException("An exception occured when retrieving flight information from the google drive");
         }
@@ -116,6 +125,17 @@ public class FlightBookingService {
 
     public Double calculateEmployeeComission(Double globaticomission){
         return globaticomission/2;
+    }
+
+    public List<FlightBooking> getFlightBookingsByEmployeeIdAndPaidStatus(Long employeeId) throws ServiceException {
+        try{
+            return flightBookingRepository.getFlightBookingByEmployeeIdAndPaidStatus(employeeId, TicketPaidStatus.PAID);
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingsByEmployeeId(): ");
+            e.printStackTrace();
+            throw new ServiceException("An exception occured when retrieving FlightBooking");
+        }
+
     }
 
 }
