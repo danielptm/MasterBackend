@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.globati.google_sheets.FlightBookingRow;
 import com.globati.service.PropertiesService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -150,5 +152,60 @@ public class ImageHandler {
         return true;
 
     }
+
+    public static File getFileFromFlightBookings(){
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+        String bucket = "globati-flight-bookings";
+        String key = "flightbookings.csv";
+
+        // create a client connection based on credentials
+        AmazonS3 s3client = new AmazonS3Client(credentials);
+
+        S3Object item = s3client.getObject(bucket, key);
+
+        inputStream = item.getObjectContent();
+
+        File file = new File("flightbookings.csv");
+
+        try {
+            outputStream = new FileOutputStream(file);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return file;
+    }
+
+
 
 }
