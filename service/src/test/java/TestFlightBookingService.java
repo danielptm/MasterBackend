@@ -63,8 +63,8 @@ public class TestFlightBookingService {
         String time = "14:34";
         String paidStatus = "PAID";
         String paidStatus2 = "CANCELLED";
-        String cost = "$726.22";
-        String comission = "$5.96";
+        String cost = "726.22";
+        String comission = "5.96";
         String flightPlan = "Stockholm (STO) - Seattle (SEA)";
         String passengers = "1";
         String departureDate = "2017.12.19";

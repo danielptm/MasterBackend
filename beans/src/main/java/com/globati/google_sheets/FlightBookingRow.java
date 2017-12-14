@@ -39,8 +39,7 @@ public class FlightBookingRow {
     }
 
     private Double adaptCost(String cost){
-        String adjustedCost = cost.substring(1);
-        return Double.parseDouble(adjustedCost);
+        return Double.parseDouble(cost);
     }
 
     private Date adaptDate(String stringDate){
