@@ -28,7 +28,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 45 10 * * ?")
+    @Scheduled(cron = "0 1 11 * * ?")
     public boolean getFlightBookingFroms3() throws Exception {
         log.info("** GLOBATI SCHEDULED TASK INITIALIZING ... GETTING flightbookings.csv from S3");
 
