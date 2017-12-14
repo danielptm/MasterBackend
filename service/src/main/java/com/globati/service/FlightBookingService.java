@@ -44,6 +44,7 @@ public class FlightBookingService {
                         booking.getCompanyBookedWith()
                 );
             }
+            ImageHandler.deleteBookingFileFromS3();
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingFroms3(): ");
             e.printStackTrace();
@@ -80,7 +81,6 @@ public class FlightBookingService {
                     employee
                     );
 
-            ImageHandler.deleteBookingFileFromS3();
             return flightBookingRepository.save(flightBooking);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createFlightBooking(): ");
