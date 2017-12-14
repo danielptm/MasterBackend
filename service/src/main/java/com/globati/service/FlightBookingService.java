@@ -28,7 +28,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 1 11 * * ?")
+    @Scheduled(cron = "0 29 11 * * ?")
     public boolean getFlightBookingFroms3() throws Exception {
         log.info("** GLOBATI SCHEDULED TASK INITIALIZING ... GETTING flightbookings.csv from S3");
 
@@ -52,7 +52,7 @@ public class FlightBookingService {
             String message = "There was an error when running getFlightBookingFroms3(): This method is called automatically from the server to get data from " +
                     "The globati bookings spread sheets on the google drive. It is possible that a google spreadsheet was deleted, or " +
                     "a different server error ocurred. Therefore it cannot be garunteed that booking data has been persisted " +
-                    "properly in the database. Here is the error message : "+"<br>"+"<br>"+"<br>"+
+                    "properly in the database. <br><br><br> If the flightbookings.csv file is not created properly, that could be a reason that this error iwas thrown"+"<br> <br> <br>"+"Here is the error message : "+"<br>"+"<br>"+"<br>"+
                     org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(e.fillInStackTrace());
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", message);
             throw new ServiceException("An exception occured when getting the flight bookings file from S3");
