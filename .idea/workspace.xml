@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/service/derby.log" afterPath="$PROJECT_DIR$/service/derby.log" />
+      <change beforePath="$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java" afterPath="$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java" />
+      <change beforePath="$PROJECT_DIR$/service/verifiedUsers.csv" afterPath="$PROJECT_DIR$/service/verifiedUsers.csv" />
     </list>
     <ignored path="$PROJECT_DIR$/api/target/" />
     <ignored path="$PROJECT_DIR$/beans/target/" />
@@ -33,31 +36,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestFlightBookingService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java">
+      <file leaf-file-name="TestRecommendationService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="168" column="0" lean-forward="true" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlightBookingService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
+      <file leaf-file-name="EmployeeService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="379">
+              <caret line="228" column="19" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageHandler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
+      <file leaf-file-name="TestEmployeeService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/src/test/java/TestEmployeeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="261" column="24" lean-forward="true" selection-start-line="261" selection-start-column="24" selection-end-line="261" selection-end-column="24" />
+            <state relative-caret-position="105">
+              <caret line="43" column="16" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -97,7 +100,6 @@
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/EventImageService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/repository/RecommendationImageRepository.java" />
         <option value="$PROJECT_DIR$/dbmodel/src/main/java/com/globati/dbmodel/Recommendation.java" />
-        <option value="$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/RecommendationImageService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/RecommendationService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/EventAdapater.java" />
@@ -134,8 +136,9 @@
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/repository/FlightBookingRepository.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
         <option value="$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
+        <option value="$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java" />
       </list>
     </option>
   </component>
@@ -295,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ServersideApplication">
+  <component name="RunManager" selected="JUnit.TestRecommendationService">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -391,46 +394,6 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="TestGlobatiUtil.getBookingFromS3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="db" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGlobatiUtil" />
-      <option name="METHOD_NAME" value="getBookingFromS3" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="TestGlobatiUtil.getFlightBookings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="db" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGlobatiUtil" />
-      <option name="METHOD_NAME" value="getFlightBookings" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration name="TestGlobatiUtil.isValidDateFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="db" />
@@ -439,6 +402,46 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestGlobatiUtil" />
       <option name="METHOD_NAME" value="isValidDateFormat" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="TestRecommendationService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="db" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestRecommendationService" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="TestRecommendationService.createReccomendation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="db" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestRecommendationService" />
+      <option name="METHOD_NAME" value="createReccomendation" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -771,19 +774,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Spring Boot.ServersideApplication" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getBookingFromS3" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFlightBookings" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.isValidDateFormat" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.s3fligthbookingintegration" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.isValidDateFormat" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.s3fligthbookingintegration" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestRecommendationService" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TestRecommendationService.createReccomendation" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.s3fligthbookingintegration" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.isValidDateFormat" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFlightBookings" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getBookingFromS3" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestRecommendationService" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestRecommendationService.createReccomendation" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.s3fligthbookingintegration" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.isValidDateFormat" />
       </list>
     </recent_temporary>
   </component>
@@ -943,34 +946,16 @@
       <workItem from="1513160407041" duration="172000" />
       <workItem from="1513160662257" duration="8872000" />
       <workItem from="1513181205367" duration="33000" />
-      <workItem from="1513183073959" duration="1290000" />
+      <workItem from="1513183073959" duration="2071000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestFlightBookingService_getFlightBookingAndPaidStatusEqualsPaid - 2017.12.13 at 14h 48m 46s.xml">
-      <configuration name="TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestFlightBookingService_getFlightBookingAndPaidStatusEqualsPaid - 2017.12.13 at 14h 50m 32s.xml">
-      <configuration name="TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestFlightBookingService_getFlightBookingAndPaidStatusEqualsPaid - 2017.12.13 at 14h 50m 47s.xml">
-      <configuration name="TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestFlightBookingService_getFlightBookingAndPaidStatusEqualsPaid - 2017.12.13 at 14h 51m 53s.xml">
-      <configuration name="TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestFlightBookingService_getFlightBookingAndPaidStatusEqualsPaid - 2017.12.13 at 14h 52m 58s.xml">
-      <configuration name="TestFlightBookingService.getFlightBookingAndPaidStatusEqualsPaid" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestFlightBookingService_s3fligthbookingintegration - 2017.12.14 at 09h 04m 56s.xml">
       <configuration name="TestFlightBookingService.s3fligthbookingintegration" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestFlightBookingService_s3fligthbookingintegration - 2017.12.14 at 09h 05m 36s.xml">
       <configuration name="TestFlightBookingService.s3fligthbookingintegration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestGlobatiUtil_getFlightBookings - 2017.12.13 at 12h 49m 56s.xml">
-      <configuration name="TestGlobatiUtil.getFlightBookings" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestGlobatiUtil_isValidDateFormat - 2017.12.13 at 12h 51m 26s.xml">
       <configuration name="TestGlobatiUtil.isValidDateFormat" configurationId="JUnit" />
@@ -978,9 +963,27 @@
     <history-entry file="TestGlobatiUtil_isValidDateFormat - 2017.12.13 at 12h 56m 03s.xml">
       <configuration name="TestGlobatiUtil.isValidDateFormat" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestRecommendationService - 2017.12.14 at 09h 24m 26s.xml">
+      <configuration name="TestRecommendationService" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRecommendationService_createReccomendation - 2017.12.14 at 09h 26m 02s.xml">
+      <configuration name="TestRecommendationService.createReccomendation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRecommendationService_createReccomendation - 2017.12.14 at 09h 28m 04s.xml">
+      <configuration name="TestRecommendationService.createReccomendation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRecommendationService_createReccomendation - 2017.12.14 at 09h 29m 01s.xml">
+      <configuration name="TestRecommendationService.createReccomendation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRecommendationService_createReccomendation - 2017.12.14 at 09h 31m 45s.xml">
+      <configuration name="TestRecommendationService.createReccomendation" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRecommendationService_createReccomendation - 2017.12.14 at 09h 32m 05s.xml">
+      <configuration name="TestRecommendationService.createReccomendation" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="656323000" />
+    <option name="totallyTimeSpent" value="657104000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1099,20 +1102,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dbmodel/src/main/java/com/globati/dbmodel/BaseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbmodel/src/main/java/com/globati/dbmodel/EventImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dbmodel/src/main/java/com/globati/dbmodel/Deal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1243,13 +1232,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="56" column="35" lean-forward="true" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestEmployeeService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="66" column="28" lean-forward="true" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1410,34 +1392,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2955">
-          <caret line="220" column="106" lean-forward="false" selection-start-line="220" selection-start-column="64" selection-end-line="220" selection-end-column="106" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="168" column="0" lean-forward="true" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+        <state relative-caret-position="780">
+          <caret line="261" column="24" lean-forward="true" selection-start-line="261" selection-start-column="24" selection-end-line="261" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
+    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="261" column="24" lean-forward="true" selection-start-line="261" selection-start-column="24" selection-end-line="261" selection-end-column="24" />
+        <state relative-caret-position="840">
+          <caret line="168" column="0" lean-forward="true" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/RecommendationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="228" column="19" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestEmployeeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="43" column="16" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
           <folding />
         </state>
       </provider>
