@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/beans/src/main/java/com/globati/google_sheets/FlightBookingRow.java" afterPath="$PROJECT_DIR$/beans/src/main/java/com/globati/google_sheets/FlightBookingRow.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java" afterPath="$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/api/target/" />
     <ignored path="$PROJECT_DIR$/beans/target/" />
@@ -35,11 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestFlightBookingService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestFlightBookingService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
+            <state relative-caret-position="-1290">
               <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlightBookingService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="54" column="223" lean-forward="false" selection-start-line="54" selection-start-column="223" selection-end-line="54" selection-end-column="223" />
               <folding />
             </state>
           </provider>
@@ -115,9 +123,9 @@
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/repository/FlightBookingRepository.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" />
         <option value="$PROJECT_DIR$/service/src/test/java/TestRecommendationService.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
         <option value="$PROJECT_DIR$/beans/src/main/java/com/globati/google_sheets/FlightBookingRow.java" />
         <option value="$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
       </list>
     </option>
   </component>
@@ -173,6 +181,36 @@
               <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="globati" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="globati" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
@@ -890,19 +928,19 @@
       <workItem from="1513160407041" duration="172000" />
       <workItem from="1513160662257" duration="8872000" />
       <workItem from="1513181205367" duration="33000" />
-      <workItem from="1513183073959" duration="5992000" />
+      <workItem from="1513183073959" duration="6371000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
+    <history-entry file="TestFlightBookingService - 2017.12.14 at 12h 33m 50s.xml">
+      <configuration name="TestFlightBookingService" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="TestFlightBookingService_s3fligthbookingintegration - 2017.12.14 at 09h 04m 56s.xml">
       <configuration name="TestFlightBookingService.s3fligthbookingintegration" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestFlightBookingService_s3fligthbookingintegration - 2017.12.14 at 09h 05m 36s.xml">
       <configuration name="TestFlightBookingService.s3fligthbookingintegration" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestGlobatiUtil_isValidDateFormat - 2017.12.13 at 12h 56m 03s.xml">
-      <configuration name="TestGlobatiUtil.isValidDateFormat" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestRecommendationService - 2017.12.14 at 09h 24m 26s.xml">
       <configuration name="TestRecommendationService" configurationId="JUnit" />
@@ -927,7 +965,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="661025000" />
+    <option name="totallyTimeSpent" value="661404000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -940,7 +978,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -962,7 +999,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6397134" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285568" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42374617" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42374617" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2936508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15995117" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1374,24 +1411,24 @@
         <state relative-caret-position="331">
           <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
           <folding>
-            <element signature="e#1415#1416#0" expanded="true" />
-            <element signature="e#1462#1463#0" expanded="true" />
+            <element signature="e#1415#1416#0" expanded="false" />
+            <element signature="e#1462#1463#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/src/test/java/TestFlightBookingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
+        <state relative-caret-position="-1290">
           <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="54" column="223" lean-forward="false" selection-start-line="54" selection-start-column="223" selection-end-line="54" selection-end-column="223" />
           <folding />
         </state>
       </provider>
