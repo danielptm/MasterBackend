@@ -28,7 +28,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 55 10 * * ?")
+    @Scheduled(cron = "0 5 10 * * ?")
     public boolean getFlightBookingFroms3() throws Exception {
 
         try {
