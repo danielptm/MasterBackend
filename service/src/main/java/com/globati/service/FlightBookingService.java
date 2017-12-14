@@ -30,6 +30,7 @@ public class FlightBookingService {
 
     @Scheduled(cron = "0 45 10 * * ?")
     public boolean getFlightBookingFroms3() throws Exception {
+        log.info("** GLOBATI SCHEDULED TASK INITIALIZING ... GETTING flightbookings.csv from S3");
 
         try {
             List<FlightBookingRow> bookings = ImageHandler.getFlightBookingRowsFromFile(ImageHandler.getFlightBookingsFromS3());
