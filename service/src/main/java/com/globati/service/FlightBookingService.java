@@ -28,8 +28,8 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 40 4 * * ?")
-    public boolean getDataFromGoogleDriveAndCreateBookings() throws Exception {
+    @Scheduled(cron = "0 20 9 * * ?")
+    public boolean getFlightBookingFroms3() throws Exception {
 
         try {
             List<FlightBookingRow> bookings = ImageHandler.getFlightBookingRowsFromFile(ImageHandler.getFlightBookingsFromS3());
@@ -45,9 +45,9 @@ public class FlightBookingService {
                 );
             }
         }catch(Exception e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getDataFromGoogleDriveAndCreateBookings(): ");
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingFroms3(): ");
             e.printStackTrace();
-            String message = "There was an error when running getGoogleDocument(): This method is called automatically from the server to get data from " +
+            String message = "There was an error when running getFlightBookingFroms3(): This method is called automatically from the server to get data from " +
                     "The globati bookings spread sheets on the google drive. It is possible that a google spreadsheet was deleted, or " +
                     "a different server error ocurred. Therefore it cannot be garunteed that booking data has been persisted " +
                     "properly in the database. Here is the error message : "+"<br>"+"<br>"+"<br>"+

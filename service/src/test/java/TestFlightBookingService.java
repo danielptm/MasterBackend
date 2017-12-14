@@ -160,9 +160,9 @@ public class TestFlightBookingService {
      * @throws Exception
      */
     @Ignore
-    public void googleSheetsIntegration() throws Exception {
+    public void s3fligthbookingintegration() throws Exception {
         System.out.println(employee.getId());
-        Assert.assertTrue(flightBookingService.getDataFromGoogleDriveAndCreateBookings());
+        Assert.assertTrue(flightBookingService.getFlightBookingFroms3());
     }
 
 }
