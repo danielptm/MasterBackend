@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -103,18 +104,9 @@ public class GuestResource {
         List<ResponseEmployee> employeesInPlace;
         try{
             employeesInPlace = employeeAdapter.getAndTranslateEmployeesByCitySearch(place);
-//            if(employeesInPlace.size()==0){
-//                employeesInPlace = employeeService.getEmployeesByCountry(place);
-//            }
 
-            System.out.println(employeesInPlace.size());
+            return Response.ok(employeesInPlace).build();
 
-            if(employeesInPlace.size()>0) {
-                return Response.ok(employeesInPlace).build();
-            }
-            else{
-                throw new Exception("Could not locate any employees for this place "+place);
-            }
         }catch(Exception e){
             throw new WebException("Could not get employees for place "+place, Response.Status.BAD_REQUEST);
         }
