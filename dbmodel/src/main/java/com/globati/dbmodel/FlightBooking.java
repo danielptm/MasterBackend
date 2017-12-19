@@ -1,6 +1,7 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
 import javax.persistence.*;
 import java.util.Date;
@@ -59,6 +60,7 @@ public class FlightBooking extends BookingEntity{
         this.globatiMarker = globatiMarker;
         this.companyBookedWith = companyBookedWith;
         this.employee = employee;
+        this.globatiPaymentStatus = GlobatiPaymentStatus.NOT_PAID;
     }
 
     public Date getDateBooked() {

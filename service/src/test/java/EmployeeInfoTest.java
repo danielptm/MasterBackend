@@ -11,6 +11,7 @@ import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.ImageHandler;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,7 +126,20 @@ public class EmployeeInfoTest {
     }
 
 
-    @Test
+    /**
+     *
+     *
+     * This test requires an internet connection and is ignored so that I can develop on the airplane. This test
+     * and other tests which upload or take stuff form S3 should be put into their own test file. So that these types
+     * of tests can easily be turned on and off.
+     *
+     * @throws ServiceException
+     * @throws IOException
+     * @throws UserDoesNotExistException
+     * @throws UserNameIsNotUniqueException
+     * @throws IllegalUserNameException
+     */
+    @Ignore
     public void testSendVerifiedUsers() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );

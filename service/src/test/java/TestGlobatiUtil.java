@@ -1,10 +1,7 @@
 
 import com.globati.dbmodel.*;
 import com.globati.google_sheets.FlightBookingRow;
-import com.globati.service.DealService;
-import com.globati.service.EmployeeService;
-import com.globati.service.EventService;
-import com.globati.service.PropertiesService;
+import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -53,6 +50,9 @@ public class TestGlobatiUtil {
 
     @Autowired
     PropertiesService propertiesService;
+
+    @Autowired
+    PayService payService;
 
     @Ignore
     public void testSendSesMail() throws Exception {
@@ -249,6 +249,31 @@ public class TestGlobatiUtil {
         Assert.assertTrue(DateTools.isValidDateFormat(validDate));
         Assert.assertFalse(DateTools.isValidDateFormat(invalidDate));
 
+    }
+
+    /**
+     * A test for PayService. This should probably be moved to its own test class.
+     */
+    @Test
+    public void calculateSumOfFlightBookingsForEmployee() throws ServiceException {
+        List<FlightBooking> flightBookings = new ArrayList<>();
+        FlightBooking flightBooking = new FlightBooking();
+        flightBooking.setGlobatiCommission(2.0);
+
+        flightBookings.add(flightBooking);
+
+
+        FlightBooking flightBooking1 = new FlightBooking();
+        flightBooking1.setGlobatiCommission(2.0);
+
+
+        FlightBooking flightBooking2 = new FlightBooking();
+        flightBooking2.setGlobatiCommission(2.0);
+
+        flightBookings.add(flightBooking1);
+        flightBookings.add(flightBooking2);
+
+        Assert.assertEquals(6.0, payService.calculateSumOfFlightBookingsForEmployee(flightBookings).doubleValue(), 1);
     }
 
     /**
