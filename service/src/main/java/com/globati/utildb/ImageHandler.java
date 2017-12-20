@@ -7,8 +7,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.globati.dbmodel.FlightBooking;
-import com.globati.google_sheets.FlightBookingRow;
+import com.globati.s3.FlightBookingRow;
+import com.globati.s3.HotelBookingRow;
 import com.globati.service.PropertiesService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -22,14 +22,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
 /**
- * Created by daniel on 12/22/16.
- *
- * This class was used for uploading images to S3 when the image streams came through our server.
- * This functioanlity is not utilized anymore, except files are uploaded to S3. Think about
- * renaming this class to S3Handler, or somthing like that and get rid of the old functionality.
- *
- *
+ * TODO: 12/20/17 DRY principle. Combine these functions to reduce repeated code.
+ * TODO: 12/20/17 Rename this class to S3Handler.
+ * TODO: 12/20/17 Make this file have its own tests. These should unit tests which work against S3, but the entire class can be ignored.
  */
 public class ImageHandler {
 
@@ -227,6 +224,112 @@ public class ImageHandler {
                             lineItems[7],
                             lineItems[8],
                             lineItems[9]
+                    );
+                    flightBookings.add(flightBookingRow);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+                if (fr != null)
+                    fr.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return flightBookings;
+    }
+
+    //TODO: 12/20/17 Make this for HotelBookings
+
+    public static File getHotelBookingsFromS3(){
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+        String bucket = "globati-hotel-bookings";
+        String key = "hotelbookings.csv";
+
+        // create a client connection based on credentials
+        AmazonS3 s3client = new AmazonS3Client(credentials);
+
+        S3Object item = s3client.getObject(bucket, key);
+
+        inputStream = item.getObjectContent();
+
+        File file = new File("hotelbookings.csv");
+
+        try {
+            outputStream = new FileOutputStream(file);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return file;
+    }
+
+    public static List<HotelBookingRow> getHotelBookingRowsFromFile(File file) throws ParseException {
+        BufferedReader br = null;
+        FileReader fr = null;
+        List<HotelBookingRow> flightBookings = new ArrayList<>();
+
+        try {
+
+            //br = new BufferedReader(new FileReader(FILENAME));
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+            String date=null;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+//                System.out.println(sCurrentLine);
+                if(DateTools.isValidDateFormat(sCurrentLine)){
+                    date = sCurrentLine;
+                }
+                else{
+                    String lineItems[] = sCurrentLine.split(",");
+                    HotelBookingRow flightBookingRow = new HotelBookingRow(
+                            date,
+                            lineItems[0],
+                            lineItems[1],
+                            lineItems[2],
+                            lineItems[3],
+                            lineItems[4],
+                            lineItems[5],
+                            lineItems[6],
+                            lineItems[7],
+                            lineItems[8]
                     );
                     flightBookings.add(flightBookingRow);
                 }

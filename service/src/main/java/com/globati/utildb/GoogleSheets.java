@@ -1,7 +1,6 @@
 package com.globati.utildb;
 
-import com.globati.dbmodel.FlightBooking;
-import com.globati.google_sheets.FlightBookingRow;
+import com.globati.s3.FlightBookingRow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -42,7 +41,7 @@ public class GoogleSheets {
 
     /** Directory to store user credentials for this application. */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-                    GoogleSheets.class.getClassLoader().getResource("google_sheets/StoredCredential").toString()
+                    GoogleSheets.class.getClassLoader().getResource("s3/StoredCredential").toString()
     );
 
     /** Global instance of the {@link FileDataStoreFactory}. */
@@ -82,7 +81,7 @@ public class GoogleSheets {
 
         // Load client secrets.
         InputStream in =
-                ClassLoader.getSystemClassLoader().getResourceAsStream("google_sheets/client_secret.json");
+                ClassLoader.getSystemClassLoader().getResourceAsStream("s3/client_secret.json");
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 

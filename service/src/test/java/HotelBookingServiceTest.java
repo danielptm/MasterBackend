@@ -1,8 +1,10 @@
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.FlightBooking;
+import com.globati.dbmodel.HotelBooking;
 import com.globati.s3.FlightBookingRow;
+import com.globati.s3.HotelBookingRow;
 import com.globati.service.EmployeeService;
-import com.globati.service.FlightBookingService;
+import com.globati.service.HotelBookingService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -23,19 +25,19 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestFlightBookingService {
+public class HotelBookingServiceTest {
 
     @Autowired
-    FlightBookingService flightBookingService;
+    HotelBookingService hotelBookingService;
 
     @Autowired
     EmployeeService employeeService;
 
-    FlightBookingRow row;
-    FlightBookingRow row2;
+    HotelBookingRow hotelBookingrow1;
+    HotelBookingRow hotelBookingRow2;
 
-    FlightBooking flightBooking1;
-    FlightBooking flightBooking2;
+    HotelBooking hotelBooking1;
+    HotelBooking hotelBooking2;
 
     String uid;
     Employee employee;
@@ -48,7 +50,7 @@ public class TestFlightBookingService {
         employee = employeeService.createEmployee(
                 "hi",
                 "daniel@me.com",
-                        uid,
+                uid,
                 "asdf",
                 23.23,
                 23,
@@ -72,77 +74,73 @@ public class TestFlightBookingService {
         String markerWithOutId = "153839";
         String company = "Kissandfly";
 
-        row = new FlightBookingRow(
+        hotelBookingrow1 = new HotelBookingRow(
                 dateBooked,
-                time, paidStatus, cost, comission, flightPlan, passengers,
+                time, paidStatus, cost, comission, flightPlan,
                 departureDate, returnDate, marker, company
         );
 
-        row2 = new FlightBookingRow(
+        hotelBookingRow2 = new HotelBookingRow(
                 dateBooked,
-                time, paidStatus2, cost, comission, flightPlan, passengers,
+                time, paidStatus2, cost, comission, flightPlan,
                 departureDate, returnDate, markerWithOutId, company
         );
 
 
         //FlightBooking with employeeId
-        flightBooking1 = flightBookingService.createFlightBooking(
-                row.getDateBooked(),
-                row.getTimeBooked(),
-                row.getPaidStatus(),
-                row.getCostOfTicket(),
-                row.getGlobatiCommission(),
-                row.getFlightPlan(),
-                row.getNumberOfPeople(),
-                row.getDepartureDate(),
-                row.getReturnDate(),
-                row.getGlobatiMarker(),
-                row.getCompanyBookedWith()
+        hotelBooking1 = hotelBookingService.createHotelBooking(
+                hotelBookingrow1.getDateBooked(),
+                hotelBookingrow1.getTimeBooked(),
+                hotelBookingrow1.getPaidStatus(),
+                hotelBookingrow1.getCostOfTicket(),
+                hotelBookingrow1.getGlobatiComission(),
+                hotelBookingrow1.getFlightPlan(),
+                hotelBookingrow1.getDepartureDate(),
+                hotelBookingrow1.getReturnDate(),
+                hotelBookingrow1.getGlobatiMaker(),
+                hotelBookingrow1.getCompanyBookedWith()
         );
 
 
         //FlightBooking with no employeeId
-        flightBooking2 = flightBookingService.createFlightBooking(
-                row2.getDateBooked(),
-                row2.getTimeBooked(),
-                row2.getPaidStatus(),
-                row2.getCostOfTicket(),
-                row2.getGlobatiCommission(),
-                row2.getFlightPlan(),
-                row2.getNumberOfPeople(),
-                row2.getDepartureDate(),
-                row2.getReturnDate(),
-                row2.getGlobatiMarker(),
-                row2.getCompanyBookedWith()
-
+        hotelBooking2 = hotelBookingService.createHotelBooking(
+                hotelBookingRow2.getDateBooked(),
+                hotelBookingRow2.getTimeBooked(),
+                hotelBookingRow2.getPaidStatus(),
+                hotelBookingRow2.getCostOfTicket(),
+                hotelBookingRow2.getGlobatiComission(),
+                hotelBookingRow2.getFlightPlan(),
+                hotelBookingRow2.getDepartureDate(),
+                hotelBookingRow2.getReturnDate(),
+                hotelBookingRow2.getGlobatiMaker(),
+                hotelBookingRow2.getCompanyBookedWith()
         );
-
     }
 
     @Test
     public void getFlightBookingById() throws ServiceException {
-        FlightBooking fb = flightBookingService.getFlightBookingById(flightBooking1.getId());
-        FlightBooking fb2 = flightBookingService.getFlightBookingById(flightBooking2.getId());
-        Assert.assertEquals(flightBooking1.getEmployee().getId(), fb.getEmployee().getId());
+        HotelBooking fb = hotelBookingService.getHotelBookingById(hotelBooking1.getId());
+        HotelBooking fb2 = hotelBookingService.getHotelBookingById(hotelBooking2.getId());
+        Assert.assertEquals(hotelBooking1.getEmployee().getId(), fb.getEmployee().getId());
         Assert.assertEquals(null, fb2.getEmployee());
     }
 
 
     @Test
     public void testGetFlightBooking() throws ServiceException {
-        Assert.assertEquals(1, flightBookingService.getFlightBookingsByEmployeeId(employee.getId()).size());
+        Assert.assertEquals(1, hotelBookingService.getHotelBookingsByEmployeeId(employee.getId()).size());
     }
 
     @Test
     public void idParser(){
         String marker = "153839."+employee.getId();
         Long id = employee.getId();
-        Assert.assertEquals(id, flightBookingService.getEmployeeIdFromMarker(marker));
+        Assert.assertEquals(id, hotelBookingService.getEmployeeIdFromMarker(marker));
     }
 
     @Test
     public void getFlightBookingAndPaidStatusEqualsPaid() throws ServiceException {
-        List<FlightBooking> rows = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
+        List<HotelBooking> rows = hotelBookingService.getHotelBookingsByEmployeeIdAndPaidStatus(employee.getId());
         Assert.assertEquals(1, rows.size());
     }
 
@@ -150,7 +148,7 @@ public class TestFlightBookingService {
     public void idParserWithGreaterValue(){
         Long id = 23422L;
         String marker = "153839."+id;
-        Assert.assertEquals(id, flightBookingService.getEmployeeIdFromMarker(marker));
+        Assert.assertEquals(id, hotelBookingService.getEmployeeIdFromMarker(marker));
     }
 
     /**
@@ -161,7 +159,10 @@ public class TestFlightBookingService {
     @Ignore
     public void s3fligthbookingintegration() throws Exception {
         System.out.println(employee.getId());
-        Assert.assertTrue(flightBookingService.getFlightBookingFroms3());
+        Assert.assertTrue(hotelBookingService.getHotelBookingsFromS3());
     }
+
+
+
 
 }

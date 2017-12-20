@@ -4,10 +4,9 @@ import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.FlightBooking;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
-import com.globati.google_sheets.FlightBookingRow;
+import com.globati.s3.FlightBookingRow;
 import com.globati.repository.FlightBookingRepository;
 import com.globati.service.exceptions.ServiceException;
-import com.globati.utildb.GoogleSheets;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +28,7 @@ public class FlightBookingService {
     @Autowired
     FlightBookingRepository flightBookingRepository;
 
-    @Scheduled(cron = "0 55 11 * * ?")
+    @Scheduled(cron = "0 30 4 * * ?")
     public boolean getFlightBookingFroms3() throws Exception {
         log.info("** GLOBATI SCHEDULED TASK INITIALIZING ... GETTING flightbookings.csv from S3");
 
@@ -120,7 +119,6 @@ public class FlightBookingService {
     }
 
     public Long getEmployeeIdFromMarker(String marker) {
-        System.out.println(marker);
         return Long.valueOf(marker.substring(7));
     }
 

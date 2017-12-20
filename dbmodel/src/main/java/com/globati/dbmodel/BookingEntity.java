@@ -11,7 +11,6 @@ public abstract class BookingEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     GlobatiPaymentStatus globatiPaymentStatus;
 
-
     public GlobatiPaymentStatus getGlobatiPaymentStatus() {
         return globatiPaymentStatus;
     }
@@ -19,4 +18,6 @@ public abstract class BookingEntity extends BaseEntity {
     public void setGlobatiPaymentStatus(GlobatiPaymentStatus globatiPaymentStatus) {
         this.globatiPaymentStatus = globatiPaymentStatus;
     }
+
+
 }

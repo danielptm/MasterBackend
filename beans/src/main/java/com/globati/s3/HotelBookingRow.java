@@ -1,42 +1,39 @@
-package com.globati.google_sheets;
+package com.globati.s3;
+
+import com.globati.dbmodel.Employee;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class FlightBookingRow {
+//TODO 12/20/17 DRY principle. This is repeating itselt with FlightBookingRow a bit. Create a super class BookingRow that these can inherit from.
+public class HotelBookingRow {
 
     Long employeeId;
     String timeBooked;
     String paidStatus;
     Double costOfTicket;
-    Double globatiCommission;
+    Double globatiComission;
     String flightPlan;
-    Integer numberOfPeople;
     Date departureDate;
     Date returnDate;
-    String globatiMarker;
+    String globatiMaker;
     String companyBookedWith;
     Date dateBooked;
 
-    public FlightBookingRow(String dateBooked, String timeBooked, String paidStatus, String costOfTicket, String globatiCommission, String flightPlan, String numberOfPeople, String departureDate, String returnDate, String globatiMarker, String companyBookedWith) {
+    public HotelBookingRow(String timeBooked, String paidStatus, String costOfTicket, String globatiComission, String flightPlan, String departureDate, String returnDate, String globatiMaker, String companyBookedWith, String dateBooked) {
         this.timeBooked = timeBooked;
         this.paidStatus = paidStatus;
         this.costOfTicket = adaptCost(costOfTicket);
-        this.globatiCommission = adaptCost(globatiCommission);
+        this.globatiComission = adaptCost(globatiComission);
         this.flightPlan = flightPlan;
-        this.numberOfPeople = adaptNumber(numberOfPeople);
         this.departureDate = adaptDate(departureDate);
         this.returnDate = adaptDate(returnDate);
-        this.globatiMarker = globatiMarker;
+        this.globatiMaker = globatiMaker;
         this.companyBookedWith = companyBookedWith;
         this.dateBooked = adaptBookingDate(dateBooked);
     }
 
-    private Integer adaptNumber(String marker){
-
-        return Integer.parseInt(marker);
-    }
 
     private Double adaptCost(String cost){
         return Double.parseDouble(cost);
@@ -54,52 +51,77 @@ public class FlightBookingRow {
         return java.sql.Date.valueOf(parsedDate);
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
     public String getTimeBooked() {
         return timeBooked;
+    }
+
+    public void setTimeBooked(String timeBooked) {
+        this.timeBooked = timeBooked;
     }
 
     public String getPaidStatus() {
         return paidStatus;
     }
 
+    public void setPaidStatus(String paidStatus) {
+        this.paidStatus = paidStatus;
+    }
+
     public Double getCostOfTicket() {
         return costOfTicket;
     }
 
-    public Double getGlobatiCommission() {
-        return globatiCommission;
+    public void setCostOfTicket(Double costOfTicket) {
+        this.costOfTicket = costOfTicket;
+    }
+
+    public Double getGlobatiComission() {
+        return globatiComission;
+    }
+
+    public void setGlobatiComission(Double globatiComission) {
+        this.globatiComission = globatiComission;
     }
 
     public String getFlightPlan() {
         return flightPlan;
     }
 
-    public Integer getNumberOfPeople() {
-        return numberOfPeople;
+    public void setFlightPlan(String flightPlan) {
+        this.flightPlan = flightPlan;
     }
+
 
     public Date getDepartureDate() {
         return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 
     public Date getReturnDate() {
         return returnDate;
     }
 
-    public String getGlobatiMarker() {
-        return globatiMarker;
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getGlobatiMaker() {
+        return globatiMaker;
+    }
+
+    public void setGlobatiMaker(String globatiMaker) {
+        this.globatiMaker = globatiMaker;
     }
 
     public String getCompanyBookedWith() {
         return companyBookedWith;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setCompanyBookedWith(String companyBookedWith) {
+        this.companyBookedWith = companyBookedWith;
     }
 
     public Date getDateBooked() {
@@ -112,17 +134,16 @@ public class FlightBookingRow {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FlightBookingRow{");
+        final StringBuilder sb = new StringBuilder("HotelBookingRow{");
         sb.append("employeeId=").append(employeeId);
         sb.append(", timeBooked='").append(timeBooked).append('\'');
         sb.append(", paidStatus='").append(paidStatus).append('\'');
         sb.append(", costOfTicket=").append(costOfTicket);
-        sb.append(", globatiCommission=").append(globatiCommission);
+        sb.append(", globatiComission=").append(globatiComission);
         sb.append(", flightPlan='").append(flightPlan).append('\'');
-        sb.append(", numberOfPeople=").append(numberOfPeople);
         sb.append(", departureDate=").append(departureDate);
         sb.append(", returnDate=").append(returnDate);
-        sb.append(", globatiMarker='").append(globatiMarker).append('\'');
+        sb.append(", globatiMaker='").append(globatiMaker).append('\'');
         sb.append(", companyBookedWith='").append(companyBookedWith).append('\'');
         sb.append(", dateBooked=").append(dateBooked);
         sb.append('}');

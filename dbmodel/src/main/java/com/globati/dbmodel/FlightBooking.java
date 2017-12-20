@@ -37,8 +37,6 @@ public class FlightBooking extends BookingEntity{
     @Column(name = "companybookedwith")
     String companyBookedWith;
 
-
-
     @ManyToOne
     @JoinColumn(name="employeeid")
     @JsonBackReference

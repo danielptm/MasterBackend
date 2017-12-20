@@ -1,6 +1,6 @@
 
 import com.globati.dbmodel.*;
-import com.globati.google_sheets.FlightBookingRow;
+import com.globati.s3.FlightBookingRow;
 import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
