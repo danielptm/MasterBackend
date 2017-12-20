@@ -1,7 +1,6 @@
 package com.globati.dbmodel;
 
 import com.globati.enums.GlobatiPaymentStatus;
-
 import javax.persistence.*;
 
 

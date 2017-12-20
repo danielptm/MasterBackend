@@ -2,5 +2,6 @@ package com.globati.enums;
 
 public enum TicketPaidStatus {
     PAID,
-    CANCELLED
+    CANCELLED,
+    PROCESSING
 }
