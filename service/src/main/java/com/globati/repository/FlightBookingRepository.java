@@ -1,6 +1,7 @@
 package com.globati.repository;
 
 import com.globati.dbmodel.FlightBooking;
+import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +15,10 @@ public interface FlightBookingRepository extends CrudRepository<FlightBooking, L
 
 //    @Query("SELECT e FROM Employee e WHERE e.id =:id " )
 
-    @Query("SELECT f FROM FlightBooking  f WHERE f.employee.id=:id AND f.paidStatus=:paidStatus")
-    List<FlightBooking> getFlightBookingByEmployeeIdAndPaidStatus(@Param("id") Long id, @Param("paidStatus") TicketPaidStatus paidStatus);
+    @Query("SELECT f FROM FlightBooking  f WHERE f.employee.id=:id AND f.paidStatus=:paidStatus AND f.globatiPaymentStatus=:globatiPaidStatus")
+    List<FlightBooking> getFlightBookingByEmployeeIdAndPaidStatus(
+            @Param("id") Long id,
+            @Param("paidStatus") TicketPaidStatus paidStatus,
+            @Param("globatiPaidStatus") GlobatiPaymentStatus globatiPaidStatus);
 
 }

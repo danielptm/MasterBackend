@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: This class is untested
 @Service
 public class ImageAdapater {
 

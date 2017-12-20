@@ -4,6 +4,7 @@ import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.EmployeeInfo;
 import com.globati.dbmodel.FlightBooking;
+import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.Verified;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.ImageHandler;
@@ -148,6 +149,7 @@ public class PayService {
         return file;
     }
 
+
     /**
      *
      * If a user has been verified, then they are added to the list.
@@ -158,26 +160,81 @@ public class PayService {
      *
      * @return
      */
-    public File createCSVFileOfVerifiedUsersForBookings() throws ServiceException {
+    public List<File> createCSVFileOfVerifiedUsersForBookings() throws ServiceException {
 
+        List<File> files = new ArrayList<>();
+
+        //Get all employee infos that are verified
         List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeesByVerified(Verified.STANDARD);
 
-        File file = new File("verifiedUsers.csv");
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+        List<Employee> employees = new ArrayList<>();
+        //Get all employees for their employeeInfos
+        employeeInfos.forEach((info)-> {
+            try {
+                employees.add(employeeService.getEmployeeById(info.getEmployeeId()));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+
+        File massPay = new File("massPayment.csv");
+        File flightBookings =  new File("flightbookings.csv");
+        File hotelBookings = new File("hotelbookings.csv");
+
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(massPay))) {
             String header = "PayPal email,Payment (Fill this in manually in excel),currency,id,Verified";
             bw.write(header);
             bw.newLine();
             for (EmployeeInfo info : employeeInfos) {
                 Employee employee1 = employeeService.getEmployeeById(info.getEmployeeId());
-                String line = employee1.getPaypalEmail() + ","+calculateSumOfFlightBookingsForEmployee(employee1.getFlights())
-                        +"," + "EUR" + "," + employee1.getId() + ","+info.get_verified();
+                String line = employee1.getPaypalEmail() +
+                        ","+calculateSumOfFlightBookingsForEmployee(employee1.getFlights()) +
+                        "," + "EUR" +
+                        "," + employee1.getId() + ","+info.get_verified();
                 bw.write(line);
                 bw.newLine();
             }
+            files.add(massPay);
+        } catch (IOException e) {
+            log.warn("There was a problem when createing a mass pay file:: in PayService.createCSVFileOfVerifiedUsersForBookings()");
+            e.printStackTrace();
+        }
+
+        try(BufferedWriter flightsWriter = new BufferedWriter(new FileWriter(flightBookings))){
+            String header = "FlightBookingId,EmployeeId,Price,EmployeeComission";
+            flightsWriter.write(header);
+            flightsWriter.newLine();
+            for (Employee employee : employees) {
+                for(FlightBooking flightBooking: employee.getFlights()){
+                    if(flightBooking.getGlobatiPaymentStatus().equals(GlobatiPaymentStatus.NOT_PAID)){
+                        String line = flightBooking.getId()+","+","+employee.getId()+","
+                                +flightBooking.getCostOfTicket()+","+flightBooking.getGlobatiCommission();
+                        flightsWriter.write(line);
+                        flightsWriter.newLine();
+                    }
+                }
+            }
+            files.add(flightBookings);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return file;
+
+        //TODO: 12/20/17 This needs to be implemented for HotelBookings too once HotelBooking is done.
+
+//        try(BufferedWriter bookingsWriter = new BufferedWriter(new FileWriter(hotelBookings))){
+//            String header = "HotelBookingId,EmployeeId,Price,EmployeeComission";
+//            bookingsWriter.write(header);
+//            bookingsWriter.newLine();
+//            for(Employee employee: employees){
+//                for(HotelB)
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+        return files;
     }
 
 
@@ -201,11 +258,23 @@ public class PayService {
         }
     }
 
-
+    /**
+     * 12/20/17
+     *
+     * @throws ServiceException
+     */
     @Scheduled(cron = "0 40 4 * * ?")
     public void uploadVerifiedUsersToS3() throws ServiceException {
+        List<File> files = createCSVFileOfVerifiedUsersForBookings();
         try{
-            ImageHandler.uploadVerifiedUsersToS3(createCSVFileOfVerifiedUsersForBookings());
+            File massPay = files.get(0);
+            File flightBookings = files.get(1);
+            File hotelBookings = files.get(2);
+
+            ImageHandler.uploadVerifiedUsersToS3(massPay);
+            ImageHandler.uploadVerifiedUsersToS3(flightBookings);
+            ImageHandler.uploadVerifiedUsersToS3(hotelBookings);
+
         }catch(Exception e){
             e.printStackTrace();
             throw new ServiceException("Could not upload the verified users csv file to S3", e);

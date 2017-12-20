@@ -2,6 +2,7 @@ package com.globati.service;
 
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.FlightBooking;
+import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
 import com.globati.google_sheets.FlightBookingRow;
 import com.globati.repository.FlightBookingRepository;
@@ -130,7 +131,8 @@ public class FlightBookingService {
 
     public List<FlightBooking> getFlightBookingsByEmployeeIdAndPaidStatus(Long employeeId) throws ServiceException {
         try{
-            return flightBookingRepository.getFlightBookingByEmployeeIdAndPaidStatus(employeeId, TicketPaidStatus.PAID);
+            return flightBookingRepository.getFlightBookingByEmployeeIdAndPaidStatus(
+                    employeeId, TicketPaidStatus.PAID, GlobatiPaymentStatus.NOT_PAID);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getFlightBookingsByEmployeeId(): ");
             e.printStackTrace();
