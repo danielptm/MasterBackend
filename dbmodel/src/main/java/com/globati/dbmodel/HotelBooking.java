@@ -7,6 +7,8 @@ import com.globati.enums.TicketPaidStatus;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "hotelbooking")
 public class HotelBooking extends BookingEntity{
     @Column(name="datebooked")
     Date dateBooked;
@@ -36,6 +38,8 @@ public class HotelBooking extends BookingEntity{
     @JoinColumn(name="employeeid")
     @JsonBackReference
     private Employee employee;
+
+    public HotelBooking(){};
 
     public HotelBooking(Date dateBooked, String timeBooked, TicketPaidStatus paidStatus, Double costOfTicket, Double globatiCommission, Double employeeComission, String hotelCity, Date checkinDate, Date getCheckOutDate, String globatiMarker, String companyBookedWith, Employee employee) {
         this.dateBooked = dateBooked;

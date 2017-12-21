@@ -115,11 +115,11 @@ public class ImageHandler {
 
     }
 
-    public static boolean uploadVerifiedUsersToS3(File file){
+    public static boolean uploadVerifiedUsersToS3(File file, String name){
 
         Date date = new Date();
 
-        String fileName = date.toString()+"verifiedUsers.csv";
+        String fileName = name;
 
         String bucketName = "globatiimages/batchpay";
 
@@ -364,5 +364,20 @@ public class ImageHandler {
 
             return true;
 
+    }
+
+    public static boolean deleteHotelBookingFileFromS3(){
+        String bucketName = "globati-hotel-bookings";
+        String keyName = "hotelbookings.csv";
+
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+        AmazonS3 s3Client = new AmazonS3Client(credentials);
+
+        s3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
+
+        return true;
     }
 }

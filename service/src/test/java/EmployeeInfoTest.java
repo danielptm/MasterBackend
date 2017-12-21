@@ -155,7 +155,7 @@ public class EmployeeInfoTest {
 
         employeeInfoService.updateEmployeeInfo(e2);
 
-        ImageHandler.uploadVerifiedUsersToS3(payService.createCSVFileOfVerifiedUsersForBookings());
+//        ImageHandler.uploadVerifiedUsersToS3(payService.createCSVFileOfVerifiedUsersForBookings());
 
     }
 

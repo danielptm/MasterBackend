@@ -85,6 +85,11 @@ public class Employee extends BaseEntity {
     @JsonManagedReference
     List<FlightBooking> flights;
 
+
+    @OneToMany
+    @JsonManagedReference
+    List<HotelBooking> hotels;
+
     public Employee(){}
 
     public Employee(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country) {
@@ -354,6 +359,14 @@ public class Employee extends BaseEntity {
 
     public void setFlights(List<FlightBooking> flights) {
         this.flights = flights;
+    }
+
+    public List<HotelBooking> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(List<HotelBooking> hotels) {
+        this.hotels = hotels;
     }
 
     @Override

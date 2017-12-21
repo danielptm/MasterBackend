@@ -21,7 +21,7 @@ public class HotelBookingRow {
     String companyBookedWith;
     Date dateBooked;
 
-    public HotelBookingRow(String timeBooked, String paidStatus, String costOfTicket, String globatiComission, String flightPlan, String departureDate, String returnDate, String globatiMaker, String companyBookedWith, String dateBooked) {
+    public HotelBookingRow(String dateBooked, String timeBooked, String paidStatus, String costOfTicket, String globatiComission, String flightPlan, String departureDate, String returnDate, String globatiMaker, String companyBookedWith) {
         this.timeBooked = timeBooked;
         this.paidStatus = paidStatus;
         this.costOfTicket = adaptCost(costOfTicket);

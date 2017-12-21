@@ -1,10 +1,7 @@
 package com.globati.adapter;
 
 import com.globati.dbmodel.*;
-import com.globati.deserialization_beans.response.employee.ResponseEmployee;
-import com.globati.deserialization_beans.response.employee.ResponseEvent;
-import com.globati.deserialization_beans.response.employee.ResponseFlight;
-import com.globati.deserialization_beans.response.employee.ResponseRecommendation;
+import com.globati.deserialization_beans.response.employee.*;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.AdapaterException;
 import com.globati.service.exceptions.ServiceException;
@@ -30,6 +27,9 @@ public class EmployeeAdapter {
 
     @Autowired
     FlightAdapater flightAdapater;
+
+    @Autowired
+    HotelAdapater hotelAdapater;
 
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
@@ -85,7 +85,8 @@ public class EmployeeAdapter {
                     employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                    translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee)
+                    translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
+                    translateResponseHotels(employee)
             );
 
             return responseEmployee;
@@ -115,7 +116,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee), null
+                        translateResponseEvents(employee), translateResponseHotels(employee), null
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());
@@ -185,6 +186,17 @@ public class EmployeeAdapter {
 
         return responseFlights;
 
+    }
+
+    public List<ResponseHotel> translateResponseHotels(Employee employee){
+        List<ResponseHotel> responseHotels = new ArrayList<>();
+
+        for(HotelBooking hotelBooking: employee.getHotels()){
+            ResponseHotel responseHotel = hotelAdapater.getAndTranslateAHotel(hotelBooking);
+            responseHotels.add(responseHotel);
+        }
+
+        return responseHotels;
     }
 
 }

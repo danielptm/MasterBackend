@@ -30,4 +30,6 @@
 
     <bean id="FlightBookingService" class="com.globati.service.FlightBookingService"></bean>
 
+    <bean id="HotelBookingService" class="com.globati.service.HotelBookingService"></bean>
+
 </beans>

@@ -1,6 +1,7 @@
 
 import com.globati.dbmodel.*;
 import com.globati.s3.FlightBookingRow;
+import com.globati.s3.HotelBookingRow;
 import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
@@ -276,6 +277,11 @@ public class TestGlobatiUtil {
         Assert.assertEquals(6.0, payService.calculateSumOfFlightBookingsForEmployee(flightBookings).doubleValue(), 1);
     }
 
+    @Test
+    public void testCreateAndSendMassPay() throws ServiceException {
+        payService.uploadVerifiedUsersToS3();
+    }
+
     /**
      *
      * Tests getting a file from S3. If the file flightbookings.csv does not exist in the S3 bucket, then this test will
@@ -298,4 +304,19 @@ public class TestGlobatiUtil {
         System.out.println(rows);
         Assert.assertTrue(rows.size()>0);
     }
+
+    @Ignore
+    public void getHotelBookingsFromS3() throws Exception {
+        File file = ImageHandler.getHotelBookingsFromS3();
+        Assert.assertNotNull(file);
+    }
+
+    @Ignore
+    public void getFHotelBookings() throws ParseException {
+        List<HotelBookingRow> rows = ImageHandler.getHotelBookingRowsFromFile(ImageHandler.getHotelBookingsFromS3());
+        System.out.println(rows);
+        Assert.assertTrue(rows.size()>0 );
+
+    }
+
 }

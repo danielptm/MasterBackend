@@ -1,7 +1,5 @@
 package com.globati.deserialization_beans.response.employee;
 
-import com.globati.dbmodel.FlightBooking;
-
 import java.util.List;
 
 public class ResponseEmployee {
@@ -30,11 +28,12 @@ public class ResponseEmployee {
     private List<ResponseRecommendation> recommendations;
     private List<ResponseEvent> events;
     private List<ResponseFlight> flightBookings;
+    private List<ResponseHotel> hotelBookings;
     private String apiKey;
 
     public ResponseEmployee(){}
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, List<ResponseHotel> hotels, String apikey) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -58,10 +57,11 @@ public class ResponseEmployee {
         this.facebookProfile = facebookProfile;
         this.recommendations = recommendations;
         this.events = events;
+        this.hotelBookings = hotels;
         this.apiKey = apikey;
     }
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings, List<ResponseHotel> hotelBookings) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -87,6 +87,7 @@ public class ResponseEmployee {
         this.events = events;
         this.apiKey = apikey;
         this.flightBookings = flightBookings;
+        this.hotelBookings = hotelBookings;
     }
 
     public Long getId() {
@@ -285,6 +286,14 @@ public class ResponseEmployee {
         this.flightBookings = flightBookings;
     }
 
+    public List<ResponseHotel> getHotelBookings() {
+        return hotelBookings;
+    }
+
+    public void setHotelBookings(List<ResponseHotel> hotelBookings) {
+        this.hotelBookings = hotelBookings;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ResponseEmployee{");
@@ -312,6 +321,7 @@ public class ResponseEmployee {
         sb.append(", recommendations=").append(recommendations);
         sb.append(", events=").append(events);
         sb.append(", flightBookings=").append(flightBookings);
+        sb.append(", hotelBookings=").append(hotelBookings);
         sb.append(", apiKey='").append(apiKey).append('\'');
         sb.append('}');
         return sb.toString();

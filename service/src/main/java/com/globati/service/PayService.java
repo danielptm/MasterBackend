@@ -1,12 +1,10 @@
 package com.globati.service;
 
-import com.globati.dbmodel.Deal;
-import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.EmployeeInfo;
-import com.globati.dbmodel.FlightBooking;
+import com.globati.dbmodel.*;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.Verified;
 import com.globati.service.exceptions.ServiceException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.ImageHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -167,15 +165,17 @@ public class PayService {
         //Get all employee infos that are verified
         List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeesByVerified(Verified.STANDARD);
 
-        List<Employee> employees = new ArrayList<>();
+        List<EmployeeAndItems> employees = new ArrayList<>();
         //Get all employees for their employeeInfos
         employeeInfos.forEach((info)-> {
             try {
-                employees.add(employeeService.getEmployeeById(info.getEmployeeId()));
+                employees.add(employeeService.getItemsForEmployee(employeeService.getEmployeeById(info.getEmployeeId()).getGlobatiUsername()));
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
         });
+
+        log.trace("Employees size: "+employees.size());
 
         File massPay = new File("massPayment.csv");
         File flightBookings =  new File("flightbookings.csv");
@@ -183,13 +183,19 @@ public class PayService {
 
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(massPay))) {
-            String header = "PayPal email,Payment (Fill this in manually in excel),currency,id,Verified";
+            String header = "PayPal email,Payment,currency,id,Verified";
             bw.write(header);
             bw.newLine();
             for (EmployeeInfo info : employeeInfos) {
-                Employee employee1 = employeeService.getEmployeeById(info.getEmployeeId());
+                Employee employee1 = employeeService.getItemsForEmployee(
+                        employeeService.getEmployeeById(info.getEmployeeId()).getGlobatiUsername())
+                        .getEmployee();
+
                 String line = employee1.getPaypalEmail() +
-                        ","+calculateSumOfFlightBookingsForEmployee(employee1.getFlights()) +
+                        ","
+                        +
+                        calculateSumOfFlightBookingsForEmployee(employee1.getFlights()) + calculateSumOfHoteltBookingsForEmployee(employee1.getHotels())
+                        +
                         "," + "EUR" +
                         "," + employee1.getId() + ","+info.get_verified();
                 bw.write(line);
@@ -205,10 +211,10 @@ public class PayService {
             String header = "FlightBookingId,EmployeeId,Price,EmployeeComission";
             flightsWriter.write(header);
             flightsWriter.newLine();
-            for (Employee employee : employees) {
-                for(FlightBooking flightBooking: employee.getFlights()){
+            for (EmployeeAndItems employee : employees) {
+                for(FlightBooking flightBooking: employee.getEmployee().getFlights()){
                     if(flightBooking.getGlobatiPaymentStatus().equals(GlobatiPaymentStatus.NOT_PAID)){
-                        String line = flightBooking.getId()+","+","+employee.getId()+","
+                        String line = flightBooking.getId()+","+employee.getEmployee().getId()+","
                                 +flightBooking.getCostOfTicket()+","+flightBooking.getGlobatiCommission();
                         flightsWriter.write(line);
                         flightsWriter.newLine();
@@ -220,20 +226,22 @@ public class PayService {
             e.printStackTrace();
         }
 
-        //TODO: 12/20/17 This needs to be implemented for HotelBookings too once HotelBooking is done.
-
-//        try(BufferedWriter bookingsWriter = new BufferedWriter(new FileWriter(hotelBookings))){
-//            String header = "HotelBookingId,EmployeeId,Price,EmployeeComission";
-//            bookingsWriter.write(header);
-//            bookingsWriter.newLine();
-//            for(Employee employee: employees){
-//                for(HotelB)
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
+        try(BufferedWriter bookingsWriter = new BufferedWriter(new FileWriter(hotelBookings))){
+            String header = "HotelBookingId,EmployeeId,Price,EmployeeComission";
+            bookingsWriter.write(header);
+            bookingsWriter.newLine();
+            for(EmployeeAndItems employee: employees){
+                for( HotelBooking hotel: employee.getEmployee().getHotels() ){
+                    String line = hotel.getId()+","+employee.getEmployee().getId()+","
+                            +hotel.getCostOfTicket()+","+hotel.getGlobatiCommission();
+                    bookingsWriter.write(line);
+                    bookingsWriter.newLine();
+                }
+            }
+            files.add(hotelBookings);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return files;
     }
 
@@ -248,7 +256,22 @@ public class PayService {
     public Double calculateSumOfFlightBookingsForEmployee(List<FlightBooking> bookings) throws ServiceException {
         try{
             Double amount = new Double(0);
+            log.trace("bookings size: ");
+            log.trace(bookings.size());
             for(FlightBooking booking: bookings){
+                amount += booking.getGlobatiCommission();
+            }
+            return amount;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new ServiceException("Could not calculate the globati comission for list of flight bookings. ");
+        }
+    }
+
+    public Double calculateSumOfHoteltBookingsForEmployee(List<HotelBooking> bookings) throws ServiceException {
+        try{
+            Double amount = new Double(0);
+            for(HotelBooking booking: bookings){
                 amount += booking.getGlobatiCommission();
             }
             return amount;
@@ -263,17 +286,18 @@ public class PayService {
      *
      * @throws ServiceException
      */
-    @Scheduled(cron = "0 40 4 * * ?")
+    @Scheduled(cron = "0 56 14 * * ?")
     public void uploadVerifiedUsersToS3() throws ServiceException {
+        log.info("** Globati batch pay initializing **");
         List<File> files = createCSVFileOfVerifiedUsersForBookings();
         try{
             File massPay = files.get(0);
             File flightBookings = files.get(1);
             File hotelBookings = files.get(2);
 
-            ImageHandler.uploadVerifiedUsersToS3(massPay);
-            ImageHandler.uploadVerifiedUsersToS3(flightBookings);
-            ImageHandler.uploadVerifiedUsersToS3(hotelBookings);
+            ImageHandler.uploadVerifiedUsersToS3(massPay, System.currentTimeMillis()+"masspay.csv");
+            ImageHandler.uploadVerifiedUsersToS3(flightBookings, System.currentTimeMillis()+"flights.csv");
+            ImageHandler.uploadVerifiedUsersToS3(hotelBookings, System.currentTimeMillis()+"hotels.csv");
 
         }catch(Exception e){
             e.printStackTrace();

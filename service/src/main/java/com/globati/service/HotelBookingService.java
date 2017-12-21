@@ -34,7 +34,7 @@ public class HotelBookingService {
     @Autowired
     HotelBookingRepository hotelBookingRepository;
 
-    @Scheduled(cron = "0 30 4 * * ?")
+    @Scheduled(cron = "0 30 11 * * ?")
     public boolean getHotelBookingsFromS3() throws Exception {
         log.info("** GLOBATI SCHEDULED TASK INITIALIZING ... GETTING flightbookings.csv from S3");
 
@@ -51,7 +51,7 @@ public class HotelBookingService {
                         booking.getCompanyBookedWith()
                 );
             }
-            ImageHandler.deleteBookingFileFromS3();
+            ImageHandler.deleteHotelBookingFileFromS3();
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getHotelBookingsFromS3(): ");
             e.printStackTrace();

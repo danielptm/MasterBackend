@@ -1,6 +1,5 @@
 package com.globati.repository;
 
-import com.globati.dbmodel.FlightBooking;
 import com.globati.dbmodel.HotelBooking;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
