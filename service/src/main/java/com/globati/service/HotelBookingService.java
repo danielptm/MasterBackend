@@ -145,4 +145,14 @@ public class HotelBookingService {
 
     }
 
+    public HotelBooking updateHotelBooking(HotelBooking booking) throws ServiceException {
+        try{
+            return hotelBookingRepository.save(booking);
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: calculateEmployeeComission(): ");
+            e.printStackTrace();
+            throw new ServiceException("An exception occured when retrieving FlightBooking");
+        }
+    }
+
 }

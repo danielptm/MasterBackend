@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.globati.s3.FlightBookingRow;
 import com.globati.s3.HotelBookingRow;
 import com.globati.service.PropertiesService;
+import jdk.internal.util.xml.impl.Input;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -243,7 +244,6 @@ public class ImageHandler {
         return flightBookings;
     }
 
-    //TODO: 12/20/17 Make this for HotelBookings
 
     public static File getHotelBookingsFromS3(){
         InputStream inputStream = null;
@@ -297,6 +297,104 @@ public class ImageHandler {
         }
         return file;
     }
+
+    public static List<File> getProcessedPaymentFile(){
+        List<File> processedFiles = new ArrayList<>();
+
+        InputStream flightStream = null;
+        InputStream hotelStream = null;
+        FileOutputStream outputStream = null;
+
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+        String bucket = "processed-payments";
+        String key = "processed-flights.csv";
+        String key2 = "processed-hotels.csv";
+
+        // create a client connection based on credentials
+        AmazonS3 s3client = new AmazonS3Client(credentials);
+
+        S3Object flightItem = s3client.getObject(bucket, key);
+        S3Object hotelsItem = s3client.getObject(bucket, key2);
+
+        flightStream = flightItem.getObjectContent();
+        hotelStream = hotelsItem.getObjectContent();
+
+        File flightsFile = new File("processed-flights.csv");
+        File hotelsFile = new File("processed-hotels.csv");
+
+        try {
+            outputStream = new FileOutputStream(flightsFile);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = flightStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (flightStream != null) {
+                try {
+                    flightStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        processedFiles.add(flightsFile);
+
+        try {
+            outputStream = new FileOutputStream(hotelsFile);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = hotelStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (hotelStream != null) {
+                try {
+                    hotelStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        processedFiles.add(hotelsFile);
+
+        return processedFiles;
+
+    }
+
+
 
     public static List<HotelBookingRow> getHotelBookingRowsFromFile(File file) throws ParseException {
         BufferedReader br = null;
@@ -380,4 +478,6 @@ public class ImageHandler {
 
         return true;
     }
+
+
 }

@@ -139,4 +139,15 @@ public class FlightBookingService {
 
     }
 
+    public FlightBooking updateFlightBooking(FlightBooking booking) throws ServiceException {
+        try{
+            return flightBookingRepository.save(booking);
+        }catch(Exception e){
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: updateFlightBooking(): ");
+            e.printStackTrace();
+            throw new ServiceException("Could not update flight booking");
+        }
+
+    }
+
 }

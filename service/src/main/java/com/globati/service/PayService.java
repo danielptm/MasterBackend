@@ -3,8 +3,10 @@ package com.globati.service;
 import com.globati.dbmodel.*;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.Verified;
+import com.globati.s3.HotelBookingRow;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service_beans.guest.EmployeeAndItems;
+import com.globati.utildb.DateTools;
 import com.globati.utildb.ImageHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +38,12 @@ public class PayService {
     @Autowired
     EmployeeInfoService employeeInfoService;
 
+    @Autowired
+    HotelBookingService hotelBookingService;
+
+    @Autowired
+    FlightBookingService flightBookingService;
+
     private static final Logger log = LogManager.getLogger(PayService.class);
 
 
@@ -60,6 +68,74 @@ public class PayService {
         }catch(Exception e){
             e.printStackTrace();
             throw new ServiceException("Could not upload the verified users csv file to S3", e);
+        }
+    }
+
+    @Scheduled(cron = "0 37 8 * * ?")
+    public void processPayments(){
+        log.info("** Initializing globati processed-payments handler **");
+        List<File> files = ImageHandler.getProcessedPaymentFile();
+
+        BufferedReader br = null;
+        FileReader fr = null;
+
+        try {
+            for(File file: files){
+                //br = new BufferedReader(new FileReader(FILENAME));
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+
+                String sCurrentLine = br.readLine();
+                String[] lineParts = sCurrentLine.split(",");
+                String bookingType = lineParts[0];
+
+                while((sCurrentLine = br.readLine()) != null) {
+                    String[] bookingRow = sCurrentLine.split(",");
+                    log.info("lines");
+                    log.info(sCurrentLine);
+                    log.info("array");
+                    log.info(bookingRow);
+                    log.info("bookingType");
+                    log.info(bookingType);
+                    String bookingId = bookingRow[0];
+                    String employeeId = bookingRow[1];
+                    String paidStatus = bookingRow[4].toUpperCase();
+                    if(bookingType.equals("HotelBookingId")){
+                        HotelBooking booking = hotelBookingService.getHotelBookingById(Long.parseLong(bookingId));
+                        booking.setGlobatiPaymentStatus(GlobatiPaymentStatus.valueOf(paidStatus));
+                        hotelBookingService.updateHotelBooking(booking);
+                    }
+                    else if(bookingType.equals("FlightBookingId")){
+                        FlightBooking booking = flightBookingService.getFlightBookingById(Long.parseLong(bookingId));
+                        booking.setGlobatiPaymentStatus(GlobatiPaymentStatus.valueOf(paidStatus));
+                        flightBookingService.updateFlightBooking(booking);
+                    }
+                    else{
+                        throw new ServiceException("There was an error parsing a process payments file.");
+                    }
+
+                }
+
+            }
+        } catch (ServiceException e1) {
+            log.warn("** Globati service exception in PayService: processPayments()");
+            e1.printStackTrace();
+        } catch (FileNotFoundException e1) {
+            log.warn("** Globati service exception in PayService: processPayments()");
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            log.warn("** Globati service exception in PayService: processPayments()");
+            e1.printStackTrace();
+        }
+        finally {
+            try {
+                if (br != null)
+                    br.close();
+                if (fr != null)
+                    fr.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -173,8 +249,6 @@ public class PayService {
     public Double calculateSumOfFlightBookingsForEmployee(List<FlightBooking> bookings) throws ServiceException {
         try{
             Double amount = new Double(0);
-            log.trace("bookings size: ");
-            log.trace(bookings.size());
             for(FlightBooking booking: bookings){
                 amount += booking.getEmployeeComission();
             }
