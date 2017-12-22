@@ -38,113 +38,29 @@ public class PayService {
 
     private static final Logger log = LogManager.getLogger(PayService.class);
 
-    /**
-     * Returns a List<> of all Receptionists(Employees) and their recruitments/deals that were created
-     * for that mont
-     * @return
-     */
-//    public List<Employee> getAllreceptionistsAndDealsForMonth() throws ServiceException {
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(new Date());
-//        c.add(Calendar.MONTH, -1);
-//
-//        Integer month = c.get(Calendar.MONTH)+1;
-//        Integer year = c.get(Calendar.YEAR);
-//
-//        List<Employee> employees = new ArrayList<>();
-//
-//        Iterable<Employee> employeeIterable = employeeService.getAllEmployees();
-//
-//        Iterator itr = employeeIterable.iterator();
-//
-//        while( itr.hasNext() ){
-//            Employee employee = (Employee) itr.next();
-//            employee.setDeals(dealService.getDealsCreatedByMonth(month, year, employee.getId()));
-//            employees.add(employee);
-//        }
-//        return employees;
-//    }
 
     /**
-     * Returns a list of 2 csv files, 1 for recepionists who have a paypal account and 1 for receptionists who do not have paypal account.
+     * 12/20/17
      *
-     *     Recipient ID 	Payment 	Currency 	Customer ID 	Note
-     *   mbrown@myco.com 	10.00 	      USD            ID001 	   Thanks for your business!
-     *
-     *
-     * @return
+     * @throws ServiceException
      */
+    @Scheduled(cron = "0 16 17 * * ?")
+    public void uploadVerifiedUsersToS3() throws ServiceException {
+        log.info("** Globati batch pay initializing **");
+        List<File> files = createCSVFileOfVerifiedUsersForBookings();
+        try{
+            File massPay = files.get(0);
+            File flightBookings = files.get(1);
+            File hotelBookings = files.get(2);
 
-//    public List<File> createCSVFileOfPayments() throws ServiceException, IOException {
-//
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(new Date());
-//        c.add(Calendar.MONTH, -1);
-//
-//        List<Employee> employees = getAllreceptionistsAndDealsForMonth();
-//        List<Employee> employeesWithNoPaypal = new ArrayList<>();
-//        List<File> files = new ArrayList<>();
-//
-//        File file = new File("receptionists.csv");
-//        File file2;
-//
-//        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-//            String header = "Recipient ID,"+"Payment,"+"Currency,"+"Year"+ c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
-//            bw.write(header);
-//            bw.newLine();
-//            for (Employee employee : employees) {
-//                Double amountToPay = 0.0;
-//                Integer numberOfDeals = 0;
-//                for (Deal deal : employee.getDeals()) {
-//                    amountToPay += deal.getCost();
-//                    numberOfDeals++;
-//                }
-//                if(employee.getPaypalEmail()!=null) {
-//                    String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR";
-//                    bw.write(line);
-//                    bw.newLine();
-//                }
-//                else{
-//                    employeesWithNoPaypal.add(employee);
-//                }
-//            }
-//            file2 = createCSVFileOfRecruitmentsWithNoPayPal(employeesWithNoPaypal);
-//        }
-//        files.add(file);
-//        files.add(file2);
-//        return files;
-//    }
+            ImageHandler.uploadVerifiedUsersToS3(massPay, System.currentTimeMillis()+"masspay.csv");
+            ImageHandler.uploadVerifiedUsersToS3(flightBookings, System.currentTimeMillis()+"flights.csv");
+            ImageHandler.uploadVerifiedUsersToS3(hotelBookings, System.currentTimeMillis()+"hotels.csv");
 
-    /**
-     * Returns a csv file of receptionists who have made recruitments, but do not have a paypal account.
-     * @param employeesWithNoPaypal
-     * @return
-     * @throws IOException
-     */
-
-    private File createCSVFileOfRecruitmentsWithNoPayPal(List<Employee> employeesWithNoPaypal) throws IOException {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.MONTH, -1);
-
-        File file = new File("nopaypal.csv");
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            String header = "Recipient ID,"+"Payment,"+"Currency,"+"Customer ID,"+"Number of recruitments for month "+ c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
-            bw.write(header);
-            bw.newLine();
-            for (Employee employee : employeesWithNoPaypal) {
-                Double amountToPay = 0.0;
-                Integer numberOfDeals = 0;
-                for (Deal deal : employee.getDeals()) {
-                    amountToPay += deal.getCost();
-                    numberOfDeals++;
-                }
-                String line = employee.getPaypalEmail() + "," + amountToPay + "," + "EUR" + "," + employee.getId() + ","+ numberOfDeals;
-                bw.write(line);
-                bw.newLine();
-            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new ServiceException("Could not upload the verified users csv file to S3", e);
         }
-        return file;
     }
 
 
@@ -169,11 +85,15 @@ public class PayService {
         //Get all employees for their employeeInfos
         employeeInfos.forEach((info)-> {
             try {
-                employees.add(employeeService.getItemsForEmployee(employeeService.getEmployeeById(info.getEmployeeId()).getGlobatiUsername()));
+                EmployeeAndItems employee = employeeService.getItemsForEmployee(employeeService.getEmployeeById(info.getEmployeeId()).getGlobatiUsername());
+                if(employee.getEmployee().getFlights().size() > 0 || employee.getEmployee().getHotels().size() > 0){
+                    employees.add(employee);
+                }
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
         });
+
 
         log.trace("Employees size: "+employees.size());
 
@@ -183,21 +103,18 @@ public class PayService {
 
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(massPay))) {
-            String header = "PayPal email,Payment,currency,id,Verified";
+            String header = "PayPal email,Payment,currency,id";
             bw.write(header);
             bw.newLine();
-            for (EmployeeInfo info : employeeInfos) {
-                Employee employee1 = employeeService.getItemsForEmployee(
-                        employeeService.getEmployeeById(info.getEmployeeId()).getGlobatiUsername())
-                        .getEmployee();
+            for (EmployeeAndItems employee : employees) {
 
-                String line = employee1.getPaypalEmail() +
+                String line = employee.getEmployee().getPaypalEmail() +
                         ","
                         +
-                        calculateSumOfFlightBookingsForEmployee(employee1.getFlights()) + calculateSumOfHoteltBookingsForEmployee(employee1.getHotels())
+                        calculateSumOfFlightBookingsForEmployee(employee.getEmployee().getFlights()) + calculateSumOfHoteltBookingsForEmployee(employee.getEmployee().getHotels())
                         +
                         "," + "EUR" +
-                        "," + employee1.getId() + ","+info.get_verified();
+                        "," + employee.getEmployee().getId();
                 bw.write(line);
                 bw.newLine();
             }
@@ -215,7 +132,7 @@ public class PayService {
                 for(FlightBooking flightBooking: employee.getEmployee().getFlights()){
                     if(flightBooking.getGlobatiPaymentStatus().equals(GlobatiPaymentStatus.NOT_PAID)){
                         String line = flightBooking.getId()+","+employee.getEmployee().getId()+","
-                                +flightBooking.getCostOfTicket()+","+flightBooking.getGlobatiCommission();
+                                +flightBooking.getCostOfTicket()+","+flightBooking.getEmployeeComission();
                         flightsWriter.write(line);
                         flightsWriter.newLine();
                     }
@@ -233,7 +150,7 @@ public class PayService {
             for(EmployeeAndItems employee: employees){
                 for( HotelBooking hotel: employee.getEmployee().getHotels() ){
                     String line = hotel.getId()+","+employee.getEmployee().getId()+","
-                            +hotel.getCostOfTicket()+","+hotel.getGlobatiCommission();
+                            +hotel.getCostOfTicket()+","+hotel.getEmployeeComission();
                     bookingsWriter.write(line);
                     bookingsWriter.newLine();
                 }
@@ -259,7 +176,7 @@ public class PayService {
             log.trace("bookings size: ");
             log.trace(bookings.size());
             for(FlightBooking booking: bookings){
-                amount += booking.getGlobatiCommission();
+                amount += booking.getEmployeeComission();
             }
             return amount;
         }catch(Exception e){
@@ -272,7 +189,7 @@ public class PayService {
         try{
             Double amount = new Double(0);
             for(HotelBooking booking: bookings){
-                amount += booking.getGlobatiCommission();
+                amount += booking.getEmployeeComission();
             }
             return amount;
         }catch(Exception e){
@@ -281,28 +198,5 @@ public class PayService {
         }
     }
 
-    /**
-     * 12/20/17
-     *
-     * @throws ServiceException
-     */
-    @Scheduled(cron = "0 56 14 * * ?")
-    public void uploadVerifiedUsersToS3() throws ServiceException {
-        log.info("** Globati batch pay initializing **");
-        List<File> files = createCSVFileOfVerifiedUsersForBookings();
-        try{
-            File massPay = files.get(0);
-            File flightBookings = files.get(1);
-            File hotelBookings = files.get(2);
-
-            ImageHandler.uploadVerifiedUsersToS3(massPay, System.currentTimeMillis()+"masspay.csv");
-            ImageHandler.uploadVerifiedUsersToS3(flightBookings, System.currentTimeMillis()+"flights.csv");
-            ImageHandler.uploadVerifiedUsersToS3(hotelBookings, System.currentTimeMillis()+"hotels.csv");
-
-        }catch(Exception e){
-            e.printStackTrace();
-            throw new ServiceException("Could not upload the verified users csv file to S3", e);
-        }
-    }
 
 }
