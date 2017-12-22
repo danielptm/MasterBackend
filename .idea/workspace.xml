@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/service/HotelBookingService.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/service/HotelBookingService.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/service/PayService.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/service/PayService.java" />
+      <change beforePath="$PROJECT_DIR$/service/derby.log" afterPath="$PROJECT_DIR$/service/derby.log" />
+      <change beforePath="$PROJECT_DIR$/service/massPayment.csv" afterPath="$PROJECT_DIR$/service/massPayment.csv" />
       <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java" />
+      <change beforePath="$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java" afterPath="$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java" />
     </list>
     <ignored path="$PROJECT_DIR$/api/target/" />
     <ignored path="$PROJECT_DIR$/beans/target/" />
@@ -36,56 +36,7 @@
     <favorites_list name="super" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6172161">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="PayService.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/PayService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="73" column="27" lean-forward="false" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="FlightBookingService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="690">
-                  <caret line="143" column="57" lean-forward="false" selection-start-line="143" selection-start-column="57" selection-end-line="143" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="HotelBookingService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/HotelBookingService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="705">
-                  <caret line="149" column="19" lean-forward="false" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="ImageHandler.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1485">
-                  <caret line="412" column="0" lean-forward="false" selection-start-line="412" selection-start-column="0" selection-end-line="413" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -152,12 +103,12 @@
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/HotelAdapater.java" />
         <option value="$PROJECT_DIR$/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEmployee.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/EmployeeAdapter.java" />
-        <option value="$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/HotelBookingService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/FlightBookingService.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/PayService.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java" />
+        <option value="$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java" />
       </list>
     </option>
   </component>
@@ -208,50 +159,6 @@
             </path>
             <path>
               <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dbmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-              <item name="enums" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -279,46 +186,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="globati" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-              <item name="adapter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="globati" type="462c0819:PsiDirectoryNode" />
-              <item name="utildb" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -372,7 +239,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ServersideApplication">
+  <component name="RunManager" selected="JUnit.TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -448,14 +315,14 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="HotelBookingServiceTest.getFlightBookingById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="db" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="HotelBookingServiceTest" />
-      <option name="METHOD_NAME" value="getFlightBookingById" />
+      <option name="MAIN_CLASS_NAME" value="TestGlobatiUtil" />
+      <option name="METHOD_NAME" value="calculateSumOfFlightBookingsForEmployee" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -876,18 +743,18 @@
       <item index="0" class="java.lang.String" itemvalue="Maven.TestAll" />
       <item index="1" class="java.lang.String" itemvalue="Spring Boot.ServersideApplication" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.HotelBookingServiceTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.HotelBookingServiceTest.getFlightBookingById" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getHotelBookingsFromS3" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFHotelBookings" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.testCreateAndSendMassPay" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getHotelBookingsFromS3" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFHotelBookings" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.testCreateAndSendMassPay" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.testCreateAndSendMassPay" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFHotelBookings" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getHotelBookingsFromS3" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.HotelBookingServiceTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.HotelBookingServiceTest.getFlightBookingById" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.testCreateAndSendMassPay" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getFHotelBookings" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestGlobatiUtil.getHotelBookingsFromS3" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.HotelBookingServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1061,16 +928,16 @@
       <workItem from="1513492887328" duration="188000" />
       <workItem from="1513498895372" duration="957000" />
       <workItem from="1513676386097" duration="3602000" />
-      <workItem from="1513953942927" duration="5580000" />
+      <workItem from="1513953942927" duration="6106000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestGlobatiUtil_getFHotelBookings - 2017.12.21 at 20h 18m 40s.xml">
-      <configuration name="TestGlobatiUtil.getFHotelBookings" configurationId="JUnit" />
+    <history-entry file="TestGlobatiUtil_calculateSumOfFlightBookingsForEmployee - 2017.12.22 at 08h 49m 27s.xml">
+      <configuration name="TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGlobatiUtil_getFHotelBookings - 2017.12.21 at 20h 19m 56s.xml">
-      <configuration name="TestGlobatiUtil.getFHotelBookings" configurationId="JUnit" />
+    <history-entry file="TestGlobatiUtil_calculateSumOfFlightBookingsForEmployee - 2017.12.22 at 08h 52m 02s.xml">
+      <configuration name="TestGlobatiUtil.calculateSumOfFlightBookingsForEmployee" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestGlobatiUtil_getFHotelBookings - 2017.12.21 at 20h 21m 08s.xml">
       <configuration name="TestGlobatiUtil.getFHotelBookings" configurationId="JUnit" />
@@ -1098,7 +965,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="705855000" />
+    <option name="totallyTimeSpent" value="706381000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1111,7 +978,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -1130,11 +996,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6397134" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6397134" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285568" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9385875" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33394384" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33394384" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15995117" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
@@ -1349,6 +1215,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1451#1452#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1543,14 +1414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-223">
-          <caret line="280" column="17" lean-forward="false" selection-start-line="280" selection-start-column="17" selection-end-line="280" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3198">
@@ -1575,14 +1438,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="412" column="0" lean-forward="false" selection-start-line="412" selection-start-column="0" selection-end-line="413" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/HotelBookingService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="705">
@@ -1599,10 +1454,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/utildb/ImageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/PayService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="-2515">
           <caret line="73" column="27" lean-forward="false" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/test/java/TestGlobatiUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="275" column="0" lean-forward="true" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
           <folding />
         </state>
       </provider>

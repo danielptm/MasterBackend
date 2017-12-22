@@ -259,17 +259,17 @@ public class TestGlobatiUtil {
     public void calculateSumOfFlightBookingsForEmployee() throws ServiceException {
         List<FlightBooking> flightBookings = new ArrayList<>();
         FlightBooking flightBooking = new FlightBooking();
-        flightBooking.setGlobatiCommission(2.0);
+        flightBooking.setEmployeeComission(2.0);
 
         flightBookings.add(flightBooking);
 
 
         FlightBooking flightBooking1 = new FlightBooking();
-        flightBooking1.setGlobatiCommission(2.0);
+        flightBooking1.setEmployeeComission(2.0);
 
 
         FlightBooking flightBooking2 = new FlightBooking();
-        flightBooking2.setGlobatiCommission(2.0);
+        flightBooking2.setEmployeeComission(2.0);
 
         flightBookings.add(flightBooking1);
         flightBookings.add(flightBooking2);
