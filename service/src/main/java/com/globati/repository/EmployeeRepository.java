@@ -19,8 +19,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     public Employee getEmployeeByGlobatiUsername(String username);
 
-//    public Employee getEmployeeByFacebookId(String id);
-
     public Employee getEmployeeByEmail(String email);
 
     public List<Employee> getEmployeeByCountry(String country);
@@ -30,6 +28,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Query("SELECT e FROM Employee e")
     public List<Employee> getAllEmployees();
+
+
 
 
 }

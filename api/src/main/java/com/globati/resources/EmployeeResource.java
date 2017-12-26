@@ -3,6 +3,7 @@ package com.globati.resources;
 import com.globati.adapter.EmployeeAdapter;
 import com.globati.dbmodel.Employee;
 import com.globati.deserialization_beans.request.CreateEmployee;
+import com.globati.deserialization_beans.response.employee.AutoCompleteEmployee;
 import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -30,6 +31,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import com.globati.HelpObjects.Email;
 
@@ -49,6 +51,7 @@ public class EmployeeResource{
 
     private static final Logger log = LogManager.getLogger(EmployeeResource.class);
 
+
     @Context
     UriInfo uri;
 
@@ -63,6 +66,7 @@ public class EmployeeResource{
 
     @Autowired
     EmployeeAdapter employeeAdapter;
+
 
 
     @POST

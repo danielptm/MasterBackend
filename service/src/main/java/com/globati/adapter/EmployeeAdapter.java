@@ -86,7 +86,7 @@ public class EmployeeAdapter {
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                     translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
-                    translateResponseHotels(employee)
+                    translateResponseHotels(employee), employee.getVisitCounter()
             );
 
             return responseEmployee;
@@ -105,7 +105,6 @@ public class EmployeeAdapter {
             responseEmployees = new ArrayList<>();
 
             List<Employee> employeeList = employeeService.getEmployeesByCityAndTheirRecommendations(city);
-            System.out.println(employeeList.size());
 
             for (Employee employee : employeeList) {
                 ResponseEmployee responseEmployee = new ResponseEmployee(
@@ -116,7 +115,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee), translateResponseHotels(employee), null
+                        translateResponseEvents(employee),null, null, employee.getVisitCounter()
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());

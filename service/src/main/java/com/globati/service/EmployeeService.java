@@ -3,6 +3,7 @@ package com.globati.service;
 
 import com.globati.HelpObjects.ApiKey;
 import com.globati.dbmodel.*;
+import com.globati.deserialization_beans.response.employee.AutoCompleteEmployee;
 import com.globati.enums.Verified;
 import com.globati.repository.EmployeeRepository;
 import com.globati.service.exceptions.IllegalUserNameException;
@@ -10,15 +11,13 @@ import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.EmployeeAndItems;
-import com.globati.utildb.FacebookUserId;
-import com.globati.utildb.ImageHandler;
-import com.globati.utildb.PBKDF2;
-import com.globati.utildb.SendMail;
+import com.globati.utildb.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -34,6 +33,9 @@ import java.util.List;
 public class EmployeeService {
 
     private static final Logger log = LogManager.getLogger(EmployeeService.class);
+
+    private static List<AutoCompleteEmployee> autoCompleteEmployees = new ArrayList<>();
+
 
     @Autowired
     PropertiesService propertiesService;
@@ -74,6 +76,7 @@ public class EmployeeService {
             employee.setEvents(null);
             employee.setRecommendations(null);
             employee.setFlights(null);
+            employee.setHotels(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -302,7 +305,6 @@ public class EmployeeService {
      */
 
     public Employee updateEmployee(Employee employee) throws ServiceException, UserDoesNotExistException, IOException, IllegalUserNameException, UserNameIsNotUniqueException {
-        log.info("updateEmployee(): employeeId: " + employee.getId());
         try {
             return this.employeeRepository.save(employee);
         } catch (DataIntegrityViolationException e) {
@@ -343,7 +345,6 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployees() throws ServiceException {
-        log.info("getAllEmployees()");
         try {
             return employeeRepository.getAllEmployees();
         } catch (Exception e) {
@@ -354,7 +355,6 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeesByCountry(String country) throws ServiceException {
-        log.info("getEmployeesByCountry(): country: " + country);
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCountry(country);
             for (Employee employee : employees) {
@@ -379,7 +379,6 @@ public class EmployeeService {
      * @throws ServiceException
      */
     public List<Employee> getEmployeesByCity(String city) throws ServiceException {
-        log.info("getEmployeesByCity(): city: " + city);
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
             for (Employee employee : employees) {
@@ -406,7 +405,6 @@ public class EmployeeService {
 
     public EmployeeAndItems getItemsForEmployeeButNoWebToken(String username) throws ServiceException {
 
-        log.info("getItemsForEmployee(): username: " + username);
         ArrayList<Object> items = new ArrayList<>();
         try {
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
@@ -422,6 +420,8 @@ public class EmployeeService {
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
+            employee.setHotels(null);
+            employee.setFlights(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
@@ -445,7 +445,6 @@ public class EmployeeService {
      * @throws ServiceException
      */
     public List<Employee> getEmployeesByCityAndTheirRecommendations(String city) throws ServiceException {
-        log.info("getEmployeesByCity(): city: " + city);
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
             List<Employee> returnEmployees = new ArrayList<>();
@@ -471,7 +470,6 @@ public class EmployeeService {
      * @throws ServiceException
      */
     public List<Recommendation> getRecommendationsForEmployee(Employee employee) throws ServiceException {
-        log.info("getRecommendationsForEmployee(): id: " + employee.getId());
         try {
             List<Recommendation> recommendations = this.recommendationService.getRecommendationByEmployeeId(employee.getId());
             return recommendations;
@@ -700,6 +698,26 @@ public class EmployeeService {
             }
         }
         return isAReservedKeyWord;
+
+    }
+
+    public List<AutoCompleteEmployee> getAutoCompleteEmployees(){
+        return autoCompleteEmployees;
+    }
+
+
+    @Scheduled(cron = "0 00 19 * * ?")
+    public void getAllActiveEmployees() throws ServiceException {
+        log.info("** Creating list for AutoCompleteEmployees **");
+        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
+
+        for(EmployeeInfo info: employeeInfos){
+            if( info.get_verified().equals(Verified.STANDARD) ){
+                Employee employee = getEmployeeById(info.getEmployeeId());
+                AutoCompleteEmployee autoCompleteEmployee = new AutoCompleteEmployee(employee.getGlobatiUsername(), employee.getCity(), employee.getImage());
+                autoCompleteEmployees.add(autoCompleteEmployee);
+            }
+        }
 
     }
 

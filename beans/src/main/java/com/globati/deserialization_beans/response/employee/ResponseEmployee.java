@@ -30,10 +30,11 @@ public class ResponseEmployee {
     private List<ResponseFlight> flightBookings;
     private List<ResponseHotel> hotelBookings;
     private String apiKey;
+    private Integer profileVisits;
 
     public ResponseEmployee(){}
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, List<ResponseHotel> hotels, String apikey) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, List<ResponseHotel> hotels, String apikey, Integer profileVisits) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -59,9 +60,10 @@ public class ResponseEmployee {
         this.events = events;
         this.hotelBookings = hotels;
         this.apiKey = apikey;
+        this.profileVisits = profileVisits;
     }
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings, List<ResponseHotel> hotelBookings) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings, List<ResponseHotel> hotelBookings, Integer profileVisits) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -88,6 +90,7 @@ public class ResponseEmployee {
         this.apiKey = apikey;
         this.flightBookings = flightBookings;
         this.hotelBookings = hotelBookings;
+        this.profileVisits = profileVisits;
     }
 
     public Long getId() {
@@ -294,6 +297,14 @@ public class ResponseEmployee {
         this.hotelBookings = hotelBookings;
     }
 
+    public Integer getProfileVisits() {
+        return profileVisits;
+    }
+
+    public void setProfileVisits(Integer profileVisits) {
+        this.profileVisits = profileVisits;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ResponseEmployee{");
@@ -323,6 +334,7 @@ public class ResponseEmployee {
         sb.append(", flightBookings=").append(flightBookings);
         sb.append(", hotelBookings=").append(hotelBookings);
         sb.append(", apiKey='").append(apiKey).append('\'');
+        sb.append(", profileVisits=").append(profileVisits);
         sb.append('}');
         return sb.toString();
     }

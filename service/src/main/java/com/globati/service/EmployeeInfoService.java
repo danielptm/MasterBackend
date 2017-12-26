@@ -104,6 +104,11 @@ public class EmployeeInfoService {
     }
 
 
+    public List<EmployeeInfo> getAllEmployeeInfos(){
+        return employeeInfoRepsitory.getAllEmployeeInfos();
+    }
+
+
 
 
 }

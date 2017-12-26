@@ -112,7 +112,11 @@ public class GuestResource {
         }
     }
 
-
-
+    @GET
+    @Path("autocomplete")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAutoCompleteReceptionists(){
+        return Response.ok(employeeService.getAutoCompleteEmployees()).build();
+    }
 
 }
