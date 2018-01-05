@@ -706,10 +706,12 @@ public class EmployeeService {
     }
 
 
-    @Scheduled(cron = "0 00 19 * * ?")
+    @Scheduled(cron = "0 43 8 * * ?")
     public void getAllActiveEmployees() throws ServiceException {
         log.info("** Creating list for AutoCompleteEmployees **");
         List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
+        autoCompleteEmployees = null;
+        autoCompleteEmployees = new ArrayList<>();
 
         for(EmployeeInfo info: employeeInfos){
             if( info.get_verified().equals(Verified.STANDARD) ){
