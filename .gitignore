@@ -3,8 +3,7 @@ dbmodel/target
 beans/target
 api/target
 service/derby.log
-.idea
-
+.idea/workspace.xml
 beans/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 beans/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 beans/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
