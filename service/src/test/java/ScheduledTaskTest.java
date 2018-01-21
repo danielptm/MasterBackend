@@ -1,5 +1,6 @@
 import com.globati.service.ScheduledTaskService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ScheduledTaskTest {
     @Autowired
     ScheduledTaskService scheduledTaskService;
 
-    @Test
+    @Ignore
     public void testSendWelcomeToGlobatiMail() throws Exception {
         scheduledTaskService.sendMarketingMail();
     }
