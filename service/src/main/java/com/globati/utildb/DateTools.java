@@ -86,4 +86,19 @@ public class DateTools {
         java.util.Date date = new java.util.Date();
         return eventData.getDate().before(date);
     }
+
+    public static boolean isWithinTheLast30Days(Date date){
+
+        Date dateToCompareWith = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime( dateToCompareWith );
+        c.add(Calendar.DATE, -30);
+
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(date);
+
+        return c.before(c2);
+
+        }
 }

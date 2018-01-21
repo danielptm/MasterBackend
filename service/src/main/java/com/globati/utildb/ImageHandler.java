@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.globati.dbmodel.Property;
 import com.globati.s3.FlightBookingRow;
 import com.globati.s3.HotelBookingRow;
 import com.globati.service.PropertiesService;
@@ -478,5 +479,106 @@ public class ImageHandler {
         return true;
     }
 
+    private static File getPropertyDataFromFileLocatedInS3(){
+        System.out.println("** GLOBATI: Getting properties file from S3.");
 
+        FileOutputStream outputStream = null;
+
+
+        String bucketName = "globati-backend-files/properties";
+        String keyName = "properties.csv";
+
+        AWSCredentials credentials = new BasicAWSCredentials(
+                "AKIAJSYT5343PVMDHCRQ",
+                "YEd/nvVixLnRyhLOYlo1iUhMLiPZ4qcjiRx7vJiM");
+
+        AmazonS3 s3client = new AmazonS3Client(credentials);
+
+
+        AmazonS3 s3Client = new AmazonS3Client(credentials);
+
+        S3Object propertiesItem = s3client.getObject(bucketName, keyName);
+
+        InputStream propertiesStream= propertiesItem.getObjectContent();
+
+        File propertiesFile = new File("properties.csv");
+
+
+        try {
+            outputStream = new FileOutputStream(propertiesFile);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = propertiesStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (propertiesStream != null) {
+                try {
+                    propertiesStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    // outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return propertiesFile;
+
+    }
+
+    public static List<Property> transformPropertyFileToPropertyObjectsAndReturnThem(){
+        System.out.println("** Globati: Transforming file to objects for database insertion");
+        File file = getPropertyDataFromFileLocatedInS3();
+
+        BufferedReader br = null;
+        FileReader fr = null;
+        List<Property> properties = new ArrayList<>();
+
+        try {
+
+            fr = new FileReader(file);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                String lineItems[] = sCurrentLine.split(",");
+                Property property = new Property(
+                        lineItems[0],
+                        lineItems[1],
+                        lineItems[2],
+                        lineItems[3],
+                        lineItems[4]
+                );
+                properties.add(property);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+                if (fr != null)
+                    fr.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return properties;
+
+
+    }
 }

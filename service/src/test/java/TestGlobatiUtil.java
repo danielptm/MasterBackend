@@ -278,6 +278,27 @@ public class TestGlobatiUtil {
     }
 
     @Test
+    public void calculateIfDateIs30DaysBefore(){
+        Date today = new Date();
+        Date thirtyOneDaysAgo = new Date();
+        Date fifteenDaysAgo = new Date();
+
+
+        Calendar c = Calendar.getInstance();
+        c.setTime( thirtyOneDaysAgo );
+        c.add(Calendar.DATE, -32);
+
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime( thirtyOneDaysAgo );
+        c2.add(Calendar.DATE, -15);
+
+        Assert.assertTrue(DateTools.isWithinTheLast30Days(today));
+        Assert.assertFalse(DateTools.isWithinTheLast30Days(c.getTime()));
+        Assert.assertTrue(DateTools.isWithinTheLast30Days(c2.getTime()));
+
+    }
+
+    @Test
     public void testCreateAndSendMassPay() throws ServiceException {
         payService.uploadVerifiedUsersToS3();
     }

@@ -3,6 +3,9 @@ package com.globati.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * This is for the application properties, not related to a Property class.
+ */
 @Service
 public class PropertiesService {
 

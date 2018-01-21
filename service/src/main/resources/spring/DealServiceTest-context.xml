@@ -33,4 +33,7 @@
     <bean id="HotelBookingService" class="com.globati.service.HotelBookingService"></bean>
 
     <bean id="ScheduledTaskService" class="com.globati.service.ScheduledTaskService"></bean>
+
+    <bean id="PropertyService" class="com.globati.service.PropertyService"></bean>
+
 </beans>
