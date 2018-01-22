@@ -42,7 +42,7 @@ public class ScheduledTaskService {
         }
 
         if(numberOfSentMails > 0){
-            SendMail.sendCustomMailToGlobatiStaff("danie@globati.com", propertyBuilder.toString());
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", propertyBuilder.toString());
         }
         if(numberOfSentMails == 0){
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "The sendMarketingMail function was run, but no emails were sent because all properties have received a mail within the last 30 days.");
