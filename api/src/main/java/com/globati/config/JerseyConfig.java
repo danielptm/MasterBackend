@@ -29,6 +29,7 @@ public class JerseyConfig extends ResourceConfig{
         register(IllegalIUsernameExceptionMapper.class);
         register(UserNameIsNotUniqueExceptionMapper.class);
         register(DealResource.class);
+        register(BlogResource.class);
         register(AuthenticationResource.class);
         register(ResponseFilter.class);
         register(FacebookConnectionFactory.class);

@@ -29,6 +29,7 @@ public class ResponseEmployee {
     private List<ResponseEvent> events;
     private List<ResponseFlight> flightBookings;
     private List<ResponseHotel> hotelBookings;
+    private List<ResponseBlog> responseBlogs;
     private String apiKey;
     private Integer profileVisits;
 

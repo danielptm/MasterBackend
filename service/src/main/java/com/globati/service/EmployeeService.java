@@ -64,6 +64,9 @@ public class EmployeeService {
     @Autowired
     HotelBookingService hotelBookingService;
 
+    @Autowired
+    BlogService blogService;
+
     EmployeeService() {
     }
 
@@ -226,12 +229,14 @@ public class EmployeeService {
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
             List<HotelBooking> hotelBookings = hotelBookingService.getHotelBookingsByEmployeeIdAndPaidStatus(employee.getId());
+            List<Blog> blogs = blogService.getApprovedBlogsByEmployeeId(employee.getId());
 
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
             employee.setFlights(bookings);
             employee.setHotels(hotelBookings);
+            employee.setBlogs(blogs);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));

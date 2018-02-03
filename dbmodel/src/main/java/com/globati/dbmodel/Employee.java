@@ -90,6 +90,10 @@ public class Employee extends BaseEntity {
     @JsonManagedReference
     List<HotelBooking> hotels;
 
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    List<Blog> blogs;
+
     public Employee(){}
 
     public Employee(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country) {
@@ -367,6 +371,14 @@ public class Employee extends BaseEntity {
 
     public void setHotels(List<HotelBooking> hotels) {
         this.hotels = hotels;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

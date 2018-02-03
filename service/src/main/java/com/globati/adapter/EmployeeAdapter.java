@@ -31,6 +31,9 @@ public class EmployeeAdapter {
     @Autowired
     HotelAdapater hotelAdapater;
 
+    @Autowired
+    BlogAdapater blogAdapater;
+
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
      *
@@ -196,6 +199,16 @@ public class EmployeeAdapter {
         }
 
         return responseHotels;
+    }
+
+    public List<ResponseBlog> translateRewsponseBlogs(Employee employee){
+        List<ResponseBlog> responseBlogs = new ArrayList<>();
+
+        for(Blog blog: employee.getBlogs()){
+            ResponseBlog responseBlog = blogAdapater.getResponseBlog(blog.getTitle(), blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink() );
+            responseBlogs.add(responseBlog);
+        }
+        return responseBlogs;
     }
 
 }
