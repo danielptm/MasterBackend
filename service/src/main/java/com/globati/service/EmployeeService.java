@@ -427,6 +427,7 @@ public class EmployeeService {
             employee.setDeals(null);
             employee.setHotels(null);
             employee.setFlights(null);
+            employee.setBlogs(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 

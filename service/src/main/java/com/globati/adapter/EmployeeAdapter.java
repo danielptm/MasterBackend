@@ -118,7 +118,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee),null, null, employee.getVisitCounter()
+                        translateResponseEvents(employee),null, null, employee.getVisitCounter(), translateRewsponseBlogs(employee)
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());

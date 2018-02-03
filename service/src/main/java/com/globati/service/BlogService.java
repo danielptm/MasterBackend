@@ -2,6 +2,7 @@ package com.globati.service;
 
 import com.globati.dbmodel.Blog;
 import com.globati.dbmodel.Employee;
+import com.globati.enums.BlogApprovalStatus;
 import com.globati.repository.BlogRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.SendMail;
@@ -42,7 +43,7 @@ public class BlogService {
 
     public List<Blog> getApprovedBlogsByEmployeeId(Long id) throws ServiceException {
         try{
-            return blogRepository.getApprovdedBlogsByEmployeeId(id, "APPROVED");
+            return blogRepository.getApprovdedBlogsByEmployeeId(id, BlogApprovalStatus.APPROVED);
         }catch(Exception e){
             log.warn("*** GLOBATI SERVICE EXCEPTION: There was an error when retrieving blogs for user with id: "+id);
             e.printStackTrace();
