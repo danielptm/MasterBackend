@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/globati/resources/BlogResource.java" afterPath="$PROJECT_DIR$/api/src/main/java/com/globati/resources/BlogResource.java" />
-      <change beforePath="$PROJECT_DIR$/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseBlog.java" afterPath="$PROJECT_DIR$/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseBlog.java" />
-      <change beforePath="$PROJECT_DIR$/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEmployee.java" afterPath="$PROJECT_DIR$/beans/src/main/java/com/globati/deserialization_beans/response/employee/ResponseEmployee.java" />
-      <change beforePath="$PROJECT_DIR$/dbmodel/src/main/java/com/globati/enums/BlogApprovalStatus.java" afterPath="$PROJECT_DIR$/dbmodel/src/main/java/com/globati/enums/BlogApprovalStatus.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/BlogAdapater.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/BlogAdapater.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/EmployeeAdapter.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/EmployeeAdapter.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/service/BlogService.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/service/BlogService.java" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" afterPath="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/api/target/" />
     <ignored path="$PROJECT_DIR$/beans/target/" />
@@ -1065,7 +1057,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="758752000" />
+    <option name="totallyTimeSpent" value="759490000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1078,7 +1070,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -1097,7 +1088,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6591607" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6591607" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285568" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36438075" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
