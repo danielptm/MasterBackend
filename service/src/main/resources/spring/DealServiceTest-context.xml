@@ -36,4 +36,6 @@
 
     <bean id="PropertyService" class="com.globati.service.PropertyService"></bean>
 
+    <bean id="BlogService" class="com.globati.service.BlogService"></bean>
+
 </beans>
