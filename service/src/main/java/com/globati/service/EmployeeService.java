@@ -64,6 +64,9 @@ public class EmployeeService {
     @Autowired
     HotelBookingService hotelBookingService;
 
+    @Autowired
+    BlogService blogService;
+
     EmployeeService() {
     }
 
@@ -77,6 +80,7 @@ public class EmployeeService {
             employee.setRecommendations(null);
             employee.setFlights(null);
             employee.setHotels(null);
+            employee.setBlogs(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -226,12 +230,14 @@ public class EmployeeService {
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
             List<HotelBooking> hotelBookings = hotelBookingService.getHotelBookingsByEmployeeIdAndPaidStatus(employee.getId());
+            List<Blog> blogs = blogService.getApprovedBlogsByEmployeeId(employee.getId());
 
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
             employee.setFlights(bookings);
             employee.setHotels(hotelBookings);
+            employee.setBlogs(blogs);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));
@@ -422,6 +428,7 @@ public class EmployeeService {
             employee.setDeals(null);
             employee.setHotels(null);
             employee.setFlights(null);
+            employee.setBlogs(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 

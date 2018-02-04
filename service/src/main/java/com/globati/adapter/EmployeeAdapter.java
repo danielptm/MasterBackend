@@ -31,6 +31,9 @@ public class EmployeeAdapter {
     @Autowired
     HotelAdapater hotelAdapater;
 
+    @Autowired
+    BlogAdapater blogAdapater;
+
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
      *
@@ -76,7 +79,6 @@ public class EmployeeAdapter {
 
             Employee employee = employeeAndItems.getEmployee();
 
-
             ResponseEmployee responseEmployee = new ResponseEmployee(
                     employee.getId(), employee.getFirstName(), employee.getImage(),
                     employee.getImage2(), employee.getImage3(), employee.getEmail(),
@@ -86,9 +88,8 @@ public class EmployeeAdapter {
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                     translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
-                    translateResponseHotels(employee), employee.getVisitCounter()
+                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee)
             );
-
             return responseEmployee;
         } catch (Exception e) {
             log.warn("An adapater exception occurred");
@@ -115,7 +116,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee),null, null, employee.getVisitCounter()
+                        translateResponseEvents(employee),null, null, employee.getVisitCounter(), null
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());
@@ -196,6 +197,17 @@ public class EmployeeAdapter {
         }
 
         return responseHotels;
+    }
+
+    public List<ResponseBlog> translateResponseBlogs(Employee employee){
+        List<ResponseBlog> responseBlogs = new ArrayList<>();
+
+        for(Blog blog: employee.getBlogs()){
+            ResponseBlog responseBlog = blogAdapater.getResponseBlog(blog.getId(), blog.getTitle(), blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink() );
+            responseBlogs.add(responseBlog);
+            System.out.println(responseBlog);
+        }
+        return responseBlogs;
     }
 
 }
