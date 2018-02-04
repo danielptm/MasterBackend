@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.rowset.serial.SerialException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,17 +21,27 @@ public class BlogResource {
     @Autowired
     BlogAdapater blogAdapater;
 
+
+    @Autowired
+    BlogService blogService;
+
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(CreateBlog blog) throws ServiceException {
-        System.out.println(blog);
-
         return Response.ok(
                 blogAdapater.createAndReturnAblog(
                 blog.getEmployeeId(), blog.getTitle(),
                 blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink()))
                 .build();
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteBlog(@PathParam("id") Long id){
+        return Response.ok(blogService.removeBlog(id)).build();
     }
 
 

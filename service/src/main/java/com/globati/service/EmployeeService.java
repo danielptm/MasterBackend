@@ -80,6 +80,7 @@ public class EmployeeService {
             employee.setRecommendations(null);
             employee.setFlights(null);
             employee.setHotels(null);
+            employee.setBlogs(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");

@@ -15,11 +15,11 @@ public class BlogAdapater {
 
     public ResponseBlog createAndReturnAblog(Long employeeId, String title, String about, String description, String blogLink, String imageLink) throws ServiceException {
         Blog blog = blogService.createBlog(employeeId, title, about, description, blogLink, imageLink);
-        return new ResponseBlog(blog.getCityAbout(), blog.getTitle(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink());
+        return new ResponseBlog(blog.getId(), blog.getCityAbout(), blog.getTitle(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink());
     }
 
-    public ResponseBlog getResponseBlog(String title, String about, String description, String blogLink, String imageLink){
-        return new ResponseBlog(title, about, description, blogLink, imageLink);
+    public ResponseBlog getResponseBlog(Long id, String title, String about, String description, String blogLink, String imageLink){
+        return new ResponseBlog(id, title, about, description, blogLink, imageLink);
     }
 
 }

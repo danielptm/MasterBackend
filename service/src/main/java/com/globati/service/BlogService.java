@@ -38,7 +38,6 @@ public class BlogService {
             e.printStackTrace();
             throw new ServiceException("Was not able to create a blog");
         }
-
     }
 
     public List<Blog> getApprovedBlogsByEmployeeId(Long id) throws ServiceException {
@@ -49,5 +48,16 @@ public class BlogService {
             e.printStackTrace();
             throw new ServiceException("Was not able to retrieve blogs.");
         }
+    }
+
+    public Long removeBlog(Long id){
+        Blog blog = null;
+        try{
+            blog = blogRepository.findOne(id);
+            blog.setBlogApprovalStatus(BlogApprovalStatus.DELETED_BY_USER);
+        }catch(Exception e){
+            log.warn("*** GLOBATI SERVICE EXCEPTION: There was an error when updating a blog to delete stats with blog id: "+id);
+        }
+        return blogRepository.save(blog).getId();
     }
 }
