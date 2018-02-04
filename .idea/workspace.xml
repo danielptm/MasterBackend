@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="4d36aebd-bbed-49e2-91ca-02d61fbf97f8" name="Default" comment="I" />
     <ignored path="$PROJECT_DIR$/api/target/" />
     <ignored path="$PROJECT_DIR$/beans/target/" />
     <ignored path="$PROJECT_DIR$/dbmodel/target/" />
@@ -30,21 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EmployeeResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/src/main/java/com/globati/resources/EmployeeResource.java">
+      <file leaf-file-name="Welcome.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/beans/src/main/java/com/globati/mail/beans/Welcome.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-961">
-              <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmployeeService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="82" column="36" lean-forward="false" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+            <state relative-caret-position="288">
+              <caret line="621" column="125" lean-forward="false" selection-start-line="621" selection-start-column="125" selection-end-line="621" selection-end-column="125" />
               <folding />
             </state>
           </provider>
@@ -72,7 +60,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/ImageAdapater.java" />
         <option value="$PROJECT_DIR$/dbmodel/src/main/java/com/globati/enums/TicketPaidStatus.java" />
         <option value="$PROJECT_DIR$/beans/src/main/java/com/globati/s3/FlightBookingRow.java" />
         <option value="$PROJECT_DIR$/dbmodel/src/main/java/com/globati/dbmodel/FlightBooking.java" />
@@ -123,6 +110,7 @@
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/BlogAdapater.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/adapter/EmployeeAdapter.java" />
         <option value="$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java" />
+        <option value="$PROJECT_DIR$/beans/src/main/java/com/globati/mail/beans/Welcome.java" />
       </list>
     </option>
   </component>
@@ -203,6 +191,45 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="globati" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="globati" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="globati" type="462c0819:PsiDirectoryNode" />
+              <item name="beans" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MasterBackend" type="b2602c69:ProjectViewProjectNode" />
@@ -1057,7 +1084,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="759490000" />
+    <option name="totallyTimeSpent" value="759733000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1202,13 +1229,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/service/src/test/java/EmployeeInfoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="149" column="0" lean-forward="true" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service/src/test/java/TestEventService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1582,6 +1602,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="82" column="36" lean-forward="false" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/src/main/java/com/globati/resources/EmployeeResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-961">
@@ -1590,10 +1618,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/src/main/java/com/globati/service/EmployeeService.java">
+    <entry file="file://$PROJECT_DIR$/beans/src/main/java/com/globati/mail/beans/Welcome.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="82" column="36" lean-forward="false" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+        <state relative-caret-position="288">
+          <caret line="621" column="125" lean-forward="false" selection-start-line="621" selection-start-column="125" selection-end-line="621" selection-end-column="125" />
           <folding />
         </state>
       </provider>
