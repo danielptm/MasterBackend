@@ -19,7 +19,7 @@ public class WelcomeToGlobati{
                 "        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"+
                 "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"+
                 "		<title>*|MC:SUBJECT|*</title>"+
-                ""+
+                "        "+
                 "    <style type=\"text/css\">"+
                 "		p{"+
                 "			margin:10px 0;"+
@@ -93,7 +93,7 @@ public class WelcomeToGlobati{
                 "		a.mcnButton{"+
                 "			display:block;"+
                 "		}"+
-                "		.mcnImage{"+
+                "		.mcnImage,.mcnRetinaImage{"+
                 "			vertical-align:bottom;"+
                 "		}"+
                 "		.mcnTextContent{"+
@@ -332,6 +332,11 @@ public class WelcomeToGlobati{
                 "		}"+
                 ""+
                 "}	@media only screen and (max-width: 480px){"+
+                "		.mcnRetinaImage{"+
+                "			max-width:100% !important;"+
+                "		}"+
+                ""+
+                "}	@media only screen and (max-width: 480px){"+
                 "		.mcnImage{"+
                 "			width:100% !important;"+
                 "		}"+
@@ -489,7 +494,7 @@ public class WelcomeToGlobati{
                 "}</style></head>"+
                 "    <body>"+
                 "		<!--*|IF:MC_PREVIEW_TEXT|*-->"+
-                "		<!--[if !gte mso 9]><!----><span class=\"mcnPreviewText\" style=\"display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;\"></span><!--<![endif]-->"+
+                "		<!--[if !gte mso 9]><!----><span class=\"mcnPreviewText\" style=\"display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;\">*|MC_PREVIEW_TEXT|*</span><!--<![endif]-->"+
                 "		<!--*|END:IF|*-->"+
                 "        <center>"+
                 "            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" height=\"100%\" width=\"100%\" id=\"bodyTable\">"+
@@ -513,11 +518,11 @@ public class WelcomeToGlobati{
                 "                    <table align=\"left\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnImageContentContainer\" style=\"min-width:100%;\">"+
                 "                        <tbody><tr>"+
                 "                            <td class=\"mcnImageContent\" valign=\"top\" style=\"padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;\">"+
-                ""+
-                ""+
+                "                                "+
+                "                                    "+
                 "                                        <img align=\"center\" alt=\"\" src=\"https://gallery.mailchimp.com/d1facc58ebda6c8320abfb7f6/images/549f518c-22c4-4f9b-8c3c-c8553e129fcb.png\" width=\"564\" style=\"max-width:1905px; padding-bottom: 0; display: inline !important; vertical-align: bottom;\" class=\"mcnImage\">"+
-                ""+
-                ""+
+                "                                    "+
+                "                                "+
                 "                            </td>"+
                 "                        </tr>"+
                 "                    </tbody></table>"+
@@ -551,15 +556,15 @@ public class WelcomeToGlobati{
                 "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
                 "				<tr>"+
                 "				<![endif]-->"+
-                ""+
+                "			    "+
                 "				<!--[if mso]>"+
                 "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
                 "				<![endif]-->"+
                 "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
                 "                    <tbody><tr>"+
-                ""+
+                "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
-                ""+
+                "                        "+
                 "                            <h4>Do you work with travellers and want to create better experiences for them?</h4>"+
                 ""+
                 "                        </td>"+
@@ -568,7 +573,7 @@ public class WelcomeToGlobati{
                 "				<!--[if mso]>"+
                 "				</td>"+
                 "				<![endif]-->"+
-                ""+
+                "                "+
                 "				<!--[if mso]>"+
                 "				</tr>"+
                 "				</table>"+
@@ -584,15 +589,15 @@ public class WelcomeToGlobati{
                 "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
                 "				<tr>"+
                 "				<![endif]-->"+
-                ""+
+                "			    "+
                 "				<!--[if mso]>"+
                 "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
                 "				<![endif]-->"+
                 "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
                 "                    <tbody><tr>"+
-                ""+
+                "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
-                ""+
+                "                        "+
                 "                            <p>If so, then come over to <a href=\"http://globati.com\" target=\"_blank\">http://globati.com</a> and within a few minutes you can create a specialized blog that will help you to reach out and create better experiences for travellers. </p>"+
                 ""+
                 "                        </td>"+
@@ -601,7 +606,7 @@ public class WelcomeToGlobati{
                 "				<!--[if mso]>"+
                 "				</td>"+
                 "				<![endif]-->"+
-                ""+
+                "                "+
                 "				<!--[if mso]>"+
                 "				</tr>"+
                 "				</table>"+
@@ -620,7 +625,7 @@ public class WelcomeToGlobati{
                 "                        </td>"+
                 "                    </tr>"+
                 "                </tbody></table>"+
-                "<!--"+
+                "<!--            "+
                 "                <td class=\"mcnDividerBlockInner\" style=\"padding: 18px;\">"+
                 "                <hr class=\"mcnDividerContent\" style=\"border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;\" />"+
                 "-->"+
@@ -635,15 +640,15 @@ public class WelcomeToGlobati{
                 "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
                 "				<tr>"+
                 "				<![endif]-->"+
-                ""+
+                "			    "+
                 "				<!--[if mso]>"+
                 "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
                 "				<![endif]-->"+
                 "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
                 "                    <tbody><tr>"+
-                ""+
+                "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding: 0px 18px 9px;color: #222222;\">"+
-                ""+
+                "                        "+
                 "                            <span style=\"font-size:22px\"><strong>With globati you can...</strong></span>"+
                 "                        </td>"+
                 "                    </tr>"+
@@ -651,7 +656,7 @@ public class WelcomeToGlobati{
                 "				<!--[if mso]>"+
                 "				</td>"+
                 "				<![endif]-->"+
-                ""+
+                "                "+
                 "				<!--[if mso]>"+
                 "				</tr>"+
                 "				</table>"+
@@ -663,7 +668,7 @@ public class WelcomeToGlobati{
                 "    <tbody class=\"mcnCaptionBlockOuter\">"+
                 "        <tr>"+
                 "            <td class=\"mcnCaptionBlockInner\" valign=\"top\" style=\"padding:9px;\">"+
-                ""+
+                "                "+
                 ""+
                 ""+
                 ""+
@@ -673,13 +678,13 @@ public class WelcomeToGlobati{
                 "            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnCaptionRightImageContentContainer\" width=\"264\">"+
                 "                <tbody><tr>"+
                 "                    <td class=\"mcnCaptionRightImageContent\" align=\"center\" valign=\"top\">"+
-                ""+
-                ""+
+                "                    "+
+                "                        "+
                 ""+
                 "                        <img alt=\"\" src=\"https://gallery.mailchimp.com/d1facc58ebda6c8320abfb7f6/images/3c9051ed-e40c-42d0-b474-4c4f737019e9.jpg\" width=\"264\" style=\"max-width:400px;\" class=\"mcnImage\">"+
+                "                        "+
                 ""+
-                ""+
-                ""+
+                "                    "+
                 "                    </td>"+
                 "                </tr>"+
                 "            </tbody></table>"+
@@ -705,7 +710,7 @@ public class WelcomeToGlobati{
                 "    <tbody class=\"mcnCaptionBlockOuter\">"+
                 "        <tr>"+
                 "            <td class=\"mcnCaptionBlockInner\" valign=\"top\" style=\"padding:9px;\">"+
-                ""+
+                "                "+
                 ""+
                 "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnCaptionLeftContentOuter\" width=\"100%\">"+
                 "    <tbody><tr>"+
@@ -713,11 +718,11 @@ public class WelcomeToGlobati{
                 "            <table align=\"right\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnCaptionLeftImageContentContainer\" width=\"264\">"+
                 "                <tbody><tr>"+
                 "                    <td class=\"mcnCaptionLeftImageContent\" align=\"center\" valign=\"top\">"+
-                ""+
-                ""+
+                "                    "+
+                "                        "+
                 "                        <img alt=\"\" src=\"https://gallery.mailchimp.com/d1facc58ebda6c8320abfb7f6/images/fa907500-751e-4899-8ae5-bd10721af8cd.jpg\" width=\"264\" style=\"max-width:1280px;\" class=\"mcnImage\">"+
-                ""+
-                ""+
+                "                        "+
+                "                    "+
                 "                    </td>"+
                 "                </tr>"+
                 "            </tbody></table>"+
@@ -744,7 +749,7 @@ public class WelcomeToGlobati{
                 "    <tbody class=\"mcnCaptionBlockOuter\">"+
                 "        <tr>"+
                 "            <td class=\"mcnCaptionBlockInner\" valign=\"top\" style=\"padding:9px;\">"+
-                ""+
+                "                "+
                 ""+
                 ""+
                 ""+
@@ -754,13 +759,13 @@ public class WelcomeToGlobati{
                 "            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"mcnCaptionRightImageContentContainer\" width=\"264\">"+
                 "                <tbody><tr>"+
                 "                    <td class=\"mcnCaptionRightImageContent\" align=\"center\" valign=\"top\">"+
-                ""+
-                ""+
+                "                    "+
+                "                        "+
                 ""+
                 "                        <img alt=\"\" src=\"https://gallery.mailchimp.com/d1facc58ebda6c8320abfb7f6/images/6a140f2f-6b2a-426c-a480-5f7020e2cd6d.png\" width=\"264\" style=\"max-width:692px;\" class=\"mcnImage\">"+
+                "                        "+
                 ""+
-                ""+
-                ""+
+                "                    "+
                 "                    </td>"+
                 "                </tr>"+
                 "            </tbody></table>"+
@@ -768,7 +773,7 @@ public class WelcomeToGlobati{
                 "                <tbody><tr>"+
                 "                    <td valign=\"top\" class=\"mcnTextContent\">"+
                 "                        <span style=\"font-size:20px\"><strong>You can make money</strong></span><br>"+
-                "from bookings made on your page through our booking engine."+
+                "from bookings made on your page through our booking engine. Visitors to your page will be able to book super cheap flights and hotels/hostels directly from your page."+
                 "                    </td>"+
                 "                </tr>"+
                 "            </tbody></table>"+
@@ -790,21 +795,22 @@ public class WelcomeToGlobati{
                 "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
                 "				<tr>"+
                 "				<![endif]-->"+
-                ""+
+                "			    "+
                 "				<!--[if mso]>"+
                 "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
                 "				<![endif]-->"+
                 "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
                 "                    <tbody><tr>"+
-                ""+
+                "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
-                ""+
+                "                        "+
                 "                            <h3>With globati you can also:</h3>"+
                 ""+
                 "<ul>"+
                 "	<li>Automatically generate google maps for recommendations and events.</li>"+
                 "	<li>Send group mail to many travelers at once with a link to your blog.</li>"+
                 "	<li>Easily integrate your blog with social media to show it to the world.</li>"+
+                "	<li>Provide your tips to travelers who don't speak your language with auto translation.</li>"+
                 "</ul>"+
                 ""+
                 "                        </td>"+
@@ -813,7 +819,7 @@ public class WelcomeToGlobati{
                 "				<!--[if mso]>"+
                 "				</td>"+
                 "				<![endif]-->"+
-                ""+
+                "                "+
                 "				<!--[if mso]>"+
                 "				</tr>"+
                 "				</table>"+
@@ -832,10 +838,43 @@ public class WelcomeToGlobati{
                 "                        </td>"+
                 "                    </tr>"+
                 "                </tbody></table>"+
-                "<!--"+
+                "<!--            "+
                 "                <td class=\"mcnDividerBlockInner\" style=\"padding: 18px;\">"+
                 "                <hr class=\"mcnDividerContent\" style=\"border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;\" />"+
                 "-->"+
+                "            </td>"+
+                "        </tr>"+
+                "    </tbody>"+
+                "</table><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" class=\"mcnTextBlock\" style=\"min-width:100%;\">"+
+                "    <tbody class=\"mcnTextBlockOuter\">"+
+                "        <tr>"+
+                "            <td valign=\"top\" class=\"mcnTextBlockInner\" style=\"padding-top:9px;\">"+
+                "              	<!--[if mso]>"+
+                "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
+                "				<tr>"+
+                "				<![endif]-->"+
+                "			    "+
+                "				<!--[if mso]>"+
+                "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
+                "				<![endif]-->"+
+                "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
+                "                    <tbody><tr>"+
+                "                        "+
+                "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
+                "                        "+
+                "                            <div style=\"text-align: center;\"><span style=\"font-size:24px\"><strong><span style=\"color:#000000\">Why not? Its completely free..</span></strong></span></div>"+
+                ""+
+                "                        </td>"+
+                "                    </tr>"+
+                "                </tbody></table>"+
+                "				<!--[if mso]>"+
+                "				</td>"+
+                "				<![endif]-->"+
+                "                "+
+                "				<!--[if mso]>"+
+                "				</tr>"+
+                "				</table>"+
+                "				<![endif]-->"+
                 "            </td>"+
                 "        </tr>"+
                 "    </tbody>"+
@@ -891,12 +930,12 @@ public class WelcomeToGlobati{
                 "                                    <table align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">"+
                 "                                    <tr>"+
                 "                                    <![endif]-->"+
-                ""+
+                "                                    "+
                 "                                        <!--[if mso]>"+
                 "                                        <td align=\"center\" valign=\"top\">"+
                 "                                        <![endif]-->"+
-                ""+
-                ""+
+                "                                        "+
+                "                                        "+
                 "                                            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"display:inline;\">"+
                 "                                                <tbody><tr>"+
                 "                                                    <td valign=\"top\" style=\"padding-right:10px; padding-bottom:9px;\" class=\"mcnFollowContentItemContainer\">"+
@@ -905,12 +944,12 @@ public class WelcomeToGlobati{
                 "                                                                <td align=\"left\" valign=\"middle\" style=\"padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;\">"+
                 "                                                                    <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"\">"+
                 "                                                                        <tbody><tr>"+
-                ""+
+                "                                                                            "+
                 "                                                                                <td align=\"center\" valign=\"middle\" width=\"24\" class=\"mcnFollowIconContent\">"+
                 "                                                                                    <a href=\"http://www.facebook.com/globati\" target=\"_blank\"><img src=\"https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-facebook-48.png\" style=\"display:block;\" height=\"24\" width=\"24\" class=\"\"></a>"+
                 "                                                                                </td>"+
-                ""+
-                ""+
+                "                                                                            "+
+                "                                                                            "+
                 "                                                                        </tr>"+
                 "                                                                    </tbody></table>"+
                 "                                                                </td>"+
@@ -919,16 +958,16 @@ public class WelcomeToGlobati{
                 "                                                    </td>"+
                 "                                                </tr>"+
                 "                                            </tbody></table>"+
-                ""+
+                "                                        "+
                 "                                        <!--[if mso]>"+
                 "                                        </td>"+
                 "                                        <![endif]-->"+
-                ""+
+                "                                    "+
                 "                                        <!--[if mso]>"+
                 "                                        <td align=\"center\" valign=\"top\">"+
                 "                                        <![endif]-->"+
-                ""+
-                ""+
+                "                                        "+
+                "                                        "+
                 "                                            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"display:inline;\">"+
                 "                                                <tbody><tr>"+
                 "                                                    <td valign=\"top\" style=\"padding-right:10px; padding-bottom:9px;\" class=\"mcnFollowContentItemContainer\">"+
@@ -937,12 +976,12 @@ public class WelcomeToGlobati{
                 "                                                                <td align=\"left\" valign=\"middle\" style=\"padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;\">"+
                 "                                                                    <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"\">"+
                 "                                                                        <tbody><tr>"+
-                ""+
+                "                                                                            "+
                 "                                                                                <td align=\"center\" valign=\"middle\" width=\"24\" class=\"mcnFollowIconContent\">"+
                 "                                                                                    <a href=\"http://www.instagram.com/globati\" target=\"_blank\"><img src=\"https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-instagram-48.png\" style=\"display:block;\" height=\"24\" width=\"24\" class=\"\"></a>"+
                 "                                                                                </td>"+
-                ""+
-                ""+
+                "                                                                            "+
+                "                                                                            "+
                 "                                                                        </tr>"+
                 "                                                                    </tbody></table>"+
                 "                                                                </td>"+
@@ -951,16 +990,16 @@ public class WelcomeToGlobati{
                 "                                                    </td>"+
                 "                                                </tr>"+
                 "                                            </tbody></table>"+
-                ""+
+                "                                        "+
                 "                                        <!--[if mso]>"+
                 "                                        </td>"+
                 "                                        <![endif]-->"+
-                ""+
+                "                                    "+
                 "                                        <!--[if mso]>"+
                 "                                        <td align=\"center\" valign=\"top\">"+
                 "                                        <![endif]-->"+
-                ""+
-                ""+
+                "                                        "+
+                "                                        "+
                 "                                            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"display:inline;\">"+
                 "                                                <tbody><tr>"+
                 "                                                    <td valign=\"top\" style=\"padding-right:10px; padding-bottom:9px;\" class=\"mcnFollowContentItemContainer\">"+
@@ -969,12 +1008,12 @@ public class WelcomeToGlobati{
                 "                                                                <td align=\"left\" valign=\"middle\" style=\"padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;\">"+
                 "                                                                    <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"\">"+
                 "                                                                        <tbody><tr>"+
-                ""+
+                "                                                                            "+
                 "                                                                                <td align=\"center\" valign=\"middle\" width=\"24\" class=\"mcnFollowIconContent\">"+
                 "                                                                                    <a href=\"http://globati.com\" target=\"_blank\"><img src=\"https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-link-48.png\" style=\"display:block;\" height=\"24\" width=\"24\" class=\"\"></a>"+
                 "                                                                                </td>"+
-                ""+
-                ""+
+                "                                                                            "+
+                "                                                                            "+
                 "                                                                        </tr>"+
                 "                                                                    </tbody></table>"+
                 "                                                                </td>"+
@@ -983,16 +1022,16 @@ public class WelcomeToGlobati{
                 "                                                    </td>"+
                 "                                                </tr>"+
                 "                                            </tbody></table>"+
-                ""+
+                "                                        "+
                 "                                        <!--[if mso]>"+
                 "                                        </td>"+
                 "                                        <![endif]-->"+
-                ""+
+                "                                    "+
                 "                                        <!--[if mso]>"+
                 "                                        <td align=\"center\" valign=\"top\">"+
                 "                                        <![endif]-->"+
-                ""+
-                ""+
+                "                                        "+
+                "                                        "+
                 "                                            <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"display:inline;\">"+
                 "                                                <tbody><tr>"+
                 "                                                    <td valign=\"top\" style=\"padding-right:0; padding-bottom:9px;\" class=\"mcnFollowContentItemContainer\">"+
@@ -1001,12 +1040,12 @@ public class WelcomeToGlobati{
                 "                                                                <td align=\"left\" valign=\"middle\" style=\"padding-top:5px; padding-right:10px; padding-bottom:5px; padding-left:9px;\">"+
                 "                                                                    <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"\">"+
                 "                                                                        <tbody><tr>"+
-                ""+
+                "                                                                            "+
                 "                                                                                <td align=\"center\" valign=\"middle\" width=\"24\" class=\"mcnFollowIconContent\">"+
                 "                                                                                    <a href=\"mailto:daniel@globati.com\" target=\"_blank\"><img src=\"https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-forwardtofriend-48.png\" style=\"display:block;\" height=\"24\" width=\"24\" class=\"\"></a>"+
                 "                                                                                </td>"+
-                ""+
-                ""+
+                "                                                                            "+
+                "                                                                            "+
                 "                                                                        </tr>"+
                 "                                                                    </tbody></table>"+
                 "                                                                </td>"+
@@ -1015,11 +1054,11 @@ public class WelcomeToGlobati{
                 "                                                    </td>"+
                 "                                                </tr>"+
                 "                                            </tbody></table>"+
-                ""+
+                "                                        "+
                 "                                        <!--[if mso]>"+
                 "                                        </td>"+
                 "                                        <![endif]-->"+
-                ""+
+                "                                    "+
                 "                                    <!--[if mso]>"+
                 "                                    </tr>"+
                 "                                    </table>"+
@@ -1048,7 +1087,7 @@ public class WelcomeToGlobati{
                 "                        </td>"+
                 "                    </tr>"+
                 "                </tbody></table>"+
-                "<!--"+
+                "<!--            "+
                 "                <td class=\"mcnDividerBlockInner\" style=\"padding: 18px;\">"+
                 "                <hr class=\"mcnDividerContent\" style=\"border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;\" />"+
                 "-->"+
@@ -1063,23 +1102,21 @@ public class WelcomeToGlobati{
                 "				<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" style=\"width:100%;\">"+
                 "				<tr>"+
                 "				<![endif]-->"+
-                ""+
+                "			    "+
                 "				<!--[if mso]>"+
                 "				<td valign=\"top\" width=\"600\" style=\"width:600px;\">"+
                 "				<![endif]-->"+
                 "                <table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:100%; min-width:100%;\" width=\"100%\" class=\"mcnTextContentContainer\">"+
                 "                    <tbody><tr>"+
-                ""+
+                "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
-                ""+
+                "                        "+
                 "                            <em>Copyright © 2018 Globati AB, All rights reserved.</em><br>"+
                 "Connecting Locals with travellers<br>"+
                 "<br>"+
                 "<strong>Our mailing address is:</strong><br>"+
                 "daniel@globati.com<br>"+
                 "<br>"+
-                "Want to change how you receive these emails?<br>"+
-                "You can <a href=\"*|UPDATE_PROFILE|*\">update your preferences</a> or <a href=\"*|UNSUB|*\">unsubscribe from this list</a>.<br>"+
                 " "+
                 "                        </td>"+
                 "                    </tr>"+
@@ -1087,7 +1124,7 @@ public class WelcomeToGlobati{
                 "				<!--[if mso]>"+
                 "				</td>"+
                 "				<![endif]-->"+
-                ""+
+                "                "+
                 "				<!--[if mso]>"+
                 "				</tr>"+
                 "				</table>"+
@@ -1113,8 +1150,6 @@ public class WelcomeToGlobati{
                 "        </center>"+
                 "    </body>"+
                 "</html>";
-
         return mail;
-
     }
 }

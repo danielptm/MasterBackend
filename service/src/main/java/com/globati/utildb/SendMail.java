@@ -12,7 +12,6 @@ import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.dbmodel.Deal;
 import com.globati.mail.beans.AdReceipt;
 import com.globati.mail.beans.ForgotPassword;
-import com.globati.mail.beans.Recruitment;
 import com.globati.mail.beans.Welcome;
 import com.globati.dbmodel.Employee;
 import com.globati.service.PropertiesService;
@@ -142,49 +141,57 @@ public class SendMail {
     }
 
 
-
+    /**
+     * Used for recruiting businesses to advertise
+     * @param employee
+     * @param email
+     * @param businessName
+     * @return
+     * @throws Exception
+     */
     public static boolean sendRecruitmentMail(Employee employee, String email, String businessName) throws Exception {
 
-        String[] emails = new String[]{email};
-
-
-        // Construct an object to contain the recipient address.
-        Destination destination = new Destination().withToAddresses(emails);
-
-        Recruitment recruitment = new Recruitment(businessName, employee.getFirstName(), properties.getActiveCreateAddLink()+employee.getId());
-
-        // Create the subject and body of the message.
-        Content subject = new Content().withData(employee.getFirstName()+" is inviting "+businessName+" to develop a business partnership on globati");
-        Content textBody = new Content().withData(
-                   recruitment.getRecruitmentMail()
-            );
-
-        Body body = new Body().withHtml(textBody);
-
-        // Create a message with the specified subject and body.
-        com.amazonaws.services.simpleemail.model.Message message = new com.amazonaws.services.simpleemail.model.Message().withSubject(subject).withBody(body);
-
-        // Assemble the email.
-        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
-
-        try {
-            AWSCredentials credentials = new BasicAWSCredentials(
-                    key,
-                    password);
-
-            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
-
-            Region REGION = Region.getRegion(Regions.EU_WEST_1);
-            client.setRegion(REGION);
-
-            // Send the email.
-            client.sendEmail(request);
-            return true;
-        } catch (Exception ex) {
-            log.error("Email send through AWS not sent.");
-            log.error("Error message: " + ex.getMessage());
-            throw new Exception(ex.toString());
-        }
+//        String[] emails = new String[]{email};
+//
+//
+//        // Construct an object to contain the recipient address.
+//        Destination destination = new Destination().withToAddresses(emails);
+//
+////        Recruitment recruitment = new Recruitment(businessName, employee.getFirstName(), properties.getActiveCreateAddLink()+employee.getId());
+////
+////        // Create the subject and body of the message.
+////        Content subject = new Content().withData(employee.getFirstName()+" is inviting "+businessName+" to develop a business partnership on globati");
+////        Content textBody = new Content().withData(
+////                   recruitment.getRecruitmentMail()
+////            );
+//
+////        Body body = new Body().withHtml(textBody);
+//
+//        // Create a message with the specified subject and body.
+////        com.amazonaws.services.simpleemail.model.Message message = new com.amazonaws.services.simpleemail.model.Message().withSubject(subject).withBody(body);
+//
+//        // Assemble the email.
+////        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
+//
+//        try {
+//            AWSCredentials credentials = new BasicAWSCredentials(
+//                    key,
+//                    password);
+//
+//            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
+//
+//            Region REGION = Region.getRegion(Regions.EU_WEST_1);
+//            client.setRegion(REGION);
+//
+//            // Send the email.
+////            client.sendEmail(request);
+//            return true;
+//        } catch (Exception ex) {
+//            log.error("Email send through AWS not sent.");
+//            log.error("Error message: " + ex.getMessage());
+//            throw new Exception(ex.toString());
+//        }
+        return true;
 
     }
 
