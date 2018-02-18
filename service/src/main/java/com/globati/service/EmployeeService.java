@@ -282,10 +282,7 @@ public class EmployeeService {
 
     public Employee createEmployee(
             String name, String email, String username, String password, double latvalue,
-            double longvalue, String image, String street, String city, String country)
-            throws Exception {
-
-        log.info("createEmployee(): email: " + email);
+            double longvalue, String image, String street, String city, String country) throws UserNameIsNotUniqueException{
         Employee employee = null;
         Employee savedEmployee = null;
         try {
