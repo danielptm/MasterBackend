@@ -286,16 +286,21 @@ public class EmployeeService {
 
         log.info("createEmployee(): email: " + email);
         Employee employee = null;
+        Employee savedEmployee = null;
         try {
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
-            Employee savedEmployee = employeeRepository.save(employee);
+            savedEmployee = employeeRepository.save(employee);
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: "+email);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
             return savedEmployee;
         } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
             e.printStackTrace();
             throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: " + username);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return savedEmployee;
     }
 
     /**
