@@ -107,6 +107,7 @@ public class EmployeeService {
             Employee employee = new Employee(name, email, username, image);
             Employee employeeToReturn = employeeRepository.save(employee);
             createEmployeeInfoFromFacebook(employeeToReturn.getId(), facebookId);
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody just created a profile with facebook with email: "+employee.getEmail());
             return employeeToReturn;
 
         } catch (Exception e) {
@@ -282,7 +283,7 @@ public class EmployeeService {
     public Employee createEmployee(
             String name, String email, String username, String password, double latvalue,
             double longvalue, String image, String street, String city, String country)
-            throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+            throws Exception {
 
         log.info("createEmployee(): email: " + email);
         Employee employee = null;
@@ -292,6 +293,7 @@ public class EmployeeService {
             savedEmployee = employeeRepository.save(employee);
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: "+email);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody just created a globati profile with email: "+savedEmployee.getEmail());
             return savedEmployee;
         } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
