@@ -288,9 +288,10 @@ public class EmployeeService {
         try {
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             savedEmployee = employeeRepository.save(employee);
-            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: "+email);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
-            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody just created a globati profile with email: "+savedEmployee.getEmail());
+            if(System.getenv("GLOBATI_SERVER_ENV").equals("production")) {
+                SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: " + email);
+            }
             return savedEmployee;
         } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");

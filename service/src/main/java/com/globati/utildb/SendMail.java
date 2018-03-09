@@ -199,13 +199,15 @@ public class SendMail {
 
         String[] emails = new String[]{email};
 
-
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
 
         // Create the subject and body of the message.
         Content subject = new Content().withData("Here is your Globati username, click on the link to reset your password.");
-        ForgotPassword fp = new ForgotPassword(globatiuser, properties.getStaticGlobatiAddress() + "changeyourpassword/" + apitoken);
+
+        //This used the properties service before, but started reutrning null pointer exception, as a workaround i hardcoded the link. As of now
+        // the only way to test this is in production with this solution.
+        ForgotPassword fp = new ForgotPassword(globatiuser, "https://admin.globati.com/changeyourpassword/" + apitoken);
 
         System.out.println(fp.toString());
         Content textBody = new Content().withData(
