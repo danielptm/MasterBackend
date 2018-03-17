@@ -38,4 +38,6 @@
 
     <bean id="BlogService" class="com.globati.service.BlogService"></bean>
 
+    <bean id="BraintreeService" class="com.globati.service.BraintreeService"></bean>
+
 </beans>
