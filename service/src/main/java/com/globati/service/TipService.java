@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TipService {
@@ -32,5 +33,16 @@ public class TipService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Tip> getTipsByEmployeeId(Long id) {
+        List<Tip> tips = null;
+        try {
+            tips = tipRepository.getTipsByEmployeeId(id);
+        }catch(Exception e){
+            log.warn("** Globati service exception: Could not get tips by employee id:");
+            e.printStackTrace();
+        }
+        return tips;
     }
 }
