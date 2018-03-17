@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="tip")
+@Table(name = "tip")
 public class Tip extends BaseEntity{
 
     @Column(name = "tipamount")

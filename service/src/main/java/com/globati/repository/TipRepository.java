@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TipRepository extends CrudRepository<Tip, Long>{
 
-    @Query("SELECT t FROM tip t WHERE employeeid=:id")
+    @Query("SELECT t FROM Tip t WHERE t.employee.id =:id")
     List<Tip> getTipsByEmployeeId(@Param("id") Long id);
 
 }
