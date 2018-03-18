@@ -31,6 +31,7 @@ public class BlogService {
             Blog blog = new Blog(employee, cityAbout, title, description, blogLink, imageLink);
             Blog createdBlog = blogRepository.save(blog);
             SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "A blog was created by sombody with email: "+employee.getEmail());
+            SendMail.sendCustomMailToGlobatiStaff("oliver@globati.com", "A blog was created by sombody with email: "+employee.getEmail());
             return createdBlog;
 
         }catch(Exception e){

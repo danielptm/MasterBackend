@@ -291,6 +291,7 @@ public class EmployeeService {
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
             if(System.getenv("GLOBATI_SERVER_ENV").equals("production")) {
                 SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: " + email);
+                SendMail.sendCustomMailToGlobatiStaff("oliver@globati.com", "Sombody signed up for globati with email: " + email);
             }
             return savedEmployee;
         } catch (DataIntegrityViolationException e) {
