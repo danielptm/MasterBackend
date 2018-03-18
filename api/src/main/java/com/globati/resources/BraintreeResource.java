@@ -55,7 +55,9 @@ public class BraintreeResource {
             environment = Environment.SANDBOX;
         }
         else{
+            System.out.println("** Setting braintree environment to production **");
             environment = Environment.PRODUCTION;
+            System.out.println(environment.toString());
         }
 
         BraintreeGateway gateway = new BraintreeGateway(
