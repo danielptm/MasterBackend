@@ -84,6 +84,7 @@ public class EmployeeService {
             employee.setFlights(null);
             employee.setHotels(null);
             employee.setBlogs(null);
+            employee.setTips(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
