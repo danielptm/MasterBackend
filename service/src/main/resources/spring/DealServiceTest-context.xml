@@ -40,4 +40,6 @@
 
     <bean id="BraintreeService" class="com.globati.service.BraintreeService"></bean>
 
+    <bean id="TipService" class="com.globati.service.TipService"></bean>
+
 </beans>
