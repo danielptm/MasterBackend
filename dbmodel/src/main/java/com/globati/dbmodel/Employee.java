@@ -68,7 +68,6 @@ public class Employee extends BaseEntity {
     @Column(name="visitcounter")
     private Integer visitCounter;
 
-
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference
     List<Deal> deals;
@@ -93,6 +92,10 @@ public class Employee extends BaseEntity {
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference
     List<Blog> blogs;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    List<Tip> tips;
 
     public Employee(){}
 
@@ -379,6 +382,14 @@ public class Employee extends BaseEntity {
 
     public void setBlogs(List<Blog> blogs) {
         this.blogs = blogs;
+    }
+
+    public List<Tip> getTips() {
+        return tips;
+    }
+
+    public void setTips(List<Tip> tips) {
+        this.tips = tips;
     }
 
     @Override

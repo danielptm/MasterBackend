@@ -88,7 +88,7 @@ public class EmployeeAdapter {
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                     translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
-                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee)
+                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee), getAndTranslateResponsetips(employee)
             );
             return responseEmployee;
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee),null, null, employee.getVisitCounter(), null
+                        translateResponseEvents(employee),null, null, employee.getVisitCounter(), null, null
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());
@@ -128,6 +128,17 @@ public class EmployeeAdapter {
         }
         return responseEmployees;
 
+    }
+
+    private List<ResponseTip> getAndTranslateResponsetips(Employee employee){
+        List<ResponseTip> responseTips = new ArrayList<>();
+
+        for(Tip tip: employee.getTips()){
+            ResponseTip rt = new ResponseTip(tip.getDate(), tip.getId(), tip.getTipAmount(), tip.getTransactionId(), tip.getEmail(), tip.getPaid());
+            responseTips.add(rt);
+        }
+
+        return responseTips;
     }
 
     //This should be moved to RecommendationAdapter
@@ -205,7 +216,6 @@ public class EmployeeAdapter {
         for(Blog blog: employee.getBlogs()){
             ResponseBlog responseBlog = blogAdapater.getResponseBlog(blog.getId(), blog.getTitle(), blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink() );
             responseBlogs.add(responseBlog);
-            System.out.println(responseBlog);
         }
         return responseBlogs;
     }

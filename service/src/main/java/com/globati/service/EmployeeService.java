@@ -67,6 +67,9 @@ public class EmployeeService {
     @Autowired
     BlogService blogService;
 
+    @Autowired
+    TipService tipService;
+
     EmployeeService() {
     }
 
@@ -81,6 +84,7 @@ public class EmployeeService {
             employee.setFlights(null);
             employee.setHotels(null);
             employee.setBlogs(null);
+            employee.setTips(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -232,13 +236,14 @@ public class EmployeeService {
             List<FlightBooking> bookings = flightBookingService.getFlightBookingsByEmployeeIdAndPaidStatus(employee.getId());
             List<HotelBooking> hotelBookings = hotelBookingService.getHotelBookingsByEmployeeIdAndPaidStatus(employee.getId());
             List<Blog> blogs = blogService.getApprovedBlogsByEmployeeId(employee.getId());
-
+            List<Tip> tips =  tipService.getTipsByEmployeeId(employee.getId());
             employee.setRecommendations(recommendations);
             employee.setEvents(events);
             employee.setDeals(null);
             employee.setFlights(bookings);
             employee.setHotels(hotelBookings);
             employee.setBlogs(blogs);
+            employee.setTips(tips);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));
@@ -492,8 +497,6 @@ public class EmployeeService {
             throw new ServiceException("Could not get recommendations for employee");
 
         }
-
-
     }
 
 
