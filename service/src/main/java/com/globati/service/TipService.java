@@ -32,6 +32,7 @@ public class TipService {
             Employee employee = employeeService.getEmployeeById(id);
             Tip tip = new Tip(employee, tipPayment, transactionId, email);
             SendMail.sendThanksForTipingMail(email, "Thanks for tipping "+employee.getGlobatiUsername()+" Your transaction number is: "+transactionId+" If you have any questions, you can email "+employee.getGlobatiUsername()+" at "+employee.getEmail()+"<br><br> best wishes, <br><br> The globati team");
+            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody just created a tip. Check the production DB for details, and send Oli the details if not a test.");
             return tipRepository.save(tip);
         } catch (ServiceException e) {
             log.warn("** Globati service exception: Could not create tip.");
