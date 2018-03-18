@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class is untested
+ */
 @Service
 public class TipService {
 
