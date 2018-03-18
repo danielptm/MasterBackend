@@ -17,6 +17,8 @@ public class Tip extends BaseEntity{
     Date date;
     @Column(name="email")
     String email;
+    @Column(name = "isPaid")
+    Boolean isPaid;
 
 
     @ManyToOne
@@ -32,6 +34,7 @@ public class Tip extends BaseEntity{
         this.employee = employee;
         this.email = email;
         this.date = new Date();
+        this.isPaid = false;
     }
 
     public Date getDate() {
@@ -72,6 +75,14 @@ public class Tip extends BaseEntity{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
     }
 
     @Override

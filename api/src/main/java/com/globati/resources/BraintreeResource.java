@@ -7,6 +7,7 @@ import com.globati.resources.exceptions.WebException;
 import com.globati.service.BraintreeService;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
+import com.globati.service.PropertiesService;
 import com.globati.third_party_api.BraintreeToken;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,25 +39,32 @@ public class BraintreeResource {
     @Autowired
     BraintreeService braintreeService;
 
-
-    private static String merchantId="yrs52pkkfq3sxrh7";
-
-    private static String publicKey="72c7qyjtntx4nknk";
-
-    private static String privateKey="8b8f6fc74fd65cb073e6f6cc7d892f15";
-
-    private static Environment environment = Environment.SANDBOX;
-
-    private static BraintreeGateway gateway = new BraintreeGateway(
-            environment,
-            merchantId,
-            publicKey,
-            privateKey
-    );
+    @Autowired
+    PropertiesService propertiesService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response gettoken() {
+        String merchantId = propertiesService.getMerchantId();
+        String publicKey = propertiesService.getPublicKey();
+        String privateKey = propertiesService.getPrivateKey();
+
+        Environment environment = null;
+
+        if(System.getenv("GLOBATI_SERVER_ENV").equals("development")){
+            environment = Environment.SANDBOX;
+        }
+        else{
+            environment = Environment.PRODUCTION;
+        }
+
+        BraintreeGateway gateway = new BraintreeGateway(
+                environment,
+                merchantId,
+                publicKey,
+                privateKey
+        );
+
         String to = gateway.clientToken().generate();
         BraintreeToken tok = new BraintreeToken(to);
         return Response.ok(tok).build();

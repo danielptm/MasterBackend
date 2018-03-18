@@ -41,12 +41,11 @@ public class BraintreeService {
     @Autowired
     TipService tipService;
 
-    private static BraintreeGateway gateway = new BraintreeGateway(
-            environment,
-            merchantId,
-            publicKey,
-            privateKey
-    );
+    @Autowired
+    PropertiesService propertiesService;
+
+
+
 
     /**
      * @return
@@ -59,6 +58,24 @@ public class BraintreeService {
             String nonce,
             String email
     ) throws Exception {
+
+        if (System.getenv("GLOBATI_SERVER_ENV").equals("production")){
+            environment = Environment.PRODUCTION;
+            System.out.println("** Setting braintree environment to production **");
+            System.out.println(environment.toString());
+        }
+
+        merchantId = propertiesService.getMerchantId();
+        publicKey = propertiesService.getPublicKey();
+        privateKey = propertiesService.getPrivateKey();
+
+
+        BraintreeGateway gateway = new BraintreeGateway(
+                environment,
+                merchantId,
+                publicKey,
+                privateKey
+        );
 
 
         Employee employee = employeeService.getEmployeeById(id);

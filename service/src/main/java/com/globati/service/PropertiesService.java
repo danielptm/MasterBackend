@@ -89,4 +89,8 @@ public class PropertiesService {
     public String getJwtSecret() {
         return jwtSecret;
     }
+
+    public String getMerchantId() {
+        return merchantId;
+    }
 }

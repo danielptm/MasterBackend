@@ -8,13 +8,15 @@ public class ResponseTip {
     Double tipAmount;
     String transactionId;
     String email;
+    Boolean isPaid;
 
-    public ResponseTip(Date date, Long id, Double tipAmount, String transactionId, String email) {
+    public ResponseTip(Date date, Long id, Double tipAmount, String transactionId, String email, Boolean isPaid) {
         this.date = date;
         this.id = id;
         this.tipAmount = tipAmount;
         this.transactionId = transactionId;
         this.email = email;
+        this.isPaid = isPaid;
     }
 
     public Date getDate() {
@@ -55,5 +57,13 @@ public class ResponseTip {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
     }
 }

@@ -134,7 +134,7 @@ public class EmployeeAdapter {
         List<ResponseTip> responseTips = new ArrayList<>();
 
         for(Tip tip: employee.getTips()){
-            ResponseTip rt = new ResponseTip(tip.getDate(), tip.getId(), tip.getTipAmount(), tip.getTransactionId(), tip.getEmail());
+            ResponseTip rt = new ResponseTip(tip.getDate(), tip.getId(), tip.getTipAmount(), tip.getTransactionId(), tip.getEmail(), tip.getPaid());
             responseTips.add(rt);
         }
 
@@ -216,7 +216,6 @@ public class EmployeeAdapter {
         for(Blog blog: employee.getBlogs()){
             ResponseBlog responseBlog = blogAdapater.getResponseBlog(blog.getId(), blog.getTitle(), blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink() );
             responseBlogs.add(responseBlog);
-            System.out.println(responseBlog);
         }
         return responseBlogs;
     }
