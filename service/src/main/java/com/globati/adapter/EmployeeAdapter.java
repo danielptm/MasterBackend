@@ -46,6 +46,7 @@ public class EmployeeAdapter {
             EmployeeAndItems profileItems = employeeService.createAccountOrLoginWithFacebook(id, name, email, image);
             EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(profileItems.getEmployee().getGlobatiUsername());
             employeeAndItems.setApiKey(profileItems.getApiKey());
+            employeeAndItems.setFacebookProfileCreated(profileItems.isFacebookProfileCreated());
             return translateOneEmployee(employeeAndItems);
         } catch (Exception e) {
             log.warn("An adapater exception occurred");
@@ -88,7 +89,8 @@ public class EmployeeAdapter {
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                     translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
-                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee), getAndTranslateResponsetips(employee)
+                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee), getAndTranslateResponsetips(employee),
+                    employeeAndItems.isFacebookProfileCreated()
             );
             return responseEmployee;
         } catch (Exception e) {
@@ -219,5 +221,4 @@ public class EmployeeAdapter {
         }
         return responseBlogs;
     }
-
 }

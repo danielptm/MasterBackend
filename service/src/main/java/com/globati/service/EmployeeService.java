@@ -176,6 +176,7 @@ public class EmployeeService {
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 EmployeeAndItems employeeAndItems = getItemsForEmployee(createdEmployee.getGlobatiUsername());
+                employeeAndItems.setFacebookProfileCreated(true);
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
                 employeeAndItems.setApiKey(jwt);
                 return employeeAndItems;
@@ -186,6 +187,7 @@ public class EmployeeService {
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
                 EmployeeAndItems items = getItemsForEmployee(employee.getGlobatiUsername());
+                items.setFacebookProfileCreated(false);
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
                 items.setApiKey(jwt);
                 return items;

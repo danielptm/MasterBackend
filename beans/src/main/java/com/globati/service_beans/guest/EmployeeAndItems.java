@@ -15,22 +15,14 @@ public class EmployeeAndItems {
         this.nearByDeals = null;
     }
 
-    @Override
-    public String toString() {
-        return "EmployeeAndItems{" +
-                "employee=" + employee +
-                ", nearByDeals=" + nearByDeals +
-                ", apiKey=" + apiKey +
-                '}';
-    }
-
-    List<Deal> nearByDeals;
-    String apiKey;
-
     public EmployeeAndItems(Employee employee, List<Deal> nearByDeals){
         this.employee = employee;
         this.nearByDeals = nearByDeals;
     }
+
+    List<Deal> nearByDeals;
+    String apiKey;
+    boolean facebookProfileCreated = false;
 
     public Employee getEmployee() {
         return employee;
@@ -56,4 +48,11 @@ public class EmployeeAndItems {
         this.apiKey = apiKey;
     }
 
+    public boolean isFacebookProfileCreated() {
+        return facebookProfileCreated;
+    }
+
+    public void setFacebookProfileCreated(boolean facebookProfileCreated) {
+        this.facebookProfileCreated = facebookProfileCreated;
+    }
 }

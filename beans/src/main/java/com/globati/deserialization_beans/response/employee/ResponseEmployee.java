@@ -33,6 +33,7 @@ public class ResponseEmployee {
     private String apiKey;
     private Integer profileVisits;
     private List<ResponseTip> responseTips;
+    private boolean isFacebookProfileCreated = false;
 
     public ResponseEmployee(){}
 
@@ -67,7 +68,7 @@ public class ResponseEmployee {
         this.responseTips = responseTips;
     }
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings, List<ResponseHotel> hotelBookings, Integer profileVisits,  List<ResponseBlog> blogs, List<ResponseTip> responseTips) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, List<ResponseFlight> flightBookings, List<ResponseHotel> hotelBookings, Integer profileVisits,  List<ResponseBlog> blogs, List<ResponseTip> responseTips, boolean isFacebookProfileCreated) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -97,6 +98,7 @@ public class ResponseEmployee {
         this.profileVisits = profileVisits;
         this.responseBlogs = blogs;
         this.responseTips = responseTips;
+        this.isFacebookProfileCreated = isFacebookProfileCreated;
     }
 
     public Long getId() {
@@ -325,6 +327,18 @@ public class ResponseEmployee {
 
     public void setResponseTips(List<ResponseTip> responseTips) {
         this.responseTips = responseTips;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isFacebookProfileCreated() {
+        return isFacebookProfileCreated;
+    }
+
+    public void setFacebookProfileCreated(boolean facebookProfileCreated) {
+        isFacebookProfileCreated = facebookProfileCreated;
     }
 
     @Override
