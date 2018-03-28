@@ -22,7 +22,7 @@ public class ScheduledTaskService {
     PropertyService propertyService;
 
     //http://pojo.sodhanalibrary.com/string.html
-    @Scheduled(cron = "0 30 3 * * ?")
+//    @Scheduled(cron = "0 30 3 * * ?")
     public void sendMarketingMail() throws Exception {
         System.out.println("Sending the marketing mail");
         List<Property> properties = propertyService.getAllProperties();
@@ -51,10 +51,10 @@ public class ScheduledTaskService {
 
     }
 
-    @Scheduled(cron = "0 15 3 * * ?")
-    public void updatePropertiesInDatabase() {
-        propertyService.updatePropertiesInDatabase();
-    }
+//    @Scheduled(cron = "0 15 3 * * ?")
+//    public void updatePropertiesInDatabase() {
+//        propertyService.updatePropertiesInDatabase();
+//    }
 
 
 
