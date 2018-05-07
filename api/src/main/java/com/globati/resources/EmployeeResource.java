@@ -3,6 +3,7 @@ package com.globati.resources;
 import com.globati.adapter.EmployeeAdapter;
 import com.globati.dbmodel.Employee;
 import com.globati.deserialization_beans.request.CreateEmployee;
+import com.globati.deserialization_beans.request.InterestMail;
 import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -23,6 +24,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -47,7 +49,6 @@ import com.globati.HelpObjects.Email;
 public class EmployeeResource{
 
     private static final Logger log = LogManager.getLogger(EmployeeResource.class);
-
 
     @Context
     UriInfo uri;
@@ -107,6 +108,16 @@ public class EmployeeResource{
             e.printStackTrace();
             throw new WebException("Could not retrieve user by username and password", Response.Status.BAD_REQUEST);
         }
+    }
+
+    @POST
+    @Path("interest-mail")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response sendInterestMail(InterestMail mail) throws Exception {
+        SendMail.sendInterestMail("daniel@globati.com", mail.toString());
+        SendMail.sendInterestMail("oliver@globati.com", mail.toString());
+        SendMail.sendInterestMail("edward@globati.com", mail.toString());
+        return Response.ok().build();
     }
 
 
