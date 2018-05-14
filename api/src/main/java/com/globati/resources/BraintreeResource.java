@@ -2,14 +2,12 @@ package com.globati.resources;
 
 import com.braintreegateway.*;
 import com.globati.dbmodel.Tip;
-import com.globati.deserialization_beans.request.TipPayment;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.BraintreeService;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.service.PropertiesService;
 import com.globati.third_party_api.BraintreeToken;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
