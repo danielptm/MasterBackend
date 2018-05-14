@@ -5,7 +5,6 @@ import com.globati.dbmodel.FlightBooking;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
 import com.globati.s3.FlightBookingRow;
-import com.globati.repository.FlightBookingRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.ImageHandler;
 import com.globati.utildb.SendMail;

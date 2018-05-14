@@ -3,7 +3,6 @@ package com.globati.service;
 import com.globati.dbmodel.Blog;
 import com.globati.dbmodel.Employee;
 import com.globati.enums.BlogApprovalStatus;
-import com.globati.repository.BlogRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sql.rowset.serial.SerialException;
 import java.util.List;
 
 @Service

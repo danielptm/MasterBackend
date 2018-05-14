@@ -2,7 +2,6 @@ package com.globati.service;
 
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Tip;
-import com.globati.repository.TipRepository;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**

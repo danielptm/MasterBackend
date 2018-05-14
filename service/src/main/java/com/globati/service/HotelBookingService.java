@@ -2,13 +2,9 @@ package com.globati.service;
 
 
 import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.FlightBooking;
 import com.globati.dbmodel.HotelBooking;
 import com.globati.enums.GlobatiPaymentStatus;
 import com.globati.enums.TicketPaidStatus;
-import com.globati.repository.FlightBookingRepository;
-import com.globati.repository.HotelBookingRepository;
-import com.globati.s3.FlightBookingRow;
 import com.globati.s3.HotelBookingRow;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.ImageHandler;
