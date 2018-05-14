@@ -10,7 +10,6 @@ import com.amazonaws.services.simpleemail.model.Content;
 import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.dbmodel.Deal;
-import com.globati.mail.beans.AdReceipt;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Welcome;
 import com.globati.dbmodel.Employee;
