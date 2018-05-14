@@ -1,8 +1,6 @@
 package com.globati.resources;
 
 import com.braintreegateway.*;
-import com.globati.dbmodel.Tip;
-import com.globati.resources.exceptions.WebException;
 import com.globati.service.BraintreeService;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
@@ -70,31 +68,4 @@ public class BraintreeResource {
         return Response.ok(tok).build();
     }
 
-
-    /**
-     * private _title:string;
-     *
-     * @return
-     * @throws Exception
-     */
-
-
-    @POST
-    @Path("checkout")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response checkout(TipPayment tipPayment) throws Exception {
-
-        System.out.println(tipPayment.toString());
-
-        Tip response = braintreeService.makeTransaction(
-                tipPayment.getId(), tipPayment.getTipAmount(), tipPayment.getNonce(), tipPayment.getEmail());
-
-        if(response !=null){
-            return Response.ok(response).build();
-        }
-        else{
-            throw new WebException("Could not create deal", Response.Status.CONFLICT);
-        }
-    }
 }
