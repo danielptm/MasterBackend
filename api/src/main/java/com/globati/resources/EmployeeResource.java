@@ -120,8 +120,6 @@ public class EmployeeResource{
         return Response.ok().build();
     }
 
-
-
     /**
      *
      * Try and take this away. If I use an UpdateEmployee object on the client site, update all its fields, and

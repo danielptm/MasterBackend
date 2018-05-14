@@ -23,7 +23,6 @@ public class JerseyConfig extends ResourceConfig{
         register(EventResource.class);
         register(EmployeeResource.class);
         register(MultiPartFeature.class);
-        register(GuestResource.class);
         register(DefaultAuthentication.class);
         register(UserDoesNotExistMapper.class);
         register(IllegalIUsernameExceptionMapper.class);
