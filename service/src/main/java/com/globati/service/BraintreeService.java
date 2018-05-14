@@ -1,21 +1,14 @@
 package com.globati.service;
 
 import com.braintreegateway.*;
-import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Tip;
-import com.globati.service.exceptions.ServiceException;
-import com.globati.utildb.GlobatiUtilException;
-import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.globati.mail.beans.*;
-import com.globati.service.TipService;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Service
 public class BraintreeService {
