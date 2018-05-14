@@ -36,8 +36,7 @@ public class EmployeeInfoTest {
     @Autowired
     EmployeeInfoService employeeInfoService;
 
-    @Autowired
-    PayService payService;
+
 
     @Test
     public void testGetEmployeeInfoByVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
