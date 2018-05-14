@@ -1,4 +1,3 @@
-import com.globati.service.PropertyService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
