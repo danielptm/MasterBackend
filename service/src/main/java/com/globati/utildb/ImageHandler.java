@@ -7,7 +7,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.globati.dbmodel.Property;
 import com.globati.s3.FlightBookingRow;
 import com.globati.s3.HotelBookingRow;
 import com.globati.service.PropertiesService;
