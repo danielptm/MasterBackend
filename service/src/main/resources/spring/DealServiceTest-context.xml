@@ -16,8 +16,6 @@
 
     <bean id="EmployeeInfoService" class="com.globati.service.EmployeeInfoService"></bean>
 
-    <bean id="PayService" class="com.globati.service.PayService"></bean>
-
     <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
 
     <bean id="JwtService" class="com.globati.service.JwtService"></bean>
@@ -27,19 +25,5 @@
     <bean id="RecommendationImageService" class="com.globati.service.RecommendationImageService"></bean>
 
     <bean id="EventImageService" class="com.globati.service.EventImageService"></bean>
-
-    <bean id="FlightBookingService" class="com.globati.service.FlightBookingService"></bean>
-
-    <bean id="HotelBookingService" class="com.globati.service.HotelBookingService"></bean>
-
-    <bean id="ScheduledTaskService" class="com.globati.service.ScheduledTaskService"></bean>
-
-    <bean id="PropertyService" class="com.globati.service.PropertyService"></bean>
-
-    <bean id="BlogService" class="com.globati.service.BlogService"></bean>
-
-    <bean id="BraintreeService" class="com.globati.service.BraintreeService"></bean>
-
-    <bean id="TipService" class="com.globati.service.TipService"></bean>
 
 </beans>

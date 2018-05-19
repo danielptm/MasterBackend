@@ -25,15 +25,6 @@ public class EmployeeAdapter {
     @Autowired
     ImageAdapater imageAdapater;
 
-    @Autowired
-    FlightAdapater flightAdapater;
-
-    @Autowired
-    HotelAdapater hotelAdapater;
-
-    @Autowired
-    BlogAdapater blogAdapater;
-
     /**
      * No tests are written for this class, because there is no logic, just object mapping and getts and setters.
      *
@@ -88,8 +79,8 @@ public class EmployeeAdapter {
                     employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                     employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                    translateResponseEvents(employee), employeeAndItems.getApiKey(), translateResponseFlights(employee),
-                    translateResponseHotels(employee), employee.getVisitCounter(), translateResponseBlogs(employee), getAndTranslateResponsetips(employee),
+                    translateResponseEvents(employee), employeeAndItems.getApiKey(),
+                    employee.getVisitCounter(),
                     employeeAndItems.isFacebookProfileCreated()
             );
             return responseEmployee;
@@ -114,11 +105,11 @@ public class EmployeeAdapter {
                         employee.getId(), employee.getFirstName(), employee.getImage(),
                         employee.getImage2(), employee.getImage3(), employee.getEmail(),
                         employee.getPaypalEmail(), employee.getAbout(), employee.getWelcomeMail(),
-                        employee.getRecruitmentMail(), employee.getFirstName(), employee.getInstagramUserId(),
+                        employee.getRecruitmentMail(), employee.getInstagramUser(), employee.getInstagramUserId(),
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee),null, null, employee.getVisitCounter(), null, null
+                        translateResponseEvents(employee),null,employee.getVisitCounter()
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());
@@ -132,16 +123,6 @@ public class EmployeeAdapter {
 
     }
 
-    private List<ResponseTip> getAndTranslateResponsetips(Employee employee){
-        List<ResponseTip> responseTips = new ArrayList<>();
-
-        for(Tip tip: employee.getTips()){
-            ResponseTip rt = new ResponseTip(tip.getDate(), tip.getId(), tip.getTipAmount(), tip.getTransactionId(), tip.getEmail(), tip.getPaid());
-            responseTips.add(rt);
-        }
-
-        return responseTips;
-    }
 
     //This should be moved to RecommendationAdapter
     private List<ResponseRecommendation> translateResponseRecommendations(Employee employee) {
@@ -189,36 +170,6 @@ public class EmployeeAdapter {
         return responses;
     }
 
-    public List<ResponseFlight> translateResponseFlights(Employee employee){
-        List<ResponseFlight> responseFlights = new ArrayList<>();
 
-        for(FlightBooking flight: employee.getFlights()){
-            ResponseFlight responseFlight = flightAdapater.getAndTranslateAflight(flight);
-            responseFlights.add(responseFlight);
-        }
 
-        return responseFlights;
-
-    }
-
-    public List<ResponseHotel> translateResponseHotels(Employee employee){
-        List<ResponseHotel> responseHotels = new ArrayList<>();
-
-        for(HotelBooking hotelBooking: employee.getHotels()){
-            ResponseHotel responseHotel = hotelAdapater.getAndTranslateAHotel(hotelBooking);
-            responseHotels.add(responseHotel);
-        }
-
-        return responseHotels;
-    }
-
-    public List<ResponseBlog> translateResponseBlogs(Employee employee){
-        List<ResponseBlog> responseBlogs = new ArrayList<>();
-
-        for(Blog blog: employee.getBlogs()){
-            ResponseBlog responseBlog = blogAdapater.getResponseBlog(blog.getId(), blog.getTitle(), blog.getCityAbout(), blog.getDescription(), blog.getBlogLink(), blog.getImageLink() );
-            responseBlogs.add(responseBlog);
-        }
-        return responseBlogs;
-    }
 }

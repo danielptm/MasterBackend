@@ -63,25 +63,25 @@ public class DealResource {
     }
 
 
-    /**
-     * This whole process from angular to this point is really bad and needs to be refactored.
-     * We need a typescript object angular side for this object. I fixed it a little bit on this side,
-     * by sending in the employee id instead of the whole emplyoee object
-     * @param businessEmail
-     * @return
-     */
-
-    @POST
-    @Path("mail")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response sendRecruitmentMail(BusinessEmail businessEmail){
-        System.out.println(businessEmail.toString());
-        try{
-            com.globati.dbmodel.Employee employee = this.employeeService.getEmployeeById(businessEmail.getEmployeeId());
-            dealService.sendRecruitmentMail(employee, businessEmail.getBusinessEmail(), businessEmail.getBusinessName());
-            return Response.ok().build();
-        }catch(Exception e){
-            throw new WebException("Could not send recruitment mail", Response.Status.CONFLICT);
-        }
-    }
+//    /**
+//     * This whole process from angular to this point is really bad and needs to be refactored.
+//     * We need a typescript object angular side for this object. I fixed it a little bit on this side,
+//     * by sending in the employee id instead of the whole emplyoee object
+//     * @param businessEmail
+//     * @return
+//     */
+//
+//    @POST
+//    @Path("mail")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response sendRecruitmentMail(BusinessEmail businessEmail){
+//        System.out.println(businessEmail.toString());
+//        try{
+//            com.globati.dbmodel.Employee employee = this.employeeService.getEmployeeById(businessEmail.getEmployeeId());
+//            dealService.sendRecruitmentMail(employee, businessEmail.getBusinessEmail(), businessEmail.getBusinessName());
+//            return Response.ok().build();
+//        }catch(Exception e){
+//            throw new WebException("Could not send recruitment mail", Response.Status.CONFLICT);
+//        }
+//    }
 }

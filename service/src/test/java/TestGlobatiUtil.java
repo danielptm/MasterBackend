@@ -1,7 +1,6 @@
 
 import com.globati.dbmodel.*;
-import com.globati.s3.FlightBookingRow;
-import com.globati.s3.HotelBookingRow;
+
 import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
@@ -52,40 +51,6 @@ public class TestGlobatiUtil {
     @Autowired
     PropertiesService propertiesService;
 
-    @Autowired
-    PayService payService;
-
-    @Ignore
-    public void testSendSesMail() throws Exception {
-
-        File file1 = new File( getClass().getClassLoader().getResource("test_resources/sweden.jpg").getFile() );
-        InputStream fis1 = new FileInputStream(file1);
-
-        String uid = UUID.randomUUID().toString();
-
-        String image1 = "image1 file";
-        String image2 = "iamge2 file";
-        String image3 = "image3 file";
-
-
-        File file = new File(getClass().getClassLoader().getResource("test_resources/cbp.jpg").getFile());
-        InputStream fis = new FileInputStream(file);
-        Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
-
-        List<String> li = new ArrayList<>();
-        li.add("danielptm@me.com");
-        li.add("daniel@globati.com");
-
-        Email email = new Email(employee.getId(), li);
-
-        Deal d = dealService.createDeal(image1, image2, image3, "qqqqqqqqqq", "A deal description", "Name of business", 59.271283,18.102924, employee.getId(), "q", "2308", "Seattle", "deal type", "globati.com", "daniel@globati.com","30 day", 30,"234", "billing","billing","billing","billing");
-
-        Assert.assertTrue(SendMail.sendGuestMail(employee, email.getEmails()));
-        Assert.assertTrue(SendMail.sendReceipt(d));
-        Assert.assertTrue(SendMail.sendRecruitmentMail(employee, "daniel@globati.com", "La neta"));
-        Assert.assertTrue(SendMail.sendForgottenPasswordEmail("daniel@globati.com", "danie", "token" ));
-
-    }
 
 
 
@@ -252,56 +217,7 @@ public class TestGlobatiUtil {
 
     }
 
-    /**
-     * A test for PayService. This should probably be moved to its own test class.
-     */
-    @Test
-    public void calculateSumOfFlightBookingsForEmployee() throws ServiceException {
-        List<FlightBooking> flightBookings = new ArrayList<>();
-        FlightBooking flightBooking = new FlightBooking();
-        flightBooking.setEmployeeComission(2.0);
 
-        flightBookings.add(flightBooking);
-
-
-        FlightBooking flightBooking1 = new FlightBooking();
-        flightBooking1.setEmployeeComission(2.0);
-
-
-        FlightBooking flightBooking2 = new FlightBooking();
-        flightBooking2.setEmployeeComission(2.0);
-
-        flightBookings.add(flightBooking1);
-        flightBookings.add(flightBooking2);
-
-        Assert.assertEquals(6.0, payService.calculateSumOfFlightBookingsForEmployee(flightBookings).doubleValue(), 1);
-    }
-
-    @Test
-    public void calculateIfDateIs30DaysBefore(){
-        Date today = new Date();
-        Date thirtyOneDaysAgo = new Date();
-        Date fifteenDaysAgo = new Date();
-
-
-        Calendar c = Calendar.getInstance();
-        c.setTime( thirtyOneDaysAgo );
-        c.add(Calendar.DATE, -32);
-
-        Calendar c2 = Calendar.getInstance();
-        c2.setTime( thirtyOneDaysAgo );
-        c2.add(Calendar.DATE, -15);
-
-        Assert.assertTrue(DateTools.isWithinTheLast30Days(today));
-        Assert.assertFalse(DateTools.isWithinTheLast30Days(c.getTime()));
-        Assert.assertTrue(DateTools.isWithinTheLast30Days(c2.getTime()));
-
-    }
-
-    @Test
-    public void testCreateAndSendMassPay() throws ServiceException {
-        payService.uploadVerifiedUsersToS3();
-    }
 
     /**
      *
@@ -316,15 +232,7 @@ public class TestGlobatiUtil {
         Assert.assertNotNull(file);
     }
 
-    /**
-     * Same as above. Dont run this on the server, just for manually testing.
-     */
-    @Ignore
-    public void getFlightBookings() throws ParseException {
-        List<FlightBookingRow> rows = ImageHandler.getFlightBookingRowsFromFile(ImageHandler.getFlightBookingsFromS3());
-        System.out.println(rows);
-        Assert.assertTrue(rows.size()>0);
-    }
+
 
     @Ignore
     public void getHotelBookingsFromS3() throws Exception {
@@ -332,12 +240,6 @@ public class TestGlobatiUtil {
         Assert.assertNotNull(file);
     }
 
-    @Ignore
-    public void getFHotelBookings() throws ParseException {
-        List<HotelBookingRow> rows = ImageHandler.getHotelBookingRowsFromFile(ImageHandler.getHotelBookingsFromS3());
-        System.out.println(rows);
-        Assert.assertTrue(rows.size()>0 );
 
-    }
 
 }

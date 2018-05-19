@@ -1,7 +1,6 @@
 package com.globati.resources;
 
 import com.braintreegateway.*;
-import com.globati.service.BraintreeService;
 import com.globati.service.DealService;
 import com.globati.service.EmployeeService;
 import com.globati.service.PropertiesService;
@@ -31,9 +30,6 @@ public class BraintreeResource {
 
     @Autowired
     EmployeeService employeeService;
-
-    @Autowired
-    BraintreeService braintreeService;
 
     @Autowired
     PropertiesService propertiesService;

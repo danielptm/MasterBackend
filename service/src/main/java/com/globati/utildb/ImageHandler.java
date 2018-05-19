@@ -7,8 +7,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.globati.s3.FlightBookingRow;
-import com.globati.s3.HotelBookingRow;
 import com.globati.service.PropertiesService;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -191,57 +189,7 @@ public class ImageHandler {
         return file;
     }
 
-    public static List<FlightBookingRow> getFlightBookingRowsFromFile(File file) throws ParseException {
-        BufferedReader br = null;
-        FileReader fr = null;
-        List<FlightBookingRow> flightBookings = new ArrayList<>();
 
-        try {
-
-            //br = new BufferedReader(new FileReader(FILENAME));
-            fr = new FileReader(file);
-            br = new BufferedReader(fr);
-
-            String sCurrentLine;
-            String date=null;
-
-            while ((sCurrentLine = br.readLine()) != null) {
-//                System.out.println(sCurrentLine);
-                if(DateTools.isValidDateFormat(sCurrentLine)){
-                    date = sCurrentLine;
-                }
-                else{
-                    String lineItems[] = sCurrentLine.split(",");
-                    FlightBookingRow flightBookingRow = new FlightBookingRow(
-                            date,
-                            lineItems[0],
-                            lineItems[1],
-                            lineItems[2],
-                            lineItems[3],
-                            lineItems[4],
-                            lineItems[5],
-                            lineItems[6],
-                            lineItems[7],
-                            lineItems[8],
-                            lineItems[9]
-                    );
-                    flightBookings.add(flightBookingRow);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-                if (fr != null)
-                    fr.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return flightBookings;
-    }
 
 
     public static File getHotelBookingsFromS3(){
@@ -395,56 +343,6 @@ public class ImageHandler {
 
 
 
-    public static List<HotelBookingRow> getHotelBookingRowsFromFile(File file) throws ParseException {
-        BufferedReader br = null;
-        FileReader fr = null;
-        List<HotelBookingRow> flightBookings = new ArrayList<>();
-
-        try {
-
-            //br = new BufferedReader(new FileReader(FILENAME));
-            fr = new FileReader(file);
-            br = new BufferedReader(fr);
-
-            String sCurrentLine;
-            String date=null;
-
-            while ((sCurrentLine = br.readLine()) != null) {
-//                System.out.println(sCurrentLine);
-                if(DateTools.isValidDateFormat(sCurrentLine)){
-                    date = sCurrentLine;
-                }
-                else{
-                    String lineItems[] = sCurrentLine.split(",");
-                    HotelBookingRow flightBookingRow = new HotelBookingRow(
-                            date,
-                            lineItems[0],
-                            lineItems[1],
-                            lineItems[2],
-                            lineItems[3],
-                            lineItems[4],
-                            lineItems[5],
-                            lineItems[6],
-                            lineItems[7],
-                            lineItems[8]
-                    );
-                    flightBookings.add(flightBookingRow);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-                if (fr != null)
-                    fr.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return flightBookings;
-    }
 
     public static boolean deleteBookingFileFromS3(){
 
@@ -538,46 +436,4 @@ public class ImageHandler {
 
     }
 
-    public static List<Property> transformPropertyFileToPropertyObjectsAndReturnThem(){
-        System.out.println("** Globati: Transforming file to objects for database insertion");
-        File file = getPropertyDataFromFileLocatedInS3();
-
-        BufferedReader br = null;
-        FileReader fr = null;
-        List<Property> properties = new ArrayList<>();
-
-        try {
-
-            fr = new FileReader(file);
-            br = new BufferedReader(fr);
-
-            String sCurrentLine;
-
-            while ((sCurrentLine = br.readLine()) != null) {
-                String lineItems[] = sCurrentLine.split(",");
-                Property property = new Property(
-                        lineItems[0],
-                        lineItems[1],
-                        lineItems[2],
-                        lineItems[3],
-                        lineItems[4]
-                );
-                properties.add(property);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-                if (fr != null)
-                    fr.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return properties;
-
-
-    }
 }
