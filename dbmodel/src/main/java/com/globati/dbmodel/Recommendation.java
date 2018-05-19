@@ -24,7 +24,7 @@ public class Recommendation extends BusinessEntity {
     @JsonBackReference
     List<RecommendationImage> recommendationimages;
 
-    @Column(name = "category", nullable=false, columnDefinition="default NONE")
+    @Column(name = "category", nullable=false, columnDefinition="VARCHAR(40) default 'NONE'")
     @Enumerated(EnumType.STRING)
     Category category;
 
