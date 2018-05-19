@@ -228,7 +228,7 @@ public class TestEmployeeService {
 		images.add("image1/url");
 		images.add("image2/url");
 		images.add("image3/url");
-		Recommendation rec = recommendationService.createRecommendation(employee.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
+		Recommendation rec = recommendationService.createRecommendation(employee.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 		File file2 = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
 		Date date = new Date();
 	}

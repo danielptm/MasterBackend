@@ -140,7 +140,8 @@ public class EmployeeAdapter {
                     recommendation.getId(), recommendation.getCity(), recommendation.getCountry(),
                     recommendation.getDescription(), recommendation.getLocation(),
                     recommendation.getStreet(), recommendation.getTargetLat(), recommendation.getTargetLong(),
-                    recommendation.getTitle(), recommendation.isActive(), imageAdapater.translateRecommendationImages(recommendation.getRecommendationimages())
+                    recommendation.getTitle(), recommendation.isActive(), imageAdapater.translateRecommendationImages(recommendation.getRecommendationimages()),
+                    recommendation.getCategory().toString()
             );
             responseRecomendations.add(responseRecommendation);
         }

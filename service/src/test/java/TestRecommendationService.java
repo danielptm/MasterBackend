@@ -81,7 +81,7 @@ public class TestRecommendationService {
         images.add(image3);
 
         Employee e = employeeService.getEmployeeById(commonEmployee.getId());
-        Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
+        Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
 
         Recommendation re3 = recommendationService.getRecommendationById(rec.getId());
@@ -114,7 +114,7 @@ public class TestRecommendationService {
         images.add(image3);
 
         Employee e = employeeService.getEmployeeById(employee.getId());
-        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
+        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
         re.setCity("hithere");
         re.getRecommendationimages().get(0).setPath("hithere");
@@ -158,7 +158,7 @@ public class TestRecommendationService {
         newImages.add(newImage3);
 
         Employee e = employeeService.getEmployeeById(employee.getId());
-        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images);
+        Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
         Recommendation updated = recommendationService.updateRecommendation(re.getId(), newTitle, newDescription, newImages);
 
@@ -188,8 +188,8 @@ public class TestRecommendationService {
         images.add("image2/url");
         images.add("image3/url");
 
-        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
-        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images );
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER" );
+        recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER" );
 
         List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(e.getId());
 

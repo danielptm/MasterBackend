@@ -116,7 +116,8 @@ public class RecommendationResource {
                     recommendation.getStreet(),
                     recommendation.getCity(),
                     recommendation.getCountry(),
-                    recommendation.getImages()
+                    recommendation.getImages(),
+                    recommendation.getCategory()
             );
 //            recommendationService.createRecommendation(id, title, description, targetLat, targetLong, street, city, country, is);
 

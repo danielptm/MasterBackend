@@ -5,6 +5,7 @@ import com.globati.adapter.ImageAdapater;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.dbmodel.RecommendationImage;
+import com.globati.enums.Category;
 import com.globati.repository.EmployeeRepository;
 import com.globati.repository.RecommendationRepository;
 import com.globati.service.exceptions.ServiceException;
@@ -46,14 +47,14 @@ public class RecommendationService{
 
     public Recommendation createRecommendation(Long employeeId, String title, String description, double targetLat,
                                                double targetLong, String street, String city, String country,
-                                               List<String> rawImages) throws ServiceException {
+                                               List<String> rawImages, String category) throws ServiceException {
 
         log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
         Employee employee=null;
         Recommendation rec=null;
         try {
             Employee e2 = employeeRepository.getEmployeeByid(employeeId);
-            rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country);
+            rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country, Category.valueOf(category));
             List<RecommendationImage> images = imageAdapater.translateToRecommendationImages(rec, rawImages);
             rec.setRecommendationimages(images);
             return recommendationRepository.save(rec);

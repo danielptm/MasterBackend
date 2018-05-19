@@ -2,6 +2,7 @@ package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.globati.enums.Category;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,10 +24,14 @@ public class Recommendation extends BusinessEntity {
     @JsonBackReference
     List<RecommendationImage> recommendationimages;
 
+    @Column(name = "category", nullable=false, columnDefinition="default NONE")
+    @Enumerated(EnumType.STRING)
+    Category category;
+
     public Recommendation(){}
 
     public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong,
-                          String street, String city, String country
+                          String street, String city, String country, Category category
                           ) {
         this.employee = employee;
         this.title = title;
@@ -37,6 +42,7 @@ public class Recommendation extends BusinessEntity {
         this.city = city;
         this.country = country;
         this.active = true;
+        this.category = category;
     }
 
 
@@ -56,8 +62,13 @@ public class Recommendation extends BusinessEntity {
         this.recommendationimages = recommendationimages;
     }
 
+    public Category getCategory() {
+        return category;
+    }
 
-
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
 
 

@@ -35,6 +35,8 @@ public class Recommendation {
     String image3;
     @JsonProperty("images")
     List<String> images;
+    @JsonProperty("category")
+    String category;
 
     public Recommendation(){}
 
@@ -142,6 +144,14 @@ public class Recommendation {
         this.id = id;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Recommendation{");
@@ -158,6 +168,7 @@ public class Recommendation {
         sb.append(", image2='").append(image2).append('\'');
         sb.append(", image3='").append(image3).append('\'');
         sb.append(", images=").append(images);
+        sb.append(", category='").append(category).append('\'');
         sb.append('}');
         return sb.toString();
     }

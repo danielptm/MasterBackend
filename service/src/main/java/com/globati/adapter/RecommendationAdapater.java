@@ -23,7 +23,7 @@ public class RecommendationAdapater {
                     recommendation.getId(), recommendation.getCity(), recommendation.getCountry(),
                     recommendation.getDescription(), recommendation.getLocation(), recommendation.getStreet(),
                     recommendation.getTargetLat(), recommendation.getTargetLong(), recommendation.getTitle(),
-                    recommendation.isActive(), translateImagesToResponseImages(recommendation)
+                    recommendation.isActive(), translateImagesToResponseImages(recommendation), recommendation.getCategory().toString()
             );
             return responseRecommendation;
         }catch(Exception e){

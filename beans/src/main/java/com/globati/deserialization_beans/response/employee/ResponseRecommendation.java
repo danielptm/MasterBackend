@@ -15,11 +15,12 @@ public class ResponseRecommendation {
     private String title;
     private boolean active;
     private List<ResponseImage> images;
+    private String category;
 
     public ResponseRecommendation() {
     }
 
-    public ResponseRecommendation(Long id, String city, String country, String description,  String location, String street, Double targetLat, Double targetLong, String title, boolean active, List<ResponseImage> recommendationImages) {
+    public ResponseRecommendation(Long id, String city, String country, String description,  String location, String street, Double targetLat, Double targetLong, String title, boolean active, List<ResponseImage> recommendationImages, String category) {
         this.id = id;
         this.city = city;
         this.country = country;
@@ -31,6 +32,7 @@ public class ResponseRecommendation {
         this.title = title;
         this.images = recommendationImages;
         this.active = active;
+        this.category = category;
     }
 
     public Long getId() {
@@ -77,5 +79,11 @@ public class ResponseRecommendation {
         return images;
     }
 
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }
