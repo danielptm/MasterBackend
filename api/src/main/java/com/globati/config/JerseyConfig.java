@@ -35,6 +35,7 @@ public class JerseyConfig extends ResourceConfig{
         property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, true);
         property(ServerProperties.PROCESSING_RESPONSE_ERRORS_ENABLED, true);
         register(ThirdPartyApi.class);
+        register(HelpRecommendationResource.class);
 
     }
 }

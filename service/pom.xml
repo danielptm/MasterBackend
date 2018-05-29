@@ -103,11 +103,11 @@
             <version>2.5</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.sun.mail</groupId>-->
-        <!--<artifactId>javax.mail</artifactId>-->
-        <!--<version>1.5.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.mandrillapp.wrapper.lutung</groupId>
+            <artifactId>lutung</artifactId>
+            <version>0.0.8</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
