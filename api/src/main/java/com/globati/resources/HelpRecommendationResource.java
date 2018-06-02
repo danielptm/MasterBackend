@@ -4,6 +4,7 @@ import com.globati.deserialization_beans.request.HelpRecommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.service.HelpRecommendationService;
 import com.globati.service.exceptions.ServiceException;
+import com.globati.utildb.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +25,7 @@ public class HelpRecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(ArrayList<HelpRecommendation> recommendations){
-        System.out.println(recommendations);
+    public Response create(ArrayList<HelpRecommendation> recommendations) throws Exception {
         com.globati.dbmodel.HelpRecommendation helpRecommendationFromdb = null;
         ArrayList<com.globati.dbmodel.HelpRecommendation> recommendations1 = new ArrayList<>();
         try {
