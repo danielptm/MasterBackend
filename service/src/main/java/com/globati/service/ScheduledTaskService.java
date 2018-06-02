@@ -37,12 +37,16 @@ public class ScheduledTaskService {
     EmployeeInfoService employeeInfoService;
 
     //http://pojo.sodhanalibrary.com/string.html
-    @Scheduled(cron = "0 45 11 * * 6")
+    @Scheduled(cron = "0 15 12 * * 6")
     public void sendMarketingMail() throws Exception {
         log.info("** Creating list for AutoCompleteEmployees **");
         List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
 
         for(EmployeeInfo info: employeeInfos){
+            if(info.getEmployeeId() == 1){
+                Employee employee = employeeService.getEmployeeById(info.getEmployeeId());
+                sendHelpRecommendationPrompt(employee, info);
+            }
             if( info.get_verified().equals(Verified.STANDARD) ){
                 Employee employee = employeeService.getEmployeeById(info.getEmployeeId());
                 List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
