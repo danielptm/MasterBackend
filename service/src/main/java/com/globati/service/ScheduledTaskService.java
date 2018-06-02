@@ -37,7 +37,7 @@ public class ScheduledTaskService {
     EmployeeInfoService employeeInfoService;
 
     //http://pojo.sodhanalibrary.com/string.html
-    @Scheduled(cron = "0 23 13 * * SAT")
+    @Scheduled(cron = "0 30 10 * * SAT")
     public void sendMarketingMail() throws Exception {
         log.info("** Creating list for AutoCompleteEmployees **");
         List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
