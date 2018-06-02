@@ -70,6 +70,7 @@ public class EmployeeService {
             employee.setDeals(null);
             employee.setEvents(null);
             employee.setRecommendations(null);
+
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -96,7 +97,6 @@ public class EmployeeService {
             Employee employee = new Employee(name, email, username, image);
             Employee employeeToReturn = employeeRepository.save(employee);
             createEmployeeInfoFromFacebook(employeeToReturn.getId(), facebookId);
-            SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody just created a profile with facebook with email: "+employee.getEmail());
             return employeeToReturn;
 
         } catch (Exception e) {
@@ -272,10 +272,6 @@ public class EmployeeService {
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
             savedEmployee = employeeRepository.save(employee);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
-            if(System.getenv("GLOBATI_SERVER_ENV").equals("production")) {
-                SendMail.sendCustomMailToGlobatiStaff("daniel@globati.com", "Sombody signed up for globati with email: " + email);
-                SendMail.sendCustomMailToGlobatiStaff("oliver@globati.com", "Sombody signed up for globati with email: " + email);
-            }
             return savedEmployee;
         } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createEmployee()");
@@ -697,21 +693,21 @@ public class EmployeeService {
     }
 
 
-    @Scheduled(cron = "0 43 8 * * ?")
-    public void getAllActiveEmployees() throws ServiceException {
-        log.info("** Creating list for AutoCompleteEmployees **");
-        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
-        autoCompleteEmployees = null;
-        autoCompleteEmployees = new ArrayList<>();
-
-        for(EmployeeInfo info: employeeInfos){
-            if( info.get_verified().equals(Verified.STANDARD) ){
-                Employee employee = getEmployeeById(info.getEmployeeId());
-                AutoCompleteEmployee autoCompleteEmployee = new AutoCompleteEmployee(employee.getGlobatiUsername(), employee.getCity(), employee.getImage());
-                autoCompleteEmployees.add(autoCompleteEmployee);
-            }
-        }
-
-    }
+//    @Scheduled(cron = "0 43 8 * * ?")
+//    public void getAllActiveEmployees() throws ServiceException {
+//        log.info("** Creating list for AutoCompleteEmployees **");
+//        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
+//        autoCompleteEmployees = null;
+//        autoCompleteEmployees = new ArrayList<>();
+//
+//        for(EmployeeInfo info: employeeInfos){
+//            if( info.get_verified().equals(Verified.STANDARD) ){
+//                Employee employee = getEmployeeById(info.getEmployeeId());
+//                AutoCompleteEmployee autoCompleteEmployee = new AutoCompleteEmployee(employee.getGlobatiUsername(), employee.getCity(), employee.getImage());
+//                autoCompleteEmployees.add(autoCompleteEmployee);
+//            }
+//        }
+//
+//    }
 
 }

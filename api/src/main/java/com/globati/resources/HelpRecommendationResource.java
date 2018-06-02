@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Component
 @Path("help-recommendation")
@@ -23,13 +24,19 @@ public class HelpRecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(HelpRecommendation helpRecommendation){
+    public Response create(ArrayList<HelpRecommendation> recommendations){
+        System.out.println(recommendations);
         com.globati.dbmodel.HelpRecommendation helpRecommendationFromdb = null;
+        ArrayList<com.globati.dbmodel.HelpRecommendation> recommendations1 = new ArrayList<>();
         try {
-            helpRecommendationFromdb = helpRecommendationService.createHelpRecommendation(helpRecommendation.getId(), helpRecommendation.getTitle(), helpRecommendation.getDescription(), helpRecommendation.getDate());
+            for(HelpRecommendation rec: recommendations) {
+                rec.setDate(new Date());
+                helpRecommendationFromdb = helpRecommendationService.createHelpRecommendation(rec.getId(), rec.getTitle(), rec.getDescription(), rec.getDate());
+                recommendations1.add(helpRecommendationFromdb);
+            }
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        return Response.ok(helpRecommendationFromdb).build();
+        return Response.ok(recommendations1).build();
     }
 }

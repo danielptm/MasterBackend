@@ -20,7 +20,8 @@ public final class ApiKey {
     String time;
 
     public ApiKey(){
-        this.time = new Long(System.currentTimeMillis()+14400*1000).toString();
+        // Sets an api token good for a week.
+        this.time = new Long(System.currentTimeMillis()+604800*1000).toString();
         this.apiKey = UUID.randomUUID().toString();
     }
 

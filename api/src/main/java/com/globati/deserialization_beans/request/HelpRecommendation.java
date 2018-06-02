@@ -14,7 +14,6 @@ public class HelpRecommendation {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.date = new Date();
     }
 
     public Long getId() {
@@ -47,5 +46,16 @@ public class HelpRecommendation {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("HelpRecommendation{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", date=").append(date);
+        sb.append('}');
+        return sb.toString();
     }
 }

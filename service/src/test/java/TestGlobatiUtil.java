@@ -51,6 +51,12 @@ public class TestGlobatiUtil {
     @Autowired
     PropertiesService propertiesService;
 
+    @Autowired
+    ScheduledTaskService scheduledTaskService;
+
+    @Autowired
+    EmployeeInfoService employeeInfoService;
+
 
 
 
@@ -240,6 +246,24 @@ public class TestGlobatiUtil {
         Assert.assertNotNull(file);
     }
 
+    /**
+     * This test should be ignored when running in cloud. It tests sending the HelpRecommendationPrompt mail to help
+     * get people to create recommendations quick and easy for the fast track feature.
+     * @throws UserNameIsNotUniqueException
+     * @throws ServiceException
+     */
+    @Ignore
+    public void testSendHelpRecommendationPrompt() throws UserNameIsNotUniqueException, ServiceException {
+        String uid = UUID.randomUUID().toString();
+        String uid2 = UUID.randomUUID().toString();
 
+        Employee employee = this.employeeService.createEmployee("Daniel", "daniel@globati.com", "dannyboy", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
+        e2.setAuthToken("c8b892d4-1b02-400b-a64e-ca8d31f98778");
+        e2.setTokenExpiration("1528391630337");
 
+        employeeInfoService.updateEmployeeInfo(e2);
+
+        scheduledTaskService.sendHelpRecommendationPrompt(employee, e2);
+    }
 }
