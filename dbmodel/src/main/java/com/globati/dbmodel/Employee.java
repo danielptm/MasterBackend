@@ -68,6 +68,9 @@ public class Employee extends BaseEntity {
     @Column(name="visitcounter")
     private Integer visitCounter;
 
+    @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
+    private Integer mobileVisitCounter;
+
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference
     List<Deal> deals;
@@ -343,6 +346,14 @@ public class Employee extends BaseEntity {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public Integer getMobileVisitCounter() {
+        return mobileVisitCounter;
+    }
+
+    public void setMobileVisitCounter(Integer mobileVisitCounter) {
+        this.mobileVisitCounter = mobileVisitCounter;
     }
 
 
