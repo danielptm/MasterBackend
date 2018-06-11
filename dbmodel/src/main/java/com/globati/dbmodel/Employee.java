@@ -3,6 +3,7 @@ package com.globati.dbmodel;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,6 +71,9 @@ public class Employee extends BaseEntity {
 
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
+
+    @Column(name="lastmobileupdate")
+    private Date date;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference
@@ -356,7 +360,13 @@ public class Employee extends BaseEntity {
         this.mobileVisitCounter = mobileVisitCounter;
     }
 
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Override
     public String toString() {
