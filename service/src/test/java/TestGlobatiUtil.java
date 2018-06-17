@@ -1,6 +1,7 @@
 
 import com.globati.dbmodel.*;
 
+import com.globati.mail.beans.GlobatiReminder;
 import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
@@ -265,5 +266,13 @@ public class TestGlobatiUtil {
         employeeInfoService.updateEmployeeInfo(e2);
 
         scheduledTaskService.sendHelpRecommendationPrompt(employee, e2);
+    }
+
+    @Test
+    public void restReminder() throws Exception {
+        String user = "CityBackpackers";
+        String email = "daniel@globati.com";
+        GlobatiReminder gmr = new GlobatiReminder(user);
+        SendMail.sendGlobatiReminder(user, email, gmr.getMessage());
     }
 }
