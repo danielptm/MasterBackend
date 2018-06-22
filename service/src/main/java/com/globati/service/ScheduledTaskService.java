@@ -2,8 +2,8 @@ package com.globati.service;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.EmployeeInfo;
 import com.globati.dbmodel.Recommendation;
-import com.globati.deserialization_beans.response.employee.AutoCompleteEmployee;
 import com.globati.enums.Verified;
+import com.globati.mail.beans.GlobatiReminder;
 import com.globati.mail.beans.HelpRecommendationPrompt;
 import com.globati.utildb.SendMail;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,6 +58,31 @@ public class ScheduledTaskService {
         }
     }
 
+    @Scheduled(cron = "0 38 12 1 * ?")
+    public void sendReminder() throws Exception {
+        log.info("** SENDING REMINDER **");
+        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
+
+        for(EmployeeInfo info: employeeInfos){
+            if(info.getEmployeeId() == 1){
+                Employee employee = employeeService.getEmployeeById(info.getEmployeeId());
+                sendGlobatiReminder(employee, info);
+            }
+            if( info.get_verified().equals(Verified.STANDARD) ){
+                Employee employee = employeeService.getEmployeeById(info.getEmployeeId());
+                sendGlobatiReminder(employee, info);
+            }
+        }
+    }
+
+    public void sendGlobatiReminder(Employee employee, EmployeeInfo employeeInfo) throws Exception {
+        String user = employee.getGlobatiUsername();
+        String email = employee.getEmail();
+        String flyer = employee.getFlyerLink();
+        GlobatiReminder gm = new GlobatiReminder();
+        SendMail.sendGlobatiReminder(user, email, gm.getMessage(user, employee.getFlyerLink()));
+
+    }
 
     public boolean sendHelpRecommendationPrompt(Employee employee, EmployeeInfo employeeInfo){
         String url = null;

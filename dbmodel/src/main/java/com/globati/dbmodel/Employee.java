@@ -69,6 +69,9 @@ public class Employee extends BaseEntity {
     @Column(name="visitcounter")
     private Integer visitCounter;
 
+    @Column(name="flyerlink", columnDefinition="VARCHAR(100) default 'https://s3.eu-central-1.amazonaws.com/globatiimages/splash/posters/poster.jpg'")
+    private String flyerLink;
+
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
 
@@ -367,6 +370,15 @@ public class Employee extends BaseEntity {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String getFlyerLink() {
+        return flyerLink;
+    }
+
+    public void setFlyerLink(String flyerLink) {
+        this.flyerLink = flyerLink;
+    }
+
 
     @Override
     public String toString() {

@@ -268,11 +268,13 @@ public class TestGlobatiUtil {
         scheduledTaskService.sendHelpRecommendationPrompt(employee, e2);
     }
 
-    @Test
+    @Ignore
     public void restReminder() throws Exception {
         String user = "CityBackpackers";
-        String email = "daniel@globati.com";
-        GlobatiReminder gmr = new GlobatiReminder(user);
-        SendMail.sendGlobatiReminder(user, email, gmr.getMessage());
+        String email = "danielptm@me.com";
+        GlobatiReminder gm = new GlobatiReminder();
+        SendMail.sendGlobatiReminder(user, email, gm.getMessage(user, "https://s3.eu-central-1.amazonaws.com/globatiimages/splash/posters/citybackpackers.jpg"));
+
+
     }
 }
