@@ -77,7 +77,7 @@ public class Employee extends BaseEntity {
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
 
-    @Column(name="lastmobileupdate", columnDefinition="VARCHAR(100) default 'booking url'")
+    @Column(name="lastmobileupdate", columnDefinition="VARCHAR(100) default 'bookingurl'")
     private Date date;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
