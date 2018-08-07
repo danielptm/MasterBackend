@@ -68,6 +68,8 @@ public class Employee extends BaseEntity {
     private boolean facebookProfile=false;
     @Column(name="visitcounter")
     private Integer visitCounter;
+    @Column(name="bookingurl")
+    private String bookingUrl;
 
     @Column(name="flyerlink", columnDefinition="VARCHAR(100) default 'https://s3.eu-central-1.amazonaws.com/globatiimages/splash/posters/poster.jpg'")
     private String flyerLink;
@@ -75,7 +77,7 @@ public class Employee extends BaseEntity {
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
 
-    @Column(name="lastmobileupdate")
+    @Column(name="lastmobileupdate", columnDefinition="VARCHAR(100) default 'booking url'")
     private Date date;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
@@ -379,6 +381,13 @@ public class Employee extends BaseEntity {
         this.flyerLink = flyerLink;
     }
 
+    public String getBookingUrl() {
+        return bookingUrl;
+    }
+
+    public void setBookingUrl(String bookingUrl) {
+        this.bookingUrl = bookingUrl;
+    }
 
     @Override
     public String toString() {
