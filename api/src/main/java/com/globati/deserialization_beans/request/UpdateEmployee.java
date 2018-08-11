@@ -53,6 +53,10 @@ public class UpdateEmployee {
     private String image2;
     @JsonProperty("image3")
     private String image3;
+    @JsonProperty("website")
+    private String website;
+    @JsonProperty("bookingUrl")
+    private String bookingUrl;
 
     public UpdateEmployee() {}
 
@@ -233,6 +237,21 @@ public class UpdateEmployee {
         this.image3 = image3;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getBookingUrl() {
+        return bookingUrl;
+    }
+
+    public void setBookingUrl(String bookingUrl) {
+        this.bookingUrl = bookingUrl;
+    }
 
     @Override
     public String toString() {

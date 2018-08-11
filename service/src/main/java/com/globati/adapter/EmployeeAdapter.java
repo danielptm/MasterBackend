@@ -60,7 +60,7 @@ public class EmployeeAdapter {
         try{
             return translateOneEmployee(employeeService.getItemsForEmployeeAndIncrement(username));
         }catch(Exception e){
-            log.warn("** GLOBATI ADAPATER EXCEPTION **");
+            log.warn("** GLOBATI ADAPTER EXCEPTION **");
             e.printStackTrace();
             throw new AdapaterException("Could not get employee by username: getEmployeeByUsername()");
         }
@@ -81,7 +81,7 @@ public class EmployeeAdapter {
                     employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
                     translateResponseEvents(employee), employeeAndItems.getApiKey(),
                     employee.getVisitCounter(),
-                    employeeAndItems.isFacebookProfileCreated()
+                    employeeAndItems.isFacebookProfileCreated(), employee.getBookingUrl(), employee.getWebsite()
             );
             return responseEmployee;
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class EmployeeAdapter {
                         employee.getInstagramUserToken(), employee.getPropLat(), employee.getPropLong(),
                         employee.getStreet(), employee.getCity(), employee.getCountry(), employee.getDisplay(),
                         employee.getGlobatiUsername(), employee.isFacebookProfile(), translateResponseRecommendations(employee),
-                        translateResponseEvents(employee),null,employee.getVisitCounter()
+                        translateResponseEvents(employee),null,employee.getVisitCounter(), employee.getBookingUrl(), employee.getWebsite()
                 );
                 responseEmployees.add(responseEmployee);
                 System.out.println(responseEmployees.size());

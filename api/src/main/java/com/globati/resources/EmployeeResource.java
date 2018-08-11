@@ -201,6 +201,12 @@ public class EmployeeResource{
         if(updateEmployee.getImage3()!=null){
             employee.setImage3(updateEmployee.getImage3());
         }
+        if(updateEmployee.getWebsite()!=null){
+            employee.setWebsite(updateEmployee.getWebsite());
+        }
+        if(updateEmployee.getBookingUrl()!=null){
+            employee.setBookingUrl(updateEmployee.getBookingUrl());
+        }
         Employee updatedEmployee = employeeService.updateEmployee(employee);
         return Response.ok(updatedEmployee).build();
     }

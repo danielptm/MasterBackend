@@ -70,6 +70,8 @@ public class Employee extends BaseEntity {
     private Integer visitCounter;
     @Column(name="bookingurl")
     private String bookingUrl;
+    @Column(name="website")
+    private String website;
 
     @Column(name="flyerlink", columnDefinition="VARCHAR(100) default 'https://s3.eu-central-1.amazonaws.com/globatiimages/splash/posters/poster.jpg'")
     private String flyerLink;
@@ -387,6 +389,14 @@ public class Employee extends BaseEntity {
 
     public void setBookingUrl(String bookingUrl) {
         this.bookingUrl = bookingUrl;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     @Override

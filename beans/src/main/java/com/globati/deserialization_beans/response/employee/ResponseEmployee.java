@@ -30,10 +30,12 @@ public class ResponseEmployee {
     private String apiKey;
     private Integer profileVisits;
     private boolean isFacebookProfileCreated = false;
+    private String bookingUrl;
+    private String website;
 
     public ResponseEmployee(){}
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events,  String apikey, Integer profileVisits) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events,  String apikey, Integer profileVisits, String bookingUrl, String website) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -59,10 +61,12 @@ public class ResponseEmployee {
         this.events = events;
         this.apiKey = apikey;
         this.profileVisits = profileVisits;
+        this.bookingUrl = bookingUrl;
+        this.website = website;
 
 }
 
-    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, Integer profileVisits,  boolean isFacebookProfileCreated) {
+    public ResponseEmployee(Long id, String firstName, String image, String image2, String image3, String email, String paypalEmail, String about, String welcomeMail, String recruitmentMail, String instagramUserName, String instagramUserId, String instagramToken, Double propLat, Double propLong, String street, String city, String country, String display, String globatiUsername, boolean facebookProfile, List<ResponseRecommendation> recommendations, List<ResponseEvent> events, String apikey, Integer profileVisits,  boolean isFacebookProfileCreated,  String bookingUrl, String website) {
         this.id = id;
         this.firstName = firstName;
         this.image = image;
@@ -89,6 +93,8 @@ public class ResponseEmployee {
         this.apiKey = apikey;
         this.profileVisits = profileVisits;
         this.isFacebookProfileCreated = isFacebookProfileCreated;
+        this.bookingUrl = bookingUrl;
+        this.website = website;
     }
 
     public Long getId() {
@@ -288,7 +294,21 @@ public class ResponseEmployee {
         this.profileVisits = profileVisits;
     }
 
+    public String getBookingUrl() {
+        return bookingUrl;
+    }
 
+    public void setBookingUrl(String bookingUrl) {
+        this.bookingUrl = bookingUrl;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 
     public void setId(Long id) {
         this.id = id;
