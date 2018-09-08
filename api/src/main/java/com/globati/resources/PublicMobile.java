@@ -1,11 +1,11 @@
 package com.globati.resources;
 
+import com.globati.resources.exceptions.WebException;
+import com.globati.service.EmployeeService;
+import com.globati.service.RecommendationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -13,28 +13,54 @@ import javax.ws.rs.core.Response;
 @Path("public")
 public class PublicMobile {
 
-    @PUT
-    @Path("increment/website")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response incrementWebsite() {
+    @Autowired
+    private EmployeeService employeeService;
 
-        return null;
+    @Autowired
+    private RecommendationService recommendationService;
+
+    @PUT
+    @Path("increment/website/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response incrementWebsite(@PathParam("id") Long id) {
+        try {
+            return Response.ok(employeeService.incrementWebsiteCounter(id)).build();
+        } catch (Exception e) {
+            throw new WebException("Could not increment the website counter.", Response.Status.BAD_REQUEST);
+        }
     }
 
     @PUT
-    @Path("increment/mobile")
+    @Path("increment/mobile/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response incrementMobile() {
+    public Response incrementMobile(@PathParam("id") Long id) {
+        try{
+            return Response.ok(employeeService.incrementMobileCounter(id)).build();
 
-        return null;
+        }catch(Exception e){
+            throw new WebException("Could not increment mobile counter", Response.Status.BAD_REQUEST);
+        }
     }
 
     @GET
-    @Path("employee")
+    @Path("employee/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmployeeById(){
-        return null;
+    public Response getEmployeeByUsername(@PathParam("username") String username){
+        try{
+            return Response.ok(employeeService.getEmployeeByUserName(username)).build();
+        } catch(Exception e){
+            throw new WebException("Could not get employee by username" + username, Response.Status.NOT_FOUND);
+        }
     }
 
-
+    @GET
+    @Path("recommendations/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecommendationsByEmployeeId(@PathParam("id") Long id) {
+        try {
+            return Response.ok(recommendationService.getRecommendationByEmployeeId(id)).build();
+        }catch(Exception e) {
+            throw new WebException("Could not get recommendations by employee id.", Response.Status.NOT_FOUND);
+        }
+    }
 }

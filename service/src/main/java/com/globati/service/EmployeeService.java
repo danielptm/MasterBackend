@@ -189,7 +189,11 @@ public class EmployeeService {
     public Employee getEmployeeByUserName(String username) throws ServiceException {
         log.info("getEmployeeByUserName(): username: " + username);
         try {
-            return employeeRepository.getEmployeeByGlobatiUsername(username);
+            Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
+            employee.setDeals(null);
+            employee.setEvents(null);
+            employee.setRecommendations(null);
+            return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeByUserName()");
             e.printStackTrace();
@@ -685,7 +689,36 @@ public class EmployeeService {
             }
         }
         return isAReservedKeyWord;
+    }
 
+    public Employee incrementWebsiteCounter(Long id) throws ServiceException {
+        try {
+            Employee employee = employeeRepository.getEmployeeByid(id);
+            employee.setRecommendations(null);
+            employee.setEvents(null);
+            employee.setDeals(null);
+            Integer newValue = employee.getVisitCounter();
+            newValue++;
+            employee.setVisitCounter(newValue);
+            return employeeRepository.save(employee);
+        }catch(Exception e) {
+            throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: incrementWebsiteCounter()");
+        }
+    }
+
+    public Employee incrementMobileCounter(Long id) throws ServiceException {
+        try {
+            Employee employee = employeeRepository.getEmployeeByid(id);
+            employee.setRecommendations(null);
+            employee.setEvents(null);
+            employee.setDeals(null);
+            Integer newValue = employee.getMobileVisitCounter();
+            newValue++;
+            employee.setMobileVisitCounter(newValue);
+            return employeeRepository.save(employee);
+        } catch (Exception e) {
+            throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: incrementMobileCounter()" );
+        }
     }
 
     public List<AutoCompleteEmployee> getAutoCompleteEmployees(){
@@ -693,21 +726,5 @@ public class EmployeeService {
     }
 
 
-//    @Scheduled(cron = "0 43 8 * * ?")
-//    public void getAllActiveEmployees() throws ServiceException {
-//        log.info("** Creating list for AutoCompleteEmployees **");
-//        List<EmployeeInfo> employeeInfos = employeeInfoService.getAllEmployeeInfos();
-//        autoCompleteEmployees = null;
-//        autoCompleteEmployees = new ArrayList<>();
-//
-//        for(EmployeeInfo info: employeeInfos){
-//            if( info.get_verified().equals(Verified.STANDARD) ){
-//                Employee employee = getEmployeeById(info.getEmployeeId());
-//                AutoCompleteEmployee autoCompleteEmployee = new AutoCompleteEmployee(employee.getGlobatiUsername(), employee.getCity(), employee.getImage());
-//                autoCompleteEmployees.add(autoCompleteEmployee);
-//            }
-//        }
-//
-//    }
 
 }

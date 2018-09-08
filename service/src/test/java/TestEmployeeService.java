@@ -246,12 +246,10 @@ public class TestEmployeeService {
 	}
 
 
-	@Test(expected = UserDoesNotExistException.class)
-	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException, IllegalUserNameException {
-		EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeAndIncrement(randomString);
-
-
-	}
+//	@Test(expected = UserDoesNotExistException.class)
+//	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException, IllegalUserNameException {
+//		EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeAndIncrement(randomString);
+//	}
 
 	@Test(expected = UserNameIsNotUniqueException.class)
 	public void attempttoCreateEmployeeButFailBecauseUsernameAlreadyExists() throws UserDoesNotExistException, UserNameIsNotUniqueException, ServiceException, IllegalUserNameException {

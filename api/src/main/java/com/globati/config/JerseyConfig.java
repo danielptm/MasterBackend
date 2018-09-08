@@ -36,6 +36,6 @@ public class JerseyConfig extends ResourceConfig{
         property(ServerProperties.PROCESSING_RESPONSE_ERRORS_ENABLED, true);
         register(ThirdPartyApi.class);
         register(HelpRecommendationResource.class);
-
+        register(PublicMobile.class);
     }
 }
