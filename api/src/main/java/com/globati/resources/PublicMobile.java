@@ -63,4 +63,15 @@ public class PublicMobile {
             throw new WebException("Could not get recommendations by employee id.", Response.Status.NOT_FOUND);
         }
     }
+
+    @GET
+    @Path("employee")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmployees() {
+        try {
+            return Response.ok(employeeService.getAllActiveEmployees()).build();
+        } catch (Exception e) {
+            throw new WebException("Could not get employees by city.", Response.Status.NOT_FOUND);
+        }
+    }
 }

@@ -721,6 +721,19 @@ public class EmployeeService {
         }
     }
 
+    public List<Employee> getAllActiveEmployees() throws ServiceException {
+        try {
+            List<Employee> employees = new ArrayList<>();
+            List<EmployeeInfo> infos = employeeInfoService.getAllEmployeesByVerified(Verified.STANDARD);
+            for(EmployeeInfo info: infos){
+                employees.add(getEmployeeById(info.getEmployeeId()));
+            }
+        return employees;
+        }catch(Exception e ){
+            throw new ServiceException("** GLOBATI SERVICE EXCEPTINO ** FOR METHOD: getAllActiveEmployees()");
+        }
+    }
+
     public List<AutoCompleteEmployee> getAutoCompleteEmployees(){
         return autoCompleteEmployees;
     }
