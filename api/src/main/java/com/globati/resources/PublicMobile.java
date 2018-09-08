@@ -3,6 +3,7 @@ package com.globati.resources;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeService;
 import com.globati.service.RecommendationService;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
@@ -54,7 +55,7 @@ public class PublicMobile {
     }
 
     @GET
-    @Path("recommendations/{id}")
+    @Path("recommendation/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecommendationsByEmployeeId(@PathParam("id") Long id) {
         try {
@@ -72,6 +73,17 @@ public class PublicMobile {
             return Response.ok(employeeService.getAllActiveEmployees()).build();
         } catch (Exception e) {
             throw new WebException("Could not get employees by city.", Response.Status.NOT_FOUND);
+        }
+    }
+
+    @GET
+    @Path("employee/recommendations/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmployeeAndItemsByUsername(@PathParam("username") String username) {
+        try {
+            return Response.ok(employeeService.getItemsForEmployeeAndIncrement(username).getEmployee()).build();
+        } catch (Exception e) {
+            throw new WebException("Could not get employee by city.", Response.Status.NOT_FOUND);
         }
     }
 }
