@@ -81,7 +81,7 @@ public class PublicMobile {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeeAndItemsByUsername(@PathParam("username") String username) {
         try {
-            return Response.ok(employeeService.getItemsForEmployeeAndIncrement(username).getEmployee()).build();
+            return Response.ok(employeeService.getEmployeeByIdWithRecommdations(username)).build();
         } catch (Exception e) {
             throw new WebException("Could not get employee by city.", Response.Status.NOT_FOUND);
         }

@@ -410,6 +410,10 @@ public class EmployeeService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
 
+            System.out.println("Recommendation images size");
+            System.out.println(recommendations.get(0).getRecommendationimages().size());
+            System.out.println(recommendations.get(0).getRecommendationimages().get(0).getPath());
+
             List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
 
             employee.setRecommendations(recommendations);
@@ -718,6 +722,17 @@ public class EmployeeService {
             return employeeRepository.save(employee);
         } catch (Exception e) {
             throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: incrementMobileCounter()" );
+        }
+    }
+
+    public Employee getEmployeeByIdWithRecommdations(String username) throws ServiceException {
+        try {
+            Employee employee = getEmployeeByUserName(username);
+            List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
+            employee.setRecommendations(recommendations);
+            return employee;
+        } catch (Exception e) {
+            throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeByIdWithRecommendations");
         }
     }
 
