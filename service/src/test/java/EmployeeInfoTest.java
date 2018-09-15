@@ -39,12 +39,10 @@ public class EmployeeInfoTest {
 
 
     @Test
-    public void testGetEmployeeInfoByVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void testGetEmployeeInfoByVerified() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
         String uid2 = UUID.randomUUID().toString();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
         EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
@@ -65,10 +63,8 @@ public class EmployeeInfoTest {
     }
 
     @Test
-    public void testCreateEmployeeInfo() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void testCreateEmployeeInfo() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
         EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
@@ -77,10 +73,8 @@ public class EmployeeInfoTest {
     }
 
     @Test
-    public void testVerified() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void testVerified() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
@@ -102,12 +96,10 @@ public class EmployeeInfoTest {
 
 
     @Test
-    public void testGetEmployeeInfoByAuthToken() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void testGetEmployeeInfoByAuthToken() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 
         String uid = UUID.randomUUID().toString();
         String uid2 = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         EmployeeInfo employeeInfo = employeeInfoService.createEmployeeInfo(employee.getId(), "hi");
@@ -139,8 +131,6 @@ public class EmployeeInfoTest {
     @Ignore
     public void testSendVerifiedUsers() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = this.employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         employee.setPaypalEmail("UnitTestEmail");

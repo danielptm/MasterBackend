@@ -83,18 +83,8 @@ public class Employee extends BaseEntity {
     private Date date;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    List<Deal> deals;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     List<Recommendation> recommendations;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    List<Event> events;
-
-
 
     public Employee(){}
 
@@ -335,28 +325,12 @@ public class Employee extends BaseEntity {
         this.visitCounter = visitCounter;
     }
 
-    public List<Deal> getDeals() {
-        return deals;
-    }
-
-    public void setDeals(List<Deal> deals) {
-        this.deals = deals;
-    }
-
     public List<Recommendation> getRecommendations() {
         return recommendations;
     }
 
     public void setRecommendations(List<Recommendation> recommendations) {
         this.recommendations = recommendations;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 
     public Integer getMobileVisitCounter() {
@@ -427,9 +401,7 @@ public class Employee extends BaseEntity {
                 ", active=" + active +
                 ", facebookProfile=" + facebookProfile +
                 ", visitCounter=" + visitCounter +
-                ", deals=" + deals +
                 ", recommendations=" + recommendations +
-                ", _events=" + events +
                 '}';
     }
 

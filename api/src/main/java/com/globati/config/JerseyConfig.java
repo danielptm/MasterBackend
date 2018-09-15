@@ -20,22 +20,17 @@ public class JerseyConfig extends ResourceConfig{
 
     public JerseyConfig() {
         register(RecommendationResource.class);
-        register(EventResource.class);
         register(EmployeeResource.class);
         register(MultiPartFeature.class);
         register(DefaultAuthentication.class);
         register(UserDoesNotExistMapper.class);
         register(IllegalIUsernameExceptionMapper.class);
         register(UserNameIsNotUniqueExceptionMapper.class);
-        register(DealResource.class);
         register(AuthenticationResource.class);
         register(ResponseFilter.class);
-        register(BraintreeResource.class);
         register(FacebookConnectionFactory.class);
         property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, true);
         property(ServerProperties.PROCESSING_RESPONSE_ERRORS_ENABLED, true);
-        register(ThirdPartyApi.class);
-        register(HelpRecommendationResource.class);
         register(PublicMobile.class);
     }
 }

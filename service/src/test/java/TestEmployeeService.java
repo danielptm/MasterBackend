@@ -51,12 +51,6 @@ public class TestEmployeeService {
 	@Autowired
 	private RecommendationService recommendationService;
 
-	@Autowired
-	DealService dealService;
-
-	@Autowired
-	EventService eventService;
-
 	private static final Logger log = LogManager.getLogger(TestEmployeeService.class);
 
 	String randomString;
@@ -246,10 +240,6 @@ public class TestEmployeeService {
 	}
 
 
-//	@Test(expected = UserDoesNotExistException.class)
-//	public void throwsUserDoesNotExistException() throws ServiceException, UserDoesNotExistException, IllegalUserNameException {
-//		EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeAndIncrement(randomString);
-//	}
 
 	@Test(expected = UserNameIsNotUniqueException.class)
 	public void attempttoCreateEmployeeButFailBecauseUsernameAlreadyExists() throws UserDoesNotExistException, UserNameIsNotUniqueException, ServiceException, IllegalUserNameException {

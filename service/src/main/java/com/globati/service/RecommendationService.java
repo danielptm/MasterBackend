@@ -1,7 +1,5 @@
 package com.globati.service;
 
-
-import com.globati.adapter.ImageAdapater;
 import com.globati.dbmodel.Employee;
 import com.globati.dbmodel.Recommendation;
 import com.globati.dbmodel.RecommendationImage;
@@ -24,7 +22,8 @@ import java.util.List;
 @Service
 public class RecommendationService{
 
-    private static final Logger log = LogManager.getLogger(DealService.class);
+    private static final Logger log = LogManager.getLogger(RecommendationService.class);
+
 
 
     @Autowired
@@ -33,11 +32,6 @@ public class RecommendationService{
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Autowired
-    ImageAdapater imageAdapater;
-
-    @Autowired
-    EventImageService eventImageService;
 
     @Autowired
     RecommendationImageService recommendationImageService;
@@ -51,17 +45,20 @@ public class RecommendationService{
 
         log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
         Employee employee=null;
-        Recommendation rec=null;
+        List<RecommendationImage> recommendationImages = new ArrayList<>();
         try {
             Employee e2 = employeeRepository.getEmployeeByid(employeeId);
-            rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country, Category.valueOf(category));
-            List<RecommendationImage> images = imageAdapater.translateToRecommendationImages(rec, rawImages);
-            rec.setRecommendationimages(images);
+            Recommendation rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country, Category.valueOf(category));
+            rawImages.forEach((image) -> {
+                RecommendationImage recommendationImage = new RecommendationImage(rec, image);
+                recommendationImages.add(recommendationImage);
+            });
+            rec.setRecommendationimages(recommendationImages);
             return recommendationRepository.save(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
             e.printStackTrace();
-            throw new ServiceException("Could not create recommendation at this time: "+rec.toString(), e);
+            throw new ServiceException("Could not create recommendation at this time: ", e);
         }
     }
 
@@ -101,7 +98,8 @@ public class RecommendationService{
                 recommendationImageService.deleteRecommendationImage(image.getId());
             }
 
-            List<RecommendationImage> translatedImages = imageAdapater.translateToRecommendationImages(returnRecommendation, images);
+            List<RecommendationImage> translatedImages = new ArrayList<>();
+            images.forEach((image) -> translatedImages.add(recommendationImageService.createRecommendationImage(returnRecommendation, image)));
 
             returnRecommendation.setRecommendationimages(translatedImages);
             returnRecommendation.setDescription(description);

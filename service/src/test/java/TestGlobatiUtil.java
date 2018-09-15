@@ -44,12 +44,6 @@ public class TestGlobatiUtil {
     EmployeeService employeeService;
 
     @Autowired
-    EventService eventService;
-
-    @Autowired
-    DealService dealService;
-
-    @Autowired
     PropertiesService propertiesService;
 
     @Autowired
@@ -67,15 +61,6 @@ public class TestGlobatiUtil {
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
-
-//        //true
-//        Recommendation recommendation = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-//
-//        //true
-//        Recommendation recommendation2 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
-//
-//        //false
-//        Recommendation recommendation3 = new Recommendation(employee,  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", "image1", "image2", "image3");
 
 
     }
@@ -126,8 +111,6 @@ public class TestGlobatiUtil {
     public void testCheckPassword() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
         Employee employee1 =employeeService.getEmployeeById(employee.getId());
@@ -146,8 +129,6 @@ public class TestGlobatiUtil {
 
         String uid = UUID.randomUUID().toString();
 
-        File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
-        InputStream fis = new FileInputStream(file);
         Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
         EmployeeInfo ei = new EmployeeInfo(employee.getId());
@@ -180,13 +161,7 @@ public class TestGlobatiUtil {
 
     }
 
-    @Test
-    public void testPropertiesFile() throws IOException {
-        InputStream is = new FileInputStream(new File(TestGlobatiUtil.class.getClassLoader().getResource("environment/development.properties").getFile()));
-        Properties properties = new Properties();
-        properties.load(is);
 
-    }
 
     @Test
     public void testStaticBlock(){

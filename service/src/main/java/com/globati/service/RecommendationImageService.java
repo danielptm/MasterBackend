@@ -1,5 +1,6 @@
 package com.globati.service;
 
+import com.globati.dbmodel.Recommendation;
 import com.globati.dbmodel.RecommendationImage;
 import com.globati.repository.RecommendationImageRepository;
 import com.globati.service.exceptions.ServiceException;
@@ -16,6 +17,17 @@ public class RecommendationImageService {
     @Autowired
     RecommendationImageRepository recommendationImageRepository;
 
+    public RecommendationImage createRecommendationImage(Recommendation recommendation, String image){
+        RecommendationImage recommendationImage = null;
+        try {
+            recommendationImage = new RecommendationImage(recommendation, image);
+            recommendationImage = recommendationImageRepository.save(recommendationImage);
+        } catch (Exception e) {
+            log.warn("** GLOBATI SERVICE EXCEPTION ** Cannot create image recommendation.");
+        }
+        return recommendationImage;
+    }
+
     public void deleteRecommendationImage(Long id) throws ServiceException {
         try{
             RecommendationImage recommendationImage = recommendationImageRepository.findOne(id);
@@ -27,13 +39,4 @@ public class RecommendationImageService {
         }
     }
 
-    public void deleteRecommendationImages(Long id) throws ServiceException {
-        try{
-            recommendationImageRepository.deleteAllRecommendationImagesWithRecommendationId(id);
-        }catch(Exception e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** deleteRecommendationImages() recommendationin: "+id);
-            e.printStackTrace();
-            throw new ServiceException("Could not delete recommendation images");
-        }
-    }
 }

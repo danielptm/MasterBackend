@@ -6,11 +6,7 @@
 
     <bean id="DataSource" class="com.globati.config.TestProfile"></bean>
 
-    <bean id="DealService" class="com.globati.service.DealService" ></bean>
-
     <bean id="EmployeeService" class="com.globati.service.EmployeeService"></bean>
-
-    <bean id="EventService" class="com.globati.service.EventService"></bean>
 
     <bean id="RecommendationService" class="com.globati.service.RecommendationService"></bean>
 
@@ -20,11 +16,7 @@
 
     <bean id="JwtService" class="com.globati.service.JwtService"></bean>
 
-    <bean id="ImageAdapater" class="com.globati.adapter.ImageAdapater"></bean>
-
     <bean id="RecommendationImageService" class="com.globati.service.RecommendationImageService"></bean>
-
-    <bean id="EventImageService" class="com.globati.service.EventImageService"></bean>
 
     <bean id="ScheduledTaskService" class="com.globati.service.ScheduledTaskService"></bean>
 

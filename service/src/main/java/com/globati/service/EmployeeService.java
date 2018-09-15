@@ -3,7 +3,6 @@ package com.globati.service;
 
 import com.globati.HelpObjects.ApiKey;
 import com.globati.dbmodel.*;
-import com.globati.deserialization_beans.response.employee.AutoCompleteEmployee;
 import com.globati.enums.Verified;
 import com.globati.repository.EmployeeRepository;
 import com.globati.service.exceptions.IllegalUserNameException;
@@ -14,10 +13,8 @@ import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -34,8 +31,6 @@ public class EmployeeService {
 
     private static final Logger log = LogManager.getLogger(EmployeeService.class);
 
-    private static List<AutoCompleteEmployee> autoCompleteEmployees = new ArrayList<>();
-
 
     @Autowired
     PropertiesService propertiesService;
@@ -44,13 +39,8 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    DealService dealService;
-
-    @Autowired
     RecommendationService recommendationService;
 
-    @Autowired
-    EventService eventService;
 
     @Autowired
     EmployeeInfoService employeeInfoService;
@@ -67,8 +57,6 @@ public class EmployeeService {
         log.info("getEmployeeById(): " + id);
         try {
             Employee employee = this.employeeRepository.getEmployeeByid(id);
-            employee.setDeals(null);
-            employee.setEvents(null);
             employee.setRecommendations(null);
 
             return employee;
@@ -190,8 +178,6 @@ public class EmployeeService {
         log.info("getEmployeeByUserName(): username: " + username);
         try {
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
-            employee.setDeals(null);
-            employee.setEvents(null);
             employee.setRecommendations(null);
             return employee;
         } catch (Exception e) {
@@ -223,10 +209,7 @@ public class EmployeeService {
             }
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByEmployeeId(employee.getId());
-            List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
             employee.setRecommendations(recommendations);
-            employee.setEvents(events);
-            employee.setDeals(null);
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(employeeInfo.getAuthToken()));
 
@@ -353,9 +336,7 @@ public class EmployeeService {
         try {
             List<Employee> employees = this.employeeRepository.getEmployeeByCountry(country);
             for (Employee employee : employees) {
-                employee.setDeals(null);
                 employee.setRecommendations(null);
-                employee.setEvents(null);
             }
             return removeNonVerifiedEmployeesfromList(employees);
         } catch (Exception e) {
@@ -378,8 +359,6 @@ public class EmployeeService {
             List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
             for (Employee employee : employees) {
                 employee.setRecommendations(null);
-                employee.setDeals(null);
-                employee.setEvents(null);
             }
             List<Employee> employees1 = removeNonVerifiedEmployeesfromList(employees);
             return employees1;
@@ -414,11 +393,7 @@ public class EmployeeService {
             System.out.println(recommendations.get(0).getRecommendationimages().size());
             System.out.println(recommendations.get(0).getRecommendationimages().get(0).getPath());
 
-            List<Event> events = eventService.getEventsByEmployeeId(employee.getId());
-
             employee.setRecommendations(recommendations);
-            employee.setEvents(events);
-            employee.setDeals(null);
 
             EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
@@ -699,8 +674,6 @@ public class EmployeeService {
         try {
             Employee employee = employeeRepository.getEmployeeByid(id);
             employee.setRecommendations(null);
-            employee.setEvents(null);
-            employee.setDeals(null);
             Integer newValue = employee.getVisitCounter();
             newValue++;
             employee.setVisitCounter(newValue);
@@ -714,8 +687,6 @@ public class EmployeeService {
         try {
             Employee employee = employeeRepository.getEmployeeByid(id);
             employee.setRecommendations(null);
-            employee.setEvents(null);
-            employee.setDeals(null);
             Integer newValue = employee.getMobileVisitCounter();
             newValue++;
             employee.setMobileVisitCounter(newValue);
@@ -748,11 +719,5 @@ public class EmployeeService {
             throw new ServiceException("** GLOBATI SERVICE EXCEPTINO ** FOR METHOD: getAllActiveEmployees()");
         }
     }
-
-    public List<AutoCompleteEmployee> getAutoCompleteEmployees(){
-        return autoCompleteEmployees;
-    }
-
-
 
 }

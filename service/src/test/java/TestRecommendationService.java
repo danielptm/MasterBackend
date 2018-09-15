@@ -20,14 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -60,14 +55,12 @@ public class TestRecommendationService {
                 "check this2", randomString+"@me.com", randomString, "secret password",
                 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa"
         );
-
         when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockApiToken");
-
     }
 
 
     @Test
-    public void createReccomendation() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void createReccomendation() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         List<String> images = new ArrayList<>();
@@ -98,7 +91,7 @@ public class TestRecommendationService {
     }
 
     @Test
-    public void updateRecommendationAndRecommendationImages() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void updateRecommendationAndRecommendationImages() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
@@ -130,7 +123,7 @@ public class TestRecommendationService {
     }
 
     @Test
-    public void updateRecommendationAndRecommendationImagesWithParameters() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void updateRecommendationAndRecommendationImagesWithParameters() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
@@ -175,7 +168,7 @@ public class TestRecommendationService {
     }
 
     @Test
-    public void getRecommendationsFromItemsOfEmployee() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void getRecommendationsFromItemsOfEmployee() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
         Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
