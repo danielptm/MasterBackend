@@ -1,17 +1,21 @@
 package com.globati.resources;
 
+import com.globati.HelpObjects.ApiKey;
 import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.EmployeeInfo;
 import com.globati.deserialization_beans.request.CreateEmployee;
 import com.globati.deserialization_beans.request.InterestMail;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
+import com.globati.service.JwtService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service_beans.guest.EmployeeAndItems;
 import com.globati.utildb.SendMail;
 import com.globati.deserialization_beans.request.ChangePasswordWithToken;
 import com.globati.deserialization_beans.request.UpdateEmployee;
@@ -55,6 +59,9 @@ public class EmployeeResource{
     @Autowired
     EmployeeInfoService employeeInfoService;
 
+    @Autowired
+    JwtService jwtService;
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -71,6 +78,7 @@ public class EmployeeResource{
                     createEmployee.getCity(),
                     createEmployee.getCountry()
             );
+
             return Response.ok(employee).build();
 
     }
@@ -90,8 +98,7 @@ public class EmployeeResource{
     @GlobatiAuthentication
     public Response login(String username){
         try{
-            Employee employeeitems = employeeService.getEmployeeByUserName(username);
-            return Response.ok(employeeitems).build();
+            return Response.ok(employeeService.getItemsForEmployee(username)).build();
         }catch(Exception e){
             e.printStackTrace();
             throw new WebException("Could not retrieve user by username and password", Response.Status.BAD_REQUEST);

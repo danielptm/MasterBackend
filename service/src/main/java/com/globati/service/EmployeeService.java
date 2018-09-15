@@ -58,7 +58,6 @@ public class EmployeeService {
         try {
             Employee employee = this.employeeRepository.getEmployeeByid(id);
             employee.setRecommendations(null);
-
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeById(Long id)");
@@ -178,7 +177,7 @@ public class EmployeeService {
         log.info("getEmployeeByUserName(): username: " + username);
         try {
             Employee employee = employeeRepository.getEmployeeByGlobatiUsername(username);
-            employee.setRecommendations(null);
+            employee.setRecommendations(new ArrayList<>());
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeeByUserName()");
@@ -257,6 +256,7 @@ public class EmployeeService {
         Employee savedEmployee = null;
         try {
             employee = new Employee(name, email, username, latvalue, longvalue, image, street, city, country);
+            employee.setRecommendations(new ArrayList<>());
             savedEmployee = employeeRepository.save(employee);
             employeeInfoService.createEmployeeInfo(savedEmployee.getId(), password);
             return savedEmployee;
@@ -568,14 +568,15 @@ public class EmployeeService {
      * @return
      * @throws ServiceException
      */
-    public List<String> authenticateReceptionist(String userName, String password) throws ServiceException {
+    public EmployeeAndItems authenticateReceptionist(String userName, String password) throws ServiceException {
         log.info("authenticateRecptionist(): username: " + userName);
         try {
-            List<String> item = new ArrayList<>();
             String username = userName;
             String passwordAttempt = password;
 
             Employee employee = getEmployeeByUserName(username);
+            employee.setRecommendations(new ArrayList<>());
+            EmployeeAndItems employeeAndItems = new EmployeeAndItems(employee);
 
             EmployeeInfo employeeInfo = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
 
@@ -585,9 +586,9 @@ public class EmployeeService {
                 employeeInfo.setAuthToken(apiKey.getApiKey());
                 employeeInfo.setTokenExpiration(apiKey.getTime());
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
-                item.add(jwt);
+                employeeAndItems.setApiKey(jwt);
                 employeeInfoService.updateEmployeeInfo(employeeInfo);
-                return item;
+                return employeeAndItems;
             } else {
                 throw new ServiceException("Could not verify user: " + username);
             }
