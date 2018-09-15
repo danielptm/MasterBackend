@@ -1,13 +1,10 @@
 package com.globati.resources;
 
-import com.globati.adapter.EmployeeAdapter;
 import com.globati.dbmodel.Employee;
 import com.globati.deserialization_beans.request.CreateEmployee;
 import com.globati.deserialization_beans.request.InterestMail;
-import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.DealService;
 import com.globati.service.EmployeeInfoService;
 import com.globati.service.EmployeeService;
 import com.globati.service.exceptions.IllegalUserNameException;
@@ -24,7 +21,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -58,14 +54,6 @@ public class EmployeeResource{
 
     @Autowired
     EmployeeInfoService employeeInfoService;
-
-    @Autowired
-    DealService dealService;
-
-    @Autowired
-    EmployeeAdapter employeeAdapter;
-
-
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -102,7 +90,7 @@ public class EmployeeResource{
     @GlobatiAuthentication
     public Response login(String username){
         try{
-            ResponseEmployee employeeitems = employeeAdapter.getAndTranslateEmployeeByUserName(username);
+            Employee employeeitems = employeeService.getEmployeeByUserName(username);
             return Response.ok(employeeitems).build();
         }catch(Exception e){
             e.printStackTrace();
@@ -307,9 +295,9 @@ public class EmployeeResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesAndTheirRecommendations(@PathParam("place") String place) {
-        List<ResponseEmployee> employeesInPlace;
+        List<Employee> employeesInPlace;
         try{
-            employeesInPlace = employeeAdapter.getAndTranslateEmployeesByCitySearch(place);
+            employeesInPlace = employeeService.getEmployeesByCity(place);
                 return Response.ok(employeesInPlace).build();
         }catch(Exception e){
             throw new WebException("Could not get employees for place "+place, Response.Status.EXPECTATION_FAILED);

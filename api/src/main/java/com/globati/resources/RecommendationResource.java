@@ -1,6 +1,5 @@
 package com.globati.resources;
 
-import com.globati.adapter.RecommendationAdapater;
 import com.globati.dbmodel.Recommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -45,9 +44,6 @@ public class RecommendationResource {
 
     @Autowired
     EmployeeService employeeService;
-
-    @Autowired
-    RecommendationAdapater recommendationAdapater;
 
     @Context
     UriInfo uriInfo;
@@ -107,7 +103,6 @@ public class RecommendationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(com.globati.deserialization_beans.request.Recommendation recommendation){
         try{
-            System.out.println(recommendation);
              Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.getEmployeeId(),
                     recommendation.getTitle(),
                     recommendation.getDescription(),
@@ -119,10 +114,8 @@ public class RecommendationResource {
                     recommendation.getImages(),
                     recommendation.getCategory()
             );
-//            recommendationService.createRecommendation(id, title, description, targetLat, targetLong, street, city, country, is);
 
-
-            return Response.ok(recommendationAdapater.translateRecommendationForResponse(returnRecommendation)).build();
+            return Response.ok(returnRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not create new recommendation", Response.Status.CONFLICT);
         }
@@ -144,7 +137,7 @@ public class RecommendationResource {
                     recommendation.getDescription(),
                     recommendation.getImages()
             );
-            return Response.ok(recommendationAdapater.translateRecommendationForResponse(returnRecommendation)).build();
+            return Response.ok(returnRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);
         }

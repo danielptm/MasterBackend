@@ -1,7 +1,5 @@
 package com.globati.resources;
 
-import com.globati.adapter.EmployeeAdapter;
-import com.globati.deserialization_beans.response.employee.ResponseEmployee;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.EmployeeInfoService;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.stereotype.Component;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -41,8 +38,6 @@ public class AuthenticationResource {
     @Autowired
     EmployeeInfoService employeeInfoService;
 
-    @Autowired
-    EmployeeAdapter employeeAdapter;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +80,11 @@ public class AuthenticationResource {
             String idFromServer = facebook.userOperations().getUserProfile().getId();
 
             if(idFromClient.equals(idFromServer)){
-                ResponseEmployee profileItems = this.employeeAdapter.translateFacebookLogin(facebookLogin.getUserId(), facebookLogin.getName(), facebookLogin.getEmail(), facebookLogin.getImage());
+                EmployeeAndItems profileItems = this.employeeService.createAccountOrLoginWithFacebook(
+                        facebookLogin.getUserId(),
+                        facebookLogin.getName(),
+                        facebookLogin.getEmail(),
+                        facebookLogin.getImage());
                 return Response.ok(profileItems).build();
             }
             else{

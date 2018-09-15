@@ -1,10 +1,6 @@
 package com.globati.service_beans.guest;
 
-import com.globati.dbmodel.Deal;
 import com.globati.dbmodel.Employee;
-import com.globati.HelpObjects.ApiKey;
-
-import java.util.List;
 
 public class EmployeeAndItems {
 
@@ -12,15 +8,8 @@ public class EmployeeAndItems {
 
     public EmployeeAndItems(Employee employee) {
         this.employee = employee;
-        this.nearByDeals = null;
     }
 
-    public EmployeeAndItems(Employee employee, List<Deal> nearByDeals){
-        this.employee = employee;
-        this.nearByDeals = nearByDeals;
-    }
-
-    List<Deal> nearByDeals;
     String apiKey;
     boolean facebookProfileCreated = false;
 
@@ -30,14 +19,6 @@ public class EmployeeAndItems {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public List<Deal> getNearByDeals() {
-        return nearByDeals;
-    }
-
-    public void setNearByDeals(List<Deal> nearByDeals) {
-        this.nearByDeals = nearByDeals;
     }
 
     public String getApiKey() {
