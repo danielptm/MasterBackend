@@ -322,30 +322,6 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> getAllEmployees() throws ServiceException {
-        try {
-            return employeeRepository.getAllEmployees();
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getAllEmployees()");
-            e.printStackTrace();
-            throw new ServiceException("Could not get All employees", e);
-        }
-    }
-
-    public List<Employee> getEmployeesByCountry(String country) throws ServiceException {
-        try {
-            List<Employee> employees = this.employeeRepository.getEmployeeByCountry(country);
-            for (Employee employee : employees) {
-                employee.setRecommendations(null);
-            }
-            return removeNonVerifiedEmployeesfromList(employees);
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCountry()");
-            e.printStackTrace();
-            throw new ServiceException("Could not get employees by place: " + country, e);
-        }
-    }
-
     /**
      * Have changed this function but not updated the test for it. This is called when sombody searches for employees
      * of a city in the
@@ -405,52 +381,6 @@ public class EmployeeService {
         }
 
 
-    }
-
-    /**
-     * Returns the same as above but gets their recommendations too.
-     * <p>
-     * This method is really bad. I get employees then get their recommendations and then remove some of them... tsk tsk tsk.
-     *
-     * @param city
-     * @return
-     * @throws ServiceException
-     */
-    public List<Employee> getEmployeesByCityAndTheirRecommendations(String city) throws ServiceException {
-        try {
-            List<Employee> employees = this.employeeRepository.getEmployeeByCity(city);
-            List<Employee> returnEmployees = new ArrayList<>();
-
-            for (Employee employee : employees) {
-                EmployeeAndItems employeeAndItems = getItemsForEmployeeButNoWebToken(employee.getGlobatiUsername());
-                returnEmployees.add(employeeAndItems.getEmployee());
-            }
-            List<Employee> employees1 = removeNonVerifiedEmployeesfromList(returnEmployees);
-            return employees1;
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getEmployeesByCity()");
-            e.printStackTrace();
-            throw new ServiceException("Could not get employees by city: " + city, e);
-        }
-    }
-
-    /**
-     * This method is untested
-     *
-     * @param employee
-     * @return
-     * @throws ServiceException
-     */
-    public List<Recommendation> getRecommendationsForEmployee(Employee employee) throws ServiceException {
-        try {
-            List<Recommendation> recommendations = this.recommendationService.getRecommendationByEmployeeId(employee.getId());
-            return recommendations;
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationsForEmployee");
-            e.printStackTrace();
-            throw new ServiceException("Could not get recommendations for employee");
-
-        }
     }
 
 
@@ -599,35 +529,6 @@ public class EmployeeService {
         }
     }
 
-    /**
-     * Called when a guest visits a globati profile page.
-     *
-     * @param id
-     * @return
-     * @throws Exception
-     */
-
-
-    public EmployeeAndItems getItemsForEmployeeAndIncrement(String id) throws ServiceException, UserDoesNotExistException {
-        log.info("getItemsForEmployeeAndIncrement(): id: " + id);
-        try {
-            Employee employee = getEmployeeByUserName(id);
-            if (employee == null) {
-                throw new UserDoesNotExistException("Tried to get an employee for the splash page, but it returned null for user id: " + id);
-            }
-            incrementCounter(employee);
-            updateEmployeeWithoutCheckingUsername(employee);
-        } catch (UserDoesNotExistException e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
-            e.printStackTrace();
-            throw e;
-        } catch (Exception e) {
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getItemsForEmployeeAndIncrement()");
-            e.printStackTrace();
-            throw new ServiceException("Could get items for an employeee and increment for employee with id: " + id, e);
-        }
-        return getItemsForEmployee(id);
-    }
 
     /**
      * No unit test written for this. This is only called by getItemsForEmployeeAndIncrement().
