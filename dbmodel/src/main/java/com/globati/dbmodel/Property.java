@@ -1,6 +1,7 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.globati.enums.Verified;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,8 +15,8 @@ import java.util.List;
  *
  */
 @Entity
-@Table(name = "employee")
-public class Employee extends BaseEntity {
+@Table(name = "property")
+public class Property extends BaseEntity {
 
 
     @Column(length=100, name="firstname")
@@ -72,23 +73,23 @@ public class Employee extends BaseEntity {
     private String bookingUrl;
     @Column(name="website")
     private String website;
-
     @Column(name="flyerlink", columnDefinition="VARCHAR(100) default 'https://s3.eu-central-1.amazonaws.com/globatiimages/splash/posters/poster.jpg'")
     private String flyerLink;
-
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
-
     @Column(name="lastmobileupdate", columnDefinition="VARCHAR(100) default 'bookingurl'")
     private Date date;
+    @Enumerated(EnumType.STRING)
+    @Column(name="verified")
+    private Verified verified;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     List<Recommendation> recommendations;
 
-    public Employee(){}
+    public Property(){}
 
-    public Employee(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country) {
+    public Property(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country, Verified verified) {
         this.firstName = firstName;
         this.email = email;
         this.globatiUsername = userName;
@@ -107,10 +108,11 @@ public class Employee extends BaseEntity {
         this.facebookProfile = false;
         this.visitCounter=0;
         this.paypalEmail = email;
+        this.verified = verified;
     }
 
     //Used for a facebook login/create account
-    public Employee(String name, String _email, String username, String image){
+    public Property(String name, String _email, String username, String image){
         this.firstName = name;
         this.email = _email;
         this.globatiUsername = username;
