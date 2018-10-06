@@ -28,7 +28,6 @@
             <version>${hibernate.version}</version>
         </dependency>
 
-
     </dependencies>
     <build>
         <finalName>dbmodel</finalName>
