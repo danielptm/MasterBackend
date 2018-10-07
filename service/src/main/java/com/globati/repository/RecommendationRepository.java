@@ -14,7 +14,7 @@ public interface RecommendationRepository extends CrudRepository<Recommendation,
 
     public List<Recommendation> getAllRecommendationsByCountry(String country);
 
-    @Query("SELECT r FROM Recommendation r WHERE r.employee.id=:id AND r.active=:active")
-    public List<Recommendation> getAllRecommendationsByEmployeeIdAndActive(@Param("id") Long id, @Param("active") boolean active);
+    @Query("SELECT r FROM Recommendation r WHERE r.property.id=:id AND r.active=:active")
+    public List<Recommendation> getAllRecommendationsByPropertyIdAndActive(@Param("id") Long id, @Param("active") boolean active);
 
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by daniel on 7/16/17.
  */
-public class CreateEmployee {
+public class CreateProperty {
 
     @JsonProperty("firstName")
     String firstName;
@@ -28,7 +28,7 @@ public class CreateEmployee {
     @JsonProperty("image")
     String image;
 
-    public CreateEmployee(){ }
+    public CreateProperty(){ }
 
     public String getFirstName() {
         return firstName;

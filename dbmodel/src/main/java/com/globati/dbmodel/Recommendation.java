@@ -14,10 +14,10 @@ import java.util.List;
 public class Recommendation extends BusinessEntity {
 
     @ManyToOne
-    @JoinColumn(name="employeeid")
+    @JoinColumn(name="propertyid")
     @JsonBackReference
     //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
-    private Employee employee;
+    private Property property;
 
     @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -29,10 +29,10 @@ public class Recommendation extends BusinessEntity {
 
     public Recommendation(){}
 
-    public Recommendation(Employee employee, String title, String description, double targetLat, double targetLong,
+    public Recommendation(Property employee, String title, String description, double targetLat, double targetLong,
                           String street, String city, String country, Category category
                           ) {
-        this.employee = employee;
+        this.property = employee;
         this.title = title;
         this.description = description;
         this.targetLat = targetLat;
@@ -45,12 +45,12 @@ public class Recommendation extends BusinessEntity {
     }
 
 
-    public Employee getEmployee() {
-        return employee;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
     public List<RecommendationImage> getRecommendationimages() {

@@ -1,23 +1,23 @@
 package com.globati.service_beans.guest;
 
-import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.Property;
 
-public class EmployeeAndItems {
+public class PropertyAndItems {
 
-    Employee employee;
+    Property employee;
 
-    public EmployeeAndItems(Employee employee) {
+    public PropertyAndItems(Property employee) {
         this.employee = employee;
     }
 
     String apiKey;
     boolean facebookProfileCreated = false;
 
-    public Employee getEmployee() {
+    public Property getProperty() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(Property employee) {
         this.employee = employee;
     }
 

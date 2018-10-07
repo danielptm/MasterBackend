@@ -1,13 +1,13 @@
-import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.Property;
 import com.globati.dbmodel.Recommendation;
-import com.globati.service.EmployeeService;
+import com.globati.service.PropertyService;
 import com.globati.service.JwtService;
 import com.globati.service.RecommendationService;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
-import com.globati.service_beans.guest.EmployeeAndItems;
+import com.globati.service_beans.guest.PropertyAndItems;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,19 +39,19 @@ public class TestRecommendationService {
 
     @InjectMocks
     @Autowired
-    EmployeeService employeeService;
+    PropertyService propertyService;
 
     @Mock
     JwtService jwtService;
 
-    Employee commonEmployee;
+    Property commonProperty;
 
 
     @Before
     public void prep() throws ServiceException, UserNameIsNotUniqueException, UserDoesNotExistException, IllegalUserNameException {
         String randomString = UUID.randomUUID().toString();
         MockitoAnnotations.initMocks(this);
-        this.commonEmployee = employeeService.createEmployee(
+        this.commonProperty = propertyService.createProperty(
                 "check this2", randomString+"@me.com", randomString, "secret password",
                 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa"
         );
@@ -73,7 +73,7 @@ public class TestRecommendationService {
         images.add(image2);
         images.add(image3);
 
-        Employee e = employeeService.getEmployeeById(commonEmployee.getId());
+        Property e = propertyService.getPropertyById(commonProperty.getId());
         Recommendation rec = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
 
@@ -83,18 +83,18 @@ public class TestRecommendationService {
 
         recommendationService.updateRecommendation(re3);
 
-        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployee(e.getGlobatiUsername());
+        PropertyAndItems propertyAndItems = propertyService.getItemsForProperty(e.getGlobatiUsername());
 
 
-        Assert.assertEquals(1, employeeAndItems.getEmployee().getRecommendations().size());
-        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(1, propertyAndItems.getProperty().getRecommendations().size());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
     }
 
     @Test
     public void updateRecommendationAndRecommendationImages() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         List<String> images = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class TestRecommendationService {
         images.add(image2);
         images.add(image3);
 
-        Employee e = employeeService.getEmployeeById(employee.getId());
+        Property e = propertyService.getPropertyById(employee.getId());
         Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
         re.setCity("hithere");
@@ -114,10 +114,10 @@ public class TestRecommendationService {
 
         recommendationService.updateRecommendation(re);
 
-        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeButNoWebToken(e.getGlobatiUsername());
+        PropertyAndItems propertyAndItems = propertyService.getItemsForPropertyButNoWebToken(e.getGlobatiUsername());
 
-        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
-        Assert.assertEquals("hithere", employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals("hithere", propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
 
 
     }
@@ -126,7 +126,7 @@ public class TestRecommendationService {
     public void updateRecommendationAndRecommendationImagesWithParameters() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
         List<String> images = new ArrayList<>();
         List<String> newImages = new ArrayList<>();
@@ -150,30 +150,30 @@ public class TestRecommendationService {
         newImages.add(newImage2);
         newImages.add(newImage3);
 
-        Employee e = employeeService.getEmployeeById(employee.getId());
+        Property e = propertyService.getPropertyById(employee.getId());
         Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
         Recommendation updated = recommendationService.updateRecommendation(re.getId(), newTitle, newDescription, newImages);
 
-        EmployeeAndItems employeeAndItems = employeeService.getItemsForEmployeeButNoWebToken(e.getGlobatiUsername());
+        PropertyAndItems propertyAndItems = propertyService.getItemsForPropertyButNoWebToken(e.getGlobatiUsername());
 
 
-        Assert.assertEquals(3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
-        Assert.assertEquals(1, employeeAndItems.getEmployee().getRecommendations().size());
-        Assert.assertEquals(newImage1, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
-        Assert.assertEquals(newImage2, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(1).getPath());
-        Assert.assertEquals(newImage3, employeeAndItems.getEmployee().getRecommendations().get(0).getRecommendationimages().get(2).getPath());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(1, propertyAndItems.getProperty().getRecommendations().size());
+        Assert.assertEquals(newImage1, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+        Assert.assertEquals(newImage2, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(1).getPath());
+        Assert.assertEquals(newImage3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(2).getPath());
 
 
     }
 
     @Test
-    public void getRecommendationsFromItemsOfEmployee() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
+    public void getRecommendationsFromItemsOfProperty() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Employee e = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property e = propertyService.createProperty("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
 
-        Employee employee =  employeeService.getEmployeeById(e.getId());
+        Property employee =  propertyService.getPropertyById(e.getId());
 
         List<String> images = new ArrayList<>();
 
@@ -184,13 +184,13 @@ public class TestRecommendationService {
         recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER" );
         recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER" );
 
-        List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(e.getId());
+        List<Recommendation> recommendationList = recommendationService.getRecommendationByPropertyId(e.getId());
 
-        EmployeeAndItems e3 = employeeService.getItemsForEmployee(e.getGlobatiUsername());
+        PropertyAndItems e3 = propertyService.getItemsForProperty(e.getGlobatiUsername());
 
         Assert.assertEquals(2, recommendationList.size());
-        Assert.assertEquals(2, e3.getEmployee().getRecommendations().size());
-        Assert.assertEquals(3, e3.getEmployee().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(2, e3.getProperty().getRecommendations().size());
+        Assert.assertEquals(3, e3.getProperty().getRecommendations().get(0).getRecommendationimages().size());
 
     }
 

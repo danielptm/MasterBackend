@@ -6,11 +6,11 @@
 
     <bean id="DataSource" class="com.globati.config.TestProfile"></bean>
 
-    <bean id="EmployeeService" class="com.globati.service.EmployeeService"></bean>
+    <bean id="EmployeeService" class="com.globati.service.PropertyService"></bean>
 
     <bean id="RecommendationService" class="com.globati.service.RecommendationService"></bean>
 
-    <bean id="EmployeeInfoService" class="com.globati.service.EmployeeInfoService"></bean>
+    <bean id="EmployeeInfoService" class="com.globati.service.PropertyInfoService"></bean>
 
     <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
 
@@ -18,6 +18,5 @@
 
     <bean id="RecommendationImageService" class="com.globati.service.RecommendationImageService"></bean>
 
-    <bean id="ScheduledTaskService" class="com.globati.service.ScheduledTaskService"></bean>
 
 </beans>

@@ -18,31 +18,14 @@ import java.util.List;
 @Table(name = "property")
 public class Property extends BaseEntity {
 
-
     @Column(length=100, name="firstname")
     private String firstName;
     @Column(name="image")
     private String image;
-    @Column(name="image2")
-    private String image2;
-    @Column(name="image3")
-    private String image3;
     @Column(length=300, name="email", nullable = true)
     private String email;
-    @Column(length=100, name="paypalemail")
-    private String paypalEmail;
     @Column(length=3000, name="about")
     private String about;
-    @Column(length=3000, name = "welcomemail")
-    private String welcomeMail;
-    @Column(length = 3000, name="recruitmentmail")
-    private String recruitmentMail;
-    @Column(length=1000, name="instagramuser")
-    private String instagramUser;
-    @Column(length=100, name="instagramuserid")
-    private String instagramUserId;
-    @Column(length=100, name="instagramusertoken")
-    private String instagramUserToken;
     @Column(name="proplat")
     private double propLat;
     @Column(name="proplong")
@@ -55,18 +38,8 @@ public class Property extends BaseEntity {
     private String country;
     @Column(length=1000, name="display")
     private String display;
-    @Column(name="addamount")
-    private double addAmount;
-    @Column(name="add2month")
-    private double add2month;
-    @Column(name="add3month")
-    private double add3month;
     @Column(unique = true, name="globatiusername")
     private String globatiUsername;
-    @Column(name="active")
-    private boolean active;
-    @Column(name="facebookprofile")
-    private boolean facebookProfile=false;
     @Column(name="visitcounter")
     private Integer visitCounter;
     @Column(name="bookingurl")
@@ -78,12 +51,12 @@ public class Property extends BaseEntity {
     @Column(name="mobilevisitcounter", columnDefinition = "int default 0")
     private Integer mobileVisitCounter;
     @Column(name="lastmobileupdate", columnDefinition="VARCHAR(100) default 'bookingurl'")
-    private Date date;
+    private Date lastMobileUpdate;
     @Enumerated(EnumType.STRING)
     @Column(name="verified")
     private Verified verified;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     List<Recommendation> recommendations;
 
@@ -99,15 +72,9 @@ public class Property extends BaseEntity {
         this.street = street;
         this.city = city;
         this.country = country;
-        this.active = true;
-        this.addAmount = 10;
-        this.add2month = 10;
-        this.add3month = 10;
         this.about=""; //set these to empty strings, to avoid strangeness related to null on client side.
         this.display="";
-        this.facebookProfile = false;
         this.visitCounter=0;
-        this.paypalEmail = email;
         this.verified = verified;
     }
 
@@ -117,12 +84,7 @@ public class Property extends BaseEntity {
         this.email = _email;
         this.globatiUsername = username;
         this.image = image;
-        this.addAmount = 10;
-        this.add2month = 10;
-        this.add3month = 10;
-        this.facebookProfile = true;
         this.visitCounter=0;
-        this.paypalEmail = _email;
     }
 
 
@@ -143,22 +105,6 @@ public class Property extends BaseEntity {
         this.image = image;
     }
 
-    public String getImage2() {
-        return image2;
-    }
-
-    public void setImage2(String image2) {
-        this.image2 = image2;
-    }
-
-    public String getImage3() {
-        return image3;
-    }
-
-    public void setImage3(String image3) {
-        this.image3 = image3;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -167,60 +113,12 @@ public class Property extends BaseEntity {
         this.email = email;
     }
 
-    public String getPaypalEmail() {
-        return paypalEmail;
-    }
-
-    public void setPaypalEmail(String paypalEmail) {
-        this.paypalEmail = paypalEmail;
-    }
-
     public String getAbout() {
         return about;
     }
 
     public void setAbout(String about) {
         this.about = about;
-    }
-
-    public String getWelcomeMail() {
-        return welcomeMail;
-    }
-
-    public void setWelcomeMail(String welcomeMail) {
-        this.welcomeMail = welcomeMail;
-    }
-
-    public String getRecruitmentMail() {
-        return recruitmentMail;
-    }
-
-    public void setRecruitmentMail(String recruitmentMail) {
-        this.recruitmentMail = recruitmentMail;
-    }
-
-    public String getInstagramUser() {
-        return instagramUser;
-    }
-
-    public void setInstagramUser(String instagramUser) {
-        this.instagramUser = instagramUser;
-    }
-
-    public String getInstagramUserId() {
-        return instagramUserId;
-    }
-
-    public void setInstagramUserId(String instagramUserId) {
-        this.instagramUserId = instagramUserId;
-    }
-
-    public String getInstagramUserToken() {
-        return instagramUserToken;
-    }
-
-    public void setInstagramUserToken(String instagramUserToken) {
-        this.instagramUserToken = instagramUserToken;
     }
 
     public double getPropLat() {
@@ -271,52 +169,12 @@ public class Property extends BaseEntity {
         this.display = display;
     }
 
-    public double getAddAmount() {
-        return addAmount;
-    }
-
-    public void setAddAmount(double addAmount) {
-        this.addAmount = addAmount;
-    }
-
-    public double getAdd2month() {
-        return add2month;
-    }
-
-    public void setAdd2month(double add2month) {
-        this.add2month = add2month;
-    }
-
-    public double getAdd3month() {
-        return add3month;
-    }
-
-    public void setAdd3month(double add3month) {
-        this.add3month = add3month;
-    }
-
     public String getGlobatiUsername() {
         return globatiUsername;
     }
 
     public void setGlobatiUsername(String globatiUsername) {
         this.globatiUsername = globatiUsername;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public boolean isFacebookProfile() {
-        return facebookProfile;
-    }
-
-    public void setFacebookProfile(boolean facebookProfile) {
-        this.facebookProfile = facebookProfile;
     }
 
     public Integer getVisitCounter() {
@@ -341,14 +199,6 @@ public class Property extends BaseEntity {
 
     public void setMobileVisitCounter(Integer mobileVisitCounter) {
         this.mobileVisitCounter = mobileVisitCounter;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getFlyerLink() {
@@ -380,33 +230,19 @@ public class Property extends BaseEntity {
         return "Employee{" +
                 "firstName='" + firstName + '\'' +
                 ", image='" + image + '\'' +
-                ", image2='" + image2 + '\'' +
-                ", image3='" + image3 + '\'' +
                 ", email='" + email + '\'' +
-                ", paypalEmail='" + paypalEmail + '\'' +
                 ", about='" + about + '\'' +
-                ", welcomeMail='" + welcomeMail + '\'' +
-                ", recruitmentMail='" + recruitmentMail + '\'' +
-                ", instagramUser='" + instagramUser + '\'' +
-                ", instagramUserId='" + instagramUserId + '\'' +
-                ", instagramUserToken='" + instagramUserToken + '\'' +
                 ", propLat=" + propLat +
                 ", propLong=" + propLong +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", display='" + display + '\'' +
-                ", addAmount=" + addAmount +
-                ", add2month=" + add2month +
-                ", add3month=" + add3month +
                 ", globatiUsername='" + globatiUsername + '\'' +
-                ", active=" + active +
-                ", facebookProfile=" + facebookProfile +
                 ", visitCounter=" + visitCounter +
                 ", recommendations=" + recommendations +
                 '}';
     }
-
 }
 
 

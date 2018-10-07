@@ -3,7 +3,7 @@ package com.globati.resources;
 import com.globati.dbmodel.Recommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.EmployeeService;
+import com.globati.service.PropertyService;
 import com.globati.service.RecommendationService;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -43,7 +43,7 @@ public class RecommendationResource {
     RecommendationService recommendationService;
 
     @Autowired
-    EmployeeService employeeService;
+    PropertyService propertyService;
 
     @Context
     UriInfo uriInfo;
@@ -62,7 +62,7 @@ public class RecommendationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecommendationsByEmployee(@QueryParam("id") Long id){
         try{
-            List<Recommendation> recommendationList = recommendationService.getRecommendationByEmployeeId(id);
+            List<Recommendation> recommendationList = recommendationService.getRecommendationByPropertyId(id);
             return Response.ok(recommendationList).build();
         }catch(Exception e){
             throw new WebException("Could not receive recommendations for employee", Response.Status.BAD_REQUEST);

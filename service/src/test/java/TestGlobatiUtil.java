@@ -41,16 +41,14 @@ public class TestGlobatiUtil {
 
 
     @Autowired
-    EmployeeService employeeService;
+    PropertyService propertyService;
 
     @Autowired
     PropertiesService propertiesService;
 
-    @Autowired
-    ScheduledTaskService scheduledTaskService;
 
     @Autowired
-    EmployeeInfoService employeeInfoService;
+    PropertyInfoService propertyInfoService;
 
 
 
@@ -60,31 +58,10 @@ public class TestGlobatiUtil {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
-        Employee employee = employeeService.createEmployee("Daniel",  uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
 
 
     }
-
-
-
-    @Ignore
-    public void sendMail() throws Exception {
-
-        String uid = UUID.randomUUID().toString();
-
-        File file = new File(getClass().getClassLoader().getResource("test_resources/cbp.jpg").getFile());
-        InputStream fis = new FileInputStream(file);
-        Employee employee = employeeService.createEmployee("Daniel", uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
-
-        List<String> li = new ArrayList<>();
-        li.add("danielptm@me.com");
-        li.add("tuttleptm@gmail.com");
-
-        Email email = new Email(employee.getId(), li);
-        Assert.assertTrue(SendMail.sendGuestMail(employee, email.getEmails()));
-    }
-
-
 
     @Test
     public void date() throws ParseException {
@@ -111,13 +88,13 @@ public class TestGlobatiUtil {
     public void testCheckPassword() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
-        Employee employee1 =employeeService.getEmployeeById(employee.getId());
+        Property employee1 = propertyService.getPropertyById(employee.getId());
 
-        EmployeeInfo ei = new EmployeeInfo(employee1.getId());
+        PropertyInfo ei = new PropertyInfo(employee1.getId());
 
-        EmployeeInfo ei2 = PBKDF2.hashEmployeePassword(ei, "secret password");
+        PropertyInfo ei2 = PBKDF2.hashPropertyPassword(ei, "secret password");
 
         Assert.assertTrue(PBKDF2.checkPassword(ei2, "secret password"));
 
@@ -129,11 +106,11 @@ public class TestGlobatiUtil {
 
         String uid = UUID.randomUUID().toString();
 
-        Employee employee = employeeService.createEmployee("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
 
-        EmployeeInfo ei = new EmployeeInfo(employee.getId());
+        PropertyInfo ei = new PropertyInfo(employee.getId());
 
-        EmployeeInfo ei2 = PBKDF2.hashEmployeePassword(ei, "secret password");
+        PropertyInfo ei2 = PBKDF2.hashPropertyPassword(ei, "secret password");
 
 
         Assert.assertFalse(PBKDF2.checkPassword(ei2, "secret passwor"));
@@ -175,7 +152,7 @@ public class TestGlobatiUtil {
         InputStream fis = new FileInputStream(file);
         ImageHandler.createNewImage(fis);
 
-        Assert.assertTrue(employeeService.replaceImage(1L, fis));
+        Assert.assertTrue(propertyService.replaceImage(1L, fis));
 
     }
 
@@ -220,27 +197,6 @@ public class TestGlobatiUtil {
     public void getHotelBookingsFromS3() throws Exception {
         File file = ImageHandler.getHotelBookingsFromS3();
         Assert.assertNotNull(file);
-    }
-
-    /**
-     * This test should be ignored when running in cloud. It tests sending the HelpRecommendationPrompt mail to help
-     * get people to create recommendations quick and easy for the fast track feature.
-     * @throws UserNameIsNotUniqueException
-     * @throws ServiceException
-     */
-    @Ignore
-    public void testSendHelpRecommendationPrompt() throws UserNameIsNotUniqueException, ServiceException {
-        String uid = UUID.randomUUID().toString();
-        String uid2 = UUID.randomUUID().toString();
-
-        Employee employee = this.employeeService.createEmployee("Daniel", "daniel@globati.com", "dannyboy", "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-        EmployeeInfo e2 = employeeInfoService.getEmployeeInfoByEmployeeId(employee.getId());
-        e2.setAuthToken("c8b892d4-1b02-400b-a64e-ca8d31f98778");
-        e2.setTokenExpiration("1528391630337");
-
-        employeeInfoService.updateEmployeeInfo(e2);
-
-        scheduledTaskService.sendHelpRecommendationPrompt(employee, e2);
     }
 
     @Ignore

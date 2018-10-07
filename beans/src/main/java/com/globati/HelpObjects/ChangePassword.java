@@ -5,25 +5,25 @@ package com.globati.HelpObjects;
  */
 public class ChangePassword {
 
-    Long employeeId;
+    Long propertyId;
     String oldPassword;
     String newPassword;
 
 
     public ChangePassword(Long employeeId, String oldPassword, String newPassword){
-        this.employeeId = employeeId;
+        this.propertyId = employeeId;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
 
     public ChangePassword(){}
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getPropertyId() {
+        return propertyId;
     }
 
     public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+        this.propertyId = employeeId;
     }
 
     public String getOldPassword() {
@@ -45,7 +45,7 @@ public class ChangePassword {
     @Override
     public String toString() {
         return "ChangePassword{" +
-                "employeeId=" + employeeId +
+                "employeeId=" + propertyId +
                 ", oldPassword='" + oldPassword + '\'' +
                 ", newPassword='" + newPassword + '\'' +
                 '}';

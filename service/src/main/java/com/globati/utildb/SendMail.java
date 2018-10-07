@@ -11,7 +11,7 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Welcome;
-import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.Property;
 import com.globati.service.PropertiesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +41,7 @@ public class SendMail {
     private static final Logger log = LogManager.getLogger(SendMail.class);
 
 
-    public static boolean sendGuestMail(Employee employee, List<String> mails) throws Exception {
+    public static boolean sendGuestMail(Property employee, List<String> mails) throws Exception {
         System.out.println("Sending guest email "+mails.get(0));
 
         String[] emails = new String[10];
@@ -53,7 +53,7 @@ public class SendMail {
         // Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(emails);
 
-//        System.out.println(mail.getEmployee().getImage());
+//        System.out.println(mail.getProperty().getImage());
 
         // Create the subject and body of the message.
 

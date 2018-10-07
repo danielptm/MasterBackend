@@ -1,10 +1,10 @@
 package com.globati.service;
 
-import com.globati.dbmodel.Employee;
+import com.globati.dbmodel.Property;
 import com.globati.dbmodel.Recommendation;
 import com.globati.dbmodel.RecommendationImage;
 import com.globati.enums.Category;
-import com.globati.repository.EmployeeRepository;
+import com.globati.repository.PropertyRepository;
 import com.globati.repository.RecommendationRepository;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class RecommendationService{
     RecommendationRepository recommendationRepository;
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    PropertyRepository propertyRepository;
 
 
     @Autowired
@@ -44,10 +43,10 @@ public class RecommendationService{
                                                List<String> rawImages, String category) throws ServiceException {
 
         log.info("createRecommendation(): employeeId: "+employeeId+" recommendationTitle: "+title);
-        Employee employee=null;
+        Property employee=null;
         List<RecommendationImage> recommendationImages = new ArrayList<>();
         try {
-            Employee e2 = employeeRepository.getEmployeeByid(employeeId);
+            Property e2 = propertyRepository.getPropertyByid(employeeId);
             Recommendation rec = new Recommendation(e2, title, description, targetLat, targetLong, street, city, country, Category.valueOf(category));
             rawImages.forEach((image) -> {
                 RecommendationImage recommendationImage = new RecommendationImage(rec, image);
@@ -126,11 +125,11 @@ public class RecommendationService{
         }
     }
 
-    public List<Recommendation> getRecommendationByEmployeeId(Long id) throws ServiceException {
+    public List<Recommendation> getRecommendationByPropertyId(Long id) throws ServiceException {
         try{
-            return recommendationRepository.getAllRecommendationsByEmployeeIdAndActive(id, true);
+            return recommendationRepository.getAllRecommendationsByPropertyIdAndActive(id, true);
         }catch(Exception e){
-            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationByEmployeeId(): employeeId: "+id);
+            log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getRecommendationByPropertyId(): employeeId: "+id);
             e.printStackTrace();
             throw new ServiceException( "Could not get recommendations by employeeId: "+id, e );
         }

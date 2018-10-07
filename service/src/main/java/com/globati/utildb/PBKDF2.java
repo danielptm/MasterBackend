@@ -1,13 +1,11 @@
 package com.globati.utildb;
 
-import com.globati.dbmodel.Employee;
-import com.globati.dbmodel.EmployeeInfo;
+import com.globati.dbmodel.PropertyInfo;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -20,7 +18,7 @@ public class PBKDF2 {
     private static final int ITERATIONS = 50000;
     private static final int KEY_LENGTH = 64*8;
 
-    public static boolean checkPassword(EmployeeInfo employee, String passwordAttempt){
+    public static boolean checkPassword(PropertyInfo employee, String passwordAttempt){
         String password = employee.getGlobatiPassword();
         char[] passwordAttemptChar = passwordAttempt.toCharArray();
         byte[] salt = employee.getSalt();
@@ -33,7 +31,7 @@ public class PBKDF2 {
         }
     }
 
-    public static EmployeeInfo hashEmployeePassword(EmployeeInfo e, String password){
+    public static PropertyInfo hashPropertyPassword(PropertyInfo e, String password){
         char[] charpass = password.toCharArray();
         byte[] salt = getsalt();
         String hashedPassword = hashPassword(charpass, salt, ITERATIONS, KEY_LENGTH);
@@ -64,4 +62,5 @@ public class PBKDF2 {
         //return salt
         return salt;
     }
+
 }

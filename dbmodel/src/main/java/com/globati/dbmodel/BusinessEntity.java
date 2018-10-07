@@ -14,8 +14,6 @@ public abstract class BusinessEntity extends BaseEntity {
     protected double targetLat;
     @Column(name = "targetlong")
     protected double targetLong;
-    @Column(name = "distance")
-    protected double distance;
     @Column(length = 100, name = "street")
     protected String street;
     @Column(length = 100, name = "city")
@@ -34,10 +32,6 @@ public abstract class BusinessEntity extends BaseEntity {
     protected String title;
     @Column(name="dateinactive")
     protected Date dateInactive;
-    @Column(name="image2")
-    protected String image2;
-    @Column(name="image3")
-    protected String image3;
 
 
     public double getTargetLat() {
@@ -54,14 +48,6 @@ public abstract class BusinessEntity extends BaseEntity {
 
     public void setTargetLong(double targetLong) {
         this.targetLong = targetLong;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
     }
 
     public String getStreet() {
@@ -136,21 +122,21 @@ public abstract class BusinessEntity extends BaseEntity {
         this.dateInactive = dateInactive;
     }
 
-    public String getImage2() {
-        return image2;
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("BusinessEntity{");
+        sb.append("targetLat=").append(targetLat);
+        sb.append(", targetLong=").append(targetLong);
+        sb.append(", street='").append(street).append('\'');
+        sb.append(", city='").append(city).append('\'');
+        sb.append(", country='").append(country).append('\'');
+        sb.append(", image='").append(image).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", location='").append(location).append('\'');
+        sb.append(", active=").append(active);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", dateInactive=").append(dateInactive);
+        sb.append('}');
+        return sb.toString();
     }
-
-    public void setImage2(String image2) {
-        this.image2 = image2;
-    }
-
-    public String getImage3() {
-        return image3;
-    }
-
-    public void setImage3(String image3) {
-        this.image3 = image3;
-    }
-
-
 }

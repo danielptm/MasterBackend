@@ -11,11 +11,11 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "employeeInfo")
-public class EmployeeInfo extends BaseEntity{
+@Table(name = "propertyInfo")
+public class PropertyInfo extends BaseEntity{
 
-    @Column(name="employeeid")
-    Long employeeId;
+    @Column(name="propertyid")
+    Long propertyId;
     @Column(name="globatipassword")
     private String globatiPassword;
     @Column(length=300, name="salt")
@@ -31,30 +31,26 @@ public class EmployeeInfo extends BaseEntity{
     @Column(name="facebookid", length=100)
     String facebookId;
 
-    @Column(name="verified")
-    @Enumerated(EnumType.STRING)
-    Verified _verified;
-
-    public EmployeeInfo(Long _employeeId) {
-        this.employeeId = _employeeId;
+    public PropertyInfo(Long _employeeId) {
+        this.propertyId = _employeeId;
         this.dateCreated = new Date();
 
     }
 
-    public EmployeeInfo(Long employeeId, String facebookid) {
-        this.employeeId = employeeId;
+    public PropertyInfo(Long employeeId, String facebookid) {
+        this.propertyId = employeeId;
         this.facebookId = facebookid;
         this.dateCreated = new Date();
     }
 
-    public EmployeeInfo(){}
+    public PropertyInfo(){}
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getPropertyId() {
+        return propertyId;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setPropertyId(Long employeeId) {
+        this.propertyId = employeeId;
     }
 
     public String getGlobatiPassword() {
@@ -113,18 +109,11 @@ public class EmployeeInfo extends BaseEntity{
         this.facebookId = facebookId;
     }
 
-    public Verified get_verified() {
-        return _verified;
-    }
-
-    public void set_verified(Verified _verified) {
-        this._verified = _verified;
-    }
 
     @Override
     public String toString() {
-        return "EmployeeInfo{" +
-                "employeeId=" + employeeId +
+        return "PropertyInfo{" +
+                "employeeId=" + propertyId +
                 ", globatiPassword='" + globatiPassword + '\'' +
                 ", salt=" + Arrays.toString(salt) +
                 ", lastLogin=" + lastLogin +
@@ -132,7 +121,6 @@ public class EmployeeInfo extends BaseEntity{
                 ", authToken='" + authToken + '\'' +
                 ", tokenExpiration='" + tokenExpiration + '\'' +
                 ", facebookId='" + facebookId + '\'' +
-                ", _verified=" + _verified +
                 '}';
     }
 

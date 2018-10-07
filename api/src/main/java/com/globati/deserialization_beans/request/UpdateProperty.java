@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <p>
  * Data that can be updated by employee on the clientside
  */
-public class UpdateEmployee {
+public class UpdateProperty {
 
     @JsonProperty("employeeId")
     private Long employeeId;
@@ -58,7 +58,7 @@ public class UpdateEmployee {
     @JsonProperty("bookingUrl")
     private String bookingUrl;
 
-    public UpdateEmployee() {}
+    public UpdateProperty() {}
 
 
     public Long getEmployeeId() {
@@ -255,7 +255,7 @@ public class UpdateEmployee {
 
     @Override
     public String toString() {
-        return "UpdateEmployee{" +
+        return "UpdateProperty{" +
                 "employeeId=" + employeeId +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
