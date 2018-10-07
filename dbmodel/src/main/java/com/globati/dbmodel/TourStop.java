@@ -2,10 +2,14 @@ package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "tourstop")
 public class TourStop extends BusinessEntity{
 
     @ManyToOne

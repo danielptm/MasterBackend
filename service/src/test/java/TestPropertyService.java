@@ -57,7 +57,7 @@ public class TestPropertyService {
 
 
 	@Before
-	public void prep() throws ServiceException, UserNameIsNotUniqueException, UserDoesNotExistException, IllegalUserNameException {
+	public void prep() throws UserNameIsNotUniqueException {
 		String randomString = UUID.randomUUID().toString();
 		MockitoAnnotations.initMocks(this);
 		this.commonProperty = propertyService.createProperty(
