@@ -1,11 +1,9 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,14 +15,13 @@ public class TourStop extends BusinessEntity{
     @JsonBackReference
     private Tour tour;
     private Integer stopOrder;
-    private List<BusinessImage> images;
+
 
     public TourStop() {}
 
-    public TourStop(Tour tour, Integer stopOrder, List<BusinessImage> images) {
+    public TourStop(Tour tour, Integer stopOrder) {
         this.tour = tour;
         this.stopOrder = stopOrder;
-        this.images = images;
     }
 
     public Tour getTour() {
@@ -43,20 +40,11 @@ public class TourStop extends BusinessEntity{
         this.stopOrder = stopOrder;
     }
 
-    public List<BusinessImage> getImages() {
-        return images;
-    }
-
-    public void setImages(List<BusinessImage> images) {
-        this.images = images;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TourStop{");
         sb.append("tour=").append(tour);
         sb.append(", stopOrder=").append(stopOrder);
-        sb.append(", images=").append(images);
         sb.append(", targetLat=").append(targetLat);
         sb.append(", targetLong=").append(targetLong);
         sb.append(", street='").append(street).append('\'');
