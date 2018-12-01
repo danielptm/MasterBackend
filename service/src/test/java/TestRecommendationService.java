@@ -78,7 +78,7 @@ public class TestRecommendationService {
 
 
         Recommendation re3 = recommendationService.getRecommendationById(rec.getId());
-        re3.getRecommendationimages().get(0).setPath("asdfasdf");
+        re3.getRecommendationImages().get(0).setPath("asdfasdf");
         re3.setCity("sdsdf");
 
         recommendationService.updateRecommendation(re3);
@@ -87,7 +87,7 @@ public class TestRecommendationService {
 
 
         Assert.assertEquals(1, propertyAndItems.getProperty().getRecommendations().size());
-        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().size());
     }
 
     @Test
@@ -110,14 +110,14 @@ public class TestRecommendationService {
         Recommendation re = recommendationService.createRecommendation(e.getId(),  "title", "Description", 23.23, 23.23, "persikogatan", "stockholm", "Sweden", images, "DINNER");
 
         re.setCity("hithere");
-        re.getRecommendationimages().get(0).setPath("hithere");
+        re.getRecommendationImages().get(0).setPath("hithere");
 
         recommendationService.updateRecommendation(re);
 
         PropertyAndItems propertyAndItems = propertyService.getItemsForPropertyButNoWebToken(e.getGlobatiUsername());
 
-        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
-        Assert.assertEquals("hithere", propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().size());
+        Assert.assertEquals("hithere", propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().get(0).getPath());
 
 
     }
@@ -158,11 +158,11 @@ public class TestRecommendationService {
         PropertyAndItems propertyAndItems = propertyService.getItemsForPropertyButNoWebToken(e.getGlobatiUsername());
 
 
-        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().size());
         Assert.assertEquals(1, propertyAndItems.getProperty().getRecommendations().size());
-        Assert.assertEquals(newImage1, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(0).getPath());
-        Assert.assertEquals(newImage2, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(1).getPath());
-        Assert.assertEquals(newImage3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationimages().get(2).getPath());
+        Assert.assertEquals(newImage1, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().get(0).getPath());
+        Assert.assertEquals(newImage2, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().get(1).getPath());
+        Assert.assertEquals(newImage3, propertyAndItems.getProperty().getRecommendations().get(0).getRecommendationImages().get(2).getPath());
 
 
     }
@@ -190,7 +190,7 @@ public class TestRecommendationService {
 
         Assert.assertEquals(2, recommendationList.size());
         Assert.assertEquals(2, e3.getProperty().getRecommendations().size());
-        Assert.assertEquals(3, e3.getProperty().getRecommendations().get(0).getRecommendationimages().size());
+        Assert.assertEquals(3, e3.getProperty().getRecommendations().get(0).getRecommendationImages().size());
 
     }
 

@@ -93,7 +93,7 @@ public class RecommendationService{
 
             Recommendation returnRecommendation = getRecommendationById(id);
 
-            for(RecommendationImage image : returnRecommendation.getRecommendationimages()){
+            for(RecommendationImage image : returnRecommendation.getRecommendationImages()){
                 recommendationImageService.deleteRecommendationImage(image.getId());
             }
 

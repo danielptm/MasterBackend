@@ -16,13 +16,11 @@ public class TourStop extends BusinessEntity{
     private Tour tour;
     private Integer stopOrder;
 
+    @OneToMany(mappedBy = "tour", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    List<BusinessImage> tourImages;
 
     public TourStop() {}
-
-    public TourStop(Tour tour, Integer stopOrder) {
-        this.tour = tour;
-        this.stopOrder = stopOrder;
-    }
 
     public Tour getTour() {
         return tour;
@@ -40,11 +38,20 @@ public class TourStop extends BusinessEntity{
         this.stopOrder = stopOrder;
     }
 
+    public List<BusinessImage> getTourImages() {
+        return tourImages;
+    }
+
+    public void setTourImages(List<BusinessImage> tourImages) {
+        this.tourImages = tourImages;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("TourStop{");
         sb.append("tour=").append(tour);
         sb.append(", stopOrder=").append(stopOrder);
+        sb.append(", tourImages=").append(tourImages);
         sb.append(", targetLat=").append(targetLat);
         sb.append(", targetLong=").append(targetLong);
         sb.append(", street='").append(street).append('\'');
@@ -56,7 +63,7 @@ public class TourStop extends BusinessEntity{
         sb.append(", active=").append(active);
         sb.append(", title='").append(title).append('\'');
         sb.append(", dateInactive=").append(dateInactive);
-        sb.append("} \n");
+        sb.append('}');
         return sb.toString();
     }
 }

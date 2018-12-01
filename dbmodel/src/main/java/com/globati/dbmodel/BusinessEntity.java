@@ -24,6 +24,7 @@ public abstract class BusinessEntity extends BaseEntity {
     protected String image;
     @Column(length = 3000, name = "description")
     protected String description;
+    //I think location can be removed ....
     @Column(length = 100, name = "location")
     protected String location;
     @Column(name = "active")

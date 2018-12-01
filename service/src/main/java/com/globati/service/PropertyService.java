@@ -237,8 +237,8 @@ public class PropertyService {
             List<Recommendation> recommendations = recommendationService.getRecommendationByPropertyId(employee.getId());
 
             System.out.println("Recommendation images size");
-            System.out.println(recommendations.get(0).getRecommendationimages().size());
-            System.out.println(recommendations.get(0).getRecommendationimages().get(0).getPath());
+            System.out.println(recommendations.get(0).getRecommendationImages().size());
+            System.out.println(recommendations.get(0).getRecommendationImages().get(0).getPath());
 
             employee.setRecommendations(recommendations);
 
