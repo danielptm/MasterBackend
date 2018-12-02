@@ -4,8 +4,6 @@ import com.globati.resources.annotations.GlobatiAuthentication;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
-
-import javax.persistence.NamedStoredProcedureQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
