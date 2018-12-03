@@ -1,51 +1,42 @@
-package com.globati.deserialization_beans.request;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.globati.request.tour;
 
 import java.util.List;
 
-/**
- * Created by daniel on 6/5/17.
- */
-public class Recommendation {
-
-    @JsonProperty("id")
+public class Tour {
     Long id;
-    @JsonProperty("employeeId")
-    Long employeeId;
-    @JsonProperty("title")
+    Long propertyId;
     String title;
-    @JsonProperty("description")
     String description;
-    @JsonProperty("targetLat")
     Double targetLat;
-    @JsonProperty("targetLong")
     Double targetLong;
-    @JsonProperty("street")
     String street;
-    @JsonProperty("city")
     String city;
-    @JsonProperty("country")
     String country;
-    @JsonProperty("image1")
-    String image1;
-    @JsonProperty("image2")
-    String image2;
-    @JsonProperty("image3")
-    String image3;
-    @JsonProperty("images")
     List<String> images;
-    @JsonProperty("category")
-    String category;
+    List<TourStop> tourStops;
 
-    public Recommendation(){}
-
-    public Long getEmployeeId() {
-        return employeeId;
+    public Tour() {
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public Tour(Long id, Long propertyId, String title, String description, Double targetLat, Double targetLong, String street, String city, String country, List<String> images, List<TourStop> tourStops) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.targetLat = targetLat;
+        this.targetLong = targetLong;
+        this.street = street;
+        this.city = city;
+        this.country = country;
+        this.images = images;
+        this.tourStops = tourStops;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -104,30 +95,6 @@ public class Recommendation {
         this.country = country;
     }
 
-    public String getImage1() {
-        return image1;
-    }
-
-    public void setImage1(String image1) {
-        this.image1 = image1;
-    }
-
-    public String getImage2() {
-        return image2;
-    }
-
-    public void setImage2(String image2) {
-        this.image2 = image2;
-    }
-
-    public String getImage3() {
-        return image3;
-    }
-
-    public void setImage3(String image3) {
-        this.image3 = image3;
-    }
-
     public List<String> getImages() {
         return images;
     }
@@ -136,27 +103,27 @@ public class Recommendation {
         this.images = images;
     }
 
-    public Long getId() {
-        return id;
+    public List<TourStop> getTourStops() {
+        return tourStops;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTourStops(List<TourStop> tourStops) {
+        this.tourStops = tourStops;
     }
 
-    public String getCategory() {
-        return category;
+    public Long getPropertyId() {
+        return propertyId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Recommendation{");
+        final StringBuilder sb = new StringBuilder("Tour{");
         sb.append("id=").append(id);
-        sb.append(", employeeId=").append(employeeId);
+        sb.append(", propertyId=").append(propertyId);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", targetLat=").append(targetLat);
@@ -164,11 +131,8 @@ public class Recommendation {
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
-        sb.append(", image1='").append(image1).append('\'');
-        sb.append(", image2='").append(image2).append('\'');
-        sb.append(", image3='").append(image3).append('\'');
         sb.append(", images=").append(images);
-        sb.append(", category='").append(category).append('\'');
+        sb.append(", tourStops=").append(tourStops);
         sb.append('}');
         return sb.toString();
     }

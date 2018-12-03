@@ -169,7 +169,6 @@
             <artifactId>dbmodel</artifactId>
         </dependency>
 
-
         <dependency>
             <version>1.0-SNAPSHOT</version>
             <groupId>com.globati</groupId>

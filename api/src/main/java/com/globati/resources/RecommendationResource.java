@@ -101,7 +101,7 @@ public class RecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.deserialization_beans.request.Recommendation recommendation){
+    public Response create(com.globati.request.Recommendation recommendation){
         try{
              Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.getEmployeeId(),
                     recommendation.getTitle(),
@@ -126,7 +126,7 @@ public class RecommendationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") Long id,  com.globati.deserialization_beans.request.Recommendation recommendation){
+    public Response update(@PathParam("id") Long id,  com.globati.request.Recommendation recommendation){
         log.debug("recommendationResource");
         log.debug(id);
         log.debug(recommendation.toString());

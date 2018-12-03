@@ -26,6 +26,7 @@
             <groupId>com.globati.dbmodel</groupId>
             <artifactId>dbmodel</artifactId>
         </dependency>
+
     </dependencies>
 
 

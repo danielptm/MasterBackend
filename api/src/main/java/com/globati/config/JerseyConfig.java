@@ -20,6 +20,7 @@ public class JerseyConfig extends ResourceConfig{
 
     public JerseyConfig() {
         register(RecommendationResource.class);
+        register(TourResource.class);
         register(PropertyResource.class);
         register(MultiPartFeature.class);
         register(DefaultAuthentication.class);

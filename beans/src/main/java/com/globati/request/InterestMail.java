@@ -1,4 +1,4 @@
-package com.globati.deserialization_beans.request;
+package com.globati.request;
 
 public class InterestMail {
     String email;

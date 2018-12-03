@@ -1,8 +1,8 @@
 package com.globati.resources;
 
 import com.globati.dbmodel.Property;
-import com.globati.deserialization_beans.request.CreateProperty;
-import com.globati.deserialization_beans.request.InterestMail;
+import com.globati.request.CreateProperty;
+import com.globati.request.InterestMail;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.PropertyInfoService;
@@ -14,8 +14,8 @@ import com.globati.service.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import com.globati.utildb.SendMail;
-import com.globati.deserialization_beans.request.ChangePasswordWithToken;
-import com.globati.deserialization_beans.request.UpdateProperty;
+import com.globati.request.ChangePasswordWithToken;
+import com.globati.request.UpdateProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.*;
-import java.util.List;
+
 import com.globati.HelpObjects.Email;
 
 

@@ -1,5 +1,6 @@
 package com.globati.resources;
 
+import com.globati.request.tour.Tour;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,9 @@ import javax.ws.rs.core.Response;
 @Component
 @Path("tour")
 @GlobatiAuthentication
-public class Tour {
+public class TourResource {
 
-    private static Logger log = LogManager.getLogger(Tour.class);
+    private static Logger log = LogManager.getLogger(TourResource.class);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -24,7 +25,8 @@ public class Tour {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createTour(){
+    public Response createTour(Tour tour){
+        log.info(tour);
         return null;
     }
 

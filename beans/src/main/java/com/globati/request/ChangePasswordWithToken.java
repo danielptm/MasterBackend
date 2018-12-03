@@ -1,4 +1,4 @@
-package com.globati.deserialization_beans.request;
+package com.globati.request;
 
 /**
  * Created by daniel on 1/25/17.
