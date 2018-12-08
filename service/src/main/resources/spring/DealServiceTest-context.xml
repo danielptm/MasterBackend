@@ -22,5 +22,8 @@
 
     <bean id="TourStopService" class="com.globati.service.TourStopService"></bean>
 
+    <bean id="ImageService" class="com.globati.service.ImageService"></bean>
+
+
 
 </beans>

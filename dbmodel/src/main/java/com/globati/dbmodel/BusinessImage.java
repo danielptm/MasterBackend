@@ -1,26 +1,37 @@
 package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.globati.enums.ImageType;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "businessimage")
-public class BusinessImage<T extends BusinessEntity> extends ImageEntity {
+public class BusinessImage extends ImageEntity {
 
     @ManyToOne
     @JoinColumn(name="tourid")
     @JsonBackReference
     private Tour tour;
 
+    @Enumerated(EnumType.STRING)
+    private ImageType imageType;
+
+
     public BusinessImage(){}
 
-    public BusinessImage(T entity, String path) {
+    public BusinessImage(Tour tour, String path, ImageType imageType) {
         this.tour = tour;
         this.path = path;
+        this.imageType = imageType;
+    }
+
+    public ImageType getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(ImageType imageType) {
+        this.imageType = imageType;
     }
 
     public Tour getTour() {

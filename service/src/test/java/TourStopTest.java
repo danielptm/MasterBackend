@@ -24,6 +24,6 @@ public class TourStopTest {
 
 
 
-//        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops();
+//        List<TourStopRepository> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops();
     }
 }
