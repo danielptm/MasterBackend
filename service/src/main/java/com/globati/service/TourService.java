@@ -4,6 +4,7 @@ import com.globati.dbmodel.BusinessImage;
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
+import com.globati.enums.ImageType;
 import com.globati.repository.TourRepository;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -35,26 +36,35 @@ public class TourService {
         Property property = propertyService.getPropertyById(tour.getPropertyId());
         Tour tourToCreate = new Tour();
         tourToCreate.setProperty(property);
-        tour.setImages(tour.getImages());
-        tour.setTargetLong(tour.getTargetLong());
-        tour.setTargetLat(tour.getTargetLat());
-        tour.setCity(tour.getCity());
-        tour.setCountry(tour.getCountry());
-        tour.setStreet(tour.getStreet());
-        tour.setDescription(tour.getDescription());
-        tour.setTitle(tour.getTitle());
-        tour.setTourStops(tour.getTourStops());
-        tour.setImages(tour.getImages());
+
+        tourToCreate.setTargetLong(tour.getTargetLong());
+        tourToCreate.setTargetLat(tour.getTargetLat());
+        tourToCreate.setCity(tour.getCity());
+        tourToCreate.setCountry(tour.getCountry());
+        tourToCreate.setStreet(tour.getStreet());
+        tourToCreate.setDescription(tour.getDescription());
+        tourToCreate.setTitle(tour.getTitle());
+
+        //Map with image service
+        List<BusinessImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), ImageType.TOUR, tourToCreate);
+        tourToCreate.setTourImages(images);
+
+//        Map with tourStopService
+        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(tourToCreate, tour.getTourStops());
+        tourToCreate.setTourStops(null);
+
         return tourRepository.save(tourToCreate);
 
     }
 
-    public Tour getTourById(Long id) {
-        Tour tour = tourRepository.findOne(id);
-        List<TourStop> tourStops = tourStopService.getTourStopsByPropertyId(id);
-        List<BusinessImage> tourImages = imageService.getImagesByEntityId(id);
-        tour.setTourImages(tourImages);
-        tour.setTourStops(tourStops);
-        return tour;
+    public List<Tour> getToursByPropertyId(Long id) {
+        List<Tour> tours = tourRepository.getToursByPropertyId(id);
+        for(Tour tour: tours) {
+            List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
+            List<BusinessImage> tourImages = imageService.getImagesByEntityId(tour.getId());
+            tour.setTourStops(tourStops);
+            tour.setTourImages(tourImages);
+        }
+        return tours;
     }
 }

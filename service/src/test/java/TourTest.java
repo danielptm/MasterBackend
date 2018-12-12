@@ -1,6 +1,6 @@
 import com.globati.dbmodel.Property;
-import com.globati.dbmodel.TourStop;
 import com.globati.request.tour.Tour;
+import com.globati.request.tour.TourStop;
 import com.globati.service.PropertyService;
 import com.globati.service.TourService;
 import com.globati.service.exceptions.ServiceException;
@@ -52,27 +52,35 @@ public class TourTest {
         tour.setTargetLong(11.11);
 
         List<String> images = new ArrayList<>();
-        images.add("image");
+        images.add("image1");
+        images.add("image2");
+
         tour.setImages(images);
 
-        tour.setTourStops(Arrays.asList(new com.globati.request.tour.TourStop()));
+        List<TourStop> tourStops = new ArrayList<>();
 
-        tourService.createTour(tour);
+        TourStop tourStop = new TourStop();
 
-        com.globati.dbmodel.Tour createdTour = tourService.getTourById(tour.getId());
+        tourStop.setCity("tourStopCity");
+        tourStop.setCountry("tourStopCountry");
+        tourStop.setStreet("tourStreet");
+        tourStop.setDescription("tourStopDescription");
+        tourStop.setId(1L);
+        tourStop.setTargetLat(11.11);
+        tourStop.setTargetLong(11.11);
+        tourStop.setTitle("tourStopTitle");
+
+        tourStops.add(tourStop);
+        tour.setTourStops(tourStops);
+
+
+        com.globati.dbmodel.Tour createdTour = tourService.createTour(tour);
 
         Assert.notNull(createdTour);
-        Assert.notNull(createdTour.getTourImages());
-        Assert.notNull(createdTour.getTourStops());
-        Assert.notNull(createdTour.getCity());
-        Assert.notNull(createdTour.getCountry());
-        Assert.notNull(createdTour.getStreet());
-        Assert.notNull(createdTour.getTitle());
-        Assert.notNull(createdTour.getTargetLat());
-        Assert.notNull(createdTour.getTargetLong());
-        Assert.notNull(createdTour.getImage());
-        Assert.notNull(createdTour.getDescription());
+    }
 
+    @Test
+    public void testGetToursByPropertyId() {
 
     }
 }

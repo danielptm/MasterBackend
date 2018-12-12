@@ -29,10 +29,10 @@ public class Recommendation extends BusinessEntity {
 
     public Recommendation(){}
 
-    public Recommendation(Property employee, String title, String description, double targetLat, double targetLong,
+    public Recommendation(Property property, String title, String description, double targetLat, double targetLong,
                           String street, String city, String country, Category category
                           ) {
-        this.property = employee;
+        this.property = property;
         this.title = title;
         this.description = description;
         this.targetLat = targetLat;

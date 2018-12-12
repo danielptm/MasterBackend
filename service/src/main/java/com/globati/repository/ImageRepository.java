@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ImageRepository extends CrudRepository<BusinessImage, Long> {
 
-    @Query("SELECT i FROM BusinessImage r WHERE i.tour.id=:id")
+    @Query("SELECT i FROM BusinessImage i WHERE i.tour.id=:id")
     List<BusinessImage> getImagesByEntityId(Long id);
 
 }

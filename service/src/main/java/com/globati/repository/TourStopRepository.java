@@ -4,13 +4,13 @@ import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface TourStopRepository extends CrudRepository<Tour, Long> {
 
-
-    @Query("SELECT ts FROM TourStop ts WHERE ts.property.id=:id")
-    List<TourStop> getTourStopsByPropertyId(Long id);
+    @Query("SELECT t FROM TourStop t WHERE t.tour.id=:id")
+    List<TourStop> getTourStopsByTourId(@Param("id") Long id);
 
 }

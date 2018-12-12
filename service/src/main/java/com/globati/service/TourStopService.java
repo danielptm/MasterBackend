@@ -1,5 +1,6 @@
 package com.globati.service;
 
+import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
 import com.globati.repository.TourStopRepository;
 import org.apache.logging.log4j.LogManager;
@@ -15,24 +16,31 @@ import java.util.List;
 public class TourStopService {
 
     @Autowired
-    TourStopService tourStopService;
+    TourStopRepository tourStopRepository;
 
     private static final Logger log = LogManager.getLogger(TourStopService.class);
 
-    public List<TourStop> getTourStopsByPropertyId(Long id) {
-        return tourStopService.getTourStopsByPropertyId(id);
+    public List<TourStop> getTourStopsByTourId(Long id) {
+        return tourStopRepository.getTourStopsByTourId(id);
     }
 
 
-    public List<TourStop> mapRequestTourStopsToDbModelTourStops(List<com.globati.request.tour.TourStop> tourStops){
+    public List<TourStop> mapRequestTourStopsToDbModelTourStops(Tour tour, List<com.globati.request.tour.TourStop> tourStops){
         List<TourStop> dbTourStops = new ArrayList<>();
         for(com.globati.request.tour.TourStop tourStop: tourStops){
-            TourStop tourStop1 = new TourStop();
-            //Do this
-
-
-
-            dbTourStops.add(tourStop1);
+            TourStop dbTourStop = new TourStop();
+            dbTourStop.setStopOrder(tourStop.getOrderNumber());
+            dbTourStop.setTour(tour);
+            dbTourStop.setActive(true);
+            dbTourStop.setCity(tour.getCity());
+            dbTourStop.setCountry(tour.getCountry());
+            dbTourStop.setDescription(tour.getDescription());
+            dbTourStop.setLocation(tour.getLocation());
+            dbTourStop.setStreet(tour.getStreet());
+            dbTourStop.setTargetLat(tour.getTargetLat());
+            dbTourStop.setTargetLong(tour.getTargetLong());
+            dbTourStop.setTitle(tour.getTitle());
+            dbTourStops.add(dbTourStop);
         }
         return dbTourStops;
     }

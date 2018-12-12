@@ -11,11 +11,12 @@ public class TourStop {
     String street;
     String city;
     String country;
+    Integer orderNumber;
     List<String> images;
 
     public TourStop() {}
 
-    public TourStop(Long id, String title, String description, Double targetLat, Double targetLong, String street, String city, String country, List<String> images) {
+    public TourStop(Long id, Integer orderNumber, String title, String description, Double targetLat, Double targetLong, String street, String city, String country) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,7 +25,15 @@ public class TourStop {
         this.street = street;
         this.city = city;
         this.country = country;
-        this.images = images;
+        this.orderNumber = orderNumber;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Long getId() {

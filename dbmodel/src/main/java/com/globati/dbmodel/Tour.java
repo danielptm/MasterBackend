@@ -25,6 +25,14 @@ public class Tour extends BusinessEntity{
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<TourStop> tourStops;
 
+    public Tour(){}
+
+    public Tour(Property property, List<BusinessImage> tourImages, List<TourStop> tourStops) {
+        this.property = property;
+        this.tourImages = tourImages;
+        this.tourStops = tourStops;
+    }
+
     public Property getProperty() {
         return property;
     }
@@ -52,10 +60,7 @@ public class Tour extends BusinessEntity{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Tour{");
-        sb.append("property=").append(property);
-        sb.append(", tourImages=").append(tourImages);
-        sb.append(", tourStops=").append(tourStops);
-        sb.append(", targetLat=").append(targetLat);
+        sb.append("targetLat=").append(targetLat);
         sb.append(", targetLong=").append(targetLong);
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');

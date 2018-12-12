@@ -60,6 +60,10 @@ public class Property extends BaseEntity {
     @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
     List<Recommendation> recommendations;
 
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
+    @JsonManagedReference //This is simply to avoid a stackoverflow error according to this link http://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
+    List<Tour> tours;
+
     public Property(){}
 
     public Property(String firstName, String email, String userName, double locLat, double locLong, String image, String street, String city, String country, Verified verified) {
@@ -88,6 +92,13 @@ public class Property extends BaseEntity {
     }
 
 
+    public List<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(List<Tour> tours) {
+        this.tours = tours;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -18,7 +18,8 @@ public class Tour {
     public Tour() {
     }
 
-    public Tour(Long id, Long propertyId, String title, String description, Double targetLat, Double targetLong, String street, String city, String country, List<String> images, List<TourStop> tourStops) {
+    public Tour(Long id, Long propertyId, String title, String description, Double targetLat,
+                Double targetLong, String street, String city, String country, List<String> images, List<TourStop> tourStops) {
         this.id = id;
         this.title = title;
         this.description = description;
