@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TourStopRepository extends CrudRepository<Tour, Long> {
+public interface TourStopRepository extends CrudRepository<TourStop, Long> {
 
     @Query("SELECT t FROM TourStop t WHERE t.tour.id=:id")
     List<TourStop> getTourStopsByTourId(@Param("id") Long id);
