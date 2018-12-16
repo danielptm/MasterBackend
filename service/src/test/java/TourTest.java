@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
@@ -28,13 +29,17 @@ public class TourTest {
     @Autowired
     PropertyService propertyService;
 
+    public String getRandomString() {
+        return UUID.randomUUID().toString();
+    }
+
 
     @Test
     public void testcreateTour() throws ServiceException, UserNameIsNotUniqueException {
         Property property = propertyService.createProperty(
-                "propertyName",
+                getRandomString(),
                         "email",
-                "username",
+                getRandomString(),
                 "password",
                 11.11,
                 11.11,
@@ -83,9 +88,9 @@ public class TourTest {
     @Test
     public void testGetToursByPropertyId() throws UserNameIsNotUniqueException, ServiceException {
         Property property = propertyService.createProperty(
-                "propertyName",
+                getRandomString(),
                 "email",
-                "username",
+                getRandomString(),
                 "password",
                 11.11,
                 11.11,
