@@ -28,6 +28,7 @@ public class TourTest {
     @Autowired
     PropertyService propertyService;
 
+
     @Test
     public void testcreateTour() throws ServiceException, UserNameIsNotUniqueException {
         Property property = propertyService.createProperty(
@@ -80,7 +81,59 @@ public class TourTest {
     }
 
     @Test
-    public void testGetToursByPropertyId() {
+    public void testGetToursByPropertyId() throws UserNameIsNotUniqueException, ServiceException {
+        Property property = propertyService.createProperty(
+                "propertyName",
+                "email",
+                "username",
+                "password",
+                11.11,
+                11.11,
+                "image",
+                "street",
+                "city",
+                "country"
+        );
+        Tour tour = new Tour();
 
+        tour.setPropertyId(property.getId());
+        tour.setCity("city");
+        tour.setCountry("country");
+        tour.setTitle("title");
+        tour.setTargetLat(11.11);
+        tour.setTargetLong(11.11);
+
+        List<String> images = new ArrayList<>();
+        images.add("image1");
+        images.add("image2");
+
+        tour.setImages(images);
+
+
+        List<TourStop> tourStops = new ArrayList<>();
+
+        TourStop tourStop = new TourStop();
+
+        tourStop.setCity("tourStopCity");
+        tourStop.setCountry("tourStopCountry");
+        tourStop.setStreet("tourStreet");
+        tourStop.setDescription("tourStopDescription");
+        tourStop.setId(1L);
+        tourStop.setTargetLat(11.11);
+        tourStop.setTargetLong(11.11);
+        tourStop.setTitle("tourStopTitle");
+
+        tourStops.add(tourStop);
+        tour.setTourStops(tourStops);
+
+
+        com.globati.dbmodel.Tour createdTour = tourService.createTour(tour);
+
+        List<com.globati.dbmodel.Tour> retrievedTours = tourService.getToursByPropertyId(property.getId());
+
+        //Size of tours is 1
+        Assert.isTrue(retrievedTours.size() == 1);
+        //Size of TourStops is 1
+        Assert.isTrue(retrievedTours.get(0).getTourStops().size() == 1);
     }
 }

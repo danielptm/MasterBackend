@@ -51,7 +51,7 @@ public class TourService {
 
 //        Map with tourStopService
         List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(tourToCreate, tour.getTourStops());
-        tourToCreate.setTourStops(null);
+        tourToCreate.setTourStops(tourStops);
 
         return tourRepository.save(tourToCreate);
 
@@ -61,9 +61,9 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
-            List<BusinessImage> tourImages = imageService.getImagesByEntityId(tour.getId());
+//            List<BusinessImage> tourImages = imageService.getImagesByEntityId(tour.getId());
             tour.setTourStops(tourStops);
-            tour.setTourImages(tourImages);
+            tour.setTourImages(null);
         }
         return tours;
     }

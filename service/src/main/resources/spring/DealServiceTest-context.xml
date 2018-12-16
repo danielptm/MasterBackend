@@ -24,6 +24,4 @@
 
     <bean id="ImageService" class="com.globati.service.ImageService"></bean>
 
-
-
 </beans>

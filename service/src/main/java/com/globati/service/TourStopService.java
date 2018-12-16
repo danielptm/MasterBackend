@@ -20,6 +20,10 @@ public class TourStopService {
 
     private static final Logger log = LogManager.getLogger(TourStopService.class);
 
+    public TourStop createTourStop(TourStop tour) {
+        return tourStopRepository.save(tour);
+    }
+
     public List<TourStop> getTourStopsByTourId(Long id) {
         return tourStopRepository.getTourStopsByTourId(id);
     }

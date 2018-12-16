@@ -6,6 +6,7 @@ import com.globati.service.TourService;
 import com.globati.service.TourStopService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,11 +97,21 @@ public class TourStopTest {
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tour);
 
-//        List<TourStop> createdTourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(createdTour, tourStops);
+        List<TourStop> mappedTourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(createdTour, tourStops);
+
+        List<TourStop> createdStops = new ArrayList<>();
 
 
+        for(TourStop ts: mappedTourStops) {
+            TourStop savedTs = tourStopService.createTourStop(ts);
+            createdStops.add(savedTs);
+        }
 
 
-//        List<TourStopRepository> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops();
+        createdStops.forEach((ts) -> {
+            // Test that the a list of TourStop is returned by the tourId.
+            Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
+        });
+
     }
 }

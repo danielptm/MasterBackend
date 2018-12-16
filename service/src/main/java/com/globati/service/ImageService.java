@@ -22,7 +22,7 @@ public class ImageService {
         return imageRepository.getImagesByEntityId(id);
     }
 
-    public java.util.List<BusinessImage> mapImagesToBusinessImages(List<String> imagePaths, ImageType imageType, Tour tour){
+    public java.util.List<BusinessImage> mapImagesToBusinessImages(List<String> imagePaths, ImageType imageType, Tour tour) {
 
         List<BusinessImage> businessImages = new ArrayList<>();
         for(String path: imagePaths) {
