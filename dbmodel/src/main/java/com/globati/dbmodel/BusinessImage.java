@@ -5,6 +5,7 @@ import com.globati.enums.ImageType;
 
 import javax.persistence.*;
 
+// TODO: Implement builder pattern on this object.
 @Entity
 @Table(name = "businessimage")
 public class BusinessImage extends ImageEntity {
@@ -17,13 +18,22 @@ public class BusinessImage extends ImageEntity {
     @Enumerated(EnumType.STRING)
     private ImageType imageType;
 
+    private int stopOrder;
 
     public BusinessImage(){}
 
-    public BusinessImage(Tour tour, String path, ImageType imageType) {
+    public BusinessImage(Tour tour, String path) {
         this.tour = tour;
         this.path = path;
-        this.imageType = imageType;
+        this.imageType = ImageType.TOUR;
+        this.stopOrder = -1;
+    }
+
+    public BusinessImage(Tour tour, String path, int stopOrder) {
+        this.tour = tour;
+        this.path = path;
+        this.imageType = ImageType.TOUR_STOP;
+        this.stopOrder = stopOrder;
     }
 
     public ImageType getImageType() {
@@ -40,6 +50,14 @@ public class BusinessImage extends ImageEntity {
 
     public void setTour(Tour tour) {
         this.tour = tour;
+    }
+
+    public void setStopOrder(int stopOrder) {
+        this.stopOrder = stopOrder;
+    }
+
+    public int getStopOrder() {
+        return stopOrder;
     }
 
     @Override

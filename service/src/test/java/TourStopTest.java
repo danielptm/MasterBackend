@@ -1,5 +1,7 @@
+import com.globati.dbmodel.BusinessImage;
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.TourStop;
+import com.globati.enums.ImageType;
 import com.globati.request.tour.Tour;
 import com.globati.service.PropertyService;
 import com.globati.service.TourService;
@@ -68,9 +70,13 @@ public class TourStopTest {
         tour2.setTargetLat(11.11);
         tour2.setTargetLong(11.11);
 
-        List<String> images = new ArrayList<>();
-        images.add("image1");
-        images.add("image2");
+        List<com.globati.request.tour.BusinessImage> images = new ArrayList<>();
+
+        com.globati.request.tour.BusinessImage businessImage = new com.globati.request.tour.BusinessImage("path", "TOUR", 1);
+        com.globati.request.tour.BusinessImage businessImage2 = new com.globati.request.tour.BusinessImage("path", "TOUR", 2);
+
+        images.add(businessImage);
+        images.add(businessImage2);
 
         tour.setImages(images);
         tour2.setImages(images);
@@ -101,17 +107,14 @@ public class TourStopTest {
 
         List<TourStop> createdStops = new ArrayList<>();
 
-
         for(TourStop ts: mappedTourStops) {
             TourStop savedTs = tourStopService.createTourStop(ts);
             createdStops.add(savedTs);
         }
 
-
         createdStops.forEach((ts) -> {
             // Test that the a list of TourStop is returned by the tourId.
             Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
         });
-
     }
 }

@@ -18,18 +18,20 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository;
 
-    public java.util.List<BusinessImage> getImagesByEntityId(Long id) {
+    public java.util.List<BusinessImage> getImagesByTourId(Long id) {
         return imageRepository.getImagesByEntityId(id);
     }
 
-    public java.util.List<BusinessImage> mapImagesToBusinessImages(List<String> imagePaths, ImageType imageType, Tour tour) {
+    public java.util.List<BusinessImage> mapImagesToBusinessImages(List<com.globati.request.tour.BusinessImage> imagePaths, Tour tour) {
 
         List<BusinessImage> businessImages = new ArrayList<>();
-        for(String path: imagePaths) {
+
+        for(com.globati.request.tour.BusinessImage bi: imagePaths) {
             BusinessImage businessImage = new BusinessImage();
-            businessImage.setImageType(imageType);
-            businessImage.setPath(path);
+            businessImage.setImageType(ImageType.valueOf(bi.getImageType()));
+            businessImage.setPath(bi.getImagePath());
             businessImage.setTour(tour);
+            businessImage.setStopOrder(bi.getStopOrder());
             businessImages.add(businessImage);
         }
 

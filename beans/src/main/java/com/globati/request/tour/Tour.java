@@ -12,14 +12,14 @@ public class Tour {
     String street;
     String city;
     String country;
-    List<String> images;
+    List<BusinessImage> images;
     List<TourStop> tourStops;
 
     public Tour() {
     }
 
     public Tour(Long id, Long propertyId, String title, String description, Double targetLat,
-                Double targetLong, String street, String city, String country, List<String> images, List<TourStop> tourStops) {
+                Double targetLong, String street, String city, String country, List<BusinessImage> images, List<TourStop> tourStops) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -96,11 +96,11 @@ public class Tour {
         this.country = country;
     }
 
-    public List<String> getImages() {
+    public List<BusinessImage> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<BusinessImage> images) {
         this.images = images;
     }
 

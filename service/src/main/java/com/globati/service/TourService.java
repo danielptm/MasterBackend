@@ -46,7 +46,7 @@ public class TourService {
         tourToCreate.setTitle(tour.getTitle());
 
         //Map with image service
-        List<BusinessImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), ImageType.TOUR, tourToCreate);
+        List<BusinessImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), tourToCreate);
         tourToCreate.setTourImages(images);
 
 //        Map with tourStopService
@@ -61,7 +61,7 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
-//            List<BusinessImage> tourImages = imageService.getImagesByEntityId(tour.getId());
+//            List<BusinessImage> tourImages = imageService.getImagesByTourId(tour.getId());
             tour.setTourStops(tourStops);
             tour.setTourImages(null);
         }
