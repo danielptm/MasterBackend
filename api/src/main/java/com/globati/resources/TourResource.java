@@ -2,7 +2,10 @@ package com.globati.resources;
 
 import com.globati.request.tour.Tour;
 import com.globati.resources.annotations.GlobatiAuthentication;
+import com.globati.service.TourService;
+import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 import javax.ws.rs.*;
@@ -11,30 +14,34 @@ import javax.ws.rs.core.Response;
 
 @Component
 @Path("tour")
-@GlobatiAuthentication
 public class TourResource {
 
     private static Logger log = LogManager.getLogger(TourResource.class);
 
+    @Autowired
+    TourService tourService;
+
     @GET
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTourById(@QueryParam("id") Long id) {
-        return null;
+    public Response getTourById(@PathParam("id") Long id) {
+        return Response.ok(tourService.getToursByPropertyId(id)).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createTour(Tour tour){
-        log.info(tour);
-        return null;
+//    @GlobatiAuthentication
+    public Response createTour(Tour tour) {
+        return Response.ok(tourService.createTour(tour)).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateTour(){
-        return null;
+    @GlobatiAuthentication
+    public Response updateTour(Tour tour){
+        return Response.ok(tourService.updateTour(tour)).build();
     }
 
 
