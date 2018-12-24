@@ -1,5 +1,7 @@
 package com.globati.request.tour;
 
+import com.globati.request.BusinessImage;
+
 import java.util.List;
 
 public class Tour {

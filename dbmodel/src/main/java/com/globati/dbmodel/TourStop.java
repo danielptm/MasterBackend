@@ -16,11 +16,23 @@ public class TourStop extends BusinessEntity{
     private Tour tour;
     private Integer stopOrder;
 
+    @OneToMany(mappedBy = "tour", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    List<TourStopImage> tourStopImages;
+
     public TourStop() {}
 
     public TourStop(Tour tour, Integer stopOrder) {
         this.tour = tour;
         this.stopOrder = stopOrder;
+    }
+
+    public List<TourStopImage> getTourStopImages() {
+        return tourStopImages;
+    }
+
+    public void setTourStopImages(List<TourStopImage> tourStopImages) {
+        this.tourStopImages = tourStopImages;
     }
 
     public Tour getTour() {

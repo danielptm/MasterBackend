@@ -1,7 +1,5 @@
-import com.globati.dbmodel.BusinessImage;
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.TourStop;
-import com.globati.enums.ImageType;
 import com.globati.request.tour.Tour;
 import com.globati.service.PropertyService;
 import com.globati.service.TourService;
@@ -70,10 +68,10 @@ public class TourStopTest {
         tour2.setTargetLat(11.11);
         tour2.setTargetLong(11.11);
 
-        List<com.globati.request.tour.BusinessImage> images = new ArrayList<>();
+        List<com.globati.request.BusinessImage> images = new ArrayList<>();
 
-        com.globati.request.tour.BusinessImage businessImage = new com.globati.request.tour.BusinessImage("path", "TOUR", 1);
-        com.globati.request.tour.BusinessImage businessImage2 = new com.globati.request.tour.BusinessImage("path", "TOUR", 2);
+        com.globati.request.BusinessImage businessImage = new com.globati.request.BusinessImage("path", "TOUR", 1);
+        com.globati.request.BusinessImage businessImage2 = new com.globati.request.BusinessImage("path", "TOUR", 2);
 
         images.add(businessImage);
         images.add(businessImage2);

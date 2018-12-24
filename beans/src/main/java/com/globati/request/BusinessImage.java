@@ -1,4 +1,4 @@
-package com.globati.request.tour;
+package com.globati.request;
 
 public class BusinessImage {
     String imagePath;

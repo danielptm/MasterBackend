@@ -17,14 +17,14 @@ public class Tour extends BusinessEntity{
 
     @OneToMany(mappedBy = "tour", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    List<BusinessImage> tourImages;
+    List<TourImage> tourImages;
 
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<TourStop> tourStops;
 
     public Tour(){}
 
-    public Tour(Property property, List<BusinessImage> tourImages, List<TourStop> tourStops) {
+    public Tour(Property property, List<TourImage> tourImages, List<TourStop> tourStops) {
         this.property = property;
         this.tourImages = tourImages;
         this.tourStops = tourStops;
@@ -38,11 +38,11 @@ public class Tour extends BusinessEntity{
         this.property = property;
     }
 
-    public List<BusinessImage> getTourImages() {
+    public List<TourImage> getTourImages() {
         return tourImages;
     }
 
-    public void setTourImages(List<BusinessImage> tourImages) {
+    public void setTourImages(List<TourImage> tourImages) {
         this.tourImages = tourImages;
     }
 

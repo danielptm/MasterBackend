@@ -1,5 +1,5 @@
 import com.globati.dbmodel.Property;
-import com.globati.request.tour.BusinessImage;
+import com.globati.request.BusinessImage;
 import com.globati.request.tour.Tour;
 import com.globati.request.tour.TourStop;
 import com.globati.service.PropertyService;
@@ -58,8 +58,8 @@ public class TourTest {
 
         List<BusinessImage> images = new ArrayList<>();
 
-        com.globati.request.tour.BusinessImage businessImage = new com.globati.request.tour.BusinessImage("path", "TOUR", 1);
-        com.globati.request.tour.BusinessImage businessImage2 = new com.globati.request.tour.BusinessImage("path", "TOUR", 2);
+        BusinessImage businessImage = new BusinessImage("path", "TOUR", 1);
+        BusinessImage businessImage2 = new BusinessImage("path", "TOUR", 2);
 
         images.add(businessImage);
         images.add(businessImage2);
@@ -113,8 +113,8 @@ public class TourTest {
 
         List<BusinessImage> images = new ArrayList<>();
 
-        com.globati.request.tour.BusinessImage businessImage = new com.globati.request.tour.BusinessImage("path", "TOUR", 1);
-        com.globati.request.tour.BusinessImage businessImage2 = new com.globati.request.tour.BusinessImage("path", "TOUR", 2);
+        BusinessImage businessImage = new BusinessImage("path", "TOUR", 1);
+        BusinessImage businessImage2 = new BusinessImage("path", "TOUR", 2);
 
         images.add(businessImage);
         images.add(businessImage2);
@@ -177,8 +177,8 @@ public class TourTest {
 
         List<BusinessImage> images = new ArrayList<>();
 
-        com.globati.request.tour.BusinessImage businessImage = new com.globati.request.tour.BusinessImage("path", "TOUR", 1);
-        com.globati.request.tour.BusinessImage businessImage2 = new com.globati.request.tour.BusinessImage("path", "TOUR", 2);
+        BusinessImage businessImage = new BusinessImage("path", "TOUR", 1);
+        BusinessImage businessImage2 = new BusinessImage("path", "TOUR", 2);
 
         images.add(businessImage);
         images.add(businessImage2);

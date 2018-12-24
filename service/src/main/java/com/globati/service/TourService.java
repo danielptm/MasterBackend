@@ -1,8 +1,8 @@
 package com.globati.service;
 
-import com.globati.dbmodel.BusinessImage;
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.Tour;
+import com.globati.dbmodel.TourImage;
 import com.globati.dbmodel.TourStop;
 import com.globati.repository.TourRepository;
 import com.globati.service.exceptions.ServiceException;
@@ -53,7 +53,7 @@ public class TourService {
         tourToCreate.setTitle(tour.getTitle());
 
         //Map with image service
-        List<BusinessImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), tourToCreate);
+        List<TourImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), tourToCreate);
         tourToCreate.setTourImages(images);
 
 //        Map with tourStopService
