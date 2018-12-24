@@ -4,6 +4,7 @@ import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.PropertyInfoService;
 import com.globati.service.PropertyService;
+import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.third_party_api.AWSCredentials;
 import com.globati.request.PasswordAttempt;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +41,9 @@ public class AuthenticationResource {
     public Response authentication(PasswordAttempt pa){
         log.debug("authentication()");
         try {
-             return Response.ok(propertyService.authenticateReceptionist(pa.getUsername(), pa.getPassword())).build();
+            PropertyAndItems propertyAndItems = propertyService.authenticateReceptionist(pa.getUsername(), pa.getPassword());
+            log.info("PROPERTY AND ITEMS" + propertyAndItems.getProperty());
+             return Response.ok(propertyAndItems).build();
         }catch(Exception e){
             e.printStackTrace();
             throw new WebException("Password or username did not match", Response.Status.UNAUTHORIZED);

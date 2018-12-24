@@ -4,7 +4,6 @@ import com.globati.dbmodel.BusinessImage;
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
-import com.globati.enums.ImageType;
 import com.globati.repository.TourRepository;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -69,9 +68,9 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
-            List<BusinessImage> tourImages = imageService.getImagesByTourId(tour.getId());
+//            List<BusinessImage> tourImages = imageService.getImagesByTourId(tour.getId());
             tour.setTourStops(tourStops);
-            tour.setTourImages(tourImages);
+//            tour.setTourImages(tourImages);
         }
         return tours;
     }
@@ -79,9 +78,9 @@ public class TourService {
     public Tour updateTour(com.globati.request.tour.Tour tour) {
         Tour oldTour = tourRepository.findOne(tour.getId());
         oldTour.setTitle(tour.getTitle());
-        oldTour.setTourImages(imageService.mapImagesToBusinessImages(tour.getImages()));
+        oldTour.setTourImages(imageService.mapImagesToBusinessImages(tour.getImages(), oldTour));
+        oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(oldTour, tour.getTourStops()));
         oldTour.setDescription(tour.getDescription());
-        oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(tour, tour.getTourStops()));
         oldTour.setCity(tour.getCity());
         oldTour.setStreet(tour.getStreet());
         oldTour.setTargetLat(tour.getTargetLat());

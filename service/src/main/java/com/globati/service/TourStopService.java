@@ -36,14 +36,13 @@ public class TourStopService {
             dbTourStop.setStopOrder(tourStop.getOrderNumber());
             dbTourStop.setTour(tour);
             dbTourStop.setActive(true);
-            dbTourStop.setCity(tour.getCity());
-            dbTourStop.setCountry(tour.getCountry());
-            dbTourStop.setDescription(tour.getDescription());
-            dbTourStop.setLocation(tour.getLocation());
-            dbTourStop.setStreet(tour.getStreet());
-            dbTourStop.setTargetLat(tour.getTargetLat());
-            dbTourStop.setTargetLong(tour.getTargetLong());
-            dbTourStop.setTitle(tour.getTitle());
+            dbTourStop.setCity(tourStop.getCity());
+            dbTourStop.setCountry(tourStop.getCountry());
+            dbTourStop.setDescription(tourStop.getDescription());
+            dbTourStop.setStreet(tourStop.getStreet());
+            dbTourStop.setTargetLat(tourStop.getTargetLat());
+            dbTourStop.setTargetLong(tourStop.getTargetLong());
+            dbTourStop.setTitle(tourStop.getTitle());
             dbTourStops.add(dbTourStop);
         }
         return dbTourStops;

@@ -6,7 +6,7 @@ import com.globati.service.PropertyService;
 import com.globati.service.TourService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
-import io.jsonwebtoken.lang.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +85,7 @@ public class TourTest {
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tour);
 
-        Assert.notNull(createdTour);
+        Assert.assertNotNull(createdTour);
     }
 
     @Test
@@ -144,12 +144,12 @@ public class TourTest {
         List<com.globati.dbmodel.Tour> retrievedTours = tourService.getToursByPropertyId(property.getId());
 
         //Size of tours is 1
-        Assert.isTrue(retrievedTours.size() == 1);
+        Assert.assertTrue(retrievedTours.size() == 1);
         //Size of TourStops is 1
-        Assert.isTrue(retrievedTours.get(0).getTourStops().size() == 1);
+        Assert.assertTrue(retrievedTours.get(0).getTourStops().size() == 1);
 
         //Test that images are bigger than 1
-        Assert.isTrue(retrievedTours.get(0).getTourImages().size() > 0);
+        Assert.assertTrue(retrievedTours.get(0).getTourImages().size() > 0);
     }
 
     @Test
@@ -201,14 +201,18 @@ public class TourTest {
         tourStops.add(tourStop);
         tour.setTourStops(tourStops);
 
-
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tour);
 
-
-        createdTour.setTitle("changedTitle");
+        tour.setId(createdTour.getId());
+        tour.getImages().get(0).setImagePath("UPDATED");
+        tour.setTitle("UPDATED_TOUR_TITLE");
+        tour.getTourStops().get(0).setTitle("UPDATED_TITLE");
 
         com.globati.dbmodel.Tour secondCreatedTour = tourService.updateTour(tour);
 
+        Assert.assertEquals("UPDATED", secondCreatedTour.getTourImages().get(0).getPath());
+        Assert.assertEquals("UPDATED_TITLE", secondCreatedTour.getTourStops().get(0).getTitle());
+        Assert.assertEquals("UPDATED_TOUR_TITLE", secondCreatedTour.getTitle());
 
     }
 }

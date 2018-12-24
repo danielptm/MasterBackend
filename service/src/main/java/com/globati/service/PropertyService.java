@@ -58,6 +58,7 @@ public class PropertyService {
         try {
             Property employee = this.propertyRepository.getPropertyByid(id);
             employee.setRecommendations(null);
+            employee.setTours(null);
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getPropertyById(Long id)");
@@ -71,6 +72,7 @@ public class PropertyService {
         try {
             Property employee = propertyRepository.getPropertyByGlobatiUsername(username);
             employee.setRecommendations(new ArrayList<>());
+            employee.setTours(new ArrayList<>());
             return employee;
         } catch (Exception e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getPropertyByUserName()");
@@ -102,6 +104,7 @@ public class PropertyService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByPropertyId(employee.getId());
             employee.setRecommendations(recommendations);
+            employee.setTours(new ArrayList<>());
             PropertyAndItems employeeAndItems = new PropertyAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(propertyInfo.getAuthToken()));
 
@@ -236,11 +239,8 @@ public class PropertyService {
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByPropertyId(employee.getId());
 
-            System.out.println("Recommendation images size");
-            System.out.println(recommendations.get(0).getRecommendationImages().size());
-            System.out.println(recommendations.get(0).getRecommendationImages().get(0).getPath());
-
             employee.setRecommendations(recommendations);
+            employee.setTours(new ArrayList<>());
 
             PropertyAndItems employeeAndItems = new PropertyAndItems(employee);
 
@@ -350,7 +350,10 @@ public class PropertyService {
             String passwordAttempt = password;
 
             Property employee = getPropertyByUserName(username);
+
             employee.setRecommendations(new ArrayList<>());
+            employee.setTours(new ArrayList<>());
+
             PropertyAndItems employeeAndItems = new PropertyAndItems(employee);
 
             PropertyInfo propertyInfo = propertyInfoService.getPropertyInfoByPropertyId(employee.getId());
@@ -448,6 +451,7 @@ public class PropertyService {
             Property employee = getPropertyByUserName(username);
             List<Recommendation> recommendations = recommendationService.getRecommendationByPropertyId(employee.getId());
             employee.setRecommendations(recommendations);
+            employee.setTours(new ArrayList<>());
             return employee;
         } catch (Exception e) {
             throw new ServiceException("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: getPropertyByIdWithRecommendations");
