@@ -2,6 +2,8 @@ package com.globati.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,8 +18,9 @@ public class TourStop extends BusinessEntity{
     private Tour tour;
     private Integer stopOrder;
 
-    @OneToMany(mappedBy = "tour", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tourstop", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<TourStopImage> tourStopImages;
 
     public TourStop() {}

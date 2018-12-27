@@ -11,12 +11,12 @@ import javax.persistence.Table;
 @Table(name = "tourstopimage")
 public class TourStopImage extends ImageEntity{
     @ManyToOne
-    @JoinColumn(name="tourid")
+    @JoinColumn(name="tourstopid")
     @JsonBackReference
-    TourStop tourStop;
+    TourStop tourstop;
 
     public TourStopImage(TourStop tourStop, String path){
         this.path = path;
-        this.tourStop = tourStop;
+        this.tourstop = tourStop;
     }
 }
