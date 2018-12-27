@@ -3,6 +3,7 @@ package com.globati.service;
 import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
 import com.globati.repository.TourStopRepository;
+import com.globati.request.tour.TourStopRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +30,20 @@ public class TourStopService {
     }
 
 
-    public List<TourStop> mapRequestTourStopsToDbModelTourStops(Tour tour, List<com.globati.request.tour.TourStop> tourStops){
+    public List<TourStop> mapRequestTourStopsToDbModelTourStops(Tour tour, List<TourStopRequest> tourStopRequests){
         List<TourStop> dbTourStops = new ArrayList<>();
-        for(com.globati.request.tour.TourStop tourStop: tourStops){
+        for(TourStopRequest tourStopRequest : tourStopRequests){
             TourStop dbTourStop = new TourStop();
-            dbTourStop.setStopOrder(tourStop.getOrderNumber());
+            dbTourStop.setStopOrder(tourStopRequest.getOrderNumber());
             dbTourStop.setTour(tour);
             dbTourStop.setActive(true);
-            dbTourStop.setCity(tourStop.getCity());
-            dbTourStop.setCountry(tourStop.getCountry());
-            dbTourStop.setDescription(tourStop.getDescription());
-            dbTourStop.setStreet(tourStop.getStreet());
-            dbTourStop.setTargetLat(tourStop.getTargetLat());
-            dbTourStop.setTargetLong(tourStop.getTargetLong());
-            dbTourStop.setTitle(tourStop.getTitle());
+            dbTourStop.setCity(tourStopRequest.getCity());
+            dbTourStop.setCountry(tourStopRequest.getCountry());
+            dbTourStop.setDescription(tourStopRequest.getDescription());
+            dbTourStop.setStreet(tourStopRequest.getStreet());
+            dbTourStop.setTargetLat(tourStopRequest.getTargetLat());
+            dbTourStop.setTargetLong(tourStopRequest.getTargetLong());
+            dbTourStop.setTitle(tourStopRequest.getTitle());
             dbTourStops.add(dbTourStop);
         }
         return dbTourStops;

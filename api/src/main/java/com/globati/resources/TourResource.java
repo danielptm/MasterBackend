@@ -1,9 +1,8 @@
 package com.globati.resources;
 
-import com.globati.request.tour.Tour;
+import com.globati.request.tour.TourRequest;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.service.TourService;
-import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,16 +31,16 @@ public class TourResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 //    @GlobatiAuthentication
-    public Response createTour(Tour tour) {
-        return Response.ok(tourService.createTour(tour)).build();
+    public Response createTour(TourRequest tourRequest) {
+        return Response.ok(tourService.createTour(tourRequest)).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
-    public Response updateTour(Tour tour){
-        return Response.ok(tourService.updateTour(tour)).build();
+    public Response updateTour(TourRequest tourRequest){
+        return Response.ok(tourService.updateTour(tourRequest)).build();
     }
 
 

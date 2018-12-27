@@ -1,10 +1,11 @@
 import com.globati.dbmodel.Property;
+import com.globati.dbmodel.TourStop;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopRequest;
-import com.globati.service.ImageService;
 import com.globati.service.PropertyService;
 import com.globati.service.TourService;
+import com.globati.service.TourStopService;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserNameIsNotUniqueException;
 import org.junit.Assert;
@@ -22,10 +23,10 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestImageService {
+public class TourRequestStopRequestTest {
 
     @Autowired
-    ImageService imageService;
+    TourStopService tourStopService;
 
     @Autowired
     PropertyService propertyService;
@@ -38,11 +39,11 @@ public class TestImageService {
     }
 
     @Test
-    public void testGetImagesByTourId() throws UserNameIsNotUniqueException, ServiceException {
+    public void getTourStopsByTourId() throws UserNameIsNotUniqueException, ServiceException {
         Property property = propertyService.createProperty(
-                getRandomString(),
-                "email",
-                getRandomString(),
+                "propertyName",
+                getRandomString() + "@me.com",
+                getRandomString() + "@me.com",
                 "password",
                 11.11,
                 11.11,
@@ -60,6 +61,15 @@ public class TestImageService {
         tourRequest.setTargetLat(11.11);
         tourRequest.setTargetLong(11.11);
 
+        TourRequest tourRequest2 = new TourRequest();
+
+        tourRequest2.setPropertyId(property.getId());
+        tourRequest2.setCity("city");
+        tourRequest2.setCountry("country");
+        tourRequest2.setTitle("title");
+        tourRequest2.setTargetLat(11.11);
+        tourRequest2.setTargetLong(11.11);
+
         List<TourImageRequest> images = new ArrayList<>();
 
         TourImageRequest tourImageRequest = new TourImageRequest("path", "TOUR");
@@ -69,6 +79,8 @@ public class TestImageService {
         images.add(tourImageRequest2);
 
         tourRequest.setImages(images);
+        tourRequest2.setImages(images);
+
 
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
 
@@ -84,17 +96,25 @@ public class TestImageService {
         tourStopRequest.setTitle("tourStopTitle");
 
         tourStopRequests.add(tourStopRequest);
-        tourRequest.setTourStopRequests(tourStopRequests);
 
+
+        tourRequest.setTourStopRequests(tourStopRequests);
+        tourRequest.setImages(images);
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
-        List<com.globati.dbmodel.TourImage> businessImages = imageService.getImagesByTourId(createdTour.getId());
+        List<TourStop> mappedTourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(createdTour, tourStopRequests);
 
-        System.out.println("Business Images");
-        System.out.println(businessImages.size());
+        List<TourStop> createdStops = new ArrayList<>();
 
-        Assert.assertTrue(businessImages.size() > 0);
+        for(TourStop ts: mappedTourStops) {
+            TourStop savedTs = tourStopService.createTourStop(ts);
+            createdStops.add(savedTs);
+        }
 
+        createdStops.forEach((ts) -> {
+            // Test that the a list of TourStopRequest is returned by the tourId.
+            Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
+        });
     }
 }

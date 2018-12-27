@@ -1,14 +1,12 @@
-package com.globati.request;
+package com.globati.request.tour;
 
-public class BusinessImage {
+public class TourImageRequest {
     String imagePath;
     String imageType;
-    int stopOrder;
 
-    public BusinessImage(String imagePath, String imageType, int stopOrder) {
+    public TourImageRequest(String imagePath, String imageType) {
         this.imagePath = imagePath;
         this.imageType = imageType;
-        this.stopOrder = stopOrder;
     }
 
     public String getImagePath() {
@@ -27,11 +25,4 @@ public class BusinessImage {
         this.imageType = imageType;
     }
 
-    public int getStopOrder() {
-        return stopOrder;
-    }
-
-    public void setStopOrder(int stopOrder) {
-        this.stopOrder = stopOrder;
-    }
 }

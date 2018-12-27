@@ -1,10 +1,8 @@
 package com.globati.request.tour;
 
-import com.globati.request.BusinessImage;
-
 import java.util.List;
 
-public class Tour {
+public class TourRequest {
     Long id;
     Long propertyId;
     String title;
@@ -14,14 +12,14 @@ public class Tour {
     String street;
     String city;
     String country;
-    List<BusinessImage> images;
-    List<TourStop> tourStops;
+    List<TourImageRequest> images;
+    List<TourStopRequest> tourStopRequests;
 
-    public Tour() {
+    public TourRequest() {
     }
 
-    public Tour(Long id, Long propertyId, String title, String description, Double targetLat,
-                Double targetLong, String street, String city, String country, List<BusinessImage> images, List<TourStop> tourStops) {
+    public TourRequest(Long id, Long propertyId, String title, String description, Double targetLat,
+                       Double targetLong, String street, String city, String country, List<TourImageRequest> images, List<TourStopRequest> tourStopRequests) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,7 +29,7 @@ public class Tour {
         this.city = city;
         this.country = country;
         this.images = images;
-        this.tourStops = tourStops;
+        this.tourStopRequests = tourStopRequests;
     }
 
     public Long getId() {
@@ -98,20 +96,20 @@ public class Tour {
         this.country = country;
     }
 
-    public List<BusinessImage> getImages() {
+    public List<TourImageRequest> getImages() {
         return images;
     }
 
-    public void setImages(List<BusinessImage> images) {
+    public void setImages(List<TourImageRequest> images) {
         this.images = images;
     }
 
-    public List<TourStop> getTourStops() {
-        return tourStops;
+    public List<TourStopRequest> getTourStopRequests() {
+        return tourStopRequests;
     }
 
-    public void setTourStops(List<TourStop> tourStops) {
-        this.tourStops = tourStops;
+    public void setTourStopRequests(List<TourStopRequest> tourStopRequests) {
+        this.tourStopRequests = tourStopRequests;
     }
 
     public Long getPropertyId() {
@@ -124,7 +122,7 @@ public class Tour {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Tour{");
+        final StringBuilder sb = new StringBuilder("TourRequest{");
         sb.append("id=").append(id);
         sb.append(", propertyId=").append(propertyId);
         sb.append(", title='").append(title).append('\'');
@@ -135,7 +133,7 @@ public class Tour {
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
         sb.append(", images=").append(images);
-        sb.append(", tourStops=").append(tourStops);
+        sb.append(", tourStopRequests=").append(tourStopRequests);
         sb.append('}');
         return sb.toString();
     }

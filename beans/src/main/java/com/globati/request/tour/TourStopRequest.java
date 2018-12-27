@@ -1,8 +1,10 @@
 package com.globati.request.tour;
 
+import com.globati.dbmodel.TourStopImage;
+
 import java.util.List;
 
-public class TourStop {
+public class TourStopRequest {
     Long id;
     String title;
     String description;
@@ -12,11 +14,11 @@ public class TourStop {
     String city;
     String country;
     Integer orderNumber;
-    List<String> images;
+    List<TourStopImageRequest> images;
 
-    public TourStop() {}
+    public TourStopRequest() {}
 
-    public TourStop(Long id, Integer orderNumber, String title, String description, Double targetLat, Double targetLong, String street, String city, String country) {
+    public TourStopRequest(Long id, Integer orderNumber, String title, String description, Double targetLat, Double targetLong, String street, String city, String country) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -100,17 +102,17 @@ public class TourStop {
         this.country = country;
     }
 
-    public List<String> getImages() {
+    public List<TourStopImageRequest> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<TourStopImageRequest> images) {
         this.images = images;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TourStop{");
+        final StringBuilder sb = new StringBuilder("TourStopRequest{");
         sb.append("id=").append(id);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');

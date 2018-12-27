@@ -236,24 +236,6 @@ public class Property extends BaseEntity {
         this.website = website;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "firstName='" + firstName + '\'' +
-                ", image='" + image + '\'' +
-                ", email='" + email + '\'' +
-                ", about='" + about + '\'' +
-                ", propLat=" + propLat +
-                ", propLong=" + propLong +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", display='" + display + '\'' +
-                ", globatiUsername='" + globatiUsername + '\'' +
-                ", visitCounter=" + visitCounter +
-                ", recommendations=" + recommendations +
-                '}';
-    }
 }
 
 

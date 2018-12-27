@@ -5,6 +5,7 @@ import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourImage;
 import com.globati.dbmodel.TourStop;
 import com.globati.repository.TourRepository;
+import com.globati.request.tour.TourRequest;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,12 +32,12 @@ public class TourService {
 
     private static final Logger log = LogManager.getLogger(TourService.class);
 
-    public Tour createTour(com.globati.request.tour.Tour tour) {
+    public Tour createTour(TourRequest tourRequest) {
         Property property = null;
 
-        // This should make use of an exception mapper and give a message Property not found when getting a Tour.
+        // This should make use of an exception mapper and give a message Property not found when getting a TourRequest.
         try {
-            property = propertyService.getPropertyById(tour.getPropertyId());
+            property = propertyService.getPropertyById(tourRequest.getPropertyId());
         } catch (ServiceException e) {
             e.printStackTrace();
         }
@@ -44,20 +45,20 @@ public class TourService {
         Tour tourToCreate = new Tour();
         tourToCreate.setProperty(property);
 
-        tourToCreate.setTargetLong(tour.getTargetLong());
-        tourToCreate.setTargetLat(tour.getTargetLat());
-        tourToCreate.setCity(tour.getCity());
-        tourToCreate.setCountry(tour.getCountry());
-        tourToCreate.setStreet(tour.getStreet());
-        tourToCreate.setDescription(tour.getDescription());
-        tourToCreate.setTitle(tour.getTitle());
+        tourToCreate.setTargetLong(tourRequest.getTargetLong());
+        tourToCreate.setTargetLat(tourRequest.getTargetLat());
+        tourToCreate.setCity(tourRequest.getCity());
+        tourToCreate.setCountry(tourRequest.getCountry());
+        tourToCreate.setStreet(tourRequest.getStreet());
+        tourToCreate.setDescription(tourRequest.getDescription());
+        tourToCreate.setTitle(tourRequest.getTitle());
 
         //Map with image service
-        List<TourImage> images = imageService.mapImagesToBusinessImages(tour.getImages(), tourToCreate);
+        List<TourImage> images = imageService.mapImagesToBusinessImages(tourRequest.getImages(), tourToCreate);
         tourToCreate.setTourImages(images);
 
 //        Map with tourStopService
-        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(tourToCreate, tour.getTourStops());
+        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(tourToCreate, tourRequest.getTourStopRequests());
         tourToCreate.setTourStops(tourStops);
 
         return tourRepository.save(tourToCreate);
@@ -68,24 +69,24 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
-//            List<BusinessImage> tourImages = imageService.getImagesByTourId(tour.getId());
+//            List<TourImageRequest> tourImages = imageService.getImagesByTourId(tour.getId());
             tour.setTourStops(tourStops);
 //            tour.setTourImages(tourImages);
         }
         return tours;
     }
 
-    public Tour updateTour(com.globati.request.tour.Tour tour) {
-        Tour oldTour = tourRepository.findOne(tour.getId());
-        oldTour.setTitle(tour.getTitle());
-        oldTour.setTourImages(imageService.mapImagesToBusinessImages(tour.getImages(), oldTour));
-        oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(oldTour, tour.getTourStops()));
-        oldTour.setDescription(tour.getDescription());
-        oldTour.setCity(tour.getCity());
-        oldTour.setStreet(tour.getStreet());
-        oldTour.setTargetLat(tour.getTargetLat());
-        oldTour.setTargetLong(tour.getTargetLong());
-        oldTour.setCountry(tour.getCountry());
+    public Tour updateTour(TourRequest tourRequest) {
+        Tour oldTour = tourRepository.findOne(tourRequest.getId());
+        oldTour.setTitle(tourRequest.getTitle());
+        oldTour.setTourImages(imageService.mapImagesToBusinessImages(tourRequest.getImages(), oldTour));
+        oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(oldTour, tourRequest.getTourStopRequests()));
+        oldTour.setDescription(tourRequest.getDescription());
+        oldTour.setCity(tourRequest.getCity());
+        oldTour.setStreet(tourRequest.getStreet());
+        oldTour.setTargetLat(tourRequest.getTargetLat());
+        oldTour.setTargetLong(tourRequest.getTargetLong());
+        oldTour.setCountry(tourRequest.getCountry());
         return tourRepository.save(oldTour);
     }
 }

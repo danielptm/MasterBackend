@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TourImageRepository extends CrudRepository<TourImage, Long> {
 
-    @Query("SELECT bi FROM BusinessImage bi WHERE bi.tour.id=:id")
+    @Query("SELECT ti FROM TourImage ti WHERE ti.tour.id=:id")
     List<TourImage> getImagesByEntityId(@Param("id") Long id);
 
 }
