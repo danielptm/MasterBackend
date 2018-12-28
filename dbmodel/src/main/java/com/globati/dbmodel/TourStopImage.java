@@ -15,8 +15,18 @@ public class TourStopImage extends ImageEntity{
     @JsonBackReference
     TourStop tourstop;
 
+    public TourStopImage() {}
+
     public TourStopImage(TourStop tourStop, String path){
         this.path = path;
         this.tourstop = tourStop;
+    }
+
+    public TourStop getTourstop() {
+        return tourstop;
+    }
+
+    public void setTourstop(TourStop tourstop) {
+        this.tourstop = tourstop;
     }
 }

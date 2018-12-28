@@ -69,9 +69,7 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
-//            List<TourImageRequest> tourImages = imageService.getImagesByTourId(tour.getId());
             tour.setTourStops(tourStops);
-//            tour.setTourImages(tourImages);
         }
         return tours;
     }

@@ -219,7 +219,6 @@ public class TourRequestTest {
         tourRequest.setTitle("UPDATED_TOUR_TITLE");
         tourRequest.getTourStopRequests().get(0).setTitle("UPDATED_TITLE");
 
-//        createdTour.getTourStops().get(0).getTourStopImages().set(0, new TourStopImage(createdTour.getTourStops().get(0), "UPDATED_TOUR_STOP_IMAGE"));
 
 
         com.globati.dbmodel.Tour secondCreatedTour = tourService.updateTour(tourRequest);

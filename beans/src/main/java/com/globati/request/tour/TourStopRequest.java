@@ -1,7 +1,5 @@
 package com.globati.request.tour;
 
-import com.globati.dbmodel.TourStopImage;
-
 import java.util.List;
 
 public class TourStopRequest {

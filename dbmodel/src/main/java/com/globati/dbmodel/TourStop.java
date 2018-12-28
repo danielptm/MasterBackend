@@ -18,9 +18,8 @@ public class TourStop extends BusinessEntity{
     private Tour tour;
     private Integer stopOrder;
 
-    @OneToMany(mappedBy = "tourstop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tourstop", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @LazyCollection(LazyCollectionOption.FALSE)
     List<TourStopImage> tourStopImages;
 
     public TourStop() {}
