@@ -53,7 +53,7 @@ public class TourService {
         Tour persistedTour = tourRepository.save(tourToCreate);
 
         //Map with image service
-        List<TourImage> images = imageService.mapImagesToBusinessImages(tourRequest.getImages(), persistedTour);
+        List<TourImage> images = imageService.mapTourImageRequestsToTourImages(tourRequest.getTourImages(), persistedTour);
         persistedTour.setTourImages(images);
 
 //        Map with tourStopService
@@ -92,7 +92,7 @@ public class TourService {
     public Tour updateTour(TourRequest tourRequest) {
         Tour oldTour = getTourByTourId(tourRequest.getId());
         oldTour.setTitle(tourRequest.getTitle());
-        oldTour.setTourImages(imageService.mapImagesToBusinessImages(tourRequest.getImages(), oldTour));
+        oldTour.setTourImages(imageService.mapTourImageRequestsToTourImages(tourRequest.getTourImages(), oldTour));
         oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(oldTour, tourRequest.getTourStopRequests()));
         oldTour.setDescription(tourRequest.getDescription());
         oldTour.setCity(tourRequest.getCity());

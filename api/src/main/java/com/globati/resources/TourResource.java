@@ -38,7 +38,7 @@ public class TourResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @GlobatiAuthentication
+//    @GlobatiAuthentication
     public Response updateTour(TourRequest tourRequest){
         return Response.ok(tourService.updateTour(tourRequest)).build();
     }

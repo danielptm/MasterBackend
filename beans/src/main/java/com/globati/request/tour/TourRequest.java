@@ -12,8 +12,8 @@ public class TourRequest {
     String street;
     String city;
     String country;
-    List<TourImageRequest> images;
-    List<TourStopRequest> tourStopRequests;
+    List<TourImageRequest> tourImages;
+    List<TourStopRequest> tourStops;
 
     public TourRequest() {
     }
@@ -28,8 +28,16 @@ public class TourRequest {
         this.street = street;
         this.city = city;
         this.country = country;
-        this.images = images;
-        this.tourStopRequests = tourStopRequests;
+        this.tourImages = images;
+        this.tourStops = tourStopRequests;
+    }
+
+    public List<TourImageRequest> getTourImages() {
+        return tourImages;
+    }
+
+    public void setTourImages(List<TourImageRequest> tourImages) {
+        this.tourImages = tourImages;
     }
 
     public Long getId() {
@@ -96,20 +104,12 @@ public class TourRequest {
         this.country = country;
     }
 
-    public List<TourImageRequest> getImages() {
-        return images;
-    }
-
-    public void setImages(List<TourImageRequest> images) {
-        this.images = images;
-    }
-
     public List<TourStopRequest> getTourStopRequests() {
-        return tourStopRequests;
+        return tourStops;
     }
 
     public void setTourStopRequests(List<TourStopRequest> tourStopRequests) {
-        this.tourStopRequests = tourStopRequests;
+        this.tourStops = tourStopRequests;
     }
 
     public Long getPropertyId() {
@@ -118,6 +118,14 @@ public class TourRequest {
 
     public void setPropertyId(Long propertyId) {
         this.propertyId = propertyId;
+    }
+
+    public List<TourStopRequest> getTourStops() {
+        return tourStops;
+    }
+
+    public void setTourStops(List<TourStopRequest> tourStops) {
+        this.tourStops = tourStops;
     }
 
     @Override
@@ -132,8 +140,8 @@ public class TourRequest {
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
-        sb.append(", images=").append(images);
-        sb.append(", tourStopRequests=").append(tourStopRequests);
+        sb.append(", images=").append(tourImages);
+        sb.append(", tourStopRequests=").append(tourStops);
         sb.append('}');
         return sb.toString();
     }

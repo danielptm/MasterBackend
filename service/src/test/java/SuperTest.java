@@ -2,6 +2,7 @@ import com.globati.dbmodel.Property;
 import com.globati.request.CreateProperty;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
+import com.globati.request.tour.TourStopImageRequest;
 import com.globati.request.tour.TourStopRequest;
 
 import java.util.UUID;
@@ -79,6 +80,11 @@ public class SuperTest {
     public static TourImageRequest getUniqueTourImageRequest() {
         TourImageRequest tourImageRequest = new TourImageRequest("PATH_" + getRandomString());
         return tourImageRequest;
+    }
+
+    public static TourStopImageRequest getUniqueTourStopImageRequest() {
+        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest(1L, "TOUR_STOP_IMAGE_REQUEST_PATH");
+        return tourStopImageRequest;
     }
 
     /**

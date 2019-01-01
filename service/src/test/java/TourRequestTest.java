@@ -46,7 +46,7 @@ public class TourRequestTest extends SuperTest{
 
         images.add(getUniqueTourImageRequest());
         images.add(getUniqueTourImageRequest());
-        tourRequest.setImages(images);
+        tourRequest.setTourImages(images);
 
         TourStopRequest tourStopRequest = getUniqueTourStopRequest();
 
@@ -68,7 +68,7 @@ public class TourRequestTest extends SuperTest{
 
         images.add(getUniqueTourImageRequest());
         images.add(getUniqueTourImageRequest());
-        tourRequest.setImages(images);
+        tourRequest.setTourImages(images);
 
         TourStopRequest tourStopRequest = getUniqueTourStopRequest();
 
@@ -92,55 +92,29 @@ public class TourRequestTest extends SuperTest{
     @Test
     public void testUpdateTour() throws UserNameIsNotUniqueException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
-
-        TourRequest tourRequest = new TourRequest();
-
-        tourRequest.setPropertyId(property.getId());
-        tourRequest.setCity("city");
-        tourRequest.setCountry("country");
-        tourRequest.setTitle("title");
-        tourRequest.setTargetLat(11.11);
-        tourRequest.setTargetLong(11.11);
-
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
         List<TourImageRequest> images = new ArrayList<>();
-
-        TourImageRequest tourImageRequest = new TourImageRequest("path");
-        TourImageRequest tourImageRequest2 = new TourImageRequest("path");
-
-        images.add(tourImageRequest);
-        images.add(tourImageRequest2);
-
-        tourRequest.setImages(images);
-
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
-
-        TourStopRequest tourStopRequest = new TourStopRequest();
-
-        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest(1L, "tourStopImagePath");
-        TourStopImageRequest tourStopImageRequest2 = new TourStopImageRequest(2L, "tourStopImagePath");
-
         List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
-        tourStopImageRequests.add(tourStopImageRequest);
-        tourStopImageRequests.add(tourStopImageRequest2);
 
-        tourStopRequest.setImages(tourStopImageRequests);
-
-        tourStopRequest.setCity("tourStopCity");
-        tourStopRequest.setCountry("tourStopCountry");
-        tourStopRequest.setStreet("tourStreet");
-        tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
-        tourStopRequest.setTargetLat(11.11);
-        tourStopRequest.setTargetLong(11.11);
-        tourStopRequest.setTitle("tourStopTitle");
-
+        //Add the data to the lists
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+        images.add(getUniqueTourImageRequest());
+        images.add(getUniqueTourImageRequest());
         tourStopRequests.add(tourStopRequest);
+
+        //Set the data toe TourRequest
+        tourRequest.setTourImages(images);
+        tourStopRequest.setImages(tourStopImageRequests);
         tourRequest.setTourStopRequests(tourStopRequests);
 
+        //Create the tour fromt the TourRequest
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
+        //Reuse the same tourRequest  but set data to the createdTour.
         tourRequest.setId(createdTour.getId());
-        tourRequest.getImages().get(0).setImagePath("UPDATED");
+        tourRequest.getTourImages().get(0).setPath("UPDATED");
         tourRequest.setTitle("UPDATED_TOUR_TITLE");
         tourRequest.getTourStopRequests().get(0).setTitle("UPDATED_TITLE");
 

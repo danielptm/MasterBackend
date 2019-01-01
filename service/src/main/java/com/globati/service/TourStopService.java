@@ -25,10 +25,25 @@ public class TourStopService {
     @Autowired
     TourStopImageRepository tourStopImageRepository;
 
+    @Autowired
+    ImageService imageService;
+
     private static final Logger log = LogManager.getLogger(TourStopService.class);
 
     public TourStop createTourStop(TourStop tour) {
         return tourStopRepository.save(tour);
+    }
+
+    public TourStop getTourStopById(Long id) {
+        TourStop tourStop = tourStopRepository.findOne(id);
+        List<TourStopImage> tourStopImages = tourStopImageRepository.getImagesByTourStopId(tourStop.getId());
+        tourStop.setTourStopImages(tourStopImages);
+        return tourStop;
+    }
+
+    public TourStop updateTourStop(TourStop tourStop) {
+        TourStop updatedTourStop = tourStopRepository.save(tourStop);
+        return getTourStopById(updatedTourStop.getId());
     }
 
     public List<TourStop> getTourStopsByTourId(Long id) {
@@ -44,34 +59,57 @@ public class TourStopService {
     public List<TourStop> mapRequestTourStopsToDbModelTourStops(Tour tour, List<TourStopRequest> tourStopRequests){
         List<TourStop> dbTourStops = new ArrayList<>();
 
-        for(TourStopRequest tourStopRequest : tourStopRequests){
+        for(TourStopRequest tourStopRequest : tourStopRequests) {
             List<TourStopImage> tourStopImages = new ArrayList<>();
-            TourStop dbTourStop = new TourStop();
-            dbTourStop.setStopOrder(tourStopRequest.getOrderNumber());
-            dbTourStop.setTour(tour);
-            dbTourStop.setActive(true);
-            dbTourStop.setCity(tourStopRequest.getCity());
-            dbTourStop.setCountry(tourStopRequest.getCountry());
-            dbTourStop.setDescription(tourStopRequest.getDescription());
-            dbTourStop.setStreet(tourStopRequest.getStreet());
-            dbTourStop.setTargetLat(tourStopRequest.getTargetLat());
-            dbTourStop.setTargetLong(tourStopRequest.getTargetLong());
-            dbTourStop.setTitle(tourStopRequest.getTitle());
-            dbTourStops.add(dbTourStop);
-
-            if(tourStopRequest.getImages() != null && tourStopRequest.getImages().size() > 0) {
-                TourStopImage tourStopImage = null;
-                for (TourStopImageRequest tourStopImageRequest : tourStopRequest.getImages()) {
-                    if (tourStopImageRequest.getId() != null) {
-                        tourStopImage = tourStopImageRepository.findOne(tourStopImageRequest.getId());
-                    }
-                    if (tourStopImage == null ) {
-                        tourStopImage = new TourStopImage(dbTourStop, tourStopImageRequest.getPath());
-                    }
-                    tourStopImages.add(tourStopImage);
-                }
+            TourStop tourStop = null;
+            if (tourStopRequest.getId() != null) {
+                tourStop = getTourStopById(tourStopRequest.getId());
             }
-            dbTourStop.setTourStopImages(tourStopImages);
+            if(tourStop == null) {
+                tourStop = new TourStop();
+                tourStop.setStopOrder(tourStopRequest.getOrderNumber());
+                tourStop.setTour(tour);
+                tourStop.setActive(true);
+                tourStop.setCity(tourStopRequest.getCity());
+                tourStop.setCountry(tourStopRequest.getCountry());
+                tourStop.setDescription(tourStopRequest.getDescription());
+                tourStop.setStreet(tourStopRequest.getStreet());
+                tourStop.setTargetLat(tourStopRequest.getTargetLat());
+                tourStop.setTargetLong(tourStopRequest.getTargetLong());
+                tourStop.setTitle(tourStopRequest.getTitle());
+                dbTourStops.add(tourStop);
+
+            } else {
+                tourStop.setStopOrder(tourStopRequest.getOrderNumber());
+                tourStop.setTour(tour);
+                tourStop.setActive(true);
+                tourStop.setCity(tourStopRequest.getCity());
+                tourStop.setCountry(tourStopRequest.getCountry());
+                tourStop.setDescription(tourStopRequest.getDescription());
+                tourStop.setStreet(tourStopRequest.getStreet());
+                tourStop.setTargetLat(tourStopRequest.getTargetLat());
+                tourStop.setTargetLong(tourStopRequest.getTargetLong());
+                tourStop.setTitle(tourStopRequest.getTitle());
+                dbTourStops.add(tourStop);
+            }
+            TourStop persistedTourStop = updateTourStop(tourStop);
+
+            tourStop.setTourStopImages(imageService.mapTourStopImageRequestsToTourStopImages(tourStopRequest.getImages(), persistedTourStop));
+            dbTourStops.add(tourStop);
+
+//            if(tourStopRequest.getImages() != null && tourStopRequest.getImages().size() > 0) {
+//                TourStopImage tourStopImage = null;
+//                for (TourStopImageRequest tourStopImageRequest : tourStopRequest.getImages()) {
+//                    if (tourStopImageRequest.getId() != null) {
+//                        tourStopImage = tourStopImageRepository.findOne(tourStopImageRequest.getId());
+//                    }
+//                    if (tourStopImage == null ) {
+//                        tourStopImage = new TourStopImage(dbTourStop, tourStopImageRequest.getPath());
+//                    }
+//                    tourStopImages.add(tourStopImage);
+//                }
+//            }
+//            dbTourStop.setTourStopImages(tourStopImages);
         }
         return dbTourStops;
     }

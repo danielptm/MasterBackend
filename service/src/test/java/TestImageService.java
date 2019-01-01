@@ -54,7 +54,7 @@ public class TestImageService extends SuperTest{
         images.add(tourImageRequest);
         images.add(tourImageRequest2);
 
-        tourRequest.setImages(images);
+        tourRequest.setTourImages(images);
 
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
 

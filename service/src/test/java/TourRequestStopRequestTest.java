@@ -64,8 +64,8 @@ public class TourRequestStopRequestTest extends SuperTest{
         images.add(tourImageRequest);
         images.add(tourImageRequest2);
 
-        tourRequest.setImages(images);
-        tourRequest2.setImages(images);
+        tourRequest.setTourImages(images);
+        tourRequest2.setTourImages(images);
 
 
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
@@ -85,7 +85,7 @@ public class TourRequestStopRequestTest extends SuperTest{
 
 
         tourRequest.setTourStopRequests(tourStopRequests);
-        tourRequest.setImages(images);
+        tourRequest.setTourImages(images);
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
