@@ -1,9 +1,6 @@
 package com.globati.service;
 
-import com.globati.dbmodel.Property;
-import com.globati.dbmodel.Tour;
-import com.globati.dbmodel.TourImage;
-import com.globati.dbmodel.TourStop;
+import com.globati.dbmodel.*;
 import com.globati.repository.TourRepository;
 import com.globati.request.tour.TourRequest;
 import com.globati.service.exceptions.ServiceException;
@@ -53,15 +50,19 @@ public class TourService {
         tourToCreate.setDescription(tourRequest.getDescription());
         tourToCreate.setTitle(tourRequest.getTitle());
 
+        Tour persistedTour = tourRepository.save(tourToCreate);
+
         //Map with image service
-        List<TourImage> images = imageService.mapImagesToBusinessImages(tourRequest.getImages(), tourToCreate);
-        tourToCreate.setTourImages(images);
+        List<TourImage> images = imageService.mapImagesToBusinessImages(tourRequest.getImages(), persistedTour);
+        persistedTour.setTourImages(images);
 
 //        Map with tourStopService
-        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(tourToCreate, tourRequest.getTourStopRequests());
-        tourToCreate.setTourStops(tourStops);
+        List<TourStop> tourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(persistedTour, tourRequest.getTourStopRequests());
+        persistedTour.setTourStops(tourStops);
 
-        return tourRepository.save(tourToCreate);
+        Tour persistedTourWithData = tourRepository.save(persistedTour);
+
+        return persistedTourWithData;
 
     }
 
@@ -69,13 +70,27 @@ public class TourService {
         List<Tour> tours = tourRepository.getToursByPropertyId(id);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
+            for(TourStop tourStop: tourStops) {
+                tourStop.setTourStopImages(imageService.getTourStopImagesByTourStopId(tourStop.getId()));
+            }
             tour.setTourStops(tourStops);
         }
         return tours;
     }
 
+    public Tour getTourByTourId(Long id) {
+        Tour tour = tourRepository.findOne(id);
+        List<TourStop> tourStops = tourStopService.getTourStopsByTourId(id);
+        for(TourStop tourStop: tourStops) {
+            List<TourStopImage> tourStopImages = imageService.getTourStopImagesByTourStopId(tourStop.getId());
+            tourStop.setTourStopImages(tourStopImages);
+        }
+        tour.setTourStops(tourStops);
+        return tour;
+    }
+
     public Tour updateTour(TourRequest tourRequest) {
-        Tour oldTour = tourRepository.findOne(tourRequest.getId());
+        Tour oldTour = getTourByTourId(tourRequest.getId());
         oldTour.setTitle(tourRequest.getTitle());
         oldTour.setTourImages(imageService.mapImagesToBusinessImages(tourRequest.getImages(), oldTour));
         oldTour.setTourStops(tourStopService.mapRequestTourStopsToDbModelTourStops(oldTour, tourRequest.getTourStopRequests()));
@@ -85,6 +100,7 @@ public class TourService {
         oldTour.setTargetLat(tourRequest.getTargetLat());
         oldTour.setTargetLong(tourRequest.getTargetLong());
         oldTour.setCountry(tourRequest.getCountry());
-        return tourRepository.save(oldTour);
+        Tour updatadTour = tourRepository.save(oldTour);
+        return getTourByTourId(updatadTour.getId());
     }
 }

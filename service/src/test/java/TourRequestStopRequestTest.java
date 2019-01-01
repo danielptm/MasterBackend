@@ -72,8 +72,8 @@ public class TourRequestStopRequestTest {
 
         List<TourImageRequest> images = new ArrayList<>();
 
-        TourImageRequest tourImageRequest = new TourImageRequest("path", "TOUR");
-        TourImageRequest tourImageRequest2 = new TourImageRequest("path", "TOUR");
+        TourImageRequest tourImageRequest = new TourImageRequest("path");
+        TourImageRequest tourImageRequest2 = new TourImageRequest("path");
 
         images.add(tourImageRequest);
         images.add(tourImageRequest2);

@@ -9,6 +9,9 @@ public class TourStopImageRequest {
         this.path = path;
     }
 
+    public TourStopImageRequest() {
+    }
+
     public Long getId() {
         return id;
     }

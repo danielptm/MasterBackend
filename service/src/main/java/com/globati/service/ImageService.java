@@ -4,7 +4,9 @@ package com.globati.service;
 
 import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourImage;
+import com.globati.dbmodel.TourStopImage;
 import com.globati.repository.TourImageRepository;
+import com.globati.repository.TourStopImageRepository;
 import com.globati.request.tour.TourImageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class ImageService {
 
     @Autowired
     TourImageRepository imageRepository;
+
+    @Autowired
+    TourStopImageRepository tourStopImageRepository;
 
     public java.util.List<TourImage> getImagesByTourId(Long id) {
         return imageRepository.getImagesByEntityId(id);
@@ -34,5 +39,9 @@ public class ImageService {
         }
 
         return businessImages;
+    }
+
+    public List<TourStopImage> getTourStopImagesByTourStopId(Long id) {
+        return tourStopImageRepository.getImagesByTourStopId(id);
     }
 }

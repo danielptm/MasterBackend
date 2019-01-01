@@ -2,11 +2,12 @@ package com.globati.request.tour;
 
 public class TourImageRequest {
     String imagePath;
-    String imageType;
 
-    public TourImageRequest(String imagePath, String imageType) {
+    public TourImageRequest(String imagePath) {
         this.imagePath = imagePath;
-        this.imageType = imageType;
+    }
+
+    public TourImageRequest() {
     }
 
     public String getImagePath() {
@@ -17,12 +18,5 @@ public class TourImageRequest {
         this.imagePath = imagePath;
     }
 
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
 
 }

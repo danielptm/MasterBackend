@@ -46,18 +46,7 @@ public class TourStopService {
 
         for(TourStopRequest tourStopRequest : tourStopRequests){
             List<TourStopImage> tourStopImages = new ArrayList<>();
-
-            if(tourStopRequest.getImages() != null) {
-                for (TourStopImageRequest tourStopImageRequest : tourStopRequest.getImages()) {
-                    TourStop tourStop = tourStopImageRepository.findOne(tourStopImageRequest.getId());
-                    TourStopImage tourStopImage = new TourStopImage(tourStop, tourStopImageRequest.getPath());
-                    tourStopImages.add(tourStopImage);
-                }
-            }
-
             TourStop dbTourStop = new TourStop();
-
-            dbTourStop.setTourStopImages(tourStopImages);
             dbTourStop.setStopOrder(tourStopRequest.getOrderNumber());
             dbTourStop.setTour(tour);
             dbTourStop.setActive(true);
@@ -69,6 +58,20 @@ public class TourStopService {
             dbTourStop.setTargetLong(tourStopRequest.getTargetLong());
             dbTourStop.setTitle(tourStopRequest.getTitle());
             dbTourStops.add(dbTourStop);
+
+            if(tourStopRequest.getImages() != null && tourStopRequest.getImages().size() > 0) {
+                TourStopImage tourStopImage = null;
+                for (TourStopImageRequest tourStopImageRequest : tourStopRequest.getImages()) {
+                    if (tourStopImageRequest.getId() != null) {
+                        tourStopImage = tourStopImageRepository.findOne(tourStopImageRequest.getId());
+                    }
+                    if (tourStopImage == null ) {
+                        tourStopImage = new TourStopImage(dbTourStop, tourStopImageRequest.getPath());
+                    }
+                    tourStopImages.add(tourStopImage);
+                }
+            }
+            dbTourStop.setTourStopImages(tourStopImages);
         }
         return dbTourStops;
     }
