@@ -63,19 +63,7 @@ public class PropertyResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(CreateProperty createProperty) throws UserNameIsNotUniqueException, ServiceException {
-            Property employee = this.propertyService.createProperty(
-                    createProperty.getFirstName(),
-                    createProperty.getEmail(),
-                    createProperty.getUsername(),
-                    createProperty.getPassword(),
-                    createProperty.getTargetLat(),
-                    createProperty.getTargetLong(),
-                    createProperty.getImage(),
-                    createProperty.getStreet(),
-                    createProperty.getCity(),
-                    createProperty.getCountry()
-            );
-
+            Property employee = this.propertyService.createProperty(createProperty);
             return Response.ok(employee).build();
 
     }

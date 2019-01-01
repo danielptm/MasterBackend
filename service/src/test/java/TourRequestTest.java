@@ -40,41 +40,18 @@ public class TourRequestTest extends SuperTest{
     @Test
     public void testcreateTour() throws ServiceException, UserNameIsNotUniqueException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
-        TourRequest tourRequest = new TourRequest();
-
-        tourRequest.setPropertyId(property.getId());
-        tourRequest.setCity("city");
-        tourRequest.setCountry("country");
-        tourRequest.setTitle("title");
-        tourRequest.setTargetLat(11.11);
-        tourRequest.setTargetLong(11.11);
-
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
         List<TourImageRequest> images = new ArrayList<>();
-
-        TourImageRequest tourImageRequest = new TourImageRequest("path");
-        TourImageRequest tourImageRequest2 = new TourImageRequest("path");
-
-        images.add(tourImageRequest);
-        images.add(tourImageRequest2);
-
-        tourRequest.setImages(images);
-
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
 
-        TourStopRequest tourStopRequest = new TourStopRequest();
+        images.add(getUniqueTourImageRequest());
+        images.add(getUniqueTourImageRequest());
+        tourRequest.setImages(images);
 
-        tourStopRequest.setCity("tourStopCity");
-        tourStopRequest.setCountry("tourStopCountry");
-        tourStopRequest.setStreet("tourStreet");
-        tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
-        tourStopRequest.setTargetLat(11.11);
-        tourStopRequest.setTargetLong(11.11);
-        tourStopRequest.setTitle("tourStopTitle");
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
-
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
@@ -85,42 +62,18 @@ public class TourRequestTest extends SuperTest{
     @Test
     public void testGetToursByPropertyId() throws UserNameIsNotUniqueException, ServiceException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
-        TourRequest tourRequest = new TourRequest();
-
-        tourRequest.setPropertyId(property.getId());
-        tourRequest.setCity("city");
-        tourRequest.setCountry("country");
-        tourRequest.setTitle("title");
-        tourRequest.setTargetLat(11.11);
-        tourRequest.setTargetLong(11.11);
-
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
         List<TourImageRequest> images = new ArrayList<>();
-
-        TourImageRequest tourImageRequest = new TourImageRequest("path");
-        TourImageRequest tourImageRequest2 = new TourImageRequest("path");
-
-        images.add(tourImageRequest);
-        images.add(tourImageRequest2);
-
-        tourRequest.setImages(images);
-
-
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
 
-        TourStopRequest tourStopRequest = new TourStopRequest();
+        images.add(getUniqueTourImageRequest());
+        images.add(getUniqueTourImageRequest());
+        tourRequest.setImages(images);
 
-        tourStopRequest.setCity("tourStopCity");
-        tourStopRequest.setCountry("tourStopCountry");
-        tourStopRequest.setStreet("tourStreet");
-        tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
-        tourStopRequest.setTargetLat(11.11);
-        tourStopRequest.setTargetLong(11.11);
-        tourStopRequest.setTitle("tourStopTitle");
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
-
 
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
