@@ -23,17 +23,13 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TourRequestTest {
+public class TourRequestTest extends SuperTest{
 
     @Autowired
     TourService tourService;
 
     @Autowired
     PropertyService propertyService;
-
-    public String getRandomString() {
-        return UUID.randomUUID().toString();
-    }
 
     @Before
     public void setup() {
