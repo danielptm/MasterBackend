@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestRecommendationService {
+public class TestRecommendationService extends SuperTest {
 
     @Autowired
     RecommendationService recommendationService;
@@ -51,10 +51,7 @@ public class TestRecommendationService {
     public void prep() throws ServiceException, UserNameIsNotUniqueException, UserDoesNotExistException, IllegalUserNameException {
         String randomString = UUID.randomUUID().toString();
         MockitoAnnotations.initMocks(this);
-        this.commonProperty = propertyService.createProperty(
-                "check this2", randomString+"@me.com", randomString, "secret password",
-                59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa"
-        );
+        this.commonProperty = propertyService.createProperty(getUniquePropertyInstance());
         when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockApiToken");
     }
 
@@ -94,7 +91,7 @@ public class TestRecommendationService {
     public void updateRecommendationAndRecommendationImages() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
 
         List<String> images = new ArrayList<>();
 
@@ -126,7 +123,7 @@ public class TestRecommendationService {
     public void updateRecommendationAndRecommendationImagesWithParameters() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
 
         List<String> images = new ArrayList<>();
         List<String> newImages = new ArrayList<>();
@@ -171,7 +168,7 @@ public class TestRecommendationService {
     public void getRecommendationsFromItemsOfProperty() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Property e = propertyService.createProperty("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property e = propertyService.createProperty(getUniquePropertyInstance());
 
         Property employee =  propertyService.getPropertyById(e.getId());
 

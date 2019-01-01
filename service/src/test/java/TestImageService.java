@@ -22,7 +22,7 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestImageService {
+public class TestImageService extends SuperTest{
 
     @Autowired
     ImageService imageService;
@@ -33,24 +33,10 @@ public class TestImageService {
     @Autowired
     TourService tourService;
 
-    public String getRandomString() {
-        return UUID.randomUUID().toString();
-    }
 
     @Test
     public void testGetImagesByTourId() throws UserNameIsNotUniqueException, ServiceException {
-        Property property = propertyService.createProperty(
-                getRandomString(),
-                "email",
-                getRandomString(),
-                "password",
-                11.11,
-                11.11,
-                "image",
-                "street",
-                "city",
-                "country"
-        );
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
 
         tourRequest.setPropertyId(property.getId());

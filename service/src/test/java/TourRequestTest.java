@@ -39,18 +39,7 @@ public class TourRequestTest extends SuperTest{
 
     @Test
     public void testcreateTour() throws ServiceException, UserNameIsNotUniqueException {
-        Property property = propertyService.createProperty(
-                getRandomString(),
-                        "email",
-                getRandomString(),
-                "password",
-                11.11,
-                11.11,
-                "image",
-                "street",
-                "city",
-                "country"
-                );
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
 
         tourRequest.setPropertyId(property.getId());
@@ -95,18 +84,7 @@ public class TourRequestTest extends SuperTest{
 
     @Test
     public void testGetToursByPropertyId() throws UserNameIsNotUniqueException, ServiceException {
-        Property property = propertyService.createProperty(
-                getRandomString(),
-                "email",
-                getRandomString(),
-                "password",
-                11.11,
-                11.11,
-                "image",
-                "street",
-                "city",
-                "country"
-        );
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
 
         tourRequest.setPropertyId(property.getId());
@@ -160,18 +138,8 @@ public class TourRequestTest extends SuperTest{
 
     @Test
     public void testUpdateTour() throws UserNameIsNotUniqueException {
-        Property property = propertyService.createProperty(
-                getRandomString(),
-                "email",
-                getRandomString(),
-                "password",
-                11.11,
-                11.11,
-                "image",
-                "street",
-                "city",
-                "country"
-        );
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
+
         TourRequest tourRequest = new TourRequest();
 
         tourRequest.setPropertyId(property.getId());

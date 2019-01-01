@@ -5,6 +5,7 @@ import com.globati.HelpObjects.ApiKey;
 import com.globati.dbmodel.*;
 import com.globati.enums.Verified;
 import com.globati.repository.PropertyRepository;
+import com.globati.request.CreateProperty;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.service.exceptions.UserDoesNotExistException;
@@ -130,36 +131,33 @@ public class PropertyService {
 
     /**
      * Creates a new employee
-     *
-     * @param name
-     * @param email
-     * @param username
-     * @param password
-     * @param latvalue
-     * @param longvalue
-     * @param street
-     * @param city
-     * @param country
-     * @return
      * @throws ServiceException org.hibernate.exception.ConstraintViolationException
      */
 
 
-    public Property createProperty(
-            String name, String email, String username, String password, double latvalue,
-            double longvalue, String image, String street, String city, String country) throws UserNameIsNotUniqueException{
+    public Property createProperty(CreateProperty createProperty) throws UserNameIsNotUniqueException{
         Property employee = null;
         Property savedProperty = null;
         try {
-            employee = new Property(name, email, username, latvalue, longvalue, image, street, city, country, Verified.STANDARD);
+            employee = new Property(
+                    createProperty.getFirstName(),
+                    createProperty.getEmail(),
+                    createProperty.getUsername(),
+                    createProperty.getTargetLat(),
+                    createProperty.getTargetLong(),
+                    createProperty.getImage(),
+                    createProperty.getStreet(),
+                    createProperty.getCity(),
+                    createProperty.getCountry(),
+                    Verified.STANDARD);
             employee.setRecommendations(new ArrayList<>());
             savedProperty = propertyRepository.save(employee);
-            propertyInfoService.createPropertyInfo(savedProperty.getId(), password);
+            propertyInfoService.createPropertyInfo(savedProperty.getId(), createProperty.getPassword());
             return savedProperty;
         } catch (DataIntegrityViolationException e) {
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createProperty()");
             e.printStackTrace();
-            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: " + username);
+            throw new UserNameIsNotUniqueException("A username that is already used was attempted to be created a profile with: " + createProperty.getUsername());
         } catch (Exception e) {
             e.printStackTrace();
         }

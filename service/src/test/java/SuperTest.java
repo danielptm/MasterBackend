@@ -1,4 +1,5 @@
 import com.globati.dbmodel.Property;
+import com.globati.request.CreateProperty;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopRequest;
@@ -7,7 +8,7 @@ import java.util.UUID;
 
 public class SuperTest {
 
-    private static Property property;
+    private static CreateProperty property;
 
     protected SuperTest() {};
 
@@ -21,34 +22,34 @@ public class SuperTest {
      */
     private static void createSingletonInstanceOfProperty() {
         if (property == null) {
-           property = new Property();
+           property = new CreateProperty();
            property.setFirstName("SINGLETON_PROPERTY_NAME");
            property.setEmail("SINGLETON_PROPERTY_EMAIL");
            property.setImage("SINGLETON_PROPERTY_IMAGE");
-           property.setAbout("SINGLETON_PROPERTY_ABOUT");
            property.setCity("SINGLETON_PROPERTY_CITY");
            property.setCity("SINGLETON_PROPERTY_STREET");
            property.setCity("SINGLETON_PROPERTY_COUNTRY");
-           property.setGlobatiUsername("SINGLETON_PROPERTY_USERNAME");
-           property.setPropLat(11.11);
-           property.setPropLong(111.11);
+           property.setUsername("SINGLETON_PROPERTY_USERNAME");
+            property.setPassword("SINGLETON_PROPERTY_PASSWORD");
+            property.setTargetLat(11.11);
+           property.setTargetLong(111.11);
         }
     }
 
-    public static Property getUniquePropertyInstance() {
+    public static CreateProperty getUniquePropertyInstance() {
         String uniqueMarker = getRandomString();
-        Property property = new Property();
+        CreateProperty property = new CreateProperty();
         property.setFirstName("UNIQUE_PROPERTY_NAME_" + uniqueMarker);
         property.setEmail("UNIQUE_PROPERTY_EMAIL_" + uniqueMarker);
-        property.setAbout("UNIQUE_PROPERTY_ABOUT");
         property.setCity("UNIQUE_PROPERTY_CITY");
-        property.setGlobatiUsername("UNIQUE_PROPERTY_USERNAME_" + uniqueMarker);
-        property.setPropLat(11.11);
-        property.setPropLong(111.11);
+        property.setUsername("UNIQUE_PROPERTY_USERNAME_" + uniqueMarker);
+        property.setPassword("UNIQUE_PROPERTY_PASSWORD");
+        property.setTargetLat(11.11);
+        property.setTargetLong(111.11);
         return property;
     }
 
-    public static Property getSingletonPropertyInstance() {
+    public static CreateProperty getSingletonPropertyInstance() {
         if(property == null) {
             createSingletonInstanceOfProperty();
         }

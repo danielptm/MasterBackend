@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestPropertyService {
+public class TestPropertyService extends SuperTest{
 
 	@InjectMocks
 	@Autowired
@@ -60,17 +60,14 @@ public class TestPropertyService {
 	public void prep() throws UserNameIsNotUniqueException {
 		String randomString = UUID.randomUUID().toString();
 		MockitoAnnotations.initMocks(this);
-		this.commonProperty = propertyService.createProperty(
-				"check this2", randomString+"@me.com", randomString, "secret password",
-				59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa"
-		);
+		this.commonProperty = propertyService.createProperty(getUniquePropertyInstance());
 	}
 
 
 	@Test
 	public void createPropertyAndGetPropertyById() throws ServiceException, FileNotFoundException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String randomString = UUID.randomUUID().toString();
-		Property employee4 = propertyService.createProperty("check this2", randomString+"@me.com", randomString, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+		Property employee4 = propertyService.createProperty(getUniquePropertyInstance());
 		Property employee5 = this.propertyService.getPropertyById(employee4.getId());
 		Assert.assertEquals(employee4.getId(), employee5.getId());
 	}
@@ -78,14 +75,14 @@ public class TestPropertyService {
 	@Ignore
 	public void createPropertyAndNotSucceedBecauseOfReservedWordForUsername() throws ServiceException, UserDoesNotExistException, FileNotFoundException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String randomString = UUID.randomUUID().toString();
-		Property employee4 = propertyService.createProperty("check this2", randomString+"@me.com", "London", "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+		Property employee4 = propertyService.createProperty(getUniquePropertyInstance());
 
 	}
 
 	@Test
 	public void updateProperty() throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String randomString = UUID.randomUUID().toString();
-		Property e = propertyService.createProperty("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Property e = propertyService.createProperty(getUniquePropertyInstance());
 		Property e2 = propertyService.getPropertyById(e.getId());
 		e2.setFirstName("zebra");
 		Property e3 = propertyService.updateProperty(e2);
@@ -106,7 +103,7 @@ public class TestPropertyService {
 	@Ignore
 	public void allowAuserWithReservedWordToUpdateTheirProfile() throws IOException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String randomString = UUID.randomUUID().toString();
-		Property e = propertyService.createProperty("Daniel", "daniel@globati.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Property e = propertyService.createProperty(getUniquePropertyInstance());
 		e.setGlobatiUsername("London");
 		propertyService.updateProperty(e);
 		Assert.assertEquals("London", e.getGlobatiUsername());
@@ -122,7 +119,7 @@ public class TestPropertyService {
 
 		when(jwtService.buildJwt(Mockito.anyString())).thenReturn("mockApiToken");
 
-		Property e1 = this.propertyService.createProperty("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Property e1 = this.propertyService.createProperty(getUniquePropertyInstance());
 		PropertyAndItems items = propertyService.getItemsForProperty(e1.getGlobatiUsername());
 		Assert.assertNotNull(items.getProperty());
 
@@ -131,7 +128,7 @@ public class TestPropertyService {
 	@Test
 	public void inrementCounter() throws ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
 		String uid = UUID.randomUUID().toString();
-		Property e1 = this.propertyService.createProperty("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Property e1 = this.propertyService.createProperty(getUniquePropertyInstance());
 		Property e2 = propertyService.incrementCounter(e1);
 		Assert.assertEquals(1, e2.getVisitCounter().intValue());
 		Property e3 = propertyService.incrementCounter(e2);
@@ -154,8 +151,8 @@ public class TestPropertyService {
 
 	@Test(expected = UserNameIsNotUniqueException.class)
 	public void attempttoCreatePropertyButFailBecauseUsernameAlreadyExists() throws UserDoesNotExistException, UserNameIsNotUniqueException, ServiceException, IllegalUserNameException {
-		Property e1 = this.propertyService.createProperty("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
-		Property e2 = this.propertyService.createProperty("Daniel", randomString+"@me.com", randomString, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+		Property e1 = this.propertyService.createProperty(getSingletonPropertyInstance());
+		Property e2 = this.propertyService.createProperty(getSingletonPropertyInstance());
 	}
 
 	@Test

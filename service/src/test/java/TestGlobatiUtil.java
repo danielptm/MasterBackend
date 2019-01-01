@@ -34,7 +34,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestGlobatiUtil {
+public class TestGlobatiUtil extends SuperTest{
 
     private static final Logger log = LogManager.getLogger(TestGlobatiUtil.class);
 
@@ -58,7 +58,7 @@ public class TestGlobatiUtil {
         String uid = UUID.randomUUID().toString();
         File file = new File( getClass().getClassLoader().getResource("test_resources/oasishostel.png").getFile() );
         InputStream fis = new FileInputStream(file);
-        Property employee = propertyService.createProperty("Daniel",  uid+"@me.com", uid, "secret password", 59.336019, 18.055262, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
 
 
     }
@@ -88,7 +88,7 @@ public class TestGlobatiUtil {
     public void testCheckPassword() throws FileNotFoundException, ServiceException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
         String uid = UUID.randomUUID().toString();
 
-        Property employee = propertyService.createProperty("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
 
         Property employee1 = propertyService.getPropertyById(employee.getId());
 
@@ -106,7 +106,7 @@ public class TestGlobatiUtil {
 
         String uid = UUID.randomUUID().toString();
 
-        Property employee = propertyService.createProperty("check this2", uid+"@me.com", uid, "secret password", 59.336038, 18.055268, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
 
         PropertyInfo ei = new PropertyInfo(employee.getId());
 

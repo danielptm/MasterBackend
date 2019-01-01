@@ -13,7 +13,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestJwt {
+public class TestJwt extends SuperTest{
 
 
     @Autowired

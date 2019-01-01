@@ -23,7 +23,7 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class PropertyInfoTest {
+public class PropertyInfoTest extends SuperTest{
 
     @Autowired
     PropertyService propertyService;
@@ -33,8 +33,8 @@ public class PropertyInfoTest {
 
     @Test
     public void testCreatePropertyInfo() throws ServiceException, UserNameIsNotUniqueException {
-        String uid = UUID.randomUUID().toString();
-        Property employee = propertyService.createProperty("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = propertyService.createProperty(getUniquePropertyInstance());
+
         PropertyInfo e2 = propertyInfoService.getPropertyInfoByPropertyId(employee.getId());
 
         Assert.assertEquals(employee.getId(), e2.getPropertyId());
@@ -48,7 +48,7 @@ public class PropertyInfoTest {
 
         String uid = UUID.randomUUID().toString();
         String uid2 = UUID.randomUUID().toString();
-        Property employee = this.propertyService.createProperty("Daniel", uid+"@me.com", uid, "secret password", 23.234, 23.23, "image", "2308 n 44 st", "seattle", "usa");
+        Property employee = this.propertyService.createProperty(getUniquePropertyInstance());
 
         PropertyInfo propertyInfo = propertyInfoService.createPropertyInfo(employee.getId(), "hi");
 

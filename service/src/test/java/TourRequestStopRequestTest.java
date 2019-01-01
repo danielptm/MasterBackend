@@ -23,7 +23,7 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TourRequestStopRequestTest {
+public class TourRequestStopRequestTest extends SuperTest{
 
     @Autowired
     TourStopService tourStopService;
@@ -34,24 +34,10 @@ public class TourRequestStopRequestTest {
     @Autowired
     TourService tourService;
 
-    public String getRandomString() {
-        return UUID.randomUUID().toString();
-    }
 
     @Test
     public void getTourStopsByTourId() throws UserNameIsNotUniqueException, ServiceException {
-        Property property = propertyService.createProperty(
-                "propertyName",
-                getRandomString() + "@me.com",
-                getRandomString() + "@me.com",
-                "password",
-                11.11,
-                11.11,
-                "image",
-                "street",
-                "city",
-                "country"
-        );
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
 
         tourRequest.setPropertyId(property.getId());
