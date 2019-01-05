@@ -1,6 +1,7 @@
 import com.globati.dbmodel.Property;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
+import com.globati.request.tour.TourStopImageRequest;
 import com.globati.request.tour.TourStopRequest;
 import com.globati.service.ImageService;
 import com.globati.service.PropertyService;
@@ -38,6 +39,7 @@ public class TestImageService extends SuperTest{
     public void testGetImagesByTourId() throws UserNameIsNotUniqueException, ServiceException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
 
         tourRequest.setPropertyId(property.getId());
         tourRequest.setCity("city");
@@ -64,10 +66,12 @@ public class TestImageService extends SuperTest{
         tourStopRequest.setCountry("tourStopCountry");
         tourStopRequest.setStreet("tourStreet");
         tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
         tourStopRequest.setTargetLat(11.11);
         tourStopRequest.setTargetLong(11.11);
         tourStopRequest.setTitle("tourStopTitle");
+
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+        tourStopRequest.setImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);

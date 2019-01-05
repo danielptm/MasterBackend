@@ -83,7 +83,8 @@ public class SuperTest {
     }
 
     public static TourStopImageRequest getUniqueTourStopImageRequest() {
-        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest(1L, "TOUR_STOP_IMAGE_REQUEST_PATH");
+        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest();
+        tourStopImageRequest.setPath("TOUR_STOP_IMAGE_REQUEST_PATH");
         return tourStopImageRequest;
     }
 
@@ -93,12 +94,10 @@ public class SuperTest {
      */
     public static TourStopRequest getUniqueTourStopRequest() {
         TourStopRequest tourStopRequest = new TourStopRequest();
-
         tourStopRequest.setCity("tourStopCity");
         tourStopRequest.setCountry("tourStopCountry");
         tourStopRequest.setStreet("tourStreet");
         tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
         tourStopRequest.setTargetLat(11.11);
         tourStopRequest.setTargetLong(11.11);
         tourStopRequest.setTitle("tourStopTitle");

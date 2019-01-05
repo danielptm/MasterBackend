@@ -1,7 +1,9 @@
 import com.globati.dbmodel.Property;
 import com.globati.dbmodel.TourStop;
+import com.globati.dbmodel.TourStopImage;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
+import com.globati.request.tour.TourStopImageRequest;
 import com.globati.request.tour.TourStopRequest;
 import com.globati.service.PropertyService;
 import com.globati.service.TourService;
@@ -39,6 +41,7 @@ public class TourRequestStopRequestTest extends SuperTest{
     public void getTourStopsByTourId() throws UserNameIsNotUniqueException, ServiceException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = new TourRequest();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
 
         tourRequest.setPropertyId(property.getId());
         tourRequest.setCity("city");
@@ -61,11 +64,21 @@ public class TourRequestStopRequestTest extends SuperTest{
         TourImageRequest tourImageRequest = new TourImageRequest("path");
         TourImageRequest tourImageRequest2 = new TourImageRequest("path");
 
+        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest();
+        tourImageRequest.setPath("path");
+
+        TourStopImageRequest tourStopImageRequest2 = new TourStopImageRequest();
+        tourImageRequest.setPath("path");
+
         images.add(tourImageRequest);
         images.add(tourImageRequest2);
 
         tourRequest.setTourImages(images);
         tourRequest2.setTourImages(images);
+
+        tourStopImageRequests.add(tourStopImageRequest);
+        tourStopImageRequests.add(tourStopImageRequest2);
+
 
 
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
@@ -76,10 +89,11 @@ public class TourRequestStopRequestTest extends SuperTest{
         tourStopRequest.setCountry("tourStopCountry");
         tourStopRequest.setStreet("tourStreet");
         tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setId(1L);
         tourStopRequest.setTargetLat(11.11);
         tourStopRequest.setTargetLong(11.11);
         tourStopRequest.setTitle("tourStopTitle");
+
+        tourStopRequest.setImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
 
@@ -91,14 +105,16 @@ public class TourRequestStopRequestTest extends SuperTest{
 
         List<TourStop> mappedTourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(createdTour, tourStopRequests);
 
-        List<TourStop> createdStops = new ArrayList<>();
+        List<TourStop> retrievedTourStops = tourStopService.getTourStopsByTourId(createdTour.getId());
 
-        for(TourStop ts: mappedTourStops) {
-            TourStop savedTs = tourStopService.createTourStop(ts);
-            createdStops.add(savedTs);
-        }
+//        List<TourStop> createdStops = new ArrayList<>();
+//
+//        for(TourStop ts: retrievedTourStops) {
+//            TourStop savedTs = tourStopService.createTourStop(ts);
+//            createdStops.add(savedTs);
+//        }
 
-        createdStops.forEach((ts) -> {
+        retrievedTourStops.forEach((ts) -> {
             // Test that the a list of TourStopRequest is returned by the tourId.
             Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
         });

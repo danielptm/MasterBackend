@@ -41,7 +41,13 @@ public class TourRequestTest extends SuperTest{
     public void testcreateTour() throws ServiceException, UserNameIsNotUniqueException {
         Property property = propertyService.createProperty(getUniquePropertyInstance());
         TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
+
         List<TourImageRequest> images = new ArrayList<>();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
+
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
 
         images.add(getUniqueTourImageRequest());
@@ -49,6 +55,7 @@ public class TourRequestTest extends SuperTest{
         tourRequest.setTourImages(images);
 
         TourStopRequest tourStopRequest = getUniqueTourStopRequest();
+        tourStopRequest.setImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
@@ -65,12 +72,17 @@ public class TourRequestTest extends SuperTest{
         TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
         List<TourImageRequest> images = new ArrayList<>();
         List<TourStopRequest> tourStopRequests = new ArrayList<>();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
 
         images.add(getUniqueTourImageRequest());
         images.add(getUniqueTourImageRequest());
         tourRequest.setTourImages(images);
 
         TourStopRequest tourStopRequest = getUniqueTourStopRequest();
+
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+
+        tourStopRequest.setImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
