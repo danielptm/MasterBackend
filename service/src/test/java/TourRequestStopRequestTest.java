@@ -39,36 +39,19 @@ public class TourRequestStopRequestTest extends SuperTest{
 
     @Test
     public void getTourStopsByTourId() throws UserNameIsNotUniqueException, ServiceException {
-        Property property = propertyService.createProperty(getUniquePropertyInstance());
-        TourRequest tourRequest = new TourRequest();
         List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
-
-        tourRequest.setPropertyId(property.getId());
-        tourRequest.setCity("city");
-        tourRequest.setCountry("country");
-        tourRequest.setTitle("title");
-        tourRequest.setTargetLat(11.11);
-        tourRequest.setTargetLong(11.11);
-
-        TourRequest tourRequest2 = new TourRequest();
-
-        tourRequest2.setPropertyId(property.getId());
-        tourRequest2.setCity("city");
-        tourRequest2.setCountry("country");
-        tourRequest2.setTitle("title");
-        tourRequest2.setTargetLat(11.11);
-        tourRequest2.setTargetLong(11.11);
-
         List<TourImageRequest> images = new ArrayList<>();
+        List<TourStopRequest> tourStopRequests = new ArrayList<>();
 
-        TourImageRequest tourImageRequest = new TourImageRequest("path");
-        TourImageRequest tourImageRequest2 = new TourImageRequest("path");
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
+        TourRequest tourRequest2 = getATourRequestWithGivenPropertyId(property.getId());
 
-        TourStopImageRequest tourStopImageRequest = new TourStopImageRequest();
-        tourImageRequest.setImagePath("path");
+        TourImageRequest tourImageRequest = getUniqueTourImageRequest();
+        TourImageRequest tourImageRequest2 = getUniqueTourImageRequest();
 
-        TourStopImageRequest tourStopImageRequest2 = new TourStopImageRequest();
-        tourImageRequest.setImagePath("path");
+        TourStopImageRequest tourStopImageRequest = getUniqueTourStopImageRequest();
+        TourStopImageRequest tourStopImageRequest2 = getUniqueTourStopImageRequest();
 
         images.add(tourImageRequest);
         images.add(tourImageRequest2);
@@ -79,22 +62,9 @@ public class TourRequestStopRequestTest extends SuperTest{
         tourStopImageRequests.add(tourStopImageRequest);
         tourStopImageRequests.add(tourStopImageRequest2);
 
-
-
-        List<TourStopRequest> tourStopRequests = new ArrayList<>();
-
-        TourStopRequest tourStopRequest = new TourStopRequest();
-
-        tourStopRequest.setCity("tourStopCity");
-        tourStopRequest.setCountry("tourStopCountry");
-        tourStopRequest.setStreet("tourStreet");
-        tourStopRequest.setDescription("tourStopDescription");
-        tourStopRequest.setTargetLat(11.11);
-        tourStopRequest.setTargetLong(11.11);
-        tourStopRequest.setTitle("tourStopTitle");
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
 
         tourStopRequest.setTourStopImages(tourStopImageRequests);
-
         tourStopRequests.add(tourStopRequest);
 
 
@@ -106,14 +76,7 @@ public class TourRequestStopRequestTest extends SuperTest{
         List<TourStop> mappedTourStops = tourStopService.mapRequestTourStopsToDbModelTourStops(createdTour, tourStopRequests);
 
         List<TourStop> retrievedTourStops = tourStopService.getTourStopsByTourId(createdTour.getId());
-
-//        List<TourStop> createdStops = new ArrayList<>();
-//
-//        for(TourStop ts: retrievedTourStops) {
-//            TourStop savedTs = tourStopService.createTourStop(ts);
-//            createdStops.add(savedTs);
-//        }
-
+        
         retrievedTourStops.forEach((ts) -> {
             // Test that the a list of TourStopRequest is returned by the tourId.
             Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
