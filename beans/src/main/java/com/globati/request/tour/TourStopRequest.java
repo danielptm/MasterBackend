@@ -12,7 +12,7 @@ public class TourStopRequest {
     String city;
     String country;
     Integer orderNumber;
-    List<TourStopImageRequest> images;
+    List<TourStopImageRequest> tourStopImages;
 
     public TourStopRequest() {}
 
@@ -100,12 +100,12 @@ public class TourStopRequest {
         this.country = country;
     }
 
-    public List<TourStopImageRequest> getImages() {
-        return images;
+    public List<TourStopImageRequest> getTourStopImages() {
+        return tourStopImages;
     }
 
-    public void setImages(List<TourStopImageRequest> images) {
-        this.images = images;
+    public void setTourStopImages(List<TourStopImageRequest> tourStopImages) {
+        this.tourStopImages = tourStopImages;
     }
 
     @Override
@@ -119,7 +119,7 @@ public class TourStopRequest {
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
-        sb.append(", images=").append(images);
+        sb.append(", images=").append(tourStopImages);
         sb.append('}');
         return sb.toString();
     }

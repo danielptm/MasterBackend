@@ -55,7 +55,7 @@ public class TourRequestTest extends SuperTest{
         tourRequest.setTourImages(images);
 
         TourStopRequest tourStopRequest = getUniqueTourStopRequest();
-        tourStopRequest.setImages(tourStopImageRequests);
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
@@ -63,6 +63,8 @@ public class TourRequestTest extends SuperTest{
         com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
         Assert.assertNotNull(createdTour);
+        Assert.assertNotNull(createdTour.getTourStops());
+        Assert.assertNotNull(createdTour.getTourStops().get(0).getTourStopImages().get(0).getImagePath());
     }
 
 
@@ -82,7 +84,7 @@ public class TourRequestTest extends SuperTest{
 
         tourStopImageRequests.add(getUniqueTourStopImageRequest());
 
-        tourStopRequest.setImages(tourStopImageRequests);
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);
@@ -118,7 +120,7 @@ public class TourRequestTest extends SuperTest{
 
         //Set the data toe TourRequest
         tourRequest.setTourImages(images);
-        tourStopRequest.setImages(tourStopImageRequests);
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
         tourRequest.setTourStopRequests(tourStopRequests);
 
         //Create the tour fromt the TourRequest
@@ -126,23 +128,23 @@ public class TourRequestTest extends SuperTest{
 
         //Reuse the same tourRequest  but set data to the createdTour.
         tourRequest.setId(createdTour.getId());
-        tourRequest.getTourImages().get(0).setPath("UPDATED");
+        tourRequest.getTourImages().get(0).setImagePath("UPDATED");
         tourRequest.setTitle("UPDATED_TOUR_TITLE");
         tourRequest.getTourStopRequests().get(0).setTitle("UPDATED_TITLE");
 
         com.globati.dbmodel.Tour secondCreatedTour = tourService.updateTour(tourRequest);
 
-        Assert.assertEquals("UPDATED", secondCreatedTour.getTourImages().get(0).getPath());
+        Assert.assertEquals("UPDATED", secondCreatedTour.getTourImages().get(0).getImagePath());
         Assert.assertEquals("UPDATED_TITLE", secondCreatedTour.getTourStops().get(0).getTitle());
         Assert.assertEquals("UPDATED_TOUR_TITLE", secondCreatedTour.getTitle());
 
-        tourRequest.getTourStopRequests().get(0).getImages().set(0, new TourStopImageRequest(createdTour.getTourStops().get(0).getId(), "UPDATED_TOUR_STOP_IMAGE"));
+        tourRequest.getTourStopRequests().get(0).getTourStopImages().set(0, new TourStopImageRequest(createdTour.getTourStops().get(0).getId(), "UPDATED_TOUR_STOP_IMAGE"));
 
         com.globati.dbmodel.Tour thirdCreatedTour = null;
 
         thirdCreatedTour = tourService.updateTour(tourRequest);
 
-        String updatedPath = thirdCreatedTour.getTourStops().get(0).getTourStopImages().get(0).getPath();
+        String updatedPath = thirdCreatedTour.getTourStops().get(0).getTourStopImages().get(0).getImagePath();
 
         Assert.assertEquals("UPDATED_TOUR_STOP_IMAGE", updatedPath );
 

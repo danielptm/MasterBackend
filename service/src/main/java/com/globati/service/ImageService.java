@@ -39,9 +39,9 @@ public class ImageService {
                 tourImage = imageRepository.findOne(bi.getId());
             }
             if(tourImage == null) {
-                tourImage = new TourImage(tour, bi.getPath());
+                tourImage = new TourImage(tour, bi.getImagePath());
             } else {
-                tourImage.setPath(bi.getPath());
+                tourImage.setImagePath(bi.getImagePath());
             }
             tourImages.add(tourImage);
         }
@@ -57,9 +57,9 @@ public class ImageService {
                 tourStopImage = tourStopImageRepository.findOne(tsif.getId());
             }
             if(tourStopImage == null) {
-                tourStopImage = new TourStopImage(tourStop, tsif.getPath());
+                tourStopImage = new TourStopImage(tourStop, tsif.getImagePath());
             } else {
-                tourStopImage.setPath(tsif.getPath());
+                tourStopImage.setImagePath(tsif.getImagePath());
             }
             tourStopImages.add(tourStopImage);
         }

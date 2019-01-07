@@ -62,6 +62,8 @@ public class TourService {
 
         Tour persistedTourWithData = tourRepository.save(persistedTour);
 
+        persistedTourWithData.setTourStops(tourStopService.getTourStopsByTourId(persistedTourWithData.getId()));
+
         return persistedTourWithData;
 
     }

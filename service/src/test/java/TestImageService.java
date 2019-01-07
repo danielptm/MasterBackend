@@ -71,7 +71,7 @@ public class TestImageService extends SuperTest{
         tourStopRequest.setTitle("tourStopTitle");
 
         tourStopImageRequests.add(getUniqueTourStopImageRequest());
-        tourStopRequest.setImages(tourStopImageRequests);
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
         tourRequest.setTourStopRequests(tourStopRequests);

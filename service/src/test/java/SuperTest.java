@@ -84,7 +84,7 @@ public class SuperTest {
 
     public static TourStopImageRequest getUniqueTourStopImageRequest() {
         TourStopImageRequest tourStopImageRequest = new TourStopImageRequest();
-        tourStopImageRequest.setPath("TOUR_STOP_IMAGE_REQUEST_PATH");
+        tourStopImageRequest.setImagePath("TOUR_STOP_IMAGE_REQUEST_PATH");
         return tourStopImageRequest;
     }
 

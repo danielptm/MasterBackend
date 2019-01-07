@@ -20,7 +20,7 @@ public class TourImage extends ImageEntity{
     }
 
     public TourImage(Tour tour, String path) {
-        this.path = path;
+        this.imagePath = path;
         this.tour = tour;
     }
 

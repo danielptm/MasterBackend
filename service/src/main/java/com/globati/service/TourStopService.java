@@ -94,7 +94,7 @@ public class TourStopService {
             }
             TourStop persistedTourStop = updateTourStop(tourStop);
 
-            tourStop.setTourStopImages(imageService.mapTourStopImageRequestsToTourStopImages(tourStopRequest.getImages(), persistedTourStop));
+            tourStop.setTourStopImages(imageService.mapTourStopImageRequestsToTourStopImages(tourStopRequest.getTourStopImages(), persistedTourStop));
             dbTourStops.add(tourStop);
 
 //            if(tourStopRequest.getImages() != null && tourStopRequest.getImages().size() > 0) {

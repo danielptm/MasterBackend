@@ -65,10 +65,10 @@ public class TourRequestStopRequestTest extends SuperTest{
         TourImageRequest tourImageRequest2 = new TourImageRequest("path");
 
         TourStopImageRequest tourStopImageRequest = new TourStopImageRequest();
-        tourImageRequest.setPath("path");
+        tourImageRequest.setImagePath("path");
 
         TourStopImageRequest tourStopImageRequest2 = new TourStopImageRequest();
-        tourImageRequest.setPath("path");
+        tourImageRequest.setImagePath("path");
 
         images.add(tourImageRequest);
         images.add(tourImageRequest2);
@@ -93,7 +93,7 @@ public class TourRequestStopRequestTest extends SuperTest{
         tourStopRequest.setTargetLong(11.11);
         tourStopRequest.setTitle("tourStopTitle");
 
-        tourStopRequest.setImages(tourStopImageRequests);
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
 
         tourStopRequests.add(tourStopRequest);
 

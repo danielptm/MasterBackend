@@ -2,11 +2,11 @@ package com.globati.request.tour;
 
 public class TourStopImageRequest {
     Long id;
-    String path;
+    String imagePath;
 
     public TourStopImageRequest(Long id, String path) {
         this.id = id;
-        this.path = path;
+        this.imagePath = path;
     }
 
     public TourStopImageRequest() {
@@ -20,12 +20,11 @@ public class TourStopImageRequest {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
-
 }

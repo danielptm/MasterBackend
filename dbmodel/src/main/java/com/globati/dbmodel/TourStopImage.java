@@ -18,7 +18,7 @@ public class TourStopImage extends ImageEntity{
     public TourStopImage() {}
 
     public TourStopImage(TourStop tourStop, String path){
-        this.path = path;
+        this.imagePath = path;
         this.tourstop = tourStop;
     }
 

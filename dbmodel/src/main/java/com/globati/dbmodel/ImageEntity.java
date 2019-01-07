@@ -14,14 +14,13 @@ public abstract class ImageEntity extends BaseEntity{
 
     @Column(name="path", length=700)
     @JsonManagedReference
-    String path;
+    String imagePath;
 
-    public String getPath() {
-        return path;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
-
 }

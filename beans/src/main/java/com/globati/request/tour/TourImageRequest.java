@@ -2,18 +2,18 @@ package com.globati.request.tour;
 
 public class TourImageRequest {
     Long id;
-    String path;
+    String imagePath;
 
     public TourImageRequest() {
     }
 
     public TourImageRequest(String imagePath) {
-        this.path = imagePath;
+        this.imagePath = imagePath;
     }
 
     public TourImageRequest(Long id, String imagePath) {
         this.id = id;
-        this.path = imagePath;
+        this.imagePath = imagePath;
     }
 
     public Long getId() {
@@ -24,11 +24,11 @@ public class TourImageRequest {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
