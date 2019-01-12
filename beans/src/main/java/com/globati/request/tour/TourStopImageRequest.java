@@ -4,12 +4,11 @@ public class TourStopImageRequest {
     Long id;
     String imagePath;
 
+    public TourStopImageRequest() {}
+
     public TourStopImageRequest(Long id, String path) {
         this.id = id;
         this.imagePath = path;
-    }
-
-    public TourStopImageRequest() {
     }
 
     public Long getId() {
