@@ -49,6 +49,7 @@ public class TourService {
         tourToCreate.setStreet(tourRequest.getStreet());
         tourToCreate.setDescription(tourRequest.getDescription());
         tourToCreate.setTitle(tourRequest.getTitle());
+        tourToCreate.setActive(true);
 
         Tour persistedTour = tourRepository.save(tourToCreate);
 
@@ -69,7 +70,7 @@ public class TourService {
     }
 
     public List<Tour> getToursByPropertyId(Long id) {
-        List<Tour> tours = tourRepository.getToursByPropertyId(id);
+        List<Tour> tours = tourRepository.getToursByPropertyId(id, true);
         for(Tour tour: tours) {
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
             for(TourStop tourStop: tourStops) {
@@ -104,5 +105,11 @@ public class TourService {
         oldTour.setCountry(tourRequest.getCountry());
         Tour updatadTour = tourRepository.save(oldTour);
         return getTourByTourId(updatadTour.getId());
+    }
+
+    public Tour setTourToInactive(long id) {
+        Tour tour = getTourByTourId(id);
+        tour.setActive(false);
+        return tourRepository.save(tour);
     }
 }

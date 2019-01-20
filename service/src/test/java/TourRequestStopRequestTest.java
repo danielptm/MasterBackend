@@ -1,4 +1,5 @@
 import com.globati.dbmodel.Property;
+import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStop;
 import com.globati.dbmodel.TourStopImage;
 import com.globati.request.tour.TourImageRequest;
@@ -82,4 +83,40 @@ public class TourRequestStopRequestTest extends SuperTest{
             Assert.assertTrue(tourStopService.getTourStopsByTourId(ts.getTour().getId()).size() > 0);
         });
     }
+
+    @Test
+    public void testDeleteTourStop() throws ServiceException, UserNameIsNotUniqueException {
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
+
+        List<TourImageRequest> images = new ArrayList<>();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
+
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+
+        List<TourStopRequest> tourStopRequests = new ArrayList<>();
+
+        images.add(getUniqueTourImageRequest());
+        images.add(getUniqueTourImageRequest());
+        tourRequest.setTourImages(images);
+
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
+
+        tourStopRequests.add(tourStopRequest);
+        tourRequest.setTourStopRequests(tourStopRequests);
+
+        com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
+
+        tourStopService.setTourStopToInactive(createdTour.getTourStops().get(0).getId());
+
+        Tour updatedTour = tourService.getTourByTourId(createdTour.getId());
+
+
+        Assert.assertNotNull(createdTour);
+        Assert.assertEquals(0, updatedTour.getTourStops());
+//        Assert.assertNotNull(createdTour.getTourStops().get(0).getTourStopImages().get(0).getImagePath());
+    }
+
 }

@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
+
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -43,5 +45,10 @@ public class TourResource {
         return Response.ok(tourService.updateTour(tourRequest)).build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response deleteTour(@PathParam("id") Long id) {
+        return Response.ok(tourService.setTourToInactive(id)).build();
+    }
 
 }

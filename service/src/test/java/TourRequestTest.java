@@ -1,4 +1,5 @@
 import com.globati.dbmodel.Property;
+import com.globati.dbmodel.Tour;
 import com.globati.dbmodel.TourStopImage;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
@@ -65,6 +66,38 @@ public class TourRequestTest extends SuperTest{
         Assert.assertNotNull(createdTour);
         Assert.assertNotNull(createdTour.getTourStops());
         Assert.assertNotNull(createdTour.getTourStops().get(0).getTourStopImages().get(0).getImagePath());
+    }
+
+    @Test
+    public void deleteTour() throws UserNameIsNotUniqueException {
+        Property property = propertyService.createProperty(getUniquePropertyInstance());
+        TourRequest tourRequest = getATourRequestWithGivenPropertyId(property.getId());
+
+        List<TourImageRequest> images = new ArrayList<>();
+        List<TourStopImageRequest> tourStopImageRequests = new ArrayList<>();
+
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+        tourStopImageRequests.add(getUniqueTourStopImageRequest());
+
+        List<TourStopRequest> tourStopRequests = new ArrayList<>();
+
+        images.add(getUniqueTourImageRequest());
+        images.add(getUniqueTourImageRequest());
+        tourRequest.setTourImages(images);
+
+        TourStopRequest tourStopRequest = getUniqueTourStopRequest();
+        tourStopRequest.setTourStopImages(tourStopImageRequests);
+
+        tourStopRequests.add(tourStopRequest);
+        tourRequest.setTourStopRequests(tourStopRequests);
+
+        com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
+
+        Tour deletedTour = tourService.setTourToInactive(createdTour.getId());
+
+        Assert.assertNotNull(deletedTour);
+        Assert.assertEquals(false, deletedTour.isActive());
+
     }
 
 

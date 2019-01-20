@@ -35,7 +35,7 @@ public class TourStopService {
     }
 
     public TourStop getTourStopById(Long id) {
-        TourStop tourStop = tourStopRepository.findOne(id);
+        TourStop tourStop = tourStopRepository.getActiveTourStopById(id, true);
         List<TourStopImage> tourStopImages = tourStopImageRepository.getImagesByTourStopId(tourStop.getId());
         tourStop.setTourStopImages(tourStopImages);
         return tourStop;
@@ -53,6 +53,12 @@ public class TourStopService {
             tourStop.setTourStopImages(tourStopImages);
         }
         return tourStops;
+    }
+
+    public TourStop setTourStopToInactive(Long id) {
+        TourStop tourStop = getTourStopById(id);
+        tourStop.setActive(false);
+        return tourStopRepository.save(tourStop);
     }
 
 
