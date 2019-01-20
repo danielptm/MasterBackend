@@ -47,6 +47,7 @@ public class TourResource {
 
     @DELETE
     @Path("/{id}")
+//  @GlobatiAuthentication
     public Response deleteTour(@PathParam("id") Long id) {
         return Response.ok(tourService.setTourToInactive(id)).build();
     }

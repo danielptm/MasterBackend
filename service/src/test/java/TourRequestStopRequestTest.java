@@ -115,7 +115,7 @@ public class TourRequestStopRequestTest extends SuperTest{
 
 
         Assert.assertNotNull(createdTour);
-        Assert.assertEquals(0, updatedTour.getTourStops());
+        Assert.assertEquals(0, updatedTour.getTourStops().size());
 //        Assert.assertNotNull(createdTour.getTourStops().get(0).getTourStopImages().get(0).getImagePath());
     }
 

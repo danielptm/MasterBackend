@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class TourStopService {
     }
 
     public TourStop getTourStopById(Long id) {
-        TourStop tourStop = tourStopRepository.getActiveTourStopById(id, true);
+        TourStop tourStop = tourStopRepository.findOne(id);
         List<TourStopImage> tourStopImages = tourStopImageRepository.getImagesByTourStopId(tourStop.getId());
         tourStop.setTourStopImages(tourStopImages);
         return tourStop;
@@ -47,7 +48,7 @@ public class TourStopService {
     }
 
     public List<TourStop> getTourStopsByTourId(Long id) {
-        List<TourStop> tourStops = tourStopRepository.getTourStopsByTourId(id);
+        List<TourStop> tourStops = tourStopRepository.getTourStopsByTourId(id, true);
         for (TourStop tourStop: tourStops) {
             List<TourStopImage> tourStopImages = tourStopImageRepository.getImagesByTourStopId(tourStop.getId());
             tourStop.setTourStopImages(tourStopImages);
@@ -58,6 +59,7 @@ public class TourStopService {
     public TourStop setTourStopToInactive(Long id) {
         TourStop tourStop = getTourStopById(id);
         tourStop.setActive(false);
+        tourStop.setDateInactive(new Date());
         return tourStopRepository.save(tourStop);
     }
 
@@ -76,6 +78,7 @@ public class TourStopService {
                 tourStop.setStopOrder(tourStopRequest.getOrderNumber());
                 tourStop.setTour(tour);
                 tourStop.setActive(true);
+                tourStop.setDateActive(new Date());
                 tourStop.setCity(tourStopRequest.getCity());
                 tourStop.setCountry(tourStopRequest.getCountry());
                 tourStop.setDescription(tourStopRequest.getDescription());
@@ -103,19 +106,6 @@ public class TourStopService {
             tourStop.setTourStopImages(imageService.mapTourStopImageRequestsToTourStopImages(tourStopRequest.getTourStopImages(), persistedTourStop));
             dbTourStops.add(tourStop);
 
-//            if(tourStopRequest.getImages() != null && tourStopRequest.getImages().size() > 0) {
-//                TourStopImage tourStopImage = null;
-//                for (TourStopImageRequest tourStopImageRequest : tourStopRequest.getImages()) {
-//                    if (tourStopImageRequest.getId() != null) {
-//                        tourStopImage = tourStopImageRepository.findOne(tourStopImageRequest.getId());
-//                    }
-//                    if (tourStopImage == null ) {
-//                        tourStopImage = new TourStopImage(dbTourStop, tourStopImageRequest.getPath());
-//                    }
-//                    tourStopImages.add(tourStopImage);
-//                }
-//            }
-//            dbTourStop.setTourStopImages(tourStopImages);
         }
         return dbTourStops;
     }

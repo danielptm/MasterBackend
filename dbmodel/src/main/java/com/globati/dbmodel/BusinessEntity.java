@@ -33,7 +33,16 @@ public abstract class BusinessEntity extends BaseEntity {
     protected String title;
     @Column(name="dateinactive")
     protected Date dateInactive;
+    @Column(name = "dateactive")
+    protected Date dateActive;
 
+    public Date getDateActive() {
+        return dateActive;
+    }
+
+    public void setDateActive(Date dateActive) {
+        this.dateActive = dateActive;
+    }
 
     public double getTargetLat() {
         return targetLat;

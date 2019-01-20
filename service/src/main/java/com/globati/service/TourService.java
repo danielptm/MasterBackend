@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,6 +51,7 @@ public class TourService {
         tourToCreate.setDescription(tourRequest.getDescription());
         tourToCreate.setTitle(tourRequest.getTitle());
         tourToCreate.setActive(true);
+        tourToCreate.setDateActive(new Date());
 
         Tour persistedTour = tourRepository.save(tourToCreate);
 
@@ -110,6 +112,7 @@ public class TourService {
     public Tour setTourToInactive(long id) {
         Tour tour = getTourByTourId(id);
         tour.setActive(false);
+        tour.setDateInactive(new Date());
         return tourRepository.save(tour);
     }
 }
