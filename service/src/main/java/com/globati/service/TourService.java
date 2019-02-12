@@ -74,6 +74,8 @@ public class TourService {
     public List<Tour> getToursByPropertyId(Long id) {
         List<Tour> tours = tourRepository.getToursByPropertyId(id, true);
         for(Tour tour: tours) {
+            List<TourImage> tourImages = imageService.getImagesByTourId(tour.getId());
+            tour.setTourImages(tourImages);
             List<TourStop> tourStops = tourStopService.getTourStopsByTourId(tour.getId());
             for(TourStop tourStop: tourStops) {
                 tourStop.setTourStopImages(imageService.getTourStopImagesByTourStopId(tourStop.getId()));

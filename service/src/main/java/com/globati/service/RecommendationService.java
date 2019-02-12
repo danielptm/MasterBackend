@@ -52,7 +52,7 @@ public class RecommendationService{
                 RecommendationImage recommendationImage = new RecommendationImage(rec, image);
                 recommendationImages.add(recommendationImage);
             });
-            rec.setRecommendationimages(recommendationImages);
+            rec.setImages(recommendationImages);
             return recommendationRepository.save(rec);
         }catch(Exception e){
             log.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: createRecommendation(): employeeId: "+employeeId);
@@ -93,14 +93,14 @@ public class RecommendationService{
 
             Recommendation returnRecommendation = getRecommendationById(id);
 
-            for(RecommendationImage image : returnRecommendation.getRecommendationImages()){
+            for(RecommendationImage image : returnRecommendation.getImages()){
                 recommendationImageService.deleteRecommendationImage(image.getId());
             }
 
             List<RecommendationImage> translatedImages = new ArrayList<>();
             images.forEach((image) -> translatedImages.add(recommendationImageService.createRecommendationImage(returnRecommendation, image)));
 
-            returnRecommendation.setRecommendationimages(translatedImages);
+            returnRecommendation.setImages(translatedImages);
             returnRecommendation.setDescription(description);
             returnRecommendation.setTitle(title);
 

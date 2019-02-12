@@ -49,6 +49,9 @@ public class PropertyService {
     @Autowired
     JwtService jwtService;
 
+    @Autowired
+    TourService tourService;
+
 
     PropertyService() {
     }
@@ -104,8 +107,9 @@ public class PropertyService {
             }
 
             List<Recommendation> recommendations = recommendationService.getRecommendationByPropertyId(employee.getId());
+            List<Tour> tours = tourService.getToursByPropertyId(employee.getId());
             employee.setRecommendations(recommendations);
-            employee.setTours(new ArrayList<>());
+            employee.setTours(tours);
             PropertyAndItems employeeAndItems = new PropertyAndItems(employee);
             employeeAndItems.setApiKey(jwtService.buildJwt(propertyInfo.getAuthToken()));
 

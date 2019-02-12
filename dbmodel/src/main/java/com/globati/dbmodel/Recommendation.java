@@ -21,7 +21,7 @@ public class Recommendation extends BusinessEntity {
 
     @OneToMany(mappedBy = "recommendation", fetch = FetchType.EAGER,  cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    List<RecommendationImage> recommendationImages;
+    List<RecommendationImage> images;
 
     @Column(name = "category", nullable=false, columnDefinition="VARCHAR(40) default 'NONE'")
     @Enumerated(EnumType.STRING)
@@ -53,12 +53,12 @@ public class Recommendation extends BusinessEntity {
         this.property = property;
     }
 
-    public List<RecommendationImage> getRecommendationImages() {
-        return recommendationImages;
+    public List<RecommendationImage> getImages() {
+        return images;
     }
 
-    public void setRecommendationimages(List<RecommendationImage> recommendationImages) {
-        this.recommendationImages = recommendationImages;
+    public void setImages(List<RecommendationImage> recommendationImages) {
+        this.images = recommendationImages;
     }
 
     public Category getCategory() {

@@ -75,11 +75,12 @@ public class TourStopService {
             }
             if(tourStop == null) {
                 tourStop = new TourStop();
-                tourStop.setStopOrder(tourStopRequest.getOrderNumber());
+                tourStop.setStopOrder(tourStopRequest.getStopOrder());
                 tourStop.setTour(tour);
                 tourStop.setActive(true);
                 tourStop.setDateActive(new Date());
                 tourStop.setCity(tourStopRequest.getCity());
+                tourStop.setStopOrder(tourStopRequest.getStopOrder());
                 tourStop.setCountry(tourStopRequest.getCountry());
                 tourStop.setDescription(tourStopRequest.getDescription());
                 tourStop.setStreet(tourStopRequest.getStreet());
@@ -89,7 +90,7 @@ public class TourStopService {
                 dbTourStops.add(tourStop);
 
             } else {
-                tourStop.setStopOrder(tourStopRequest.getOrderNumber());
+                tourStop.setStopOrder(tourStopRequest.getStopOrder());
                 tourStop.setTour(tour);
                 tourStop.setActive(true);
                 tourStop.setCity(tourStopRequest.getCity());
@@ -97,6 +98,7 @@ public class TourStopService {
                 tourStop.setDescription(tourStopRequest.getDescription());
                 tourStop.setStreet(tourStopRequest.getStreet());
                 tourStop.setTargetLat(tourStopRequest.getTargetLat());
+                tourStop.setStopOrder(tourStopRequest.getStopOrder());
                 tourStop.setTargetLong(tourStopRequest.getTargetLong());
                 tourStop.setTitle(tourStopRequest.getTitle());
                 dbTourStops.add(tourStop);
