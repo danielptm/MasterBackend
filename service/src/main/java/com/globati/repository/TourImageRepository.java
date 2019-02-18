@@ -1,6 +1,6 @@
 package com.globati.repository;
 
-import com.globati.dbmodel.TourImage;
+import com.globati.mysql.dbmodel.TourImage;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

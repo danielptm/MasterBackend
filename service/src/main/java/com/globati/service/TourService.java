@@ -1,6 +1,6 @@
 package com.globati.service;
 
-import com.globati.dbmodel.*;
+import com.globati.mysql.dbmodel.*;
 import com.globati.repository.TourRepository;
 import com.globati.request.tour.TourRequest;
 import com.globati.service.exceptions.ServiceException;

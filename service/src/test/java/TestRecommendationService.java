@@ -1,5 +1,5 @@
-import com.globati.dbmodel.Property;
-import com.globati.dbmodel.Recommendation;
+import com.globati.mysql.dbmodel.Property;
+import com.globati.mysql.dbmodel.Recommendation;
 import com.globati.service.PropertyService;
 import com.globati.service.JwtService;
 import com.globati.service.RecommendationService;

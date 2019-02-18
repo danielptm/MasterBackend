@@ -1,8 +1,6 @@
 package com.globati.repository;
 
-import com.globati.dbmodel.Recommendation;
-import com.globati.dbmodel.Tour;
-import com.globati.dbmodel.TourStop;
+import com.globati.mysql.dbmodel.Tour;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

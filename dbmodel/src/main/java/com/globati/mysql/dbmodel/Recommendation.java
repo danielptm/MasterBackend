@@ -1,7 +1,7 @@
-package com.globati.dbmodel;
+package com.globati.mysql.dbmodel;
 
 import com.fasterxml.jackson.annotation.*;
-import com.globati.enums.Category;
+import com.globati.mysql.enums.Category;
 
 import javax.persistence.*;
 import java.util.List;

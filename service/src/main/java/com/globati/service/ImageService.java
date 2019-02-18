@@ -2,10 +2,10 @@ package com.globati.service;
 
 
 
-import com.globati.dbmodel.Tour;
-import com.globati.dbmodel.TourImage;
-import com.globati.dbmodel.TourStop;
-import com.globati.dbmodel.TourStopImage;
+import com.globati.mysql.dbmodel.Tour;
+import com.globati.mysql.dbmodel.TourImage;
+import com.globati.mysql.dbmodel.TourStop;
+import com.globati.mysql.dbmodel.TourStopImage;
 import com.globati.repository.TourImageRepository;
 import com.globati.repository.TourStopImageRepository;
 import com.globati.request.tour.TourImageRequest;

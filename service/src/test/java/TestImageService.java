@@ -1,4 +1,4 @@
-import com.globati.dbmodel.Property;
+import com.globati.mysql.dbmodel.Property;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopImageRequest;
@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
@@ -77,9 +76,9 @@ public class TestImageService extends SuperTest{
         tourRequest.setTourStopRequests(tourStopRequests);
 
 
-        com.globati.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
+        com.globati.mysql.dbmodel.Tour createdTour = tourService.createTour(tourRequest);
 
-        List<com.globati.dbmodel.TourImage> businessImages = imageService.getImagesByTourId(createdTour.getId());
+        List<com.globati.mysql.dbmodel.TourImage> businessImages = imageService.getImagesByTourId(createdTour.getId());
 
         System.out.println("Business Images");
         System.out.println(businessImages.size());

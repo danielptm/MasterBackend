@@ -1,6 +1,6 @@
 package com.globati.repository;
 
-import com.globati.dbmodel.Property;
+import com.globati.mysql.dbmodel.Property;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

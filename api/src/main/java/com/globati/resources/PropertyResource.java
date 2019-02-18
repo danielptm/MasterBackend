@@ -1,6 +1,6 @@
 package com.globati.resources;
 
-import com.globati.dbmodel.Property;
+import com.globati.mysql.dbmodel.Property;
 import com.globati.request.CreateProperty;
 import com.globati.request.InterestMail;
 import com.globati.resources.annotations.GlobatiAuthentication;

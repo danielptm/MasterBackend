@@ -1,5 +1,5 @@
-import com.globati.dbmodel.Property;
-import com.globati.dbmodel.PropertyInfo;
+import com.globati.mysql.dbmodel.Property;
+import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.service.PropertyInfoService;
 import com.globati.service.PropertyService;
 import com.globati.service.exceptions.IllegalUserNameException;

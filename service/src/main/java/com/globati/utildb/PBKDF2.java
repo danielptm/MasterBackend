@@ -1,6 +1,6 @@
 package com.globati.utildb;
 
-import com.globati.dbmodel.PropertyInfo;
+import com.globati.mysql.dbmodel.PropertyInfo;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.SecretKey;

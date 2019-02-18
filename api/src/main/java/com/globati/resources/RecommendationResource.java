@@ -1,6 +1,6 @@
 package com.globati.resources;
 
-import com.globati.dbmodel.Recommendation;
+import com.globati.mysql.dbmodel.Recommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.PropertyService;

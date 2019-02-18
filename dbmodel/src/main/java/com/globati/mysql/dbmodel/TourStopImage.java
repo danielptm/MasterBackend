@@ -1,4 +1,4 @@
-package com.globati.dbmodel;
+package com.globati.mysql.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

@@ -1,8 +1,6 @@
-package com.globati.dbmodel;
+package com.globati.mysql.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 

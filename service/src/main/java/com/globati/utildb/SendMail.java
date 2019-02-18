@@ -11,7 +11,7 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Welcome;
-import com.globati.dbmodel.Property;
+import com.globati.mysql.dbmodel.Property;
 import com.globati.service.PropertiesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

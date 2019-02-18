@@ -1,4 +1,4 @@
-package com.globati.enums;
+package com.globati.mysql.enums;
 
 public enum Verified {
     NOT,

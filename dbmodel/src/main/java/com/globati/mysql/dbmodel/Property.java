@@ -1,7 +1,7 @@
-package com.globati.dbmodel;
+package com.globati.mysql.dbmodel;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.globati.enums.Verified;
+import com.globati.mysql.enums.Verified;
 
 import javax.persistence.*;
 import java.util.Date;

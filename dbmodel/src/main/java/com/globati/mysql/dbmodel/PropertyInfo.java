@@ -1,6 +1,4 @@
-package com.globati.dbmodel;
-
-import com.globati.enums.Verified;
+package com.globati.mysql.dbmodel;
 
 import javax.persistence.*;
 import java.util.Arrays;

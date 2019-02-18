@@ -1,9 +1,9 @@
 package com.globati.service;
 
-import com.globati.dbmodel.Property;
-import com.globati.dbmodel.Recommendation;
-import com.globati.dbmodel.RecommendationImage;
-import com.globati.enums.Category;
+import com.globati.mysql.dbmodel.Property;
+import com.globati.mysql.dbmodel.Recommendation;
+import com.globati.mysql.dbmodel.RecommendationImage;
+import com.globati.mysql.enums.Category;
 import com.globati.repository.PropertyRepository;
 import com.globati.repository.RecommendationRepository;
 import com.globati.service.exceptions.ServiceException;

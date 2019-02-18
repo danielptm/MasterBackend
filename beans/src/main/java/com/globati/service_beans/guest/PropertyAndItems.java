@@ -1,6 +1,6 @@
 package com.globati.service_beans.guest;
 
-import com.globati.dbmodel.Property;
+import com.globati.mysql.dbmodel.Property;
 
 public class PropertyAndItems {
 

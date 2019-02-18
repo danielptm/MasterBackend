@@ -1,11 +1,10 @@
 package com.globati.service;
 
-import com.globati.dbmodel.Tour;
-import com.globati.dbmodel.TourStop;
-import com.globati.dbmodel.TourStopImage;
+import com.globati.mysql.dbmodel.Tour;
+import com.globati.mysql.dbmodel.TourStop;
+import com.globati.mysql.dbmodel.TourStopImage;
 import com.globati.repository.TourStopImageRepository;
 import com.globati.repository.TourStopRepository;
-import com.globati.request.tour.TourStopImageRequest;
 import com.globati.request.tour.TourStopRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

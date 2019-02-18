@@ -1,6 +1,6 @@
 package com.globati.service;
 
-import com.globati.dbmodel.PropertyInfo;
+import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.repository.PropertyInfoRepsitory;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.PBKDF2;

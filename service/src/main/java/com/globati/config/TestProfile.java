@@ -107,7 +107,7 @@ public class TestProfile {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource( dataSource() ); //Get data source config here!
         factory.setJpaVendorAdapter(jpaVendorAdapter());
-        factory.setPackagesToScan("com.globati.dbmodel");
+        factory.setPackagesToScan("com.globati.mysql.dbmodel");
 
         return factory;
     }

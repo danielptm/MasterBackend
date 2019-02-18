@@ -1,5 +1,4 @@
-import com.globati.dbmodel.*;
-import com.globati.enums.Verified;
+import com.globati.mysql.dbmodel.*;
 import com.globati.service.*;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;
@@ -25,7 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,4 +1,3 @@
-import com.globati.dbmodel.Property;
 import com.globati.request.CreateProperty;
 import com.globati.request.tour.TourImageRequest;
 import com.globati.request.tour.TourRequest;

@@ -1,6 +1,6 @@
 package com.globati.resources.filters;
 
-import com.globati.dbmodel.PropertyInfo;
+import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.PropertyInfoService;

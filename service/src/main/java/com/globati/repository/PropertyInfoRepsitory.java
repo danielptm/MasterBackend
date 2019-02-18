@@ -1,7 +1,6 @@
 package com.globati.repository;
 
-import com.globati.dbmodel.PropertyInfo;
-import com.globati.enums.Verified;
+import com.globati.mysql.dbmodel.PropertyInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

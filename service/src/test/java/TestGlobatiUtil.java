@@ -1,5 +1,5 @@
 
-import com.globati.dbmodel.*;
+import com.globati.mysql.dbmodel.*;
 
 import com.globati.mail.beans.GlobatiReminder;
 import com.globati.service.*;
@@ -19,13 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.globati.HelpObjects.Email;
+
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.text.ParseException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by daniel on 12/22/16.
