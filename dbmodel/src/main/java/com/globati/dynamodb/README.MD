@@ -16,6 +16,12 @@ See this SO post for how to make a table:
 
 `https://stackoverflow.com/questions/42435407/create-dynamodb-table-using-aws-cli`
 
+
+See this link for information about Attribute data types:
+
+`https://stackoverflow.com/questions/42435407/create-dynamodb-table-using-aws-cli `
+
+
 ##Some CLI commands:
 
 ####List tables: 
@@ -23,7 +29,7 @@ See this SO post for how to make a table:
 
 ####Create table (Use a json file to define table):
 
-`aws dynamodb create-table --cli-input-json file://create-table-movies.json  --endpoint-url http://localhost:8000`
+`aws dynamodb create-table --cli-input-json file:///Users/danieltuttle/projects/globati/code/backend/MasterBackend/dbmodel/src/main/java/com/globati/dynamodb/Dynamodb_statements/CreateTable.json  --endpoint-url http://localhost:8000`
 
 ####Delete table
 
