@@ -21,6 +21,8 @@ See this link for information about Attribute data types:
 
 `https://stackoverflow.com/questions/42435407/create-dynamodb-table-using-aws-cli `
 
+See this link for information on dynamodb actions
+`https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations.html`
 
 ##Some CLI commands:
 
