@@ -88,7 +88,7 @@ public class PropertyInfoService {
         }
     }
 
-//    public List<PropertyInfo> getAllEmployeesByVerified(Verified verified) throws ServiceException {
+//    public List<PropertyInfo.json> getAllEmployeesByVerified(Verified verified) throws ServiceException {
 //        log.info("getAllEmployeesByVerified(): verified: "+verified.toString());
 //        try{
 //            return employeeInfoRepsitory.getBy_verified(verified);

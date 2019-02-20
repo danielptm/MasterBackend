@@ -110,7 +110,7 @@ public class PropertyInfo extends BaseEntity{
 
     @Override
     public String toString() {
-        return "PropertyInfo{" +
+        return "PropertyInfo.json{" +
                 "employeeId=" + propertyId +
                 ", globatiPassword='" + globatiPassword + '\'' +
                 ", salt=" + Arrays.toString(salt) +
