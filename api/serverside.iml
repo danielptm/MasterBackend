@@ -132,11 +132,12 @@
     <orderEntry type="library" name="Maven: org.mortbay.jetty:jetty-util:6.1.26" level="project" />
     <orderEntry type="library" name="Maven: org.mortbay.jetty:servlet-api:2.5-20081211" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.2" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.86" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-pinpoint:1.11.86" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-xray:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-opsworkscm:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-support:1.11.86" level="project" />
@@ -162,7 +163,6 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elasticache:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elastictranscoder:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-ec2:1.11.86" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-sns:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-budgets:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-cloudtrail:1.11.86" level="project" />
