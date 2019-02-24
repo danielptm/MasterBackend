@@ -1,7 +1,7 @@
 package com.globati.service;
 
 import com.globati.mysql.dbmodel.PropertyInfo;
-import com.globati.repository.PropertyInfoRepsitory;
+import com.globati.repository.mysql.PropertyInfoRepsitory;
 import com.globati.service.exceptions.ServiceException;
 import com.globati.utildb.PBKDF2;
 import org.apache.logging.log4j.LogManager;

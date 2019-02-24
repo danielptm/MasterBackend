@@ -1,7 +1,7 @@
 package com.globati.service;
 
 import com.globati.mysql.dbmodel.*;
-import com.globati.repository.TourRepository;
+import com.globati.repository.mysql.TourRepository;
 import com.globati.request.tour.TourRequest;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;

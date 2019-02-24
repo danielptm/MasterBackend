@@ -1,8 +1,14 @@
 package com.globati.config;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.globati.service.PropertiesService;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.commons.lang.StringUtils;
+import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,10 +37,11 @@ import java.util.Properties;
 
 @Configuration
 @Profile("test")
-@EnableJpaRepositories("com.globati.repository")
+@EnableJpaRepositories("com.globati.repository.mysql")
 @EnableTransactionManagement
 @EnableScheduling
 @PropertySource("classpath:environment/test.properties")
+@EnableDynamoDBRepositories(basePackages = "com.globati.repository.dynamodb")
 public class TestProfile {
 
     @Autowired
@@ -110,6 +117,24 @@ public class TestProfile {
         factory.setPackagesToScan("com.globati.mysql.dbmodel");
 
         return factory;
+    }
+
+    @Bean
+    public AmazonDynamoDB amazonDynamoDB() {
+        AmazonDynamoDB amazonDynamoDB
+                = new AmazonDynamoDBClient(amazonAWSCredentials());
+
+        if (!StringUtils.isEmpty(propertiesService.getAmazonDynamoDBEndpoint())) {
+            amazonDynamoDB.setEndpoint(propertiesService.getAmazonDynamoDBEndpoint());
+        }
+
+        return amazonDynamoDB;
+    }
+
+    @Bean
+    public AWSCredentials amazonAWSCredentials() {
+        return new BasicAWSCredentials(
+                propertiesService.getAmazonAWSAccessKey(), propertiesService.getAmazonAWSSecretKey());
     }
 
 

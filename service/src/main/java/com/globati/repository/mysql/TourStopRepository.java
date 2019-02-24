@@ -1,4 +1,4 @@
-package com.globati.repository;
+package com.globati.repository.mysql;
 
 import com.globati.mysql.dbmodel.TourStop;
 import org.springframework.data.jpa.repository.Query;

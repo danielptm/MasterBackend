@@ -2,7 +2,7 @@ package com.globati.service;
 
 import com.globati.mysql.dbmodel.Recommendation;
 import com.globati.mysql.dbmodel.RecommendationImage;
-import com.globati.repository.RecommendationImageRepository;
+import com.globati.repository.mysql.RecommendationImageRepository;
 import com.globati.service.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

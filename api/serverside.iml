@@ -134,6 +134,7 @@
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.2" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.86" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.86" level="project" />
+    <orderEntry type="library" name="Maven: com.github.derjust:spring-data-dynamodb:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk:1.11.86" level="project" />

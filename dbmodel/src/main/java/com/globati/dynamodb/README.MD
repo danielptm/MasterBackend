@@ -31,8 +31,11 @@
 
 ####Create table (Use a json file to define table):
 
-`aws dynamodb create-table --cli-input-json file:///Users/danieltuttle/projects/globati/code/backend/MasterBackend/dbmodel/src/main/java/com/globati/dynamodb/Dynamodb_statements/CreateTable.json  --endpoint-url http://localhost:8000`
+`aws dynamodb create-table --cli-input-json file:///Users/danieltuttle/projects/globati/code/backend/MasterBackend/dbmodel/src/main/resources/dynamodb/CreateTable.json  --endpoint-url http://localhost:8000`
 
 ####Delete table
 
 `aws dynamodb delete-table --table-name Property --endpoint-url http://localhost:8000`
+
+####How to work with complex data types
+`https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.ArbitraryDataMapping.html`

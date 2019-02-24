@@ -1,4 +1,4 @@
-package com.globati.repository;
+package com.globati.repository.mysql;
 
 import com.globati.mysql.dbmodel.RecommendationImage;
 import org.springframework.data.jpa.repository.Query;

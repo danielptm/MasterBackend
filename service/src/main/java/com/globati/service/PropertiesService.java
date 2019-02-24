@@ -35,6 +35,12 @@ public class PropertiesService {
     String privateKey;
     @Value("${jwtSecret}")
     String jwtSecret;
+    @Value("${amazon.dynamodb.endpoint}")
+    private String amazonDynamoDBEndpoint;
+    @Value("${amazon.aws.accesskey}")
+    private String amazonAWSAccessKey;
+    @Value("${amazon.aws.secretkey}")
+    private String amazonAWSSecretKey;
 
     String activeCreateAddLink = "https://globati.com/connect/";
 
@@ -92,5 +98,17 @@ public class PropertiesService {
 
     public String getMerchantId() {
         return merchantId;
+    }
+
+    public String getAmazonDynamoDBEndpoint() {
+        return amazonDynamoDBEndpoint;
+    }
+
+    public String getAmazonAWSAccessKey() {
+        return amazonAWSAccessKey;
+    }
+
+    public String getAmazonAWSSecretKey() {
+        return amazonAWSSecretKey;
     }
 }

@@ -4,7 +4,7 @@ package com.globati.service;
 import com.globati.HelpObjects.ApiKey;
 import com.globati.mysql.dbmodel.*;
 import com.globati.mysql.enums.Verified;
-import com.globati.repository.PropertyRepository;
+import com.globati.repository.mysql.PropertyRepository;
 import com.globati.request.CreateProperty;
 import com.globati.service.exceptions.IllegalUserNameException;
 import com.globati.service.exceptions.ServiceException;

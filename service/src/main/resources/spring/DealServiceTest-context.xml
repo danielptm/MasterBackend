@@ -24,4 +24,6 @@
 
     <bean id="ImageService" class="com.globati.service.ImageService"></bean>
 
+    <bean id="DynamoPropertyService" class="com.globati.service.DynamoPropertyService"></bean>
+
 </beans>
