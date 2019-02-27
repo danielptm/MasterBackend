@@ -43,3 +43,5 @@
 ####How to work with complex data types
 `https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.ArbitraryDataMapping.html`
 
+####Easier local testing with dynamodb SO post
+`https://stackoverflow.com/questions/26901613/easier-dynamodb-local-testing`
