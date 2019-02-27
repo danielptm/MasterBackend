@@ -26,6 +26,9 @@
 
 ##Some CLI commands:
 
+###Start in shared db mode
+`docker run -p 8000:8000 -v /Users/danieltuttle/dynamodblocal:/data/ amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath /data`
+
 ####List tables: 
 `aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
@@ -39,3 +42,4 @@
 
 ####How to work with complex data types
 `https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.ArbitraryDataMapping.html`
+

@@ -8,24 +8,19 @@ import com.globati.dynamodb.common.DynamoBusinessInfo;
 import com.globati.mysql.enums.Verified;
 
 @DynamoDBTable(tableName="Property")
-public class DynamoProperty extends DynamoBusinessInfo {
+public class DynamoProperty {
 
     @DynamoDBHashKey (attributeName = "email")
     private String email;
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName="name")
     private String name;
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName="userName")
     private String userName;
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName="mobileVisitCounter")
     private String mobileVisitCounter;
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName="website")
     private String website;
-    @DynamoDBAttribute
-    private Verified verified;
-    @DynamoDBAttribute
-    DynamoPropertyInfo dynamoPropertyInfo;
-    @DynamoDBAttribute
-    String mainImage;
+
 
     public DynamoProperty() {
     }
@@ -70,27 +65,15 @@ public class DynamoProperty extends DynamoBusinessInfo {
         this.website = website;
     }
 
-    public Verified getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Verified verified) {
-        this.verified = verified;
-    }
-
-    public DynamoPropertyInfo getDynamoPropertyInfo() {
-        return dynamoPropertyInfo;
-    }
-
-    public void setDynamoPropertyInfo(DynamoPropertyInfo dynamoPropertyInfo) {
-        this.dynamoPropertyInfo = dynamoPropertyInfo;
-    }
-
-    public String getMainImage() {
-        return mainImage;
-    }
-
-    public void setMainImage(String mainImage) {
-        this.mainImage = mainImage;
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Property{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", mobileVisitCounter='").append(mobileVisitCounter).append('\'');
+        sb.append(", website='").append(website).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

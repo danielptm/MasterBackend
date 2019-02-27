@@ -30,7 +30,6 @@ public class TestDynamoDbService {
     @Test
     public void testing() {
 
-        DynamoDBMapper dynamoDBMapper = new DynamoDBMapper(amazonDynamoDB);
 
 
 
@@ -39,7 +38,11 @@ public class TestDynamoDbService {
         db.setName("CBP");
 
 
+
+
         dynamoPropertyService.createDynamoProperty(db);
+
+        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").getEmail());
 
 
     }

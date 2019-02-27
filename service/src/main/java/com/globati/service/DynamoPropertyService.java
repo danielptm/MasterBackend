@@ -14,4 +14,8 @@ public class DynamoPropertyService {
     public DynamoProperty createDynamoProperty(DynamoProperty dynamoProperty) {
         return dynamoPropertyRepository.save(dynamoProperty);
     }
+
+    public DynamoProperty getDynamoPropertyById(String email) {
+        return dynamoPropertyRepository.findOne(email);
+    }
 }
