@@ -28,13 +28,11 @@ public class DynamoProperty extends DynamoBusinessInfo{
     private String website;
 
 
-    @DynamoDBTypeConverted(converter = DynamoRecommendationListConverter.class)
     @DynamoDBAttribute(attributeName = "recommendations")
-    List<DynamoRecommendation> dynamoRecommendations = new ArrayList<DynamoRecommendation>();
+    List<DynamoRecommendation> dynamoRecommendations;
 
-    @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
     @DynamoDBAttribute(attributeName = "tours")
-    List<DynamoTour> dynamoTours = new ArrayList<DynamoTour>();
+    List<DynamoTour> dynamoTours;
 
 
     public DynamoProperty() {

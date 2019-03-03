@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DynamoRecommendation extends DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "recommendationImages")
-    @DynamoDBTypeConverted(converter = DynamoImageListConverter.class)
     List<DynamoImage> images;
     @DynamoDBAttribute
     Category category;

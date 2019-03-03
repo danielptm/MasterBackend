@@ -11,7 +11,6 @@ import java.util.List;
 public class DynamoTourStop extends DynamoBusinessInfo{
 
     @DynamoDBAttribute (attributeName = "tourStopImages")
-    @DynamoDBTypeConverted(converter = DynamoImageListConverter.class)
     List<DynamoImage> images;
     @DynamoDBAttribute
     int stopOrder;
