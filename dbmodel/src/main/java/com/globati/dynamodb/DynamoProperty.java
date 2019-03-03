@@ -29,11 +29,28 @@ public class DynamoProperty extends DynamoBusinessInfo{
 
 
     @DynamoDBAttribute(attributeName = "recommendations")
+    @DynamoDBTypeConverted(converter = DynamoRecommendationListConverter.class)
     List<DynamoRecommendation> dynamoRecommendations;
 
     @DynamoDBAttribute(attributeName = "tours")
+    @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
     List<DynamoTour> dynamoTours;
 
+    public List<DynamoRecommendation> getDynamoRecommendations() {
+        return dynamoRecommendations;
+    }
+
+    public void setDynamoRecommendations(List<DynamoRecommendation> dynamoRecommendations) {
+        this.dynamoRecommendations = dynamoRecommendations;
+    }
+
+//    public List<DynamoTour> getDynamoTours() {
+//        return dynamoTours;
+//    }
+//
+//    public void setDynamoTours(List<DynamoTour> dynamoTours) {
+//        this.dynamoTours = dynamoTours;
+//    }
 
     public DynamoProperty() {
         super();

@@ -1,6 +1,7 @@
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.globati.dynamodb.DynamoProperty;
+import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.service.DynamoPropertyService;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
@@ -30,19 +34,24 @@ public class TestDynamoDbService {
     @Test
     public void testing() {
 
+        List<DynamoRecommendation> recommendationList = new ArrayList<>();
 
+        DynamoRecommendation dr = new DynamoRecommendation();
 
+        dr.setCity("Seattle");
+
+        recommendationList.add(dr);
 
         DynamoProperty db = new DynamoProperty();
+
         db.setEmail("danielptm@me.com");
         db.setName("CBP");
 
-
-
+        db.setDynamoRecommendations(recommendationList);
 
         dynamoPropertyService.createDynamoProperty(db);
 
-        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").getEmail());
+        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").getDynamoRecommendations().get(0).getCity());
 
 
     }
