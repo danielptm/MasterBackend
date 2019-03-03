@@ -5,10 +5,14 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.globati.dynamodb.common.DynamoBusinessInfo;
 import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
 import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 import com.globati.dynamodb.tour.DynamoTour;
+import com.globati.util.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,15 +100,7 @@ public class DynamoProperty extends DynamoBusinessInfo{
         this.website = website;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Property{");
-        sb.append("email='").append(email).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", userName='").append(userName).append('\'');
-        sb.append(", mobileVisitCounter='").append(mobileVisitCounter).append('\'');
-        sb.append(", website='").append(website).append('\'');
-        sb.append('}');
-        return sb.toString();
+    public String toJson() throws JsonProcessingException {
+        return Mapper.getMapper().writeValueAsString(this);
     }
 }

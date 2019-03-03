@@ -1,5 +1,6 @@
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
@@ -32,7 +33,7 @@ public class TestDynamoDbService {
 
 
     @Test
-    public void testing() {
+    public void testing() throws JsonProcessingException {
 
         List<DynamoRecommendation> recommendationList = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class TestDynamoDbService {
 
         dynamoPropertyService.createDynamoProperty(db);
 
-        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").getDynamoRecommendations().get(0).getCity());
+        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").toJson());
 
 
     }
