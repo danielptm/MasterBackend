@@ -4,11 +4,17 @@ package com.globati.dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.globati.dynamodb.common.DynamoBusinessInfo;
-import com.globati.mysql.enums.Verified;
+import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
+import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
+import com.globati.dynamodb.tour.DynamoTour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @DynamoDBTable(tableName="Property")
-public class DynamoProperty {
+public class DynamoProperty extends DynamoBusinessInfo{
 
     @DynamoDBHashKey (attributeName = "email")
     private String email;
@@ -22,7 +28,17 @@ public class DynamoProperty {
     private String website;
 
 
+    @DynamoDBTypeConverted(converter = DynamoRecommendationListConverter.class)
+    @DynamoDBAttribute(attributeName = "recommendations")
+    List<DynamoRecommendation> dynamoRecommendations = new ArrayList<DynamoRecommendation>();
+
+    @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
+    @DynamoDBAttribute(attributeName = "tours")
+    List<DynamoTour> dynamoTours = new ArrayList<DynamoTour>();
+
+
     public DynamoProperty() {
+        super();
     }
 
     public String getEmail() {

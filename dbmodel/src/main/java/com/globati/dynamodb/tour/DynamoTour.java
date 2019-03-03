@@ -1,14 +1,18 @@
 package com.globati.dynamodb.tour;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.globati.dynamodb.common.DynamoBusinessInfo;
 import com.globati.dynamodb.common.DynamoImage;
+import com.globati.dynamodb.converters.lists.DynamoImageListConverter;
+import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 
 import java.util.List;
 
 public class DynamoTour extends DynamoBusinessInfo{
 
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "tourImages")
+    @DynamoDBTypeConverted(converter = DynamoImageListConverter.class)
     List<DynamoImage> images;
     @DynamoDBAttribute
     List<DynamoTourStop> tourStops;

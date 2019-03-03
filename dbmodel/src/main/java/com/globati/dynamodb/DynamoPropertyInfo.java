@@ -5,17 +5,18 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import java.util.Date;
 
 public class DynamoPropertyInfo {
-    @DynamoDBAttribute
+
+    @DynamoDBAttribute (attributeName = "password")
     private String password;
-    @DynamoDBAttribute
-    private byte[] sale;
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "salt")
+    private byte[] salt;
+    @DynamoDBAttribute (attributeName = "lastLogin")
     private Date lastLogin;
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "dateCreated")
     private Date dateCreated;
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "apiToken")
     private String apiToken;
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "tokenExpiration")
     private String tokenExpiration;
 
 }
