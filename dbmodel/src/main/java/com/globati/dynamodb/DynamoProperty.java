@@ -17,9 +17,9 @@ import com.globati.util.Mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @DynamoDBTable(tableName="Property")
 public class DynamoProperty extends DynamoBusinessInfo{
-
     @DynamoDBHashKey (attributeName = "email")
     private String email;
     @DynamoDBAttribute(attributeName="name")
@@ -47,14 +47,6 @@ public class DynamoProperty extends DynamoBusinessInfo{
     public void setDynamoRecommendations(List<DynamoRecommendation> dynamoRecommendations) {
         this.dynamoRecommendations = dynamoRecommendations;
     }
-
-//    public List<DynamoTour> getDynamoTours() {
-//        return dynamoTours;
-//    }
-//
-//    public void setDynamoTours(List<DynamoTour> dynamoTours) {
-//        this.dynamoTours = dynamoTours;
-//    }
 
     public DynamoProperty() {
         super();
@@ -100,7 +92,14 @@ public class DynamoProperty extends DynamoBusinessInfo{
         this.website = website;
     }
 
-    public String toJson() throws JsonProcessingException {
-        return Mapper.getMapper().writeValueAsString(this);
+    @Override
+    public String toString() {
+        String toWrite = null;
+        try {
+            toWrite = Mapper.getMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return toWrite;
     }
 }

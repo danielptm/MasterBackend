@@ -52,7 +52,7 @@ public class TestDynamoDbService {
 
         dynamoPropertyService.createDynamoProperty(db);
 
-        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").toJson());
+        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").toString());
 
 
     }
