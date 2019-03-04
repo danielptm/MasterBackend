@@ -1,9 +1,12 @@
 import com.globati.mysql.dbmodel.*;
 import com.globati.service.*;
-import com.globati.service.exceptions.IllegalUserNameException;
-import com.globati.service.exceptions.ServiceException;
-import com.globati.service.exceptions.UserDoesNotExistException;
-import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service.mysql.exceptions.IllegalUserNameException;
+import com.globati.service.mysql.exceptions.ServiceException;
+import com.globati.service.mysql.exceptions.UserDoesNotExistException;
+import com.globati.service.mysql.exceptions.UserNameIsNotUniqueException;
+import com.globati.service.mysql.PropertyInfoService;
+import com.globati.service.mysql.PropertyService;
+import com.globati.service.mysql.RecommendationService;
 import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.utildb.GlobatiUtilException;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +42,7 @@ public class TestPropertyService extends SuperTest{
 	private PropertyService propertyService;
 
 	@Autowired
-	PropertyInfoService propertyInfoService;
+    PropertyInfoService propertyInfoService;
 
 	@Autowired
 	private RecommendationService recommendationService;

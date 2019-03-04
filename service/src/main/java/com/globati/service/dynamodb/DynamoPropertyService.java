@@ -1,4 +1,4 @@
-package com.globati.service;
+package com.globati.service.dynamodb;
 
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;

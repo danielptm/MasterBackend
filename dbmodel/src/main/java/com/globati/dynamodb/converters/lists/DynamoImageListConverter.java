@@ -2,18 +2,11 @@ package com.globati.dynamodb.converters.lists;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
-import com.globati.dynamodb.converters.DynamoTourStopConverter;
-import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.util.Mapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DynamoImageListConverter  implements DynamoDBTypeConverter<String, List<DynamoImage>> {

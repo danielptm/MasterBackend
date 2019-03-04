@@ -1,4 +1,4 @@
-package com.globati.service;
+package com.globati.service.mysql;
 
 import com.globati.mysql.dbmodel.Tour;
 import com.globati.mysql.dbmodel.TourStop;

@@ -1,11 +1,11 @@
 import com.globati.mysql.dbmodel.Property;
 import com.globati.mysql.dbmodel.PropertyInfo;
-import com.globati.service.PropertyInfoService;
-import com.globati.service.PropertyService;
-import com.globati.service.exceptions.IllegalUserNameException;
-import com.globati.service.exceptions.ServiceException;
-import com.globati.service.exceptions.UserDoesNotExistException;
-import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service.mysql.PropertyInfoService;
+import com.globati.service.mysql.PropertyService;
+import com.globati.service.mysql.exceptions.IllegalUserNameException;
+import com.globati.service.mysql.exceptions.ServiceException;
+import com.globati.service.mysql.exceptions.UserDoesNotExistException;
+import com.globati.service.mysql.exceptions.UserNameIsNotUniqueException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

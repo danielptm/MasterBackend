@@ -1,4 +1,4 @@
-package com.globati.service;
+package com.globati.service.mysql;
 
 
 import com.globati.HelpObjects.ApiKey;
@@ -6,10 +6,12 @@ import com.globati.mysql.dbmodel.*;
 import com.globati.mysql.enums.Verified;
 import com.globati.repository.mysql.PropertyRepository;
 import com.globati.request.CreateProperty;
-import com.globati.service.exceptions.IllegalUserNameException;
-import com.globati.service.exceptions.ServiceException;
-import com.globati.service.exceptions.UserDoesNotExistException;
-import com.globati.service.exceptions.UserNameIsNotUniqueException;
+import com.globati.service.JwtService;
+import com.globati.service.PropertiesService;
+import com.globati.service.mysql.exceptions.IllegalUserNameException;
+import com.globati.service.mysql.exceptions.ServiceException;
+import com.globati.service.mysql.exceptions.UserDoesNotExistException;
+import com.globati.service.mysql.exceptions.UserNameIsNotUniqueException;
 import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.utildb.*;
 import org.apache.logging.log4j.LogManager;

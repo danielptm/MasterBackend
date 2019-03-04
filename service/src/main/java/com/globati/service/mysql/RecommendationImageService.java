@@ -1,9 +1,9 @@
-package com.globati.service;
+package com.globati.service.mysql;
 
 import com.globati.mysql.dbmodel.Recommendation;
 import com.globati.mysql.dbmodel.RecommendationImage;
 import com.globati.repository.mysql.RecommendationImageRepository;
-import com.globati.service.exceptions.ServiceException;
+import com.globati.service.mysql.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

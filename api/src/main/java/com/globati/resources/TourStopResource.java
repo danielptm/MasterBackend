@@ -1,6 +1,6 @@
 package com.globati.resources;
 
-import com.globati.service.TourStopService;
+import com.globati.service.mysql.TourStopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.globati.service.exceptions;
+package com.globati.service.mysql.exceptions;
 
 public class AdapaterException extends Exception{
 

@@ -1,4 +1,4 @@
-package com.globati.service.exceptions;
+package com.globati.service.mysql.exceptions;
 
 /**
  * Created by daniel on 12/21/16.

@@ -6,24 +6,24 @@
 
     <bean id="DataSource" class="com.globati.config.TestProfile"></bean>
 
-    <bean id="EmployeeService" class="com.globati.service.PropertyService"></bean>
+    <bean id="EmployeeService" class="com.globati.service.mysql.PropertyService"></bean>
 
-    <bean id="RecommendationService" class="com.globati.service.RecommendationService"></bean>
+    <bean id="RecommendationService" class="com.globati.service.mysql.RecommendationService"></bean>
 
-    <bean id="EmployeeInfoService" class="com.globati.service.PropertyInfoService"></bean>
+    <bean id="EmployeeInfoService" class="com.globati.service.mysql.PropertyInfoService"></bean>
 
     <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
 
     <bean id="JwtService" class="com.globati.service.JwtService"></bean>
 
-    <bean id="RecommendationImageService" class="com.globati.service.RecommendationImageService"></bean>
+    <bean id="RecommendationImageService" class="com.globati.service.mysql.RecommendationImageService"></bean>
 
-    <bean id="TourService" class="com.globati.service.TourService"></bean>
+    <bean id="TourService" class="com.globati.service.mysql.TourService"></bean>
 
-    <bean id="TourStopService" class="com.globati.service.TourStopService"></bean>
+    <bean id="TourStopService" class="com.globati.service.mysql.TourStopService"></bean>
 
-    <bean id="ImageService" class="com.globati.service.ImageService"></bean>
+    <bean id="ImageService" class="com.globati.service.mysql.ImageService"></bean>
 
-    <bean id="DynamoPropertyService" class="com.globati.service.DynamoPropertyService"></bean>
+    <bean id="DynamoPropertyService" class="com.globati.service.dynamodb.DynamoPropertyService"></bean>
 
 </beans>

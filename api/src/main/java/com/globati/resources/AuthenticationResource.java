@@ -2,8 +2,8 @@ package com.globati.resources;
 
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.PropertyInfoService;
-import com.globati.service.PropertyService;
+import com.globati.service.mysql.PropertyInfoService;
+import com.globati.service.mysql.PropertyService;
 import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.third_party_api.AWSCredentials;
 import com.globati.request.PasswordAttempt;

@@ -1,9 +1,7 @@
 package com.globati.resources.exceptions;
 
-import com.globati.service.exceptions.UserDoesNotExistException;
-import org.hibernate.exception.ConstraintViolationException;
+import com.globati.service.mysql.exceptions.UserDoesNotExistException;
 
-import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;

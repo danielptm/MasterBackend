@@ -2,9 +2,7 @@ package com.globati.dynamodb.converters;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.globati.dynamodb.common.DynamoImage;
-import com.globati.dynamodb.tour.DynamoTourStop;
 import com.globati.util.Mapper;
-import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

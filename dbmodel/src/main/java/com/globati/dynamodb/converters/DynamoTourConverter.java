@@ -2,11 +2,8 @@ package com.globati.dynamodb.converters;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.globati.dynamodb.DynamoRecommendation;
-import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.util.Mapper;
-import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

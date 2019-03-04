@@ -1,14 +1,12 @@
 package com.globati.resources;
 
 import com.globati.request.tour.TourRequest;
-import com.globati.resources.annotations.GlobatiAuthentication;
-import com.globati.service.TourService;
+import com.globati.service.mysql.TourService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

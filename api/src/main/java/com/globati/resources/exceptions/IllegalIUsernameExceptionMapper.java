@@ -1,6 +1,6 @@
 package com.globati.resources.exceptions;
 
-import com.globati.service.exceptions.IllegalUserNameException;
+import com.globati.service.mysql.exceptions.IllegalUserNameException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

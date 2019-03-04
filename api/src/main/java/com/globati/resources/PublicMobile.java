@@ -1,8 +1,8 @@
 package com.globati.resources;
 
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.PropertyService;
-import com.globati.service.RecommendationService;
+import com.globati.service.mysql.PropertyService;
+import com.globati.service.mysql.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.ws.rs.*;

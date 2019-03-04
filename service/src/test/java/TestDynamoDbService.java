@@ -1,10 +1,8 @@
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
-import com.globati.repository.dynamodb.DynamoPropertyRepository;
-import com.globati.service.DynamoPropertyService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
