@@ -13,6 +13,9 @@ import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
 import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.util.Mapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.LoggerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,9 @@ import java.util.List;
 
 @DynamoDBTable(tableName="Property")
 public class DynamoProperty extends DynamoBusinessInfo{
+
+    private static final Logger LOGGER = LogManager.getLogger(DynamoRecommendationListConverter.class);
+
     @DynamoDBHashKey (attributeName = "email")
     private String email;
     @DynamoDBAttribute(attributeName="name")
@@ -98,6 +104,7 @@ public class DynamoProperty extends DynamoBusinessInfo{
         try {
             toWrite = Mapper.getMapper().writeValueAsString(this);
         } catch (JsonProcessingException e) {
+            LOGGER.error("DynamoProperty exception: ");
             e.printStackTrace();
         }
         return toWrite;

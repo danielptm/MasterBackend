@@ -1,20 +1,38 @@
 package com.globati.dynamodb.converters.lists;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.globati.dynamodb.DynamoRecommendation;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.globati.util.Mapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class DynamoRecommendationListConverter implements DynamoDBTypeConverter<String, List<DynamoRecommendation>> {
+
+    private static final Logger LOGGER = LogManager.getLogger(DynamoRecommendationListConverter.class);
+
     public String convert(List<DynamoRecommendation> object) {
-        return new Gson().toJson(object);
+        String toReturn = null;
+        try {
+            toReturn = Mapper.getMapper().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("DynamoRecommendationListConverter exception: ");
+            e.printStackTrace();
+        }
+        return toReturn;
     }
 
     public List<DynamoRecommendation> unconvert(String object) {
-        Type listType = new TypeToken<ArrayList<DynamoRecommendation>>() {}.getType();
-        return new Gson().fromJson(object, listType);
+        List<DynamoRecommendation> recommendations = null;
+        try {
+            recommendations = Mapper.getMapper().readValue(object, new TypeReference<List<DynamoRecommendation>>(){});
+        } catch (IOException e) {
+            LOGGER.error("DynamoRecommendationListConverter exception: ");
+            e.printStackTrace();
+        }
+        return recommendations;
     }
 }

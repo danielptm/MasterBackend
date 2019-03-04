@@ -1,16 +1,38 @@
 package com.globati.dynamodb.converters;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.globati.dynamodb.DynamoRecommendation;
+import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
 import com.globati.dynamodb.tour.DynamoTour;
+import com.globati.util.Mapper;
 import com.google.gson.Gson;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DynamoTourConverter implements DynamoDBTypeConverter<String, DynamoTour> {
 
+    private static final Logger LOGGER = LogManager.getLogger(DynamoTourConverter.class);
+
     public String convert(DynamoTour object) {
-        return new Gson().toJson(object);
+        String toReturn = null;
+        try {
+            toReturn = Mapper.getMapper().writeValueAsString(object);
+        } catch (JsonProcessingException e ){
+            LOGGER.error("DynamoTourConverter exception: ");
+            e.printStackTrace();
+        }
+        return toReturn;
     }
 
     public DynamoTour unconvert(String object) {
-        return new Gson().fromJson(object, DynamoTour.class);
+        DynamoTour dynamoTour = null;
+        try {
+            dynamoTour = Mapper.getMapper().readValue(object, DynamoTour.class);
+        }catch (java.io.IOException e) {
+            LOGGER.error("DynamoTourConverter exception: ");
+            e.printStackTrace();
+        }
+        return dynamoTour;
     }
 }
