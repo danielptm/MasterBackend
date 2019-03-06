@@ -1,6 +1,6 @@
 package com.globati.resources.exceptions;
 
-import com.globati.service.mysql.exceptions.UserNameIsNotUniqueException;
+import com.globati.exceptions.UserNameIsNotUniqueException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;

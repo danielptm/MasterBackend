@@ -22,8 +22,6 @@ public abstract  class DynamoBusinessInfo {
     protected String description;
     @DynamoDBAttribute (attributeName = "active")
     protected boolean active;
-    @DynamoDBAttribute (attributeName = "title")
-    protected String title;
     @DynamoDBAttribute (attributeName = "dateInactive")
     protected Date dateInactive;
     @DynamoDBAttribute (attributeName = "dateActive")
@@ -94,14 +92,6 @@ public abstract  class DynamoBusinessInfo {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Date getDateInactive() {

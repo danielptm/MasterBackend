@@ -1,6 +1,6 @@
 package com.globati.resources.exceptions;
 
-import com.globati.service.mysql.exceptions.UserDoesNotExistException;
+import com.globati.exceptions.UserDoesNotExistException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

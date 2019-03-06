@@ -1,9 +1,15 @@
 package com.globati.request;
 
+import com.globati.HelpObjects.ChangePassword;
+import com.globati.util.Mapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Created by daniel on 1/25/17.
  */
 public class ChangePasswordWithToken {
+    private static final Logger LOGGER = LogManager.getLogger(ChangePassword.class);
 
     String token;
     String password;
@@ -33,10 +39,14 @@ public class ChangePasswordWithToken {
 
     @Override
     public String toString() {
-        return "ChangePasswordWithToken{" +
-                "token='" + token + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        String toReturn = null;
+        try {
+            toReturn = Mapper.getMapper().writeValueAsString(this);
+        } catch (Exception e) {
+            LOGGER.error("ChangePasswordWithToken exception: ");
+            e.printStackTrace();
+        }
+        return toReturn;
     }
 
 

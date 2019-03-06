@@ -1,11 +1,10 @@
 package com.globati.resources;
 
-import com.globati.mysql.dbmodel.Recommendation;
+import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.mysql.PropertyService;
-import com.globati.service.mysql.RecommendationService;
-import com.globati.service.mysql.exceptions.ServiceException;
+import com.globati.service.dynamodb.DynamoRecommendationService;
+import com.globati.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,7 @@ public class RecommendationResource {
     private static final Logger log = LogManager.getLogger(RecommendationResource.class);
 
     @Autowired
-    RecommendationService recommendationService;
-
-    @Autowired
-    PropertyService propertyService;
+    DynamoRecommendationService recommendationService;
 
     @Context
     UriInfo uriInfo;
@@ -60,9 +56,9 @@ public class RecommendationResource {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecommendationsByEmployee(@QueryParam("id") Long id){
+    public Response getRecommendationsByEmployee(@QueryParam("id") String id){
         try{
-            List<Recommendation> recommendationList = recommendationService.getRecommendationByPropertyId(id);
+            List<DynamoRecommendation> recommendationList = recommendationService.getRecommendationsByEmployeeName(id);
             return Response.ok(recommendationList).build();
         }catch(Exception e){
             throw new WebException("Could not receive recommendations for employee", Response.Status.BAD_REQUEST);
@@ -82,9 +78,9 @@ public class RecommendationResource {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response delete(@PathParam("id") Long id) throws ServiceException {
+    public Response delete(@PathParam("id") String id) throws ServiceException {
         try{
-            recommendationService.inactivateRecommendation(id);
+            recommendationService.deleteRecommendation(id);
             return Response.ok().build();
         }catch(Exception e){
             throw new WebException("Could not update recommendation", Response.Status.CONFLICT);
@@ -103,18 +99,7 @@ public class RecommendationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(com.globati.request.Recommendation recommendation){
         try{
-             Recommendation returnRecommendation = recommendationService.createRecommendation(recommendation.getEmployeeId(),
-                    recommendation.getTitle(),
-                    recommendation.getDescription(),
-                    recommendation.getTargetLat(),
-                    recommendation.getTargetLong(),
-                    recommendation.getStreet(),
-                    recommendation.getCity(),
-                    recommendation.getCountry(),
-                    recommendation.getImages(),
-                    recommendation.getCategory()
-            );
-
+             DynamoRecommendation returnRecommendation = recommendationService.createRecommendation(recommendation);
             return Response.ok(returnRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not create new recommendation", Response.Status.CONFLICT);
@@ -127,16 +112,8 @@ public class RecommendationResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") Long id,  com.globati.request.Recommendation recommendation){
-        log.debug("recommendationResource");
-        log.debug(id);
-        log.debug(recommendation.toString());
         try{
-            Recommendation returnRecommendation = recommendationService.updateRecommendation(
-                    recommendation.getId(),
-                    recommendation.getTitle(),
-                    recommendation.getDescription(),
-                    recommendation.getImages()
-            );
+            DynamoRecommendation returnRecommendation = recommendationService.udpateRecommendation(recommendation);
             return Response.ok(returnRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);

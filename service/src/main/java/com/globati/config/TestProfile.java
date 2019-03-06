@@ -37,7 +37,6 @@ import java.util.Properties;
 
 @Configuration
 @Profile("test")
-@EnableJpaRepositories("com.globati.repository.mysql")
 @EnableTransactionManagement
 @EnableScheduling
 @PropertySource("classpath:environment/test.properties")

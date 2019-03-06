@@ -1,7 +1,10 @@
+package dynamodb;
+
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
+import com.globati.request.RequestProperty;
 import com.globati.service.dynamodb.DynamoPropertyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +21,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
 @ActiveProfiles("test")
-public class TestDynamoDbService {
+public class TestDynamoPropertyService {
 
     @Autowired
     DynamoPropertyService dynamoPropertyService;
@@ -26,12 +29,12 @@ public class TestDynamoDbService {
     @Autowired
     private AmazonDynamoDB amazonDynamoDB;
 
-    private static final Logger log = LogManager.getLogger(TestDynamoDbService.class);
+    private static final Logger log = LogManager.getLogger(TestDynamoPropertyService.class);
 
 
 
     @Test
-    public void testing() throws JsonProcessingException {
+    public void createProperty() throws JsonProcessingException {
 
         List<DynamoRecommendation> recommendationList = new ArrayList<>();
 
@@ -41,18 +44,27 @@ public class TestDynamoDbService {
 
         recommendationList.add(dr);
 
-        DynamoProperty db = new DynamoProperty();
+        RequestProperty rp = new RequestProperty();
 
-        db.setEmail("danielptm@me.com");
-        db.setName("CBP");
+        rp.setEmail("danielptm@me.com");
+        rp.setName("CBP");
 
-        db.setDynamoRecommendations(recommendationList);
 
-        dynamoPropertyService.createDynamoProperty(db);
+        dynamoPropertyService.createDynamoProperty(rp);
+
 
         System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").toString());
 
 
     }
 
+    @Test
+    public void deleteProperty() {
+
+    }
+
+    @Test
+    public void updateProperty() {
+
+    }
 }

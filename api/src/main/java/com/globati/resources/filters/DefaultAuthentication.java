@@ -3,8 +3,7 @@ package com.globati.resources.filters;
 import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.mysql.PropertyInfoService;
-import com.globati.service.mysql.PropertyService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import com.globati.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -22,10 +21,8 @@ import java.io.IOException;
 public class DefaultAuthentication implements ContainerRequestFilter {
 
     @Autowired
-    PropertyService propertyService;
+    DynamoPropertyService propertyService;
 
-    @Autowired
-    PropertyInfoService propertyInfoService;
 
     @Autowired
     JwtService jwtService;
@@ -40,7 +37,7 @@ public class DefaultAuthentication implements ContainerRequestFilter {
 
         try {
             jwt = clientapikey1.substring("Bearer".length()).trim();
-            propertyInfo = propertyInfoService.getPropertyInfoByToken(jwtService.getPayloadFromJwt(jwt));
+            propertyInfo = propertyService.getPropertyToken(jwtService.getPayloadFromJwt(jwt));
         }catch(Exception e){
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }

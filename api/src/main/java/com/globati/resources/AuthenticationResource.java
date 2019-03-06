@@ -2,8 +2,7 @@ package com.globati.resources;
 
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
-import com.globati.service.mysql.PropertyInfoService;
-import com.globati.service.mysql.PropertyService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.third_party_api.AWSCredentials;
 import com.globati.request.PasswordAttempt;
@@ -29,10 +28,8 @@ public class AuthenticationResource {
     private static final Logger log = LogManager.getLogger(AuthenticationResource.class);
 
     @Autowired
-    PropertyService propertyService;
+    DynamoPropertyService propertyService;
 
-    @Autowired
-    PropertyInfoService propertyInfoService;
 
 
     @POST
@@ -41,7 +38,7 @@ public class AuthenticationResource {
     public Response authentication(PasswordAttempt pa){
         log.debug("authentication()");
         try {
-            PropertyAndItems propertyAndItems = propertyService.authenticateReceptionist(pa.getUsername(), pa.getPassword());
+            PropertyAndItems propertyAndItems = propertyService.authenticate(pa.getUsername(), pa.getPassword());
             log.info("PROPERTY AND ITEMS" + propertyAndItems.getProperty());
              return Response.ok(propertyAndItems).build();
         }catch(Exception e){

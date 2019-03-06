@@ -1,4 +1,4 @@
-package com.globati.service.mysql.exceptions;
+package com.globati.exceptions;
 
 public class IllegalUserNameException extends Exception {
 
