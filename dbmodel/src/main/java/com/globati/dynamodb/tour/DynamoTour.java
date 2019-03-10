@@ -8,6 +8,7 @@ import com.globati.dynamodb.converters.lists.DynamoImageListConverter;
 import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 
 import java.util.List;
+import java.util.UUID;
 
 public class DynamoTour extends DynamoBusinessInfo{
 
@@ -15,4 +16,8 @@ public class DynamoTour extends DynamoBusinessInfo{
     List<DynamoImage> images;
     @DynamoDBAttribute
     List<DynamoTourStop> tourStops;
+
+    public DynamoTour() {
+        super();
+    }
 }

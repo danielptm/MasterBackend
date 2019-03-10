@@ -19,6 +19,7 @@ import org.apache.logging.log4j.spi.LoggerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @DynamoDBTable(tableName="Property")

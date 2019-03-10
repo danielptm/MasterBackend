@@ -9,6 +9,7 @@ import com.globati.dynamodb.converters.lists.DynamoRecommendationListConverter;
 import com.globati.mysql.enums.Category;
 
 import java.util.List;
+import java.util.UUID;
 
 public class DynamoRecommendation extends DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "recommendationImages")
@@ -18,6 +19,10 @@ public class DynamoRecommendation extends DynamoBusinessInfo {
     Category category;
     @DynamoDBAttribute (attributeName = "title")
     String title;
+
+    public DynamoRecommendation() {
+        super();
+    }
 
     public List<DynamoImage> getImages() {
         return images;

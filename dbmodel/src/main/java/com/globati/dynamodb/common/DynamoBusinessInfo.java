@@ -27,7 +27,9 @@ public abstract  class DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "dateActive")
     protected Date dateActive;
 
+
     public DynamoBusinessInfo() {
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getId() {

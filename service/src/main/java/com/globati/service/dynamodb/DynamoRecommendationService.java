@@ -3,6 +3,7 @@ package com.globati.service.dynamodb;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
+import com.oracle.jrockit.jfr.DynamicEventToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,22 @@ public class DynamoRecommendationService {
         return null;
     }
 
-    public String deleteRecommendation(String id) {
-        return null;
+    /**
+     * Deletes a recommenation from a property
+     * @param email of the property
+     * @param recommendationId of the recommendation to delete.
+     * @returnå
+     */
+    public DynamoProperty deleteRecommendation(String email, String recommendationId) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(email);
+        DynamoRecommendation recommendationToRemove = dynamoProperty.getDynamoRecommendations().stream()
+                .filter((dynamoRecommendation -> dynamoRecommendation.getId().equals(recommendationId))).findFirst().get();
+
+        dynamoProperty.getDynamoRecommendations().remove(recommendationToRemove);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+        return dynamoProperty;
     }
 
     public DynamoProperty updateRecommendation(com.globati.request.Recommendation recommendation){

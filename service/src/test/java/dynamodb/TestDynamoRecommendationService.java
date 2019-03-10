@@ -76,4 +76,16 @@ public class TestDynamoRecommendationService {
         Assert.assertEquals(updatedCity, dynamoProperty.getDynamoRecommendations().get(0).getCity());
         Assert.assertEquals(updatedDescription, dynamoProperty.getDynamoRecommendations().get(0).getDescription());
     }
+
+    @Test
+    public void deleteRecommendation() {
+        DynamoProperty dynamoProperty = dynamoRecommendationService.deleteRecommendation(
+                this.dynamoProperty.getEmail(),
+                this.dynamoProperty.getDynamoRecommendations().get(0).getId() );
+
+        Assert.assertEquals(0, dynamoProperty.getDynamoRecommendations().size());
+
+
+
+    }
 }
