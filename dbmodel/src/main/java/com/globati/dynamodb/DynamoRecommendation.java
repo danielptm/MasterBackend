@@ -14,6 +14,32 @@ public class DynamoRecommendation extends DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "recommendationImages")
     @DynamoDBTypeConverted(converter = DynamoImageListConverter.class)
     List<DynamoImage> images;
-    @DynamoDBAttribute
+    @DynamoDBAttribute (attributeName = "category")
     Category category;
+    @DynamoDBAttribute (attributeName = "title")
+    String title;
+
+    public List<DynamoImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<DynamoImage> images) {
+        this.images = images;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

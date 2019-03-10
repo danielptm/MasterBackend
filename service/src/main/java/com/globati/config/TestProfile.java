@@ -5,11 +5,13 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.globati.service.PropertiesService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.lang.StringUtils;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -43,14 +45,13 @@ import java.util.Properties;
 @EnableDynamoDBRepositories(basePackages = "com.globati.repository.dynamodb")
 public class TestProfile {
 
-    @Autowired
-    PropertiesService propertiesService;
 
-    String activeDriver;
-    String databasePath;
-    String activeDbLogin;
-    String activeDbPassword;
-    Database activeVendor = Database.DERBY;
+    @Value("${amazon.dynamodb.endpoint}")
+    private String dynamoEndpoint;
+    @Value("${amazon.aws.accesskey}")
+    private String amazonAWSAccessKey;
+    @Value("${amazon.aws.secretkey}")
+    private String amazonAWSSecretKey;
 
     public TestProfile() throws IOException {
 
@@ -61,20 +62,11 @@ public class TestProfile {
         String testResource = "environment/test.properties";
         try (InputStream resourceStream = InfrastructureConfig.class.getClassLoader().getResourceAsStream(testResource)) {
             props.load(resourceStream);
-            activeVendor = Database.DERBY;
         }
-        String dbPath = props.get("dbPath").toString();
-        String driver = props.get("driver").toString();
-
-        activeDriver = driver;
-        databasePath = dbPath;
-        activeDbPassword="";
-        activeDbLogin="";
 
         System.out.println("=======================================================================");
         System.out.println("**                   GLOBATI "+SYSTEMENV.get("GLOBATI_SERVER_ENV")+" ENVIRONMENT     **");
         System.out.println("=========================================================================");
-        System.out.println("Active Driver: "+activeDriver+" "+"ActiveDbPassword: "+activeDbPassword+" "+"ActiveDbLogin: "+activeDbLogin+"ActiveDbPath: "+databasePath);
         System.out.println("=======================================================================");
         System.out.println("**                      RUNNING UNIT TESTS                          **");
         System.out.println("=======================================================================");
@@ -82,49 +74,12 @@ public class TestProfile {
     }
 
     @Bean
-    public DataSource dataSource(){
-        HikariConfig config = new HikariConfig();
-        config.setDriverClassName(activeDriver);
-        config.setJdbcUrl(databasePath);
-        config.setUsername(activeDbLogin);
-        config.setPassword(activeDbPassword);
-        return new HikariDataSource(config);
-    }
-
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory factory) {
-        return new JpaTransactionManager(factory);
-    }
-
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter() {
-
-        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabase(activeVendor);
-        adapter.setGenerateDdl(true);
-
-        return adapter;
-    }
-
-    //Make sure that the right datasource is being set
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource( dataSource() ); //Get data source config here!
-        factory.setJpaVendorAdapter(jpaVendorAdapter());
-        factory.setPackagesToScan("com.globati.mysql.dbmodel");
-
-        return factory;
-    }
-
-    @Bean
     public AmazonDynamoDB amazonDynamoDB() {
         AmazonDynamoDB amazonDynamoDB
                 = new AmazonDynamoDBClient(amazonAWSCredentials());
 
-        if (!StringUtils.isEmpty(propertiesService.getAmazonDynamoDBEndpoint())) {
-            amazonDynamoDB.setEndpoint(propertiesService.getAmazonDynamoDBEndpoint());
+        if (!StringUtils.isEmpty(dynamoEndpoint)) {
+            amazonDynamoDB.setEndpoint(dynamoEndpoint);
         }
 
         return amazonDynamoDB;
@@ -133,7 +88,12 @@ public class TestProfile {
     @Bean
     public AWSCredentials amazonAWSCredentials() {
         return new BasicAWSCredentials(
-                propertiesService.getAmazonAWSAccessKey(), propertiesService.getAmazonAWSSecretKey());
+                amazonAWSAccessKey, amazonAWSSecretKey);
+    }
+
+    @Bean
+    public DynamoPropertyService dynamoPropertyService() {
+        return new DynamoPropertyService();
     }
 
 

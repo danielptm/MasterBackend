@@ -2,7 +2,6 @@ package dynamodb;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.request.RequestProperty;
 import com.globati.service.dynamodb.DynamoPropertyService;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring/DealServiceTest-context.xml"})
+@ContextConfiguration(locations = {"classpath:/spring/test-context.xml"})
 @ActiveProfiles("test")
 public class TestDynamoPropertyService {
 
@@ -31,31 +30,8 @@ public class TestDynamoPropertyService {
 
     private static final Logger log = LogManager.getLogger(TestDynamoPropertyService.class);
 
-
-
     @Test
     public void createProperty() throws JsonProcessingException {
-
-        List<DynamoRecommendation> recommendationList = new ArrayList<>();
-
-        DynamoRecommendation dr = new DynamoRecommendation();
-
-        dr.setCity("Seattle");
-
-        recommendationList.add(dr);
-
-        RequestProperty rp = new RequestProperty();
-
-        rp.setEmail("danielptm@me.com");
-        rp.setName("CBP");
-
-
-        dynamoPropertyService.createDynamoProperty(rp);
-
-
-        System.out.println(dynamoPropertyService.getDynamoPropertyById("danielptm@me.com").toString());
-
-
     }
 
     @Test

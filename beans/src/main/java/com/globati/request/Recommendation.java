@@ -10,9 +10,9 @@ import java.util.List;
 public class Recommendation {
 
     @JsonProperty("id")
-    Long id;
-    @JsonProperty("employeeId")
-    Long employeeId;
+    String id;
+    @JsonProperty("propertyEmail")
+    String propertyEmail;
     @JsonProperty("title")
     String title;
     @JsonProperty("description")
@@ -40,12 +40,12 @@ public class Recommendation {
 
     public Recommendation(){}
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public String getPropertyEmail() {
+        return propertyEmail;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setPropertyEmail(String propertyEmail) {
+        this.propertyEmail = propertyEmail;
     }
 
     public String getTitle() {
@@ -136,11 +136,11 @@ public class Recommendation {
         this.images = images;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -156,7 +156,7 @@ public class Recommendation {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Recommendation{");
         sb.append("id=").append(id);
-        sb.append(", employeeId=").append(employeeId);
+        sb.append(", employeeId=").append(propertyEmail);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", targetLat=").append(targetLat);
