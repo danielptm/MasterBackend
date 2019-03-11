@@ -4,9 +4,30 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 
 import java.util.UUID;
 
-public abstract class DynamoImage {
+public class DynamoImage {
     @DynamoDBAttribute
     private String id;
     @DynamoDBAttribute
-    private String imagePath;
+    private String path;
+
+    public DynamoImage(String path) {
+        this.id = UUID.randomUUID().toString();
+        this.path = path;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }

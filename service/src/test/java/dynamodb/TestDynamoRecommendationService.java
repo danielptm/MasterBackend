@@ -13,10 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +31,12 @@ public class TestDynamoRecommendationService {
     DynamoRecommendationService dynamoRecommendationService;
 
     DynamoProperty dynamoProperty;
+
+    com.globati.request.Recommendation recommendation;
+
+    String updatedCity = "Seattle";
+    String updatedDescription = "updatedDescription";
+    String email = "daniel@cbp.com";
 
     @Before
     public void setup() {
@@ -54,24 +58,31 @@ public class TestDynamoRecommendationService {
 
         this.dynamoProperty = dynamoProperty;
 
+        this.recommendation = new Recommendation();
+
+        //Set the id like this after creation because for the sake of testing these are the same recommendation
+        //just being updated.
+        this.recommendation.setId(dynamoRecommendation.getId());
+        this.recommendation.setPropertyEmail("daniel@cbp.com");
+        this.recommendation.setCity(updatedCity);
+        this.recommendation.setDescription(updatedDescription);
+        this.recommendation.setPropertyEmail(this.email);
+
+        this.recommendation.setImages(new ArrayList<>());
+        this.recommendation.getImages().add("image1");
+
         Mockito.when(dynamoPropertyRepository.findOne(Mockito.anyString()))
                 .thenReturn(this.dynamoProperty);
 
         Mockito.when(dynamoPropertyRepository.save((DynamoProperty) Mockito.anyObject()))
                 .thenReturn(null);
+
     }
 
     @Test
     public void updateRecommendation() {
-        String updatedCity = "Seattle";
-        String updatedDescription = "updatedDescription";
-        com.globati.request.Recommendation recommendation = new Recommendation();
-        recommendation.setPropertyEmail("daniel@cbp.com");
 
-        recommendation.setCity(updatedCity);
-        recommendation.setDescription(updatedDescription);
-
-        DynamoProperty dynamoProperty = dynamoRecommendationService.updateRecommendation(recommendation);
+        DynamoProperty dynamoProperty = dynamoRecommendationService.updateRecommendation(this.recommendation);
 
         Assert.assertEquals(updatedCity, dynamoProperty.getDynamoRecommendations().get(0).getCity());
         Assert.assertEquals(updatedDescription, dynamoProperty.getDynamoRecommendations().get(0).getDescription());
@@ -84,8 +95,25 @@ public class TestDynamoRecommendationService {
                 this.dynamoProperty.getDynamoRecommendations().get(0).getId() );
 
         Assert.assertEquals(0, dynamoProperty.getDynamoRecommendations().size());
+    }
 
+    @Test
+    public void testCreateRecommendation(){
+        DynamoProperty dynamoProperty = dynamoRecommendationService.createRecommendation(this.recommendation);
+        System.out.println(dynamoProperty);
+        Assert.assertEquals(this.email, dynamoProperty.getEmail());
+//        Assert.assertEquals(2, dynamoProperty.getDynamoRecommendations().get(0).getImages().size());
+    }
 
+    @Test
+    public void testGetRecommendationById() {
 
     }
+
+    @Test
+    public void testGetRecommendaitonsByEmployeeName() {
+
+    }
+
+
 }

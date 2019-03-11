@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class DynamoRecommendation extends DynamoBusinessInfo {
+
     @DynamoDBAttribute (attributeName = "recommendationImages")
     @DynamoDBTypeConverted(converter = DynamoImageListConverter.class)
     List<DynamoImage> images;
@@ -47,4 +48,5 @@ public class DynamoRecommendation extends DynamoBusinessInfo {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }
