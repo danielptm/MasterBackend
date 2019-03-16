@@ -47,6 +47,7 @@ public class TestDynamoRecommendationService {
         dynamoProperty.setCity("Stockholm");
 
         DynamoRecommendation dynamoRecommendation = new DynamoRecommendation();
+        DynamoRecommendation dynamoRecommendation2 = new DynamoRecommendation();
 
         dynamoRecommendation.setTitle("title");
         dynamoRecommendation.setDescription("description");
@@ -54,6 +55,7 @@ public class TestDynamoRecommendationService {
 
         List<DynamoRecommendation> dynamoRecommendations = new ArrayList<>();
         dynamoRecommendations.add(dynamoRecommendation);
+        dynamoRecommendations.add(dynamoRecommendation2);
         dynamoProperty.setDynamoRecommendations(dynamoRecommendations);
 
         this.dynamoProperty = dynamoProperty;
@@ -70,6 +72,7 @@ public class TestDynamoRecommendationService {
 
         this.recommendation.setImages(new ArrayList<>());
         this.recommendation.getImages().add("image1");
+
 
         Mockito.when(dynamoPropertyRepository.findOne(Mockito.anyString()))
                 .thenReturn(this.dynamoProperty);
@@ -102,18 +105,17 @@ public class TestDynamoRecommendationService {
         DynamoProperty dynamoProperty = dynamoRecommendationService.createRecommendation(this.recommendation);
         System.out.println(dynamoProperty);
         Assert.assertEquals(this.email, dynamoProperty.getEmail());
-//        Assert.assertEquals(2, dynamoProperty.getDynamoRecommendations().get(0).getImages().size());
+        Assert.assertEquals(1, dynamoProperty.getDynamoRecommendations().get(1).getImages().size());
     }
 
     @Test
     public void testGetRecommendationById() {
+        String id = dynamoProperty.getDynamoRecommendations().get(0).getId();
+        DynamoRecommendation dynamoRecommendation = dynamoRecommendationService.getRecommendationById(id);
+        Assert.assertEquals(id, dynamoRecommendation.getId());
 
     }
 
-    @Test
-    public void testGetRecommendaitonsByEmployeeName() {
-
-    }
 
 
 }

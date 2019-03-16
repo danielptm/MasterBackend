@@ -49,4 +49,5 @@ public class DynamoRecommendation extends DynamoBusinessInfo {
         this.title = title;
     }
 
+
 }

@@ -23,20 +23,6 @@ public class DynamoRecommendationService {
 
         DynamoRecommendation dynamoRecommendation = new DynamoRecommendation();
 
-//        Optional.ofNullable(recommendation)
-//        dynamoRecommendation.setTitle(recommendation.getTitle());
-//        dynamoRecommendation.setDescription(recommendation.getDescription());
-//        dynamoRecommendation.setLatitude(recommendation.getTargetLat());
-//        dynamoRecommendation.setLongitude(recommendation.getTargetLong());
-//        dynamoRecommendation.setCity(recommendation.getCity());
-//        dynamoRecommendation.setCountry(recommendation.getCountry());
-//        dynamoRecommendation.setCity(recommendation.getCity());
-//        dynamoRecommendation.setImages(new ArrayList<>());
-//        recommendation.getImages().forEach((image) -> {
-//            DynamoImage dynamoImage = new DynamoImage(image);
-//            dynamoRecommendation.getImages().add(dynamoImage);
-//        });
-
         Optional.ofNullable(recommendation.getTitle())
                 .ifPresent((title) -> dynamoRecommendation.setTitle(title));
 
@@ -128,10 +114,14 @@ public class DynamoRecommendationService {
     }
 
     public DynamoRecommendation getRecommendationById(String id) {
-        return null;
+        DynamoRecommendation dynamoRecommendation = null;
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(id);
+        for (DynamoRecommendation recommendation: dynamoProperty.getDynamoRecommendations()) {
+            if(recommendation.getId().equals(id)) {
+                dynamoRecommendation = recommendation;
+            }
+        }
+        return dynamoRecommendation;
     }
 
-    public List<DynamoRecommendation> getRecommendationsByEmployeeName(String name) {
-        return null;
-    }
 }
