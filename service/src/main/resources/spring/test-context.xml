@@ -8,7 +8,7 @@
     <bean id="PropertiesService" class="com.globati.service.PropertiesService"></bean>
     <bean id="JwtService" class="com.globati.service.JwtService"></bean>
     <bean id="DynamoPropertyService" class="com.globati.service.dynamodb.DynamoPropertyService"></bean>
-    <bean id="DynamoRecommendationService" class="com.globati.service.dynamodb.DynamoRecommendationService
-"></bean>
+    <bean id="DynamoRecommendationService" class="com.globati.service.dynamodb.DynamoRecommendationService"></bean>
+    <bean id="DynamoTourService" class="com.globati.service.dynamodb.DynamoTourService"></bean>
 
 </beans>

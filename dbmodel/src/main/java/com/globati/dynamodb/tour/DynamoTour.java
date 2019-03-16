@@ -10,8 +10,10 @@ import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 import java.util.List;
 import java.util.UUID;
 
-public class DynamoTour extends DynamoBusinessInfo{
+public class DynamoTour extends DynamoBusinessInfo {
 
+    @DynamoDBAttribute (attributeName = "title")
+    String title;
     @DynamoDBAttribute (attributeName = "tourImages")
     List<DynamoImage> images;
     @DynamoDBAttribute
@@ -19,5 +21,29 @@ public class DynamoTour extends DynamoBusinessInfo{
 
     public DynamoTour() {
         super();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<DynamoImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<DynamoImage> images) {
+        this.images = images;
+    }
+
+    public List<DynamoTourStop> getTourStops() {
+        return tourStops;
+    }
+
+    public void setTourStops(List<DynamoTourStop> tourStops) {
+        this.tourStops = tourStops;
     }
 }

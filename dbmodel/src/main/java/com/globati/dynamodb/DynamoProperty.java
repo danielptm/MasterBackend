@@ -47,16 +47,18 @@ public class DynamoProperty extends DynamoBusinessInfo{
     @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
     List<DynamoTour> dynamoTours;
 
+    public DynamoProperty() {
+        super();
+        this.dynamoRecommendations = new ArrayList<DynamoRecommendation>();
+        this.dynamoTours = new ArrayList<DynamoTour>();
+    }
+
     public List<DynamoRecommendation> getDynamoRecommendations() {
         return dynamoRecommendations;
     }
 
     public void setDynamoRecommendations(List<DynamoRecommendation> dynamoRecommendations) {
         this.dynamoRecommendations = dynamoRecommendations;
-    }
-
-    public DynamoProperty() {
-        super();
     }
 
     public String getEmail() {
@@ -97,6 +99,14 @@ public class DynamoProperty extends DynamoBusinessInfo{
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public List<DynamoTour> getDynamoTours() {
+        return dynamoTours;
+    }
+
+    public void setDynamoTours(List<DynamoTour> dynamoTours) {
+        this.dynamoTours = dynamoTours;
     }
 
     @Override

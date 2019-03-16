@@ -10,9 +10,34 @@ import java.util.List;
 
 public class DynamoTourStop extends DynamoBusinessInfo{
 
+    @DynamoDBAttribute (attributeName = "title")
+    String title;
     @DynamoDBAttribute (attributeName = "tourStopImages")
     List<DynamoImage> images;
     @DynamoDBAttribute
     int stopOrder;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<DynamoImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<DynamoImage> images) {
+        this.images = images;
+    }
+
+    public int getStopOrder() {
+        return stopOrder;
+    }
+
+    public void setStopOrder(int stopOrder) {
+        this.stopOrder = stopOrder;
+    }
 }

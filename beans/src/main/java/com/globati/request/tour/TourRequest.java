@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TourRequest {
     Long id;
-    Long propertyId;
+    String propertyEmail;
     String title;
     String description;
     Double targetLat;
@@ -16,20 +16,6 @@ public class TourRequest {
     List<TourStopRequest> tourStops;
 
     public TourRequest() {
-    }
-
-    public TourRequest(Long id, Long propertyId, String title, String description, Double targetLat,
-                       Double targetLong, String street, String city, String country, List<TourImageRequest> images, List<TourStopRequest> tourStopRequests) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.targetLat = targetLat;
-        this.targetLong = targetLong;
-        this.street = street;
-        this.city = city;
-        this.country = country;
-        this.tourImages = images;
-        this.tourStops = tourStopRequests;
     }
 
     public List<TourImageRequest> getTourImages() {
@@ -112,12 +98,12 @@ public class TourRequest {
         this.tourStops = tourStopRequests;
     }
 
-    public Long getPropertyId() {
-        return propertyId;
+    public String getPropertyEmail() {
+        return propertyEmail;
     }
 
-    public void setPropertyId(Long propertyId) {
-        this.propertyId = propertyId;
+    public void setPropertyEmail(String propertyId) {
+        this.propertyEmail = propertyId;
     }
 
     public List<TourStopRequest> getTourStops() {
@@ -132,7 +118,7 @@ public class TourRequest {
     public String toString() {
         final StringBuilder sb = new StringBuilder("TourRequest{");
         sb.append("id=").append(id);
-        sb.append(", propertyId=").append(propertyId);
+        sb.append(", propertyEmail=").append(propertyEmail);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", targetLat=").append(targetLat);

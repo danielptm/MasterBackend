@@ -25,20 +25,6 @@ public class TourStopRequest {
 
     public TourStopRequest() {}
 
-    public TourStopRequest(Long id, Integer orderNumber, String title, String description, Double targetLat, Double targetLong, String street, String city, String country) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.targetLat = targetLat;
-        this.targetLong = targetLong;
-        this.street = street;
-        this.city = city;
-        this.country = country;
-        this.stopOrder = orderNumber;
-    }
-
-
-
     public Long getId() {
         return id;
     }
