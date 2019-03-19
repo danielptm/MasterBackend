@@ -3,7 +3,7 @@ package com.globati.request.tour;
 import java.util.List;
 
 public class TourRequest {
-    Long id;
+    String id;
     String propertyEmail;
     String title;
     String description;
@@ -26,11 +26,11 @@ public class TourRequest {
         this.tourImages = tourImages;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

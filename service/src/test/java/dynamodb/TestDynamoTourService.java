@@ -2,6 +2,7 @@ package dynamodb;
 
 
 import com.globati.dynamodb.DynamoProperty;
+import com.globati.dynamodb.tour.DynamoTour;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,11 @@ public class TestDynamoTourService extends SuperTest{
 
     @Test
     public void testUpdateTour() {
-
+        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+        tourRequest.setId(dynamoProperty.getDynamoTours().get(0).getId());
+        tourRequest.setCountry("Argentina");
+        DynamoProperty dynamoProperty2 = dynamoTourService.updateTour(tourRequest);
+        Assert.assertEquals("Argentina", dynamoProperty2.getDynamoTours().get(0).getCountry());
     }
 
     @Test

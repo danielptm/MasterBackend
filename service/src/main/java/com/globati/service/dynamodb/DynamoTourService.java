@@ -1,6 +1,7 @@
 package com.globati.service.dynamodb;
 
 import com.globati.dynamodb.DynamoProperty;
+import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
@@ -71,8 +72,38 @@ public class DynamoTourService {
         return dynamoProperty;
     }
 
-    public Object updateTour(TourRequest tourRequest) {
-        return null;
+    public DynamoProperty updateTour(TourRequest tourRequest) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourRequest.getPropertyEmail());
+        DynamoTour dynamoTour = dynamoProperty.getDynamoTours()
+                .stream().filter((tr -> tr.getId() ==  tourRequest.getId())).findFirst().get();
+
+        int indexToUpdate = dynamoProperty.getDynamoTours().indexOf(dynamoTour);
+
+        if(tourRequest != null) {
+            Optional.ofNullable(tourRequest.getTitle())
+                    .ifPresent(title -> dynamoTour.setTitle(title));
+
+            Optional.ofNullable(tourRequest.getDescription())
+                    .ifPresent(des -> dynamoTour.setDescription(des));
+
+            Optional.ofNullable(tourRequest.getCity())
+                    .ifPresent(city -> dynamoTour.setCity(city));
+
+            Optional.ofNullable(tourRequest.getCountry())
+                    .ifPresent(country -> dynamoTour.setCountry(country));
+
+            Optional.ofNullable(tourRequest.getTargetLat())
+                    .ifPresent(lat -> dynamoTour.setLatitude(lat));
+
+            Optional.ofNullable(tourRequest.getTargetLong())
+                    .ifPresent(longitutde -> dynamoTour.setLongitude(longitutde));
+        }
+
+        dynamoProperty.getDynamoTours().set(indexToUpdate, dynamoTour);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+        return dynamoProperty;
     }
 
     public Object deleteTour(String id) {
