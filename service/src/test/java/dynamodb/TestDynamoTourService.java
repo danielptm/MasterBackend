@@ -33,6 +33,15 @@ public class TestDynamoTourService extends SuperTest{
 
     @Test
     public void testDeleteTour() {
+        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+
+        Assert.assertEquals(1, dynamoProperty.getDynamoTours().size());
+
+        DynamoProperty dynamoProperty1 = dynamoTourService.deleteTour(dynamoProperty.getEmail(), dynamoProperty.getDynamoTours().get(0).getId());
+
+        Assert.assertEquals(0, dynamoProperty.getDynamoTours().size());
+
+
 
     }
 

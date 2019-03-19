@@ -106,11 +106,21 @@ public class DynamoTourService {
         return dynamoProperty;
     }
 
-    public Object deleteTour(String id) {
-        return null;
+    public DynamoProperty deleteTour(String email, String tourId) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(email);
+
+        DynamoTour dynamoTour = dynamoProperty.getDynamoTours().stream()
+                .filter(tr -> tr.getId().equals(tourId))
+                .findFirst().get();
+
+        dynamoProperty.getDynamoTours().remove(dynamoTour);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+        return dynamoProperty;
     }
 
-    public Object getTourById(String id) {
+    public DynamoTour getTourById(String id) {
         return null;
     }
 
