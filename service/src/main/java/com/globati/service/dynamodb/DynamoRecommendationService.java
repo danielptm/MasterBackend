@@ -113,6 +113,7 @@ public class DynamoRecommendationService {
         return dynamoProperty;
     }
 
+    //TODO: Add the email of the property as the first argument of the method, because otherwise it wont be able to get the right property
     public DynamoRecommendation getRecommendationById(String id) {
         DynamoRecommendation dynamoRecommendation = null;
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(id);

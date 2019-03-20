@@ -3,6 +3,7 @@ package dynamodb;
 
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.tour.DynamoTour;
+import com.globati.dynamodb.tour.DynamoTourStop;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +56,11 @@ public class TestDynamoTourService extends SuperTest{
 
     @Test
     public void getTourStopById(){
+        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+        DynamoTourStop dynamoTourStopOriginal = dynamoProperty.getDynamoTours().get(0).getTourStops().get(0);
+        DynamoTourStop dynamoTourStopToTest = dynamoTourService.getTourStopById(dynamoProperty.getEmail(), dynamoTourStopOriginal.getId());
+
+        Assert.assertEquals(dynamoTourStopOriginal.getId(),dynamoTourStopToTest.getId());
 
     }
 

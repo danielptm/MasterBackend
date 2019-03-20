@@ -4,6 +4,8 @@ import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
 import com.globati.dynamodb.tour.DynamoTour;
+import com.globati.dynamodb.tour.DynamoTourStop;
+import com.globati.mysql.dbmodel.TourStop;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopImageRequest;
@@ -132,8 +134,18 @@ public class DynamoTourService {
         return dynamoTour;
     }
 
-    public Object getTourStopById(String id) {
-        return null;
+    public DynamoTourStop getTourStopById(String propertyEmail, String id) {
+        DynamoTourStop stopToReturn = null;
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(propertyEmail);
+
+        for(DynamoTour tour: dynamoProperty.getDynamoTours()) {
+            for(DynamoTourStop dynamoTourStop: tour.getTourStops()) {
+                if(dynamoTourStop.getId().equals(id)) {
+                    stopToReturn = dynamoTourStop;
+                }
+            }
+        }
+        return stopToReturn;
     }
 
     public Object createTourStop(TourStopImageRequest tourStopImageRequest) {
