@@ -121,7 +121,15 @@ public class DynamoTourService {
     }
 
     public DynamoTour getTourById(String id) {
-        return null;
+        DynamoTour dynamoTour = null;
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(id);
+
+        for (DynamoTour tour: dynamoProperty.getDynamoTours()) {
+            if(tour.getId().equals(id)) {
+                dynamoTour = tour;
+            }
+        }
+        return dynamoTour;
     }
 
     public Object getTourStopById(String id) {

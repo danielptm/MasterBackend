@@ -47,7 +47,10 @@ public class TestDynamoTourService extends SuperTest{
 
     @Test
     public void testGetTourById() {
+        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+        DynamoTour dynamoTour = dynamoTourService.getTourById(dynamoProperty.getDynamoTours().get(0).getId());
 
+        Assert.assertEquals(dynamoProperty.getDynamoTours().get(0).getId(), dynamoTour.getId());
     }
 
     @Test
