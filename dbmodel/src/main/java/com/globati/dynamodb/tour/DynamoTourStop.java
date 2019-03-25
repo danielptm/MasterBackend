@@ -16,6 +16,8 @@ public class DynamoTourStop extends DynamoBusinessInfo{
     List<DynamoImage> images;
     @DynamoDBAttribute
     int stopOrder;
+    @DynamoDBAttribute (attributeName = "tourId")
+    String tourId;
 
     public String getTitle() {
         return title;
@@ -39,5 +41,13 @@ public class DynamoTourStop extends DynamoBusinessInfo{
 
     public void setStopOrder(int stopOrder) {
         this.stopOrder = stopOrder;
+    }
+
+    public String getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(String tourId) {
+        this.tourId = tourId;
     }
 }

@@ -3,6 +3,8 @@ package dynamodb;
 
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
+import com.globati.dynamodb.tour.DynamoTour;
+import com.globati.dynamodb.tour.DynamoTourStop;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.request.Recommendation;
 import com.globati.request.tour.TourRequest;
@@ -67,9 +69,26 @@ public class SuperTest {
         dynamoProperty.setDynamoTours(new ArrayList<>());
         dynamoProperty.setDynamoRecommendations(dynamoRecommendations);
 
+
+
         tourRequest = new TourRequest();
         tourStopRequest = new TourStopRequest();
+        tourStopRequest.setTourId(tourRequest.getId());
 
+        DynamoTour dynamoTour = new DynamoTour();
+
+
+        //Set the tourRequest id so it can be fetched.
+        tourRequest.setId(dynamoTour.getId());
+
+        DynamoTourStop dynamoTourStop = new DynamoTourStop();
+        dynamoTourStop.setTourId(dynamoTour.getId());
+
+        dynamoTour.setTourStops(new ArrayList<>());
+
+        tourStopRequest.setId(dynamoTourStop.getId());
+        tourStopRequest.setTourId(dynamoTour.getId());
+        tourStopRequest.setPropertyEmail("daniel@me.com");
         tourStopRequest.setTitle("TourStopTitle");
         tourStopRequest.setDescription("TourStopDescription");
 
@@ -80,7 +99,6 @@ public class SuperTest {
         tourRequest.setDescription("TourDescription");
 
         this.dynamoProperty = dynamoProperty;
-
         this.recommendation = new Recommendation();
 
         //Set the id like this after creation because for the sake of testing these are the same recommendation
@@ -93,6 +111,9 @@ public class SuperTest {
 
         this.recommendation.setImages(new ArrayList<>());
         this.recommendation.getImages().add("image1");
+
+        dynamoTour.getTourStops().add(dynamoTourStop);
+        dynamoProperty.getDynamoTours().add(dynamoTour);
 
 
         Mockito.when(dynamoPropertyRepository.findOne(Mockito.anyString()))

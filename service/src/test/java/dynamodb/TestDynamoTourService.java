@@ -4,6 +4,7 @@ package dynamodb;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.dynamodb.tour.DynamoTourStop;
+import com.globati.request.tour.TourStopRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,8 +43,6 @@ public class TestDynamoTourService extends SuperTest{
 
         Assert.assertEquals(0, dynamoProperty.getDynamoTours().size());
 
-
-
     }
 
     @Test
@@ -66,17 +65,32 @@ public class TestDynamoTourService extends SuperTest{
 
     @Test
     public void testCreateTourStop(){
+        DynamoTourStop dynamoTourStop = dynamoTourService.createTourStop(tourStopRequest);
 
-
+        Assert.assertNotNull(dynamoTourStop);
     }
 
     @Test
     public void testDeleteTourStop() {
 
+        DynamoProperty returnedProperty = dynamoTourService
+                .deleteTourStop(
+                        dynamoProperty.getEmail(),
+                        dynamoProperty.getDynamoTours().get(0).getId(),
+                        dynamoProperty.getDynamoTours().get(0).getTourStops().get(0).getId());
+
+        Assert.assertEquals(0, dynamoProperty.getDynamoTours().get(0).getTourStops().size());
     }
 
     @Test
     public void testUpdateTourStop(){
+        TourStopRequest tourStopRequest = new TourStopRequest();
+        tourStopRequest.setTourId(tourRequest.getId());
+        tourStopRequest.setId(dynamoProperty.getDynamoTours().get(0).getTourStops().get(0).getId());
+        tourStopRequest.setTitle("updatedTitle");
+        DynamoProperty returnedProperty = dynamoTourService
+                .updateTourStop(tourStopRequest);
 
+        Assert.assertEquals("updatedTitle", dynamoProperty.getDynamoTours().get(0).getTourStops().get(0).getTitle());
     }
 }

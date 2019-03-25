@@ -9,6 +9,7 @@ import com.globati.mysql.dbmodel.TourStop;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopImageRequest;
+import com.globati.request.tour.TourStopRequest;
 import com.globati.utildb.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,6 @@ public class DynamoTourService {
         dynamoProperty.getDynamoTours().add(dynamoTour);
 
         dynamoPropertyRepository.save(dynamoProperty);
-
 
         return dynamoProperty;
     }
@@ -148,15 +148,145 @@ public class DynamoTourService {
         return stopToReturn;
     }
 
-    public Object createTourStop(TourStopImageRequest tourStopImageRequest) {
-        return null;
+    public DynamoTourStop createTourStop(TourStopRequest tourStopRequest) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourStopRequest.getPropertyEmail());
+        DynamoTourStop dynamoTourStop = new DynamoTourStop();
+
+        DynamoTour dynamoTour = dynamoProperty.getDynamoTours().stream()
+                .filter(tr -> tr.getId().equals(tourStopRequest.getTourId()))
+                .findFirst().get();
+
+        int indexToUpdate = dynamoProperty.getDynamoTours().indexOf(dynamoTour);
+
+        Optional.ofNullable(tourStopRequest.getTitle())
+                .ifPresent(title -> dynamoTourStop.setTitle(title));
+
+        Optional.ofNullable(tourStopRequest.getDescription())
+                .ifPresent(des -> dynamoTourStop.setDescription(des));
+
+        Optional.ofNullable(tourStopRequest.getTargetLong())
+            .ifPresent(longitude -> dynamoTourStop.setLongitude(longitude));
+
+        Optional.ofNullable(tourStopRequest.getTargetLat())
+                .ifPresent(latitude -> dynamoTourStop.setLatitude(latitude));
+
+        Optional.ofNullable(tourStopRequest.getStreet())
+                .ifPresent(street -> dynamoTourStop.setStreet(street));
+
+        Optional.ofNullable(tourStopRequest.getCity())
+                .ifPresent(city -> dynamoTourStop.setCity(city));
+
+        Optional.ofNullable(tourStopRequest.getCountry())
+                .ifPresent(country -> dynamoTourStop.setCountry(country));
+
+        Optional.ofNullable(tourStopRequest.getStopOrder())
+                .ifPresent(so -> dynamoTourStop.setStopOrder(so));
+
+        Optional.ofNullable(tourStopRequest.getTourStopImages())
+                .ifPresent(images -> {
+                    images.forEach(image ->{
+                        DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                        dynamoTourStop.getImages().add(dynamoImage);
+                    });
+                });
+
+        Optional.ofNullable(dynamoTour)
+                .ifPresent(dt -> {
+                    dt.getTourStops().add(dynamoTourStop);
+                });
+
+        dynamoProperty.getDynamoTours().set(indexToUpdate, dynamoTour);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+        return dynamoTourStop;
     }
 
-    public DynamoProperty deleteTourStop(String id) {
-        return null;
+    public DynamoProperty deleteTourStop(String propertyEmail, String tourId, String tourStopId) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(propertyEmail);
+
+        DynamoTour dynamoTour = dynamoProperty.getDynamoTours().stream()
+                .filter(tr -> tr.getId().equals(tourId))
+                .findFirst().get();
+
+        int tourIndextoUpdate = dynamoProperty.getDynamoTours().indexOf(dynamoTour);
+
+        DynamoTourStop dynamoTourStop = dynamoTour.getTourStops().stream()
+                .filter(tr -> tr.getId().equals(tourStopId))
+                .findFirst().get();
+
+        int tourStopIndexToUpdate = dynamoProperty.getDynamoTours()
+                .get(tourIndextoUpdate)
+                .getTourStops().indexOf(dynamoTourStop);
+
+
+        dynamoProperty
+                .getDynamoTours().get(tourIndextoUpdate)
+                .getTourStops().remove(tourStopIndexToUpdate);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+
+        return dynamoProperty;
     }
 
-    public Object updateTourStop(String id) {
-        return null;
+    public DynamoProperty updateTourStop(TourStopRequest tourStopRequest) {
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourStopRequest.getPropertyEmail());
+
+        DynamoTour dynamoTour = dynamoProperty.getDynamoTours().stream()
+                .filter(tr -> tr.getId().equals(tourStopRequest.getTourId()))
+                .findFirst().get();
+
+        int tourIndextoUpdate = dynamoProperty.getDynamoTours().indexOf(dynamoTour);
+
+        DynamoTourStop dynamoTourStop = dynamoTour.getTourStops().stream()
+                .filter(tr -> tr.getId().equals(tourStopRequest.getId()))
+                .findFirst().get();
+
+        int tourStopIndexToUpdate = dynamoProperty.getDynamoTours()
+                .get(tourIndextoUpdate)
+                .getTourStops().indexOf(dynamoTourStop);
+
+
+        Optional.ofNullable(tourStopRequest.getTitle())
+                .ifPresent(title -> dynamoTourStop.setTitle(title));
+
+        Optional.ofNullable(tourStopRequest.getDescription())
+                .ifPresent(des -> dynamoTourStop.setDescription(des));
+
+        Optional.ofNullable(tourStopRequest.getTargetLong())
+                .ifPresent(longitude -> dynamoTourStop.setLongitude(longitude));
+
+        Optional.ofNullable(tourStopRequest.getTargetLat())
+                .ifPresent(latitude -> dynamoTourStop.setLatitude(latitude));
+
+        Optional.ofNullable(tourStopRequest.getStreet())
+                .ifPresent(street -> dynamoTourStop.setStreet(street));
+
+        Optional.ofNullable(tourStopRequest.getCity())
+                .ifPresent(city -> dynamoTourStop.setCity(city));
+
+        Optional.ofNullable(tourStopRequest.getCountry())
+                .ifPresent(country -> dynamoTourStop.setCountry(country));
+
+        Optional.ofNullable(tourStopRequest.getStopOrder())
+                .ifPresent(so -> dynamoTourStop.setStopOrder(so));
+
+        Optional.ofNullable(tourStopRequest.getTourStopImages())
+                .ifPresent(images -> {
+                    images.forEach(image ->{
+                        DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                        dynamoTourStop.getImages().add(dynamoImage);
+                    });
+                });
+
+        dynamoProperty.getDynamoTours()
+                .get(tourIndextoUpdate)
+                .getTourStops()
+                .set(tourStopIndexToUpdate, dynamoTourStop);
+
+        dynamoPropertyRepository.save(dynamoProperty);
+
+        return dynamoProperty;
     }
 }

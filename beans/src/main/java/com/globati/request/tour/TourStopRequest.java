@@ -3,7 +3,9 @@ package com.globati.request.tour;
 import java.util.List;
 
 public class TourStopRequest {
-    Long id;
+    String id;
+    String tourId;
+    String propertyEmail;
     String title;
     String description;
     Double targetLat;
@@ -23,13 +25,29 @@ public class TourStopRequest {
     Integer stopOrder;
     List<TourStopImageRequest> tourStopImages;
 
+    public String getPropertyEmail() {
+        return propertyEmail;
+    }
+
+    public void setPropertyEmail(String propertyEmail) {
+        this.propertyEmail = propertyEmail;
+    }
+
+    public String getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(String tourId) {
+        this.tourId = tourId;
+    }
+
     public TourStopRequest() {}
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
