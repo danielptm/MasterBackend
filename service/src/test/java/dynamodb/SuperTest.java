@@ -121,8 +121,6 @@ public class SuperTest {
 
         Mockito.when(dynamoPropertyRepository.save((DynamoProperty) Mockito.anyObject()))
                 .thenReturn(null);
-
-
     }
 
 }
