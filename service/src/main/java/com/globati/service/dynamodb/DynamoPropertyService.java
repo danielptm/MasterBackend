@@ -45,7 +45,7 @@ public class DynamoPropertyService {
     }
 
     public DynamoProperty updateDynamoProperty(RequestProperty requestProperty) {
-        DynamoProperty dynamoProperty = getDynamoPropertyById(requestProperty.getEmail());
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(requestProperty.getEmail());
         dynamoProperty.setEmail(requestProperty.getEmail());
         dynamoProperty.setUserName(requestProperty.getUserName());
         dynamoProperty.setName(requestProperty.getName());
