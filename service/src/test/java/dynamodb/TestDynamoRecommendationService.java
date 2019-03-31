@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/test-context.xml"})
 @ActiveProfiles("test")
-public class TestDynamoRecommendationService extends SuperTest{
+public class TestDynamoRecommendationService extends SuperTest {
 
     @Test
     public void updateRecommendation() {

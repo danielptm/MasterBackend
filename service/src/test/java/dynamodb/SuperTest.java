@@ -9,9 +9,12 @@ import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.request.Recommendation;
 import com.globati.request.tour.TourRequest;
 import com.globati.request.tour.TourStopRequest;
+import com.globati.service.JwtService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import com.globati.service.dynamodb.DynamoRecommendationService;
 import com.globati.service.dynamodb.DynamoTourService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,13 +29,20 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/test-context.xml"})
 @ActiveProfiles("test")
+@Ignore
 public class SuperTest {
 
     @Mock
     DynamoPropertyRepository dynamoPropertyRepository;
 
+    @Mock
+    JwtService jwtService;
+
     @InjectMocks
     DynamoRecommendationService dynamoRecommendationService;
+
+    @InjectMocks
+    DynamoPropertyService dynamoPropertyService;
 
     @InjectMocks
     DynamoTourService dynamoTourService;
@@ -117,10 +127,13 @@ public class SuperTest {
 
 
         Mockito.when(dynamoPropertyRepository.findOne(Mockito.anyString()))
-                .thenReturn(this.dynamoProperty);
+                .thenReturn(dynamoProperty);
 
         Mockito.when(dynamoPropertyRepository.save((DynamoProperty) Mockito.anyObject()))
                 .thenReturn(null);
+
+        Mockito.when(jwtService.buildJwt(Mockito.anyString()))
+                .thenReturn("testjwt");
     }
 
 }

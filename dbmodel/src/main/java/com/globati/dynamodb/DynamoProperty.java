@@ -18,12 +18,13 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.LoggerRegistry;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 
 @DynamoDBTable(tableName="Property")
-public class DynamoProperty extends DynamoBusinessInfo{
+public class DynamoProperty extends DynamoBusinessInfo {
 
     private static final Logger LOGGER = LogManager.getLogger(DynamoRecommendationListConverter.class);
 
@@ -37,6 +38,17 @@ public class DynamoProperty extends DynamoBusinessInfo{
     private String mobileVisitCounter;
     @DynamoDBAttribute(attributeName="website")
     private String website;
+    @DynamoDBAttribute (attributeName = "salt")
+    private byte[] salt;
+    @DynamoDBAttribute (attributeName = "hashedPassword")
+    private String hashedPassword;
+    @DynamoDBAttribute (attributeName = "lastLogin")
+    private Date lastLogin;
+    @DynamoDBAttribute (attributeName = "apiToken")
+    private String apiToken;
+    @DynamoDBAttribute (attributeName = "apiTokenExpiration")
+    private String apiTokenExpiration;
+
 
 
     @DynamoDBAttribute(attributeName = "recommendations")
@@ -107,6 +119,46 @@ public class DynamoProperty extends DynamoBusinessInfo{
 
     public void setDynamoTours(List<DynamoTour> dynamoTours) {
         this.dynamoTours = dynamoTours;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
+
+    public String getApiTokenExpiration() {
+        return apiTokenExpiration;
+    }
+
+    public void setApiTokenExpiration(String apiTokenExpiration) {
+        this.apiTokenExpiration = apiTokenExpiration;
     }
 
     @Override

@@ -31,6 +31,8 @@ public class RequestProperty {
     private String description;
     @JsonProperty("website")
     private String website;
+    @JsonProperty
+    private String password;
 
     public RequestProperty() {}
 
@@ -120,5 +122,13 @@ public class RequestProperty {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

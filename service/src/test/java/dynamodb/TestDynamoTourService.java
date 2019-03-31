@@ -15,13 +15,13 @@ import org.springframework.test.context.ContextConfiguration;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/test-context.xml"})
 @ActiveProfiles("test")
-public class TestDynamoTourService extends SuperTest{
+public class TestDynamoTourService extends SuperTest {
 
 
     @Test
     public void testCreateTour() {
         DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
-        Assert.assertEquals(1, dynamoProperty.getDynamoTours().size());
+        Assert.assertEquals(2, dynamoProperty.getDynamoTours().size());
     }
 
     @Test
@@ -37,11 +37,11 @@ public class TestDynamoTourService extends SuperTest{
     public void testDeleteTour() {
         DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
 
-        Assert.assertEquals(1, dynamoProperty.getDynamoTours().size());
+        Assert.assertEquals(2, dynamoProperty.getDynamoTours().size());
 
         DynamoProperty dynamoProperty1 = dynamoTourService.deleteTour(dynamoProperty.getEmail(), dynamoProperty.getDynamoTours().get(0).getId());
 
-        Assert.assertEquals(0, dynamoProperty.getDynamoTours().size());
+        Assert.assertEquals(1, dynamoProperty.getDynamoTours().size());
 
     }
 

@@ -125,4 +125,9 @@ public class DynamoRecommendationService {
         return dynamoRecommendation;
     }
 
+    public List<DynamoRecommendation> getRecommendationsByEmployeeEmail(String email) {
+        return dynamoPropertyRepository.findOne(email).getDynamoRecommendations();
+    }
+
+
 }

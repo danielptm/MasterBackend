@@ -2,7 +2,6 @@ package com.globati.resources;
 
 import com.globati.request.tour.TourRequest;
 import com.globati.service.dynamodb.DynamoTourService;
-import com.globati.service.mysql.TourService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +21,10 @@ public class TourResource {
     DynamoTourService tourService;
 
     @GET
-    @Path("/{id}")
+    @Path("/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTourById(@PathParam("id") String id) {
-        return Response.ok(tourService.getToursByPropertyId(id)).build();
+    public Response getTourById(@PathParam("email") String email) {
+        return Response.ok(tourService.getToursByPropertyEmail(email)).build();
     }
 
     @POST
@@ -45,10 +44,10 @@ public class TourResource {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("{email}/{tourId}")
 //  @GlobatiAuthentication
-    public Response deleteTour(@PathParam("id") String id) {
-        return Response.ok(tourService.setTourToInactive(id)).build();
+    public Response deleteTour(@PathParam("email") String email, String tourId) {
+        return Response.ok(tourService.deleteTour(email, tourId)).build();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.globati.utildb;
 
+import com.globati.dynamodb.DynamoProperty;
 import com.globati.mysql.dbmodel.PropertyInfo;
+import com.globati.request.RequestProperty;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.SecretKey;
@@ -18,10 +20,10 @@ public class PBKDF2 {
     private static final int ITERATIONS = 50000;
     private static final int KEY_LENGTH = 64*8;
 
-    public static boolean checkPassword(PropertyInfo employee, String passwordAttempt){
-        String password = employee.getGlobatiPassword();
+    public static boolean checkPassword(DynamoProperty property, String passwordAttempt){
+        String password = property.getHashedPassword();
         char[] passwordAttemptChar = passwordAttempt.toCharArray();
-        byte[] salt = employee.getSalt();
+        byte[] salt = property.getSalt();
         String hashedPassword =hashPassword(passwordAttemptChar, salt, ITERATIONS, KEY_LENGTH);
         if(password.equals(hashedPassword)){
             return true;
@@ -31,13 +33,13 @@ public class PBKDF2 {
         }
     }
 
-    public static PropertyInfo hashPropertyPassword(PropertyInfo e, String password){
+    public static DynamoProperty hashPropertyPassword(DynamoProperty dynamoProperty, String password){
         char[] charpass = password.toCharArray();
         byte[] salt = getsalt();
         String hashedPassword = hashPassword(charpass, salt, ITERATIONS, KEY_LENGTH);
-        e.setGlobatiPassword(hashedPassword);
-        e.setSalt(salt);
-        return e;
+        dynamoProperty.setHashedPassword(hashedPassword);
+        dynamoProperty.setSalt(salt);
+        return dynamoProperty;
     }
 
     public static String hashPassword( final char[] password, final byte[] salt, final int iterations, final int keyLength ) {
