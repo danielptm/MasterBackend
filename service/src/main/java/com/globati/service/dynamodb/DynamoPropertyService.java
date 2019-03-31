@@ -2,11 +2,14 @@ package com.globati.service.dynamodb;
 
 import com.globati.HelpObjects.ApiKey;
 import com.globati.dynamodb.DynamoProperty;
+import com.globati.exceptions.ServiceException;
 import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import com.globati.request.RequestProperty;
 import com.globati.service.JwtService;
+import com.globati.service.PropertiesService;
 import com.globati.utildb.PBKDF2;
+import io.jsonwebtoken.Jwts;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class DynamoPropertyService {
 
     @Autowired
     DynamoPropertyRepository dynamoPropertyRepository;
+
+    @Autowired
+    PropertiesService propertiesService;
 
     @Autowired
     JwtService jwtService;
@@ -124,8 +130,9 @@ public class DynamoPropertyService {
 
     public DynamoProperty authenticate(String userName, String passwordAttempt) {
         LOGGER.info("authenticateRecptionist(): username: " + userName);
-        DynamoProperty property = dynamoPropertyRepository.findOne(userName);
+        DynamoProperty property = null;
         try {
+            property = dynamoPropertyRepository.findOne(userName);
             if (PBKDF2.checkPassword(property, passwordAttempt)) {
                 property.setLastLogin(new Date());
                 ApiKey apiKey = new ApiKey();
@@ -141,16 +148,52 @@ public class DynamoPropertyService {
         return property;
     }
 
-    public boolean changePassword(String id, String userName, String password) {
-        return false;
+    public boolean changePassword(String userEmail, String password, String passwordRepeat) throws ServiceException {
+        LOGGER.info("chnagePassword(): employeeEmail: " + userEmail);
+        try {
+            DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(userEmail);
+            if(password.equals(passwordRepeat)) {
+                if (PBKDF2.checkPassword(dynamoProperty, password)) {
+                    DynamoProperty updatedProperty = PBKDF2.hashPropertyPassword(dynamoProperty, password);
+                    dynamoPropertyRepository.save(updatedProperty);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                String message = "The passwords did not match eachother. password: " + password + "passwordReapeat: "+ passwordRepeat;
+                LOGGER.error(message);
+                throw new Exception(message);
+            }
+        } catch (Exception e) {
+            LOGGER.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: changePassword()");
+            e.printStackTrace();
+            throw new ServiceException("Could not change password at this time. ", e);
+        }
     }
 
-    public boolean changePasswordWithToken(String email, String token) {
-        return false;
-    }
-
-    public PropertyInfo getPropertyToken(String payloadFromJwt) {
-        return null;
+    public boolean changePasswordWithToken(String email, String token, String oldPassword, String passwordRepeated) throws ServiceException {
+        LOGGER.info("changePasswordWithToken(): token: " + token);
+        try {
+            DynamoProperty propertyInfo = dynamoPropertyRepository.findOne(email);
+            if (oldPassword.equals(passwordRepeated)) {
+                if (Long.parseLong(propertyInfo.getApiToken()) > System.currentTimeMillis()) {
+                    DynamoProperty dynamoProperty = PBKDF2.hashPropertyPassword(propertyInfo, oldPassword);
+                    dynamoPropertyRepository.save(dynamoProperty);
+                    return true;
+                } else {
+                    throw new Exception();
+                }
+            } else {
+                String message = "The passwords did not match eachother. password: " + oldPassword + "passwordReapeat: "+ passwordRepeated;
+                LOGGER.error(message);
+                throw new Exception(message);
+            }
+        } catch (Exception e) {
+            LOGGER.warn("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: changePasswordWithToken()");
+            e.printStackTrace();
+            throw new ServiceException("Could not change password at this time ", e);
+        }
     }
 
 }

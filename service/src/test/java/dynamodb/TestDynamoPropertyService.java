@@ -65,7 +65,16 @@ public class TestDynamoPropertyService extends SuperTest {
         Assert.assertTrue(dynamoProperty.getHashedPassword().length() > 10);
         Assert.assertEquals("danielptm", dynamoProperty.getUserName());
 
+    }
 
+    @Test
+    public void testChangePassword() {
+       System.out.println("testChangePassword() not implemented");
+    }
+
+    @Test
+    public void testChangePasswordWithToken() {
+        System.out.println("testChangePasswordWithToken() not implemented");
     }
 
 
