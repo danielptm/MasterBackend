@@ -1,5 +1,6 @@
 package com.globati.resources;
 
+import com.globati.dynamodb.DynamoProperty;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.dynamodb.DynamoPropertyService;
@@ -25,7 +26,7 @@ import javax.ws.rs.core.Response;
 @Path("authentication")
 public class AuthenticationResource {
 
-    private static final Logger log = LogManager.getLogger(AuthenticationResource.class);
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationResource.class);
 
     @Autowired
     DynamoPropertyService propertyService;
@@ -34,10 +35,9 @@ public class AuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authentication(PasswordAttempt pa){
-        log.debug("authentication()");
+        LOGGER.debug("authentication()");
         try {
-            PropertyAndItems propertyAndItems = propertyService.authenticate(pa.getUsername(), pa.getPassword());
-            log.info("PROPERTY AND ITEMS" + propertyAndItems.getProperty());
+            DynamoProperty propertyAndItems = propertyService.authenticate(pa.getUsername(), pa.getPassword());
              return Response.ok(propertyAndItems).build();
         }catch(Exception e){
             e.printStackTrace();

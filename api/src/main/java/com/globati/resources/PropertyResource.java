@@ -52,7 +52,7 @@ public class PropertyResource{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(RequestProperty requestProperty) throws UserNameIsNotUniqueException, ServiceException {
+    public Response create(RequestProperty requestProperty) {
             DynamoProperty property = propertyService.createDynamoProperty(requestProperty);
             return Response.ok(property).build();
 
@@ -124,7 +124,11 @@ public class PropertyResource{
     @Consumes(MediaType.APPLICATION_JSON)
     public Response changePasswordWithToken(ChangePasswordWithToken changePasswordWithToken){
         try{
-            propertyService.changePasswordWithToken(changePasswordWithToken.getToken(), changePasswordWithToken.getPassword());
+            propertyService.changePasswordWithToken(
+                    changePasswordWithToken.getEmail(),
+                    changePasswordWithToken.getToken(),
+                    changePasswordWithToken.getPassword(),
+                    changePasswordWithToken.getOldPassword());
             return Response.ok().build();
         }catch(Exception e){
             throw new WebException("Could not change the password with token", Response.Status.CONFLICT);

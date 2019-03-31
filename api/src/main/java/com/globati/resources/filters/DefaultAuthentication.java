@@ -1,5 +1,6 @@
 package com.globati.resources.filters;
 
+import com.globati.dynamodb.DynamoProperty;
 import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -32,21 +33,24 @@ public class DefaultAuthentication implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
         String clientapikey1 = requestContext.getHeaders().get("Authorization").get(0);
-        PropertyInfo propertyInfo = null;
+
+        String[] parts = clientapikey1.split("-");
+
+        DynamoProperty dynamoProperty = null;
         String jwt = null;
 
         try {
             jwt = clientapikey1.substring("Bearer".length()).trim();
-            propertyInfo = propertyService.getPropertyToken(jwtService.getPayloadFromJwt(jwt));
+            dynamoProperty = propertyService.getPropertyToken(parts[1], jwtService.getPayloadFromJwt(jwt));
         }catch(Exception e){
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }
 
-        if(! jwtService.getPayloadFromJwt(jwt).equals(propertyInfo.getAuthToken()) ){
+        if(! jwtService.getPayloadFromJwt(jwt).equals(dynamoProperty.getApiToken()) ){
             throw new WebException("The user needs to authenticate themselves", Response.Status.UNAUTHORIZED);
         }
 
-        if(Long.parseLong(propertyInfo.getTokenExpiration())< System.currentTimeMillis() ){
+        if(Long.parseLong(dynamoProperty.getApiTokenExpiration())< System.currentTimeMillis() ){
             throw new WebException("The token is expired, the user needs to log in to get a new token", Response.Status.UNAUTHORIZED);
         }
     }

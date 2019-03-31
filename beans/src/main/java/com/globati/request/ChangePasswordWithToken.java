@@ -11,14 +11,18 @@ import org.apache.logging.log4j.Logger;
 public class ChangePasswordWithToken {
     private static final Logger LOGGER = LogManager.getLogger(ChangePassword.class);
 
-    String token;
-    String password;
+    private String email;
+    private String token;
+    private String password;
+    private String oldPassword;
 
     ChangePasswordWithToken(){}
 
-    ChangePasswordWithToken(String token, String password){
+    ChangePasswordWithToken(String email, String token, String password, String oldPassword){
         this.token = token;
         this.password = password;
+        this.oldPassword = oldPassword;
+        this.email = email;
     }
 
     public String getPassword() {
@@ -35,6 +39,22 @@ public class ChangePasswordWithToken {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

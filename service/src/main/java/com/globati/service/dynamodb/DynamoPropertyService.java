@@ -196,4 +196,7 @@ public class DynamoPropertyService {
         }
     }
 
+    public DynamoProperty getPropertyToken(String email, String payloadFromJwt) {
+        return null;
+    }
 }
