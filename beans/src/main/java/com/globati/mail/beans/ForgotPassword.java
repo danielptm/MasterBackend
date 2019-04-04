@@ -640,7 +640,7 @@ public class ForgotPassword {
                 "                        "+
                 "                        <td valign=\"top\" class=\"mcnTextContent\" style=\"padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;\">"+
                 "                        "+
-                "                            <p dir=\"ltr\">If you did not request the reset, please ignore this email. This password reset is valid for the next 4 hours.<br>"+
+                "                            <p dir=\"ltr\">If you did not api the reset, please ignore this email. This password reset is valid for the next 4 hours.<br>"+
                 "<br>"+
                 "<br>"+
                 "Thanks,<br>"+

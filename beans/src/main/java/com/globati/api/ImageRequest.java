@@ -1,26 +1,26 @@
-package com.globati.request.tour;
+package com.globati.api;
 
-public class TourImageRequest {
-    Long id;
+public class ImageRequest {
+    String id;
     String imagePath;
 
-    public TourImageRequest() {
+    public ImageRequest() {
     }
 
-    public TourImageRequest(String imagePath) {
+    public ImageRequest(String imagePath) {
         this.imagePath = imagePath;
     }
 
-    public TourImageRequest(Long id, String imagePath) {
+    public ImageRequest(String id, String imagePath) {
         this.id = id;
         this.imagePath = imagePath;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

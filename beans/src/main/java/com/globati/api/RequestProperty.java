@@ -1,6 +1,8 @@
-package com.globati.request;
+package com.globati.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 /**
  * Created by daniel on 4/15/17.
@@ -13,7 +15,7 @@ public class RequestProperty {
     private String id;
     @JsonProperty("email")
     private String email;
-    @JsonProperty("username")
+    @JsonProperty("userName")
     private String userName;
     @JsonProperty("name")
     private String name;
@@ -33,6 +35,8 @@ public class RequestProperty {
     private String website;
     @JsonProperty
     private String password;
+    @JsonProperty
+    private List<ImageRequest> images;
 
     public RequestProperty() {}
 
@@ -130,5 +134,13 @@ public class RequestProperty {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<ImageRequest> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageRequest> images) {
+        this.images = images;
     }
 }

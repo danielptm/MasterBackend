@@ -4,7 +4,7 @@ package dynamodb;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.dynamodb.tour.DynamoTourStop;
-import com.globati.request.tour.TourStopRequest;
+import com.globati.api.tour.TourStopRequest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

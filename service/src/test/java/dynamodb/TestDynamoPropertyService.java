@@ -1,24 +1,15 @@
 package dynamodb;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.globati.dynamodb.DynamoProperty;
-import com.globati.dynamodb.DynamoRecommendation;
-import com.globati.request.RequestProperty;
-import com.globati.service.dynamodb.DynamoPropertyService;
+import com.globati.api.RequestProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/test-context.xml"})

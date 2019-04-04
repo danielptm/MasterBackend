@@ -4,14 +4,16 @@ import com.globati.dynamodb.DynamoProperty;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.dynamodb.DynamoPropertyService;
-import com.globati.service_beans.guest.PropertyAndItems;
 import com.globati.third_party_api.AWSCredentials;
-import com.globati.request.PasswordAttempt;
+import com.globati.api.PasswordAttempt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,6 +28,9 @@ import javax.ws.rs.core.Response;
 @Path("authentication")
 public class AuthenticationResource {
 
+    @Context
+    private HttpServletResponse servletResponse;
+
     private static final Logger LOGGER = LogManager.getLogger(AuthenticationResource.class);
 
     @Autowired
@@ -37,8 +42,11 @@ public class AuthenticationResource {
     public Response authentication(PasswordAttempt pa){
         LOGGER.debug("authentication()");
         try {
-            DynamoProperty propertyAndItems = propertyService.authenticate(pa.getUsername(), pa.getPassword());
-             return Response.ok(propertyAndItems).build();
+            DynamoProperty propertyAndItems = propertyService.authenticate(pa.getUserName(), pa.getPassword());
+             return Response.ok(propertyAndItems)
+                     .header("Access-Control-Expose-Headers", "token")
+                     .header("token", propertyAndItems.getApiToken())
+                     .build();
         }catch(Exception e){
             e.printStackTrace();
             throw new WebException("Password or username did not match", Response.Status.UNAUTHORIZED);

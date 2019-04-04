@@ -34,19 +34,17 @@ public class DefaultAuthentication implements ContainerRequestFilter {
 
         String clientapikey1 = requestContext.getHeaders().get("Authorization").get(0);
 
-        String[] parts = clientapikey1.split("-");
+        String[] parts = clientapikey1.split(":");
 
         DynamoProperty dynamoProperty = null;
-        String jwt = null;
 
         try {
-            jwt = clientapikey1.substring("Bearer".length()).trim();
-            dynamoProperty = propertyService.getPropertyToken(parts[1], jwtService.getPayloadFromJwt(jwt));
+            dynamoProperty = propertyService.getDynamoPropertyById(parts[1]);
         }catch(Exception e){
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }
 
-        if(! jwtService.getPayloadFromJwt(jwt).equals(dynamoProperty.getApiToken()) ){
+        if(! jwtService.getPayloadFromJwt(parts[0]).equals(dynamoProperty.getApiToken()) ){
             throw new WebException("The user needs to authenticate themselves", Response.Status.UNAUTHORIZED);
         }
 

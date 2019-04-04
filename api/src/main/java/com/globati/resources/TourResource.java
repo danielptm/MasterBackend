@@ -1,6 +1,6 @@
 package com.globati.resources;
 
-import com.globati.request.tour.TourRequest;
+import com.globati.api.tour.TourRequest;
 import com.globati.service.dynamodb.DynamoTourService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

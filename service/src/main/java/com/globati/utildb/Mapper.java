@@ -2,7 +2,7 @@ package com.globati.utildb;
 
 import com.globati.dynamodb.common.DynamoImage;
 import com.globati.dynamodb.tour.DynamoTourStop;
-import com.globati.request.tour.TourStopRequest;
+import com.globati.api.tour.TourStopRequest;
 
 import java.util.ArrayList;
 import java.util.Optional;

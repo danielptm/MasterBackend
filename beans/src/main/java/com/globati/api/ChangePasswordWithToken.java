@@ -1,4 +1,4 @@
-package com.globati.request;
+package com.globati.api;
 
 import com.globati.HelpObjects.ChangePassword;
 import com.globati.util.Mapper;

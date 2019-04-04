@@ -1,4 +1,4 @@
-package com.globati.request;
+package com.globati.api;
 
 public class InterestMail {
     String email;

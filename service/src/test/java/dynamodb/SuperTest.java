@@ -1,14 +1,15 @@
 package dynamodb;
 
 
+import com.globati.api.ImageRequest;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.tour.DynamoTour;
 import com.globati.dynamodb.tour.DynamoTourStop;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
-import com.globati.request.Recommendation;
-import com.globati.request.tour.TourRequest;
-import com.globati.request.tour.TourStopRequest;
+import com.globati.api.Recommendation;
+import com.globati.api.tour.TourRequest;
+import com.globati.api.tour.TourStopRequest;
 import com.globati.service.JwtService;
 import com.globati.service.dynamodb.DynamoPropertyService;
 import com.globati.service.dynamodb.DynamoRecommendationService;
@@ -49,9 +50,9 @@ public class SuperTest {
 
     DynamoProperty dynamoProperty;
 
-    com.globati.request.Recommendation recommendation;
-    com.globati.request.tour.TourRequest tourRequest;
-    com.globati.request.tour.TourStopRequest tourStopRequest;
+    com.globati.api.Recommendation recommendation;
+    com.globati.api.tour.TourRequest tourRequest;
+    com.globati.api.tour.TourStopRequest tourStopRequest;
 
     String updatedCity = "Seattle";
     String updatedDescription = "updatedDescription";
@@ -120,7 +121,7 @@ public class SuperTest {
         this.recommendation.setPropertyEmail(this.email);
 
         this.recommendation.setImages(new ArrayList<>());
-        this.recommendation.getImages().add("image1");
+        this.recommendation.getImages().add(new ImageRequest("image1"));
 
         dynamoTour.getTourStops().add(dynamoTourStop);
         dynamoProperty.getDynamoTours().add(dynamoTour);

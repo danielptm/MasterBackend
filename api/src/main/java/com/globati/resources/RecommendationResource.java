@@ -5,7 +5,6 @@ import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.dynamodb.DynamoRecommendationService;
-import com.globati.exceptions.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,13 +91,13 @@ public class RecommendationResource {
      *
      * Refactoring:
      * This is ok, but I could return the UriInfo, and build the path to the created image, return that
-     * And then use that in a get request on the angular side.
+     * And then use that in a get api on the angular side.
      *
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(com.globati.request.Recommendation recommendation){
+    public Response create(com.globati.api.Recommendation recommendation){
         try{
              DynamoProperty dynamoProperty = recommendationService.createRecommendation(recommendation);
             return Response.ok(dynamoProperty).build();
@@ -112,7 +111,7 @@ public class RecommendationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") Long id,  com.globati.request.Recommendation recommendation){
+    public Response update(@PathParam("id") Long id,  com.globati.api.Recommendation recommendation){
         try{
             DynamoProperty dynamoProperty = recommendationService.updateRecommendation(recommendation);
             return Response.ok(dynamoProperty).build();

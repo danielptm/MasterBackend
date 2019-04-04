@@ -1,29 +1,38 @@
-package com.globati.request.tour;
+package com.globati.api;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class TourStopRequest {
+/**
+ * Created by daniel on 6/5/17.
+ */
+public class Recommendation {
+
+    @JsonProperty("id")
     String id;
-    String tourId;
+    @JsonProperty("propertyEmail")
     String propertyEmail;
+    @JsonProperty("title")
     String title;
+    @JsonProperty("description")
     String description;
+    @JsonProperty("targetLat")
     Double targetLat;
+    @JsonProperty("targetLong")
     Double targetLong;
+    @JsonProperty("street")
     String street;
+    @JsonProperty("city")
     String city;
+    @JsonProperty("country")
     String country;
+    @JsonProperty("images")
+    List<ImageRequest> images;
+    @JsonProperty("category")
+    String category;
 
-    public Integer getStopOrder() {
-        return stopOrder;
-    }
-
-    public void setStopOrder(Integer stopOrder) {
-        this.stopOrder = stopOrder;
-    }
-
-    Integer stopOrder;
-    List<TourStopImageRequest> tourStopImages;
+    public Recommendation(){}
 
     public String getPropertyEmail() {
         return propertyEmail;
@@ -31,24 +40,6 @@ public class TourStopRequest {
 
     public void setPropertyEmail(String propertyEmail) {
         this.propertyEmail = propertyEmail;
-    }
-
-    public String getTourId() {
-        return tourId;
-    }
-
-    public void setTourId(String tourId) {
-        this.tourId = tourId;
-    }
-
-    public TourStopRequest() {}
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -107,18 +98,35 @@ public class TourStopRequest {
         this.country = country;
     }
 
-    public List<TourStopImageRequest> getTourStopImages() {
-        return tourStopImages;
+    public List<ImageRequest> getImages() {
+        return images;
     }
 
-    public void setTourStopImages(List<TourStopImageRequest> tourStopImages) {
-        this.tourStopImages = tourStopImages;
+    public void setImages(List<ImageRequest> images) {
+        this.images = images;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TourStopRequest{");
+        final StringBuilder sb = new StringBuilder("Recommendation{");
         sb.append("id=").append(id);
+        sb.append(", employeeId=").append(propertyEmail);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", targetLat=").append(targetLat);
@@ -126,7 +134,8 @@ public class TourStopRequest {
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
-        sb.append(", images=").append(tourStopImages);
+        sb.append(", images=").append(images);
+        sb.append(", category='").append(category).append('\'');
         sb.append('}');
         return sb.toString();
     }

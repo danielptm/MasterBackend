@@ -1,4 +1,6 @@
-package com.globati.request.tour;
+package com.globati.api.tour;
+
+import com.globati.api.ImageRequest;
 
 import java.util.List;
 
@@ -12,17 +14,17 @@ public class TourRequest {
     String street;
     String city;
     String country;
-    List<TourImageRequest> tourImages;
+    List<ImageRequest> tourImages;
     List<TourStopRequest> tourStops;
 
     public TourRequest() {
     }
 
-    public List<TourImageRequest> getTourImages() {
+    public List<ImageRequest> getTourImages() {
         return tourImages;
     }
 
-    public void setTourImages(List<TourImageRequest> tourImages) {
+    public void setTourImages(List<ImageRequest> tourImages) {
         this.tourImages = tourImages;
     }
 

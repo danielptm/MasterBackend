@@ -1,21 +1,21 @@
-package com.globati.request;
+package com.globati.api;
 
 /**
  * Created by daniel on 12/29/16.
  */
 public class PasswordAttempt {
-    String username;
+    String userName;
     String password;
 
     public PasswordAttempt(){}
 
     public PasswordAttempt(String username, String password){
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
@@ -25,7 +25,7 @@ public class PasswordAttempt {
     @Override
     public String toString() {
         return "PasswordAttempt{" +
-                "username='" + username + '\'' +
+                "username='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

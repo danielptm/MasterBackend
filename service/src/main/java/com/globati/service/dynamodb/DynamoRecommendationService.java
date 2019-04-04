@@ -4,7 +4,6 @@ import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
-import com.oracle.jrockit.jfr.DynamicEventToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class DynamoRecommendationService {
     @Autowired
     DynamoPropertyRepository dynamoPropertyRepository;
 
-    public DynamoProperty createRecommendation(com.globati.request.Recommendation recommendation) {
+    public DynamoProperty createRecommendation(com.globati.api.Recommendation recommendation) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getId());
 
         DynamoRecommendation dynamoRecommendation = new DynamoRecommendation();
@@ -46,7 +45,7 @@ public class DynamoRecommendationService {
         Optional.ofNullable(recommendation.getImages())
                 .ifPresent((images) -> {
                     images.forEach((image) -> {
-                       DynamoImage dynamoImage = new DynamoImage(image);
+                       DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
                        dynamoRecommendation.getImages().add(dynamoImage);
                    });
                 });
@@ -77,7 +76,7 @@ public class DynamoRecommendationService {
         return dynamoProperty;
     }
 
-    public DynamoProperty updateRecommendation(com.globati.request.Recommendation recommendation){
+    public DynamoProperty updateRecommendation(com.globati.api.Recommendation recommendation){
 
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getPropertyEmail());
 

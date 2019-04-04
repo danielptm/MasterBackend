@@ -1,8 +1,6 @@
 package com.globati.utildb;
 
 import com.globati.dynamodb.DynamoProperty;
-import com.globati.mysql.dbmodel.PropertyInfo;
-import com.globati.request.RequestProperty;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.SecretKey;

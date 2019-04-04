@@ -3,13 +3,11 @@ package com.globati.service.dynamodb;
 import com.globati.HelpObjects.ApiKey;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.exceptions.ServiceException;
-import com.globati.mysql.dbmodel.PropertyInfo;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
-import com.globati.request.RequestProperty;
+import com.globati.api.RequestProperty;
 import com.globati.service.JwtService;
 import com.globati.service.PropertiesService;
 import com.globati.utildb.PBKDF2;
-import io.jsonwebtoken.Jwts;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,24 +126,28 @@ public class DynamoPropertyService {
         return dynamoProperty;
     }
 
+    // TODO: Make a test for this sending in the right username but bad password.
     public DynamoProperty authenticate(String userName, String passwordAttempt) {
         LOGGER.info("authenticateRecptionist(): username: " + userName);
-        DynamoProperty property = null;
+        DynamoProperty propertyToAuthenticate = null;
+        DynamoProperty authenticatedProperty = null;
         try {
-            property = dynamoPropertyRepository.findOne(userName);
-            if (PBKDF2.checkPassword(property, passwordAttempt)) {
-                property.setLastLogin(new Date());
+            propertyToAuthenticate = dynamoPropertyRepository.findOne(userName);
+            if (PBKDF2.checkPassword(propertyToAuthenticate, passwordAttempt)) {
+                propertyToAuthenticate.setLastLogin(new Date());
                 ApiKey apiKey = new ApiKey();
-                property.setApiToken(apiKey.getApiKey());
-                property.setApiTokenExpiration(apiKey.getTime());
+                propertyToAuthenticate.setApiToken(apiKey.getApiKey());
+                propertyToAuthenticate.setApiTokenExpiration(apiKey.getTime());
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
-                property.setApiToken(jwt);
+                propertyToAuthenticate.setApiToken(jwt);
+                dynamoPropertyRepository.save(propertyToAuthenticate);
+                authenticatedProperty = propertyToAuthenticate;
             }
         } catch (Exception e) {
             LOGGER.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: authenticateReceptionist()");
             e.printStackTrace();
         }
-        return property;
+        return authenticatedProperty;
     }
 
     public boolean changePassword(String userEmail, String password, String passwordRepeat) throws ServiceException {

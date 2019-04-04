@@ -11,18 +11,16 @@ import com.globati.exceptions.ServiceException;
 import com.globati.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
 import com.globati.exceptions.UserNameIsNotUniqueException;
-import com.globati.request.ChangePasswordWithToken;
-import com.globati.request.RequestProperty;
+import com.globati.api.ChangePasswordWithToken;
+import com.globati.api.RequestProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.io.*;
 
 
@@ -40,8 +38,7 @@ public class PropertyResource{
 
     private static final Logger LOGGER = LogManager.getLogger(PropertyResource.class);
 
-    @Context
-    UriInfo uri;
+
 
     @Autowired
     DynamoPropertyService propertyService;
@@ -67,11 +64,10 @@ public class PropertyResource{
      * @return
      */
     @POST
-    @Path("login")
+    @Path("login/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @GlobatiAuthentication
-    public Response login(String email){
+    public Response login(@PathParam("email") String email){
         try{
             return Response.ok(propertyService.getDynamoPropertyById(email)).build();
         }catch(Exception e){
