@@ -136,7 +136,6 @@ public class DynamoPropertyService {
             if (PBKDF2.checkPassword(propertyToAuthenticate, passwordAttempt)) {
                 propertyToAuthenticate.setLastLogin(new Date());
                 ApiKey apiKey = new ApiKey();
-                propertyToAuthenticate.setApiToken(apiKey.getApiKey());
                 propertyToAuthenticate.setApiTokenExpiration(apiKey.getTime());
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
                 propertyToAuthenticate.setApiToken(jwt);

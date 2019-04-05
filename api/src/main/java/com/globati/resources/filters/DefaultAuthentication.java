@@ -44,7 +44,7 @@ public class DefaultAuthentication implements ContainerRequestFilter {
             throw new WebException("Could not get employee by auth token", Response.Status.UNAUTHORIZED);
         }
 
-        if(! jwtService.getPayloadFromJwt(parts[0]).equals(dynamoProperty.getApiToken()) ){
+        if (! jwtService.getPayloadFromJwt(parts[0]).equals(jwtService.getPayloadFromJwt(dynamoProperty.getApiToken())) ){
             throw new WebException("The user needs to authenticate themselves", Response.Status.UNAUTHORIZED);
         }
 
