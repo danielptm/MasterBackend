@@ -8,6 +8,7 @@ import com.globati.dynamodb.converters.lists.DynamoImageListConverter;
 import com.globati.dynamodb.converters.lists.DynamoTourListConverter;
 import com.sun.webkit.Disposer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +24,8 @@ public class DynamoTour extends DynamoBusinessInfo {
 
     public DynamoTour() {
         super();
+        images = new ArrayList<DynamoImage>();
+        tourStops = new ArrayList<DynamoTourStop>();
     }
 
     public String getTitle() {

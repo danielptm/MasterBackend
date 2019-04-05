@@ -46,8 +46,11 @@
 ####Easier local testing with dynamodb SO post
 `https://stackoverflow.com/questions/26901613/easier-dynamodb-local-testing`
 
+##### How to list danielptm@me.com data
+aws dynamodb get-item --table-name Property --key '{"email": {"S": "danielptm@me.com"}}' --endpoint-url http://localhost:8000
 
-
+#### How to delete danielptm@me.com data
+aws dynamodb get-item --table-name Property --key '{"email": {"S": "danielptm@me.com"}}' --endpoint-url http://localhost:8000
 
 
 
