@@ -54,7 +54,7 @@ public class DynamoTourService {
         Optional.ofNullable(tourRequest.getTourImages())
                 .ifPresent(images -> {
                     images.forEach(image -> {
-                        DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                        DynamoImage dynamoImage = new DynamoImage(image.getPath());
                         dynamoTour.getImages().add(dynamoImage);
                     });
                 });
@@ -184,7 +184,7 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getTourStopImages())
                 .ifPresent(images -> {
                     images.forEach(image ->{
-                        DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                        DynamoImage dynamoImage = new DynamoImage(image.getPath());
                         dynamoTourStop.getImages().add(dynamoImage);
                     });
                 });
@@ -274,7 +274,7 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getTourStopImages())
                 .ifPresent(images -> {
                     images.forEach(image ->{
-                        DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                        DynamoImage dynamoImage = new DynamoImage(image.getPath());
                         dynamoTourStop.getImages().add(dynamoImage);
                     });
                 });

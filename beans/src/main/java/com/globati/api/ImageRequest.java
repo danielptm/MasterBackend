@@ -2,18 +2,18 @@ package com.globati.api;
 
 public class ImageRequest {
     String id;
-    String imagePath;
+    String path;
 
     public ImageRequest() {
     }
 
     public ImageRequest(String imagePath) {
-        this.imagePath = imagePath;
+        this.path = imagePath;
     }
 
     public ImageRequest(String id, String imagePath) {
         this.id = id;
-        this.imagePath = imagePath;
+        this.path = imagePath;
     }
 
     public String getId() {
@@ -24,11 +24,11 @@ public class ImageRequest {
         this.id = id;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getPath() {
+        return path;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setPath(String path) {
+        this.path = path;
     }
 }

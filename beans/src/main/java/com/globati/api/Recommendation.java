@@ -17,10 +17,10 @@ public class Recommendation {
     String title;
     @JsonProperty("description")
     String description;
-    @JsonProperty("targetLat")
-    Double targetLat;
-    @JsonProperty("targetLong")
-    Double targetLong;
+    @JsonProperty("latitude")
+    Double latitude;
+    @JsonProperty("longitude")
+    Double longitude;
     @JsonProperty("street")
     String street;
     @JsonProperty("city")
@@ -31,6 +31,22 @@ public class Recommendation {
     List<ImageRequest> images;
     @JsonProperty("category")
     String category;
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 
     public Recommendation(){}
 
@@ -56,22 +72,6 @@ public class Recommendation {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getTargetLat() {
-        return targetLat;
-    }
-
-    public void setTargetLat(Double targetLat) {
-        this.targetLat = targetLat;
-    }
-
-    public Double getTargetLong() {
-        return targetLong;
-    }
-
-    public void setTargetLong(Double targetLong) {
-        this.targetLong = targetLong;
     }
 
     public String getStreet() {
@@ -129,8 +129,6 @@ public class Recommendation {
         sb.append(", employeeId=").append(propertyEmail);
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
-        sb.append(", targetLat=").append(targetLat);
-        sb.append(", targetLong=").append(targetLong);
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');

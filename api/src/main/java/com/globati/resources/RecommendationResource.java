@@ -102,7 +102,8 @@ public class RecommendationResource {
              DynamoProperty dynamoProperty = recommendationService.createRecommendation(recommendation);
             return Response.ok(dynamoProperty).build();
         }catch(Exception e){
-            throw new WebException("Could not create new recommendation", Response.Status.CONFLICT);
+            System.out.println(e);
+            throw new WebException("Could not create new recommendation", Response.Status.BAD_REQUEST);
         }
     }
 

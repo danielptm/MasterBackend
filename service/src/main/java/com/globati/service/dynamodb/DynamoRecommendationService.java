@@ -18,7 +18,7 @@ public class DynamoRecommendationService {
     DynamoPropertyRepository dynamoPropertyRepository;
 
     public DynamoProperty createRecommendation(com.globati.api.Recommendation recommendation) {
-        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getId());
+        DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getPropertyEmail());
 
         DynamoRecommendation dynamoRecommendation = new DynamoRecommendation();
 
@@ -34,10 +34,10 @@ public class DynamoRecommendationService {
         Optional.ofNullable(recommendation.getCountry())
                 .ifPresent((country) -> dynamoRecommendation.setCountry(country));
 
-        Optional.ofNullable(recommendation.getTargetLat())
+        Optional.ofNullable(recommendation.getLatitude())
                 .ifPresent((lat) -> dynamoRecommendation.setLatitude(lat));
 
-        Optional.ofNullable(recommendation.getTargetLong())
+        Optional.ofNullable(recommendation.getLongitude())
                 .ifPresent((longitude) -> dynamoRecommendation.setLongitude(longitude));
 
         dynamoRecommendation.setImages(new ArrayList<>());
@@ -45,7 +45,7 @@ public class DynamoRecommendationService {
         Optional.ofNullable(recommendation.getImages())
                 .ifPresent((images) -> {
                     images.forEach((image) -> {
-                       DynamoImage dynamoImage = new DynamoImage(image.getImagePath());
+                       DynamoImage dynamoImage = new DynamoImage(image.getPath());
                        dynamoRecommendation.getImages().add(dynamoImage);
                    });
                 });
@@ -98,10 +98,10 @@ public class DynamoRecommendationService {
             Optional.ofNullable(recommendation.getCountry())
                     .ifPresent((country) -> dynamoRecommendation.setCountry(country));
 
-            Optional.ofNullable(recommendation.getTargetLat())
+            Optional.ofNullable(recommendation.getLatitude())
                     .ifPresent((lat) -> dynamoRecommendation.setLatitude(lat));
 
-            Optional.ofNullable(recommendation.getTargetLong())
+            Optional.ofNullable(recommendation.getLongitude())
                     .ifPresent((longitude) -> dynamoRecommendation.setLongitude(longitude));
         }
 

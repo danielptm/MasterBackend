@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -49,12 +50,12 @@ public class DynamoProperty extends DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "apiTokenExpiration")
     private String apiTokenExpiration;
 
-
-
+    @JsonProperty("recommendations")
     @DynamoDBAttribute(attributeName = "recommendations")
     @DynamoDBTypeConverted(converter = DynamoRecommendationListConverter.class)
     List<DynamoRecommendation> dynamoRecommendations;
 
+    @JsonProperty("tours")
     @DynamoDBAttribute(attributeName = "tours")
     @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
     List<DynamoTour> dynamoTours;
