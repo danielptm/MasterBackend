@@ -10,6 +10,10 @@ public class DynamoImage {
     @DynamoDBAttribute
     private String path;
 
+    public DynamoImage() {
+
+    }
+
     public DynamoImage(String path) {
         this.id = UUID.randomUUID().toString();
         this.path = path;

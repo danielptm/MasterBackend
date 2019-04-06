@@ -1,6 +1,7 @@
 package com.globati.resources;
 
 import com.globati.dynamodb.DynamoProperty;
+import com.globati.dynamodb.common.DynamoImage;
 import com.globati.mysql.dbmodel.Property;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
@@ -66,10 +67,10 @@ public class PropertyResource{
     @POST
     @Path("login/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    @GlobatiAuthentication
     public Response login(@PathParam("email") String email){
         try{
-            return Response.ok(propertyService.getDynamoPropertyById(email)).build();
+            DynamoProperty dynamoProperty = propertyService.getDynamoPropertyById(email);
+            return Response.ok(dynamoProperty).build();
         }catch(Exception e){
             e.printStackTrace();
             throw new WebException("Could not retrieve user by username and password", Response.Status.BAD_REQUEST);
@@ -89,9 +90,9 @@ public class PropertyResource{
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @GlobatiAuthentication
-    public Response update(RequestProperty requestProperty) throws ServiceException, IOException, UserDoesNotExistException, UserNameIsNotUniqueException, IllegalUserNameException {
-        Property updatedProperty = null;
+//    @GlobatiAuthentication
+    public Response update(RequestProperty requestProperty) {
+        DynamoProperty updatedProperty = propertyService.updateDynamoProperty(requestProperty);
         return Response.ok(updatedProperty).build();
     }
 

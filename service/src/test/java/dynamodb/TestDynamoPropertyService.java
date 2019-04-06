@@ -59,6 +59,11 @@ public class TestDynamoPropertyService extends SuperTest {
     }
 
     @Test
+    public void testGetPropertyById() {
+
+    }
+
+    @Test
     public void testChangePassword() {
        System.out.println("testChangePassword() not implemented");
     }

@@ -17,7 +17,7 @@ public class DynamoRecommendationListConverter implements DynamoDBTypeConverter<
     public String convert(List<DynamoRecommendation> object) {
         String toReturn = null;
         try {
-            toReturn = Mapper.getMapper().writeValueAsString(object);
+            toReturn = Mapper.getConverterMapper().writeValueAsString(object);
         } catch (JsonProcessingException e) {
             LOGGER.error("DynamoRecommendationListConverter exception: ");
             e.printStackTrace();
@@ -28,7 +28,7 @@ public class DynamoRecommendationListConverter implements DynamoDBTypeConverter<
     public List<DynamoRecommendation> unconvert(String object) {
         List<DynamoRecommendation> recommendations = null;
         try {
-            recommendations = Mapper.getMapper().readValue(object, new TypeReference<List<DynamoRecommendation>>(){});
+            recommendations = Mapper.getConverterMapper().readValue(object, new TypeReference<List<DynamoRecommendation>>(){});
         } catch (IOException e) {
             LOGGER.error("DynamoRecommendationListConverter exception: ");
             e.printStackTrace();

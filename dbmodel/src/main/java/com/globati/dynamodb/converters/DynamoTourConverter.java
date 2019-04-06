@@ -14,7 +14,7 @@ public class DynamoTourConverter implements DynamoDBTypeConverter<String, Dynamo
     public String convert(DynamoTour object) {
         String toReturn = null;
         try {
-            toReturn = Mapper.getMapper().writeValueAsString(object);
+            toReturn = Mapper.getConverterMapper().writeValueAsString(object);
         } catch (JsonProcessingException e ){
             LOGGER.error("DynamoTourConverter exception: ");
             e.printStackTrace();
@@ -25,7 +25,7 @@ public class DynamoTourConverter implements DynamoDBTypeConverter<String, Dynamo
     public DynamoTour unconvert(String object) {
         DynamoTour dynamoTour = null;
         try {
-            dynamoTour = Mapper.getMapper().readValue(object, DynamoTour.class);
+            dynamoTour = Mapper.getConverterMapper().readValue(object, DynamoTour.class);
         }catch (java.io.IOException e) {
             LOGGER.error("DynamoTourConverter exception: ");
             e.printStackTrace();

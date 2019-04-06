@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 public class Mapper {
 
     private static ObjectMapper instance = null;
+    private static ObjectMapper converterInstance = null;
 
     protected Mapper() {
 
@@ -23,5 +24,12 @@ public class Mapper {
             createInstance();
         }
         return instance;
+    }
+
+    public static ObjectMapper getConverterMapper() {
+        if (converterInstance == null) {
+            converterInstance = new ObjectMapper();
+        }
+        return converterInstance;
     }
 }

@@ -33,7 +33,6 @@ import java.util.List;
 
 @Component
 @Path("recommendations")
-@GlobatiAuthentication
 public class RecommendationResource {
 
     private static final Logger log = LogManager.getLogger(RecommendationResource.class);
@@ -97,6 +96,7 @@ public class RecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+//    @GlobatiAuthentication
     public Response create(com.globati.api.Recommendation recommendation){
         try{
              DynamoProperty dynamoProperty = recommendationService.createRecommendation(recommendation);

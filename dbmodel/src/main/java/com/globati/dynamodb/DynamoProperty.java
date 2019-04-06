@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,14 +40,22 @@ public class DynamoProperty extends DynamoBusinessInfo {
     private String mobileVisitCounter;
     @DynamoDBAttribute(attributeName="website")
     private String website;
+
+    @JsonIgnore
     @DynamoDBAttribute (attributeName = "salt")
     private byte[] salt;
+
+    @JsonIgnore
     @DynamoDBAttribute (attributeName = "hashedPassword")
     private String hashedPassword;
     @DynamoDBAttribute (attributeName = "lastLogin")
     private Date lastLogin;
+
+    @JsonIgnore
     @DynamoDBAttribute (attributeName = "apiToken")
     private String apiToken;
+
+    @JsonIgnore
     @DynamoDBAttribute (attributeName = "apiTokenExpiration")
     private String apiTokenExpiration;
 
