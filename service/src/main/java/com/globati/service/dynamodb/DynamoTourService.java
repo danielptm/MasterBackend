@@ -23,7 +23,7 @@ public class DynamoTourService {
     DynamoPropertyRepository dynamoPropertyRepository;
 
 
-    public DynamoProperty createTour(TourRequest tourRequest) {
+    public DynamoTour createTour(TourRequest tourRequest) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourRequest.getPropertyEmail());
 
         DynamoTour dynamoTour = new DynamoTour();
@@ -70,10 +70,10 @@ public class DynamoTourService {
 
         dynamoPropertyRepository.save(dynamoProperty);
 
-        return dynamoProperty;
+        return dynamoTour;
     }
 
-    public DynamoProperty updateTour(TourRequest tourRequest) {
+    public DynamoTour updateTour(TourRequest tourRequest) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourRequest.getPropertyEmail());
         DynamoTour dynamoTour = dynamoProperty.getDynamoTours()
                 .stream().filter((tr -> tr.getId() ==  tourRequest.getId())).findFirst().get();
@@ -104,7 +104,7 @@ public class DynamoTourService {
 
         dynamoPropertyRepository.save(dynamoProperty);
 
-        return dynamoProperty;
+        return dynamoTour;
     }
 
     public DynamoProperty deleteTour(String email, String tourId) {
@@ -229,7 +229,7 @@ public class DynamoTourService {
         return dynamoProperty;
     }
 
-    public DynamoProperty updateTourStop(TourStopRequest tourStopRequest) {
+    public DynamoTourStop updateTourStop(TourStopRequest tourStopRequest) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourStopRequest.getPropertyEmail());
 
         DynamoTour dynamoTour = dynamoProperty.getDynamoTours().stream()
@@ -286,7 +286,7 @@ public class DynamoTourService {
 
         dynamoPropertyRepository.save(dynamoProperty);
 
-        return dynamoProperty;
+        return dynamoTourStop;
     }
 
     public List<DynamoRecommendation> getToursByPropertyEmail(String email ) {

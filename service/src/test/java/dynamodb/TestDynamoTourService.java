@@ -20,26 +20,26 @@ public class TestDynamoTourService extends SuperTest {
 
     @Test
     public void testCreateTour() {
-        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
-        Assert.assertEquals(2, dynamoProperty.getDynamoTours().size());
+        DynamoTour dynamoTour = dynamoTourService.createTour(tourRequest);
+        Assert.assertEquals("TourTitle", dynamoTour.getTitle());
     }
 
     @Test
     public void testUpdateTour() {
-        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+        DynamoTour dynamoTour = dynamoTourService.createTour(tourRequest);
         tourRequest.setId(dynamoProperty.getDynamoTours().get(0).getId());
         tourRequest.setCountry("Argentina");
-        DynamoProperty dynamoProperty2 = dynamoTourService.updateTour(tourRequest);
-        Assert.assertEquals("Argentina", dynamoProperty2.getDynamoTours().get(0).getCountry());
+        DynamoTour dynamoTour1 = dynamoTourService.updateTour(tourRequest);
+        Assert.assertEquals("Argentina", dynamoTour1.getCountry());
     }
 
     @Test
     public void testDeleteTour() {
-        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
+        DynamoTour dynamoTour = dynamoTourService.createTour(tourRequest);
+//
+//        DynamoProperty
 
-        Assert.assertEquals(2, dynamoProperty.getDynamoTours().size());
-
-        DynamoProperty dynamoProperty1 = dynamoTourService.deleteTour(dynamoProperty.getEmail(), dynamoProperty.getDynamoTours().get(0).getId());
+        DynamoProperty dynamoProperty1 = dynamoTourService.deleteTour(dynamoProperty.getEmail(), dynamoTour.getId());
 
         Assert.assertEquals(1, dynamoProperty.getDynamoTours().size());
 
@@ -47,16 +47,16 @@ public class TestDynamoTourService extends SuperTest {
 
     @Test
     public void testGetTourById() {
-        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
-        DynamoTour dynamoTour = dynamoTourService.getTourById(dynamoProperty.getDynamoTours().get(0).getId());
+        DynamoTour dynamoTour = dynamoTourService.createTour(tourRequest);
+        DynamoTour dynamoTour2 = dynamoTourService.getTourById(dynamoTour.getId());
 
-        Assert.assertEquals(dynamoProperty.getDynamoTours().get(0).getId(), dynamoTour.getId());
+        Assert.assertEquals(dynamoTour.getId(), dynamoTour2.getId());
     }
 
     @Test
     public void getTourStopById(){
-        DynamoProperty dynamoProperty = dynamoTourService.createTour(tourRequest);
-        DynamoTourStop dynamoTourStopOriginal = dynamoProperty.getDynamoTours().get(0).getTourStops().get(0);
+        DynamoTour dynamoTour = dynamoTourService.createTour(tourRequest);
+        DynamoTourStop dynamoTourStopOriginal = dynamoTour.getTourStops().get(0);
         DynamoTourStop dynamoTourStopToTest = dynamoTourService.getTourStopById(dynamoProperty.getEmail(), dynamoTourStopOriginal.getId());
 
         Assert.assertEquals(dynamoTourStopOriginal.getId(),dynamoTourStopToTest.getId());
@@ -88,9 +88,9 @@ public class TestDynamoTourService extends SuperTest {
         tourStopRequest.setTourId(tourRequest.getId());
         tourStopRequest.setId(dynamoProperty.getDynamoTours().get(0).getTourStops().get(0).getId());
         tourStopRequest.setTitle("updatedTitle");
-        DynamoProperty returnedProperty = dynamoTourService
+        DynamoTourStop updatedTourStop = dynamoTourService
                 .updateTourStop(tourStopRequest);
 
-        Assert.assertEquals("updatedTitle", dynamoProperty.getDynamoTours().get(0).getTourStops().get(0).getTitle());
+        Assert.assertEquals("updatedTitle", updatedTourStop.getTitle());
     }
 }
