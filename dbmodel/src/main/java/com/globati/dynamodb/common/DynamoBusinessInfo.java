@@ -1,10 +1,12 @@
 package com.globati.dynamodb.common;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 
 import java.util.Date;
 import java.util.UUID;
 
+@DynamoDBDocument
 public abstract  class DynamoBusinessInfo {
     @DynamoDBAttribute (attributeName = "id")
     private String id;
