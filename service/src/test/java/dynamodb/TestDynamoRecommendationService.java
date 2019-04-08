@@ -17,26 +17,25 @@ public class TestDynamoRecommendationService extends SuperTest {
     @Test
     public void updateRecommendation() {
 
-        DynamoProperty dynamoProperty = dynamoRecommendationService.updateRecommendation(this.recommendation);
+        DynamoRecommendation dynamoRecommendation = dynamoRecommendationService.updateRecommendation(this.recommendation);
 
-        Assert.assertEquals(updatedCity, dynamoProperty.getDynamoRecommendations().get(0).getCity());
-        Assert.assertEquals(updatedDescription, dynamoProperty.getDynamoRecommendations().get(0).getDescription());
+        Assert.assertEquals(updatedCity, dynamoRecommendation.getCity());
     }
 
     @Test
     public void deleteRecommendation() {
+        int initialSize = dynamoProperty.getDynamoRecommendations().size();
         DynamoProperty dynamoProperty = dynamoRecommendationService.deleteRecommendation(
                 this.dynamoProperty.getEmail(),
                 this.dynamoProperty.getDynamoRecommendations().get(0).getId() );
 
-        Assert.assertEquals(1, dynamoProperty.getDynamoRecommendations().size());
+        Assert.assertEquals(initialSize -1, dynamoProperty.getDynamoRecommendations().size());
     }
 
     @Test
     public void testCreateRecommendation(){
-        DynamoProperty dynamoProperty = dynamoRecommendationService.createRecommendation(this.recommendation);
-        Assert.assertEquals(this.email, dynamoProperty.getEmail());
-        Assert.assertEquals(1, dynamoProperty.getDynamoRecommendations().get(2).getImages().size());
+        DynamoRecommendation dynamoRecommendation = dynamoRecommendationService.createRecommendation(this.recommendation);
+        Assert.assertEquals("title", dynamoRecommendation.getTitle());
     }
 
     @Test

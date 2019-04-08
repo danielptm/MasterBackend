@@ -99,8 +99,8 @@ public class RecommendationResource {
 //    @GlobatiAuthentication
     public Response create(com.globati.api.Recommendation recommendation){
         try{
-             DynamoProperty dynamoProperty = recommendationService.createRecommendation(recommendation);
-            return Response.ok(dynamoProperty).build();
+             DynamoRecommendation dynamoRecommendation = recommendationService.createRecommendation(recommendation);
+            return Response.ok(dynamoRecommendation).build();
         }catch(Exception e){
             System.out.println(e);
             throw new WebException("Could not create new recommendation", Response.Status.BAD_REQUEST);
@@ -114,8 +114,8 @@ public class RecommendationResource {
     @Path("{id}")
     public Response update(@PathParam("id") Long id,  com.globati.api.Recommendation recommendation){
         try{
-            DynamoProperty dynamoProperty = recommendationService.updateRecommendation(recommendation);
-            return Response.ok(dynamoProperty).build();
+            DynamoRecommendation dynamoRecommendation = recommendationService.updateRecommendation(recommendation);
+            return Response.ok(dynamoRecommendation).build();
         }catch(Exception e){
             throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);
         }

@@ -117,6 +117,7 @@ public class SuperTest {
         this.recommendation.setId(dynamoRecommendation.getId());
         this.recommendation.setPropertyEmail("daniel@cbp.com");
         this.recommendation.setCity(updatedCity);
+        this.recommendation.setTitle("title");
         this.recommendation.setDescription(updatedDescription);
         this.recommendation.setPropertyEmail(this.email);
 

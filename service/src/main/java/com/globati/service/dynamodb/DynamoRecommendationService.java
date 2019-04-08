@@ -17,7 +17,7 @@ public class DynamoRecommendationService {
     @Autowired
     DynamoPropertyRepository dynamoPropertyRepository;
 
-    public DynamoProperty createRecommendation(com.globati.api.Recommendation recommendation) {
+    public DynamoRecommendation createRecommendation(com.globati.api.Recommendation recommendation) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getPropertyEmail());
 
         DynamoRecommendation dynamoRecommendation = new DynamoRecommendation();
@@ -54,7 +54,7 @@ public class DynamoRecommendationService {
 
         dynamoPropertyRepository.save(dynamoProperty);
 
-        return dynamoProperty;
+        return dynamoRecommendation;
     }
 
     /**
@@ -65,6 +65,7 @@ public class DynamoRecommendationService {
      */
     public DynamoProperty deleteRecommendation(String email, String recommendationId) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(email);
+
         DynamoRecommendation recommendationToRemove = dynamoProperty.getDynamoRecommendations().stream()
                 .filter((dynamoRecommendation -> dynamoRecommendation.getId().equals(recommendationId)))
                 .findFirst().get();
@@ -76,7 +77,7 @@ public class DynamoRecommendationService {
         return dynamoProperty;
     }
 
-    public DynamoProperty updateRecommendation(com.globati.api.Recommendation recommendation){
+    public DynamoRecommendation updateRecommendation(com.globati.api.Recommendation recommendation){
 
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getPropertyEmail());
 
@@ -109,7 +110,7 @@ public class DynamoRecommendationService {
 
         dynamoPropertyRepository.save(dynamoProperty);
 
-        return dynamoProperty;
+        return dynamoRecommendation;
     }
 
     //TODO: Add the email of the property as the first argument of the method, because otherwise it wont be able to get the right property
