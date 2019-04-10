@@ -14,18 +14,18 @@ public class TourRequest {
     String street;
     String city;
     String country;
-    List<ImageRequest> tourImages;
+    List<ImageRequest> images;
     List<TourStopRequest> tourStops;
 
     public TourRequest() {
     }
 
-    public List<ImageRequest> getTourImages() {
-        return tourImages;
+    public List<ImageRequest> getImages() {
+        return images;
     }
 
-    public void setTourImages(List<ImageRequest> tourImages) {
-        this.tourImages = tourImages;
+    public void setImages(List<ImageRequest> images) {
+        this.images = images;
     }
 
     public String getId() {
@@ -128,7 +128,6 @@ public class TourRequest {
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
-        sb.append(", images=").append(tourImages);
         sb.append(", tourStopRequests=").append(tourStops);
         sb.append('}');
         return sb.toString();

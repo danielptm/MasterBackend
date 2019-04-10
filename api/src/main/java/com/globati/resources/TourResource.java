@@ -1,6 +1,7 @@
 package com.globati.resources;
 
 import com.globati.api.tour.TourRequest;
+import com.globati.dynamodb.DynamoProperty;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.service.dynamodb.DynamoTourService;
 import org.apache.logging.log4j.Logger;
@@ -45,10 +46,11 @@ public class TourResource {
     }
 
     @DELETE
-    @Path("{email}/{tourId}")
+    @Path("{email}/{id}")
 //  @GlobatiAuthentication
-    public Response deleteTour(@PathParam("email") String email, String tourId) {
-        return Response.ok(tourService.deleteTour(email, tourId)).build();
+    public Response deleteTour(@PathParam("email") String email, @PathParam("id") String tourId) {
+        DynamoProperty dynamoProperty = tourService.deleteTour(email, tourId);
+        return Response.ok().build();
     }
 
 }

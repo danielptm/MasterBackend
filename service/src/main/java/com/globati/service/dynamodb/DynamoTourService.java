@@ -51,7 +51,7 @@ public class DynamoTourService {
 
         dynamoTour.setImages(new ArrayList<>());
 
-        Optional.ofNullable(tourRequest.getTourImages())
+        Optional.ofNullable(tourRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image -> {
                         DynamoImage dynamoImage = new DynamoImage(image.getPath());
