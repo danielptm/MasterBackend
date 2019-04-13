@@ -69,6 +69,8 @@ public class DynamoProperty extends DynamoBusinessInfo {
     @DynamoDBTypeConverted(converter = DynamoTourListConverter.class)
     List<DynamoTour> dynamoTours;
 
+    private String mainImage;
+
     public DynamoProperty() {
         super();
         this.dynamoRecommendations = new ArrayList<DynamoRecommendation>();
@@ -169,6 +171,14 @@ public class DynamoProperty extends DynamoBusinessInfo {
 
     public void setApiTokenExpiration(String apiTokenExpiration) {
         this.apiTokenExpiration = apiTokenExpiration;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
     @Override

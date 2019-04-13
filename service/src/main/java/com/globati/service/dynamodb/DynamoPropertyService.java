@@ -65,6 +65,9 @@ public class DynamoPropertyService {
         Optional.ofNullable(requestProperty.getWebsite())
                 .ifPresent(website -> dynamoProperty.setWebsite(website));
 
+        Optional.ofNullable(requestProperty.getMainImage())
+                .ifPresent(image -> dynamoProperty.setMainImage(image));
+
         dynamoPropertyRepository.save(dynamoProperty);
 
         return dynamoProperty;
@@ -120,6 +123,9 @@ public class DynamoPropertyService {
 
         Optional.ofNullable(requestProperty.getWebsite())
                 .ifPresent(website -> dynamoProperty.setWebsite(website));
+
+        Optional.ofNullable(requestProperty.getMainImage())
+                .ifPresent(image -> dynamoProperty.setMainImage(image));
 
         dynamoPropertyRepository.save(dynamoProperty);
 

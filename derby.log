@@ -1,11 +1,13 @@
-
-on database directory memory:/Users/danieltuttle/Documents/globati/code/super/testdb with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+----------------------------------------------------------------
+Fri Apr 12 20:14:33 PDT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-016a-14b0-83a4-000012ac6050 
+on database directory memory:/Users/danieltuttle/projects/globati/code/backend/MasterBackend/testdb with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/Users/danieltuttle/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
-user.dir=/Users/danieltuttle/Documents/globati/code/super
+user.dir=/Users/danieltuttle/projects/globati/code/backend/MasterBackend
 os.name=Mac OS X
 os.arch=x86_64
-os.version=10.12.6
+os.version=10.14
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

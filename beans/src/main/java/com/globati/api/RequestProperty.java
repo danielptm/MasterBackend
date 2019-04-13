@@ -36,6 +36,8 @@ public class RequestProperty {
     @JsonProperty
     private String password;
     @JsonProperty
+    private String mainImage;
+    @JsonProperty
     private List<ImageRequest> images;
 
     public RequestProperty() {}
@@ -142,5 +144,13 @@ public class RequestProperty {
 
     public void setImages(List<ImageRequest> images) {
         this.images = images;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 }

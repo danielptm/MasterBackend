@@ -30,6 +30,7 @@ public class JerseyConfig extends ResourceConfig{
         register(AuthenticationResource.class);
         register(ResponseFilter.class);
         register(FacebookConnectionFactory.class);
+        register(HealthCheck.class);
         property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, true);
         property(ServerProperties.PROCESSING_RESPONSE_ERRORS_ENABLED, true);
     }

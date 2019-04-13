@@ -11,7 +11,6 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.globati.mail.beans.ForgotPassword;
 import com.globati.mail.beans.Welcome;
-import com.globati.mysql.dbmodel.Property;
 import com.globati.service.PropertiesService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,58 +39,6 @@ public class SendMail {
 
     private static final Logger log = LogManager.getLogger(SendMail.class);
 
-
-    public static boolean sendGuestMail(Property employee, List<String> mails) throws Exception {
-        System.out.println("Sending guest email "+mails.get(0));
-
-        String[] emails = new String[10];
-
-        for(int i=0 ; i< mails.size(); i++){
-            emails[i] = mails.get(i);
-        }
-
-        // Construct an object to contain the recipient address.
-        Destination destination = new Destination().withToAddresses(emails);
-
-//        System.out.println(mail.getProperty().getImage());
-
-        // Create the subject and body of the message.
-
-        Content subject = new Content().withData("My globati ~"+employee.getFirstName());
-
-        Welcome welcome = new Welcome(employee.getFirstName(), employee.getCity(), employee.getEmail(), employee.getGlobatiUsername());
-        Content textBody = new Content().withData(
-            welcome.getWelcomeMail()
-        );
-
-
-        Body body = new Body().withHtml(textBody);
-
-        // Create a message with the specified subject and body.
-        com.amazonaws.services.simpleemail.model.Message message = new com.amazonaws.services.simpleemail.model.Message().withSubject(subject).withBody(body);
-
-        // Assemble the email.
-        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
-
-        try {
-            AWSCredentials credentials = new BasicAWSCredentials(
-                    key,
-                    password);
-
-            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
-
-            Region REGION = Region.getRegion(Regions.EU_WEST_1);
-            client.setRegion(REGION);
-
-            // Send the email.
-            client.sendEmail(request);
-            return true;
-        } catch (Exception ex) {
-            log.error("Email send through AWS not sent.");
-            log.error("Error message: " + ex.getMessage());
-            throw new Exception(ex.toString());
-        }
-    }
 
     public static boolean sendForgottenPasswordEmail(String email, String globatiuser, String apitoken) throws Exception {
 
