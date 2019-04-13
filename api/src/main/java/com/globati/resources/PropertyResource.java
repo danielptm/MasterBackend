@@ -1,28 +1,21 @@
 package com.globati.resources;
 
-import com.globati.dynamodb.DynamoProperty;
-import com.globati.dynamodb.common.DynamoImage;
-import com.globati.mysql.dbmodel.Property;
-import com.globati.resources.annotations.GlobatiAuthentication;
-import com.globati.resources.exceptions.WebException;
-import com.globati.service.dynamodb.DynamoPropertyService;
-import com.globati.service.JwtService;
-import com.globati.exceptions.IllegalUserNameException;
-import com.globati.exceptions.ServiceException;
-import com.globati.exceptions.UserDoesNotExistException;
 import com.globati.HelpObjects.ChangePassword;
-import com.globati.exceptions.UserNameIsNotUniqueException;
 import com.globati.api.ChangePasswordWithToken;
 import com.globati.api.RequestProperty;
+import com.globati.dynamodb.DynamoProperty;
+import com.globati.exceptions.ServiceException;
+import com.globati.resources.exceptions.WebException;
+import com.globati.service.JwtService;
+import com.globati.service.dynamodb.DynamoPropertyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import java.io.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 /**
