@@ -13,14 +13,14 @@ permissions:
 
 hooks:
   ApplicationStop:
-    - location: server_stop.sh
+    - location: /opt/codedeploy-agent/deployment-root/ce899306-41ba-45d9-a99d-93b4903d3412/d-69YPWWV2Y/deployment-archive/server_stop.sh
       timeout: 20
       runas: ec2-user
   ApplicationStart:
-    - location: server_start.sh
+    - location: /opt/codedeploy-agent/deployment-root/ce899306-41ba-45d9-a99d-93b4903d3412/d-69YPWWV2Y/deployment-archives/erver_start.sh
       timeout: 20
       runas: ec2-user
   ValidateService:
-    - location: server_validate.sh
+    - location: /opt/codedeploy-agent/deployment-root/ce899306-41ba-45d9-a99d-93b4903d3412/d-69YPWWV2Y/deployment-archive/server_validate.sh
       timeout: 60
       runas: ec2-user
