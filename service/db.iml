@@ -18,6 +18,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.10.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.12.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.22" level="project" />
+    <orderEntry type="library" name="Maven: com.github.derjust:spring-data-dynamodb:4.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.10.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.12.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.3.RELEASE" level="project" />
