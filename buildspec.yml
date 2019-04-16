@@ -12,10 +12,11 @@ phases:
       - echo '******************** installing maven'
       - ls
       - mvn install -f master/pom.xml
-      - mv appspec.yml api/target
-      - mv server_start.sh api/target
-      - mv server_stop.sh api/target
-      - mv server_validate.sh api/target
+      - mkdir api/target/scripts
+      - mv appspec.yml api/target/scripts
+      - mv server_start.sh api/target/scripts
+      - mv server_stop.sh api/target/scripts
+      - mv server_validate.sh api/target/scripts
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
@@ -23,7 +24,7 @@ artifacts:
   files:
     - 'application.jar'
     - 'appspec.yml'
-    - 'server_start.sh'
-    - 'server_stop.sh'
-    - 'server_validate.sh'
+    - 'scripts/server_start.sh'
+    - 'scripts/server_stop.sh'
+    - 'scripts/server_validate.sh'
   base-directory: 'api/target'
