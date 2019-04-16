@@ -11,9 +11,9 @@ phases:
     commands:
       - echo '******************** installing maven'
       - ls
-      - ls master
       - echo '****************** zipping appspec.yml'
       - zip appspec.yml.zip appspec.yml
+      - ls
       - mvn install -f master/pom.xml
   post_build:
     commands:
