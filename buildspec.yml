@@ -14,6 +14,7 @@ phases:
       - echo '****************** zipping appspec.yml'
       - zip appspec.yml.zip appspec.yml
       - ls
+      - mv app spec.yml.zip api/target
       - mvn install -f master/pom.xml
   post_build:
     commands:
@@ -21,4 +22,5 @@ phases:
 artifacts:
   files:
     - 'application.jar'
+    - 'appspec.yml.zip'
   base-directory: 'api/target'
