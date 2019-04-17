@@ -13,7 +13,7 @@ phases:
       - ls
       - mvn install -f master/pom.xml
       - mkdir api/target/scripts
-      - mv appspec.yml api/target/scripts
+      - mv appspec.yml api/target
       - mv server_start.sh api/target/scripts
       - mv server_stop.sh api/target/scripts
       - mv server_validate.sh api/target/scripts
