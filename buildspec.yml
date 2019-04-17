@@ -14,9 +14,9 @@ phases:
       - mvn install -f master/pom.xml
       - mkdir api/target/scripts
       - mv appspec.yml api/target
-      - mv server_start.sh api/target/scripts
-      - mv server_stop.sh api/target/scripts
-      - mv server_validate.sh api/target/scripts
+      - mv server_start.sh api/target/scripts/server_start.sh
+      - mv server_stop.sh api/target/scripts/server_stop.sh
+      - mv server_validate.sh api/target/scripts/server_validate.sh
   post_build:
     commands:
       - echo  '*********************************** Finishing build'
