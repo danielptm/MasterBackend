@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get install openjdk-8-jdk
+sudo yum install java-1.8.0
+yes | command-that-asks-for-input
