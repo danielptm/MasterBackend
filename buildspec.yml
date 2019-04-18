@@ -22,4 +22,5 @@ artifacts:
     - 'server_start.sh'
     - 'server_stop.sh'
     - 'server_validate.sh'
+    - 'install_dependencies.sh'
   base-directory: ''
