@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-killall java
+
+if pgrep "java"
+then
+    killall java
+fi
