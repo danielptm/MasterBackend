@@ -15,7 +15,7 @@ hooks:
       runas: root
   ApplicationStart:
     - location: server_start.sh
-      timeout: 45
+      timeout: 60
       runas: ec2-user
   ApplicationStop:
     - location: server_stop.sh
