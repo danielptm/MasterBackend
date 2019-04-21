@@ -5,3 +5,4 @@ sudo source ~/.bash_profile
 mv /home/ec2-user/server/api/target/application.jar /home/ec2-user/server/application.jar
 cd /home/ec2-user/server
 java -jar application.jar
+exit 0
