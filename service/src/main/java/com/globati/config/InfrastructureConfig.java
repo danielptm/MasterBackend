@@ -4,6 +4,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.globati.service.PropertiesService;
 import org.apache.commons.lang.StringUtils;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
@@ -39,17 +40,9 @@ public class InfrastructureConfig  {
 
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
-		AmazonDynamoDB amazonDynamoDB
-				= new AmazonDynamoDBClient(amazonAWSCredentials());
+		final AmazonDynamoDB ddb = AmazonDynamoDBClientBuilder.defaultClient();
 
-		System.out.println("***************");
-		System.out.println(propertiesService.getAmazonDynamoDBEndpoint());
-
-		if (!StringUtils.isEmpty(propertiesService.getAmazonDynamoDBEndpoint())) {
-			amazonDynamoDB.setEndpoint(propertiesService.getAmazonDynamoDBEndpoint());
-		}
-
-		return amazonDynamoDB;
+		return ddb;
 	}
 
 	@Bean
