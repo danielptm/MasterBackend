@@ -40,15 +40,23 @@ public class InfrastructureConfig  {
 
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
-		final AmazonDynamoDB ddb = AmazonDynamoDBClientBuilder.defaultClient();
+		AmazonDynamoDB amazonDynamoDB;
 
-		return ddb;
+		if (propertiesService.getAmazonDynamoDBEndpoint().equals("http://localhost:8000/")) {
+			amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials());
+			amazonDynamoDB.setEndpoint(propertiesService.getAmazonDynamoDBEndpoint());
+
+		} else {
+			amazonDynamoDB = AmazonDynamoDBClientBuilder.defaultClient();
+		}
+
+		return amazonDynamoDB;
 	}
 
 	@Bean
 	public AWSCredentials amazonAWSCredentials() {
 		return new BasicAWSCredentials(
-				propertiesService.getAmazonAWSAccessKey(), propertiesService.getAmazonAWSSecretKey());
+				"key", "secret");
 	}
 
 }
