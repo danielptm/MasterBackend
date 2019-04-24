@@ -42,6 +42,9 @@ public class InfrastructureConfig  {
 		AmazonDynamoDB amazonDynamoDB
 				= new AmazonDynamoDBClient(amazonAWSCredentials());
 
+		System.out.println("***************");
+		System.out.println(propertiesService.getAmazonDynamoDBEndpoint());
+
 		if (!StringUtils.isEmpty(propertiesService.getAmazonDynamoDBEndpoint())) {
 			amazonDynamoDB.setEndpoint(propertiesService.getAmazonDynamoDBEndpoint());
 		}
