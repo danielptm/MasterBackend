@@ -2,7 +2,7 @@
 
 while [ true ]
 do
-    if [ "$(curl -s https://localhost:5000/health-check)" = 'Globati up and running...' ]
+    if [ "$(curl -s http://localhost:5000/health-check)" = 'Globati up and running...' ]
     then
         exit 0
     else
