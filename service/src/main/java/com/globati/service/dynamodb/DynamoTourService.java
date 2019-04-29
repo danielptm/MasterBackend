@@ -76,7 +76,7 @@ public class DynamoTourService {
     public DynamoTour updateTour(TourRequest tourRequest) {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(tourRequest.getPropertyEmail());
         DynamoTour dynamoTour = dynamoProperty.getDynamoTours()
-                .stream().filter((tr -> tr.getId() ==  tourRequest.getId())).findFirst().get();
+                .stream().filter((tr -> tr.getId().equals(tourRequest.getId()))).findFirst().get();
 
         int indexToUpdate = dynamoProperty.getDynamoTours().indexOf(dynamoTour);
 
@@ -99,6 +99,11 @@ public class DynamoTourService {
             Optional.ofNullable(tourRequest.getTargetLong())
                     .ifPresent(longitutde -> dynamoTour.setLongitude(longitutde));
         }
+
+        tourRequest.getTourStopRequests()
+                .forEach(tsr -> {
+                    updateTourStop(tsr);
+                });
 
         dynamoProperty.getDynamoTours().set(indexToUpdate, dynamoTour);
 
@@ -180,6 +185,9 @@ public class DynamoTourService {
 
         Optional.ofNullable(tourStopRequest.getStopOrder())
                 .ifPresent(so -> dynamoTourStop.setStopOrder(so));
+
+        Optional.ofNullable(tourStopRequest.getPropertyEmail())
+                .ifPresent(pe -> dynamoTourStop.setPropertyEmail(pe));
 
         Optional.ofNullable(tourStopRequest.getTourStopImages())
                 .ifPresent(images -> {

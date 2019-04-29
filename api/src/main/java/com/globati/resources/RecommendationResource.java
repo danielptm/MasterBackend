@@ -77,6 +77,7 @@ public class RecommendationResource {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{email}/{id}")
+    @GlobatiAuthentication
     public Response delete(@PathParam("email") String email, @PathParam("id") String id) {
         try{
             recommendationService.deleteRecommendation(email, id);
@@ -96,7 +97,7 @@ public class RecommendationResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    @GlobatiAuthentication
+    @GlobatiAuthentication
     public Response create(com.globati.api.Recommendation recommendation){
         try{
              DynamoRecommendation dynamoRecommendation = recommendationService.createRecommendation(recommendation);
@@ -112,6 +113,7 @@ public class RecommendationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
+    @GlobatiAuthentication
     public Response update(@PathParam("id") Long id,  com.globati.api.Recommendation recommendation){
         try{
             DynamoRecommendation dynamoRecommendation = recommendationService.updateRecommendation(recommendation);

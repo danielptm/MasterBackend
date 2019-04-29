@@ -145,8 +145,7 @@ public class DynamoPropertyService {
                 propertyToAuthenticate.setApiTokenExpiration(apiKey.getTime());
                 String jwt = jwtService.buildJwt(apiKey.getApiKey());
                 propertyToAuthenticate.setApiToken(jwt);
-                dynamoPropertyRepository.save(propertyToAuthenticate);
-                authenticatedProperty = propertyToAuthenticate;
+                authenticatedProperty = dynamoPropertyRepository.save(propertyToAuthenticate);
             }
         } catch (Exception e) {
             LOGGER.error("** GLOBATI SERVICE EXCEPTION ** FOR METHOD: authenticateReceptionist()");

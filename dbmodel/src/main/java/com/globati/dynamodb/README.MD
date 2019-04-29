@@ -50,7 +50,7 @@
 aws dynamodb get-item --table-name Property --key '{"email": {"S": "danielptm@me.com"}}' --endpoint-url http://localhost:8000
 
 #### How to delete danielptm@me.com data
-aws dynamodb get-item --table-name Property --key '{"email": {"S": "danielptm@me.com"}}' --endpoint-url http://localhost:8000
+aws dynamodb delete-item --table-name Property --key '{"email": {"S": "danielptm@me.com"}}' --endpoint-url http://localhost:8000
 
 
 

@@ -5,6 +5,7 @@ import com.globati.api.ChangePasswordWithToken;
 import com.globati.api.RequestProperty;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.exceptions.ServiceException;
+import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.JwtService;
 import com.globati.service.dynamodb.DynamoPropertyService;
@@ -60,6 +61,7 @@ public class PropertyResource{
     @POST
     @Path("login/{email}")
     @Produces(MediaType.APPLICATION_JSON)
+    @GlobatiAuthentication
     public Response login(@PathParam("email") String email){
         try{
             DynamoProperty dynamoProperty = propertyService.getDynamoPropertyById(email);
@@ -83,7 +85,7 @@ public class PropertyResource{
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    @GlobatiAuthentication
+    @GlobatiAuthentication
     public Response update(RequestProperty requestProperty) {
         DynamoProperty updatedProperty = propertyService.updateDynamoProperty(requestProperty);
         return Response.ok(updatedProperty).build();
@@ -94,6 +96,7 @@ public class PropertyResource{
     @Path("changepassword")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
+    @GlobatiAuthentication
     public Response changePassword(ChangePassword passwords){
         try{
             if(propertyService.changePassword(passwords.getEmail(), passwords.getOldPassword(), passwords.getNewPassword())){

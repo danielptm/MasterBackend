@@ -19,6 +19,8 @@ public class DynamoTourStop extends DynamoBusinessInfo {
     int stopOrder;
     @DynamoDBAttribute (attributeName = "tourId")
     String tourId;
+    @DynamoDBAttribute (attributeName = "propertyEmail")
+    String propertyEmail;
 
     public DynamoTourStop() {
         super();
@@ -55,5 +57,13 @@ public class DynamoTourStop extends DynamoBusinessInfo {
 
     public void setTourId(String tourId) {
         this.tourId = tourId;
+    }
+
+    public String getPropertyEmail() {
+        return propertyEmail;
+    }
+
+    public void setPropertyEmail(String propertyEmail) {
+        this.propertyEmail = propertyEmail;
     }
 }

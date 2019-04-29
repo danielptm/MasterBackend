@@ -25,6 +25,7 @@ public class TourResource {
     @GET
     @Path("/{email}")
     @Produces(MediaType.APPLICATION_JSON)
+    @GlobatiAuthentication
     public Response getTourById(@PathParam("email") String email) {
         return Response.ok(tourService.getToursByPropertyEmail(email)).build();
     }
@@ -32,7 +33,7 @@ public class TourResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    @GlobatiAuthentication
+    @GlobatiAuthentication
     public Response createTour(TourRequest tourRequest) {
         return Response.ok(tourService.createTour(tourRequest)).build();
     }
@@ -40,14 +41,14 @@ public class TourResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-//    @GlobatiAuthentication
+    @GlobatiAuthentication
     public Response updateTour(TourRequest tourRequest){
         return Response.ok(tourService.updateTour(tourRequest)).build();
     }
 
     @DELETE
     @Path("{email}/{id}")
-//  @GlobatiAuthentication
+    @GlobatiAuthentication
     public Response deleteTour(@PathParam("email") String email, @PathParam("id") String tourId) {
         DynamoProperty dynamoProperty = tourService.deleteTour(email, tourId);
         return Response.ok().build();

@@ -1,11 +1,12 @@
 package com.globati.resources;
 
+import com.globati.api.PasswordAttempt;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.dynamodb.DynamoPropertyService;
 import com.globati.third_party_api.AWSCredentials;
-import com.globati.api.PasswordAttempt;
+import com.globati.util.Mapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
