@@ -98,12 +98,16 @@ public class DynamoTourService {
 
             Optional.ofNullable(tourRequest.getTargetLong())
                     .ifPresent(longitutde -> dynamoTour.setLongitude(longitutde));
+
+            dynamoTour.setTourStops(new ArrayList<>());
+
+            tourRequest.getTourStopRequests()
+                    .forEach((ts) -> {
+                        dynamoTour.getTourStops().add(Mapper.mapTourStop(ts));
+                    });
         }
 
-        tourRequest.getTourStopRequests()
-                .forEach(tsr -> {
-                    updateTourStop(tsr);
-                });
+
 
         dynamoProperty.getDynamoTours().set(indexToUpdate, dynamoTour);
 
