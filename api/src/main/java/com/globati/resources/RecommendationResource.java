@@ -35,7 +35,7 @@ import java.util.List;
 @Path("recommendations")
 public class RecommendationResource {
 
-    private static final Logger log = LogManager.getLogger(RecommendationResource.class);
+    private static final Logger LOGGER = LogManager.getLogger(RecommendationResource.class);
 
     @Autowired
     DynamoRecommendationService recommendationService;
@@ -112,14 +112,14 @@ public class RecommendationResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
     @GlobatiAuthentication
-    public Response update(@PathParam("id") Long id,  com.globati.api.Recommendation recommendation){
+    public Response update(com.globati.api.Recommendation recommendation){
         try{
             DynamoRecommendation dynamoRecommendation = recommendationService.updateRecommendation(recommendation);
             return Response.ok(dynamoRecommendation).build();
         }catch(Exception e){
-            throw new WebException("Could not update new recommendation", Response.Status.CONFLICT);
+            LOGGER.error(e);
+            throw new WebException("Could not update new recommendation", Response.Status.BAD_REQUEST);
         }
     }
 }

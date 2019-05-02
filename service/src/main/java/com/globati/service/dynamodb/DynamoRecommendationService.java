@@ -82,7 +82,7 @@ public class DynamoRecommendationService {
         DynamoProperty dynamoProperty = dynamoPropertyRepository.findOne(recommendation.getPropertyEmail());
 
         DynamoRecommendation dynamoRecommendation = dynamoProperty.getDynamoRecommendations()
-                .stream().filter((dr -> dr.getId() == recommendation.getId())).findFirst().get();
+                .stream().filter((dr -> dr.getId().equals(recommendation.getId()))).findFirst().get();
 
         int indexToUpdate = dynamoProperty.getDynamoRecommendations().indexOf(dynamoRecommendation);
 
@@ -104,6 +104,15 @@ public class DynamoRecommendationService {
 
             Optional.ofNullable(recommendation.getLongitude())
                     .ifPresent((longitude) -> dynamoRecommendation.setLongitude(longitude));
+
+
+            Optional.ofNullable(recommendation.getImages())
+                    .ifPresent((images) -> {
+                        dynamoRecommendation.setImages(new ArrayList<>());
+                        images.forEach(image -> {
+                            dynamoRecommendation.getImages().add(new DynamoImage(image.getPath()));
+                        });
+                    });
         }
 
         dynamoProperty.getDynamoRecommendations().set(indexToUpdate, dynamoRecommendation);
