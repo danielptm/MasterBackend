@@ -128,4 +128,12 @@ public class PropertyResource{
         }
     }
 
+    @GET
+    @Path("{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPropertyByEmail(@PathParam("email") String email) {
+        DynamoProperty dynamoProperty = propertyService.getDynamoPropertyById(email);
+        return Response.ok(dynamoProperty).build();
+    }
+
 }
