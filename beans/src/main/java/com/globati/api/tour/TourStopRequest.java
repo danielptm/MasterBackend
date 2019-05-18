@@ -25,7 +25,7 @@ public class TourStopRequest {
     }
 
     Integer stopOrder;
-    List<ImageRequest> tourStopImages;
+    List<ImageRequest> images;
 
     public String getPropertyEmail() {
         return propertyEmail;
@@ -109,27 +109,11 @@ public class TourStopRequest {
         this.country = country;
     }
 
-    public List<ImageRequest> getTourStopImages() {
-        return tourStopImages;
+    public List<ImageRequest> getImages() {
+        return images;
     }
 
-    public void setTourStopImages(List<ImageRequest> tourStopImages) {
-        this.tourStopImages = tourStopImages;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("TourStopRequest{");
-        sb.append("id=").append(id);
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", targetLat=").append(targetLat);
-        sb.append(", targetLong=").append(targetLong);
-        sb.append(", street='").append(street).append('\'');
-        sb.append(", city='").append(city).append('\'');
-        sb.append(", country='").append(country).append('\'');
-        sb.append(", images=").append(tourStopImages);
-        sb.append('}');
-        return sb.toString();
+    public void setImages(List<ImageRequest> images) {
+        this.images = images;
     }
 }

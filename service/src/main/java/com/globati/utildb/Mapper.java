@@ -22,7 +22,7 @@ public class Mapper {
 
         dynamoTourStop.setImages(new ArrayList<>());
 
-        Optional.ofNullable(tourStopRequest.getTourStopImages())
+        Optional.ofNullable(tourStopRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image -> {
                         DynamoImage dynamoImage = new DynamoImage(image.getPath());

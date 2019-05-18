@@ -193,7 +193,7 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getPropertyEmail())
                 .ifPresent(pe -> dynamoTourStop.setPropertyEmail(pe));
 
-        Optional.ofNullable(tourStopRequest.getTourStopImages())
+        Optional.ofNullable(tourStopRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image ->{
                         DynamoImage dynamoImage = new DynamoImage(image.getPath());
@@ -283,7 +283,7 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getStopOrder())
                 .ifPresent(so -> dynamoTourStop.setStopOrder(so));
 
-        Optional.ofNullable(tourStopRequest.getTourStopImages())
+        Optional.ofNullable(tourStopRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image ->{
                         DynamoImage dynamoImage = new DynamoImage(image.getPath());
