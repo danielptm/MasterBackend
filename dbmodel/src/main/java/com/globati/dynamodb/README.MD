@@ -57,3 +57,4 @@ aws dynamodb delete-item --table-name Property --key '{"email": {"S": "danielptm
 
 
 
+
