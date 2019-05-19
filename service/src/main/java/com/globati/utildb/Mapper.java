@@ -42,10 +42,10 @@ public class Mapper {
         Optional.ofNullable(tourStopRequest.getStreet())
                 .ifPresent(street -> dynamoTourStop.setStreet(street));
 
-        Optional.ofNullable(tourStopRequest.getTargetLat())
+        Optional.ofNullable(tourStopRequest.getLatitude())
                 .ifPresent(lat -> dynamoTourStop.setLatitude(lat));
 
-        Optional.ofNullable(tourStopRequest.getTargetLong())
+        Optional.ofNullable(tourStopRequest.getLongitude())
                 .ifPresent(longitude -> dynamoTourStop.setLongitude(longitude));
 
         return dynamoTourStop;

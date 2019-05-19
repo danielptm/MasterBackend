@@ -172,10 +172,10 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getDescription())
                 .ifPresent(des -> dynamoTourStop.setDescription(des));
 
-        Optional.ofNullable(tourStopRequest.getTargetLong())
+        Optional.ofNullable(tourStopRequest.getLongitude())
             .ifPresent(longitude -> dynamoTourStop.setLongitude(longitude));
 
-        Optional.ofNullable(tourStopRequest.getTargetLat())
+        Optional.ofNullable(tourStopRequest.getLatitude())
                 .ifPresent(latitude -> dynamoTourStop.setLatitude(latitude));
 
         Optional.ofNullable(tourStopRequest.getStreet())
@@ -265,10 +265,10 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getDescription())
                 .ifPresent(des -> dynamoTourStop.setDescription(des));
 
-        Optional.ofNullable(tourStopRequest.getTargetLong())
+        Optional.ofNullable(tourStopRequest.getLongitude())
                 .ifPresent(longitude -> dynamoTourStop.setLongitude(longitude));
 
-        Optional.ofNullable(tourStopRequest.getTargetLat())
+        Optional.ofNullable(tourStopRequest.getLatitude())
                 .ifPresent(latitude -> dynamoTourStop.setLatitude(latitude));
 
         Optional.ofNullable(tourStopRequest.getStreet())

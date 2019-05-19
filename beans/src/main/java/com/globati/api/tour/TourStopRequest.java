@@ -10,8 +10,8 @@ public class TourStopRequest {
     String propertyEmail;
     String title;
     String description;
-    Double targetLat;
-    Double targetLong;
+    Double latitude;
+    Double longitude;
     String street;
     String city;
     String country;
@@ -69,20 +69,20 @@ public class TourStopRequest {
         this.description = description;
     }
 
-    public Double getTargetLat() {
-        return targetLat;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setTargetLat(Double targetLat) {
-        this.targetLat = targetLat;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public Double getTargetLong() {
-        return targetLong;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setTargetLong(Double targetLong) {
-        this.targetLong = targetLong;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getStreet() {
