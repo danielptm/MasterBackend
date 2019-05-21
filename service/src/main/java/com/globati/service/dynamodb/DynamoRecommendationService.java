@@ -3,6 +3,7 @@ package com.globati.service.dynamodb;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
+import com.globati.enums.Category;
 import com.globati.repository.dynamodb.DynamoPropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,9 @@ public class DynamoRecommendationService {
 
         Optional.ofNullable(recommendation.getLongitude())
                 .ifPresent((longitude) -> dynamoRecommendation.setLongitude(longitude));
+
+        Optional.ofNullable(recommendation.getCategory())
+                .ifPresent(cat -> dynamoRecommendation.setCategory(Category.valueOf(cat)));
 
         dynamoRecommendation.setImages(new ArrayList<>());
 
@@ -104,6 +108,9 @@ public class DynamoRecommendationService {
 
             Optional.ofNullable(recommendation.getLongitude())
                     .ifPresent((longitude) -> dynamoRecommendation.setLongitude(longitude));
+
+            Optional.ofNullable(recommendation.getCategory())
+                    .ifPresent((cat) -> dynamoRecommendation.setCategory(Category.valueOf(cat)));
 
 
             Optional.ofNullable(recommendation.getImages())
