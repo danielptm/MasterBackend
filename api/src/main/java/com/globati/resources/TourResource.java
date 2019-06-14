@@ -54,4 +54,12 @@ public class TourResource {
         return Response.ok().build();
     }
 
+    @DELETE
+    @Path("tour-stop/{email}/{tourId}/{tourStopId}")
+    @GlobatiAuthentication
+    public Response deleteTourStop(@PathParam("email") String email, @PathParam("tourStopId") String tourStopId, @PathParam("tourId") String tourId) {
+        DynamoProperty dynamoProperty = tourService.deleteTourStop(email, tourStopId, tourId);
+        return Response.ok().build();
+    }
+
 }
