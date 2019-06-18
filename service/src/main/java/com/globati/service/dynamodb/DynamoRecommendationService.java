@@ -48,7 +48,7 @@ public class DynamoRecommendationService {
         dynamoRecommendation.setImages(new ArrayList<>());
 
         if(recommendation.getImages() != null && recommendation.getImages().size() == 0) {
-            recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+            recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/empty.png"));
         }
 
         Optional.ofNullable(recommendation.getImages())
@@ -118,7 +118,7 @@ public class DynamoRecommendationService {
                     .ifPresent((cat) -> dynamoRecommendation.setCategory(Category.valueOf(cat)));
 
             if(recommendation.getImages() != null && recommendation.getImages().size() == 0) {
-                recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+                recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/empty.png"));
             }
 
             Optional.ofNullable(recommendation.getImages())

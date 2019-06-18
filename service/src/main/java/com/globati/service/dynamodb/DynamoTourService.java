@@ -108,7 +108,7 @@ public class DynamoTourService {
             dynamoTour.setTourStops(new ArrayList<>());
 
             if (tourRequest.getImages() != null && tourRequest.getImages().size() == 0) {
-                tourRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+                tourRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/empty.png"));
             }
 
             Optional.ofNullable(tourRequest.getImages())
@@ -213,7 +213,7 @@ public class DynamoTourService {
                 .ifPresent(pe -> dynamoTourStop.setPropertyEmail(pe));
 
         if (tourStopRequest.getImages() != null && tourStopRequest.getImages().size() == 0) {
-            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/empty.png"));
         }
 
         Optional.ofNullable(tourStopRequest.getImages())
@@ -307,7 +307,7 @@ public class DynamoTourService {
                 .ifPresent(so -> dynamoTourStop.setStopOrder(so));
 
         if (tourStopRequest.getImages() != null && tourStopRequest.getImages().size() == 0) {
-            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/empty.png"));
         }
 
         Optional.ofNullable(tourStopRequest.getImages())
