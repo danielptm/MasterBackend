@@ -1,5 +1,6 @@
 package com.globati.service.dynamodb;
 
+import com.globati.api.ImageRequest;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
@@ -51,6 +52,11 @@ public class DynamoTourService {
 
         dynamoTour.setImages(new ArrayList<>());
 
+        if (tourRequest.getImages() != null && tourRequest.getImages().size() == 0) {
+            tourRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+        }
+
+
         Optional.ofNullable(tourRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image -> {
@@ -100,6 +106,19 @@ public class DynamoTourService {
                     .ifPresent(longitutde -> dynamoTour.setLongitude(longitutde));
 
             dynamoTour.setTourStops(new ArrayList<>());
+
+            if (tourRequest.getImages() != null && tourRequest.getImages().size() == 0) {
+                tourRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+            }
+
+            Optional.ofNullable(tourRequest.getImages())
+                    .ifPresent(images -> {
+                        images.forEach(image -> {
+                            DynamoImage dynamoImage = new DynamoImage(image.getPath());
+                            dynamoTour.getImages().add(dynamoImage);
+                        });
+                    });
+
 
             tourRequest.getTourStopRequests()
                     .forEach((ts) -> {
@@ -193,6 +212,10 @@ public class DynamoTourService {
         Optional.ofNullable(tourStopRequest.getPropertyEmail())
                 .ifPresent(pe -> dynamoTourStop.setPropertyEmail(pe));
 
+        if (tourStopRequest.getImages() != null && tourStopRequest.getImages().size() == 0) {
+            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+        }
+
         Optional.ofNullable(tourStopRequest.getImages())
                 .ifPresent(images -> {
                     images.forEach(image ->{
@@ -282,6 +305,10 @@ public class DynamoTourService {
 
         Optional.ofNullable(tourStopRequest.getStopOrder())
                 .ifPresent(so -> dynamoTourStop.setStopOrder(so));
+
+        if (tourStopRequest.getImages() != null && tourStopRequest.getImages().size() == 0) {
+            tourStopRequest.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+        }
 
         Optional.ofNullable(tourStopRequest.getImages())
                 .ifPresent(images -> {

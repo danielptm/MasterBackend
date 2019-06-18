@@ -1,5 +1,6 @@
 package com.globati.service.dynamodb;
 
+import com.globati.api.ImageRequest;
 import com.globati.dynamodb.DynamoProperty;
 import com.globati.dynamodb.DynamoRecommendation;
 import com.globati.dynamodb.common.DynamoImage;
@@ -45,6 +46,10 @@ public class DynamoRecommendationService {
                 .ifPresent(cat -> dynamoRecommendation.setCategory(Category.valueOf(cat)));
 
         dynamoRecommendation.setImages(new ArrayList<>());
+
+        if(recommendation.getImages() != null && recommendation.getImages().size() == 0) {
+            recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+        }
 
         Optional.ofNullable(recommendation.getImages())
                 .ifPresent((images) -> {
@@ -112,6 +117,9 @@ public class DynamoRecommendationService {
             Optional.ofNullable(recommendation.getCategory())
                     .ifPresent((cat) -> dynamoRecommendation.setCategory(Category.valueOf(cat)));
 
+            if(recommendation.getImages() != null && recommendation.getImages().size() == 0) {
+                recommendation.getImages().add(new ImageRequest("https://globatiimages.s3.eu-central-1.amazonaws.com/other/test.png"));
+            }
 
             Optional.ofNullable(recommendation.getImages())
                     .ifPresent((images) -> {
