@@ -11,3 +11,4 @@ beans/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/
 service/derby.log
 service/verifiedUsers.csv
 
+derby.log
