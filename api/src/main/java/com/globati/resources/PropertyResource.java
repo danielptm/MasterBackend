@@ -9,7 +9,7 @@ import com.globati.resources.annotations.GlobatiAuthentication;
 import com.globati.resources.exceptions.WebException;
 import com.globati.service.JwtService;
 import com.globati.service.dynamodb.DynamoPropertyService;
-import com.globati.utildb.HostelSyncS3Client;
+import com.globati.utildb.HostelSyncS3.HostelSyncS3Client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,7 +141,14 @@ public class PropertyResource{
     @Path("list-hostels")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listHostels() {
-        return Response.ok(HostelSyncS3Client.readFile()).build();
+        return Response.ok(HostelSyncS3Client.getHostels()).build();
+    }
+
+    @GET
+    @Path("list-locations")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listLocations() {
+        return Response.ok(HostelSyncS3Client.getLocations()).build();
     }
 
 }
