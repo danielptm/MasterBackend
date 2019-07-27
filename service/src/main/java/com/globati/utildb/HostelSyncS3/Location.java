@@ -1,5 +1,7 @@
 package com.globati.utildb.HostelSyncS3;
 
+import java.util.Objects;
+
 public class Location {
     private String city;
     private String contry;
@@ -23,5 +25,19 @@ public class Location {
 
     public void setContry(String contry) {
         this.contry = contry;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Location)) return false;
+        Location location = (Location) o;
+        return Objects.equals(getCity(), location.getCity()) &&
+                Objects.equals(getContry(), location.getContry());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCity(), getContry());
     }
 }
