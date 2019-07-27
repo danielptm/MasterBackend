@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class Location {
     private String city;
-    private String contry;
+    private String country;
 
-    public Location(String city, String contry) {
+    public Location(String city, String country) {
         this.city = city;
-        this.contry = contry;
+        this.country = country;
     }
 
     public String getCity() {
@@ -19,12 +19,12 @@ public class Location {
         this.city = city;
     }
 
-    public String getContry() {
-        return contry;
+    public String getCountry() {
+        return country;
     }
 
-    public void setContry(String contry) {
-        this.contry = contry;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class Location {
         if (!(o instanceof Location)) return false;
         Location location = (Location) o;
         return Objects.equals(getCity(), location.getCity()) &&
-                Objects.equals(getContry(), location.getContry());
+                Objects.equals(getCountry(), location.getCountry());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCity(), getContry());
+        return Objects.hash(getCity(), getCountry());
     }
 }
