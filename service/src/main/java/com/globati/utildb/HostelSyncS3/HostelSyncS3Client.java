@@ -51,16 +51,6 @@ public class HostelSyncS3Client {
         }
     }
 
-    public static Set<Location> getLocations() {
-        readFile();
-        return locations;
-    }
-
-    public static List<Hostel> getHostels() {
-        readFile();
-        return hostels;
-    }
-
     private static String getResponse() {
         S3Object s3Object = s3Client.getObject("hostelsync.com", "static/hostels.json");
         InputStream inputStream = s3Object.getObjectContent();
@@ -74,6 +64,16 @@ public class HostelSyncS3Client {
         String theString = writer.toString();
 
         return theString;
+    }
+
+    public static Set<Location> getLocations() {
+        readFile();
+        return locations;
+    }
+
+    public static List<Hostel> getHostels() {
+        readFile();
+        return hostels;
     }
 
 }
