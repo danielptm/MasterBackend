@@ -12,11 +12,12 @@ public class Hostel {
     private String latitude;
     private String longitude;
     private String appImage;
+    private String mainImage;
 
     public Hostel() {
     }
 
-    public Hostel(String city, String country, String hostelName, String email, String street, String website, String directBooking, String phoneNumber, String latitude, String longitude, String appImage) {
+    public Hostel(String city, String country, String hostelName, String email, String street, String website, String directBooking, String phoneNumber, String latitude, String longitude, String appImage, String mainImage) {
         this.city = city;
         this.country = country;
         this.hostelName = hostelName;
@@ -28,6 +29,7 @@ public class Hostel {
         this.latitude = latitude;
         this.longitude = longitude;
         this.appImage = appImage;
+        this.mainImage = mainImage;
     }
 
     public String getCity() {
@@ -116,5 +118,13 @@ public class Hostel {
 
     public void setAppImage(String appImage) {
         this.appImage = appImage;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 }
