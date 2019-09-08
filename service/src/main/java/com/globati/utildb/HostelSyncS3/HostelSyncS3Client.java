@@ -12,6 +12,7 @@ import com.globati.util.Mapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,19 +37,18 @@ public class HostelSyncS3Client {
 
 
     private static void readFile() {
-        if (locations == null) {
-            ObjectMapper objectMapper = Mapper.getMapper();
-            try {
-                hostels = objectMapper.readValue(getResponse(), new TypeReference<ArrayList<Hostel>>(){});
-                locations = new HashSet<>();
-                for (Hostel hostel: hostels) {
-                    Location location = new Location(hostel.getCity(), hostel.getCountry());
-                    locations.add(location);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        ObjectMapper objectMapper = Mapper.getMapper();
+        try {
+            hostels = objectMapper.readValue(getResponse(), new TypeReference<ArrayList<Hostel>>(){});
+            locations = new HashSet<>();
+            for (Hostel hostel: hostels) {
+                Location location = new Location(hostel.getCity(), hostel.getCountry());
+                locations.add(location);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     private static String getResponse() {
@@ -67,13 +67,25 @@ public class HostelSyncS3Client {
     }
 
     public static Set<Location> getLocations() {
-        readFile();
+        if (locations == null) {
+            readFile();
+        }
         return locations;
     }
 
     public static List<Hostel> getHostels() {
-        readFile();
+        if (locations == null) {
+            readFile();
+        }
         return hostels;
+    }
+
+    /**
+     * Run this every 30 minutes.
+     */
+    @Scheduled(fixedDelay = 1800000)
+    private static void reloadCache() {
+        readFile();
     }
 
 }
